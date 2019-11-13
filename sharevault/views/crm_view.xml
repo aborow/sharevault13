@@ -2,10 +2,10 @@
 <odoo>
     <data>
 
-        <record model="ir.ui.view" id="crm_case_form_view_oppor">
+        <record model="ir.ui.view" id="crm_crm_lead_view_form">
             <field name="name">Lead</field>
             <field name="model">crm.lead</field>
-            <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="before">
                     <field name="original_source"/>

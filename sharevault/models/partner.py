@@ -118,7 +118,7 @@ class Partner(models.Model):
 
     sharevault_ids = fields.One2many('sharevault.sharevault', 'partner_id', 'ShareVaults')
     sharevault_ids_count = fields.Integer('ShareVault count', compute='get_sharevault_count')
-    auditlog_ids_count = fields.Integer('Auditlog count', compute='get_auditlog_count')
+    #auditlog_ids_count = fields.Integer('Auditlog count', compute='get_auditlog_count')
 
     first_name = fields.Char('First Name', computed='get_first_last_name', store=True)
     last_name = fields.Char('Last Name', computed='get_first_last_name', store=True)
@@ -169,7 +169,6 @@ class Partner(models.Model):
     sharevault_email_subscription = fields.Selection([('null','null')], 'ShareVault Email Subscription')
     sharevault_publisher = fields.Selection([('null','null')], 'ShareVault Publisher')
 
-
     fax = fields.Char('Fax')
     fax_opt_out = fields.Boolean('Fax Opt Out')
 
@@ -204,6 +203,7 @@ class Partner(models.Model):
         for partner in self:
             partner.sharevault_ids_count = len(partner.sharevault_ids)
 
+    """
     def get_auditlog_count(self):
         # self.ensure_one()
         for partner in self:
@@ -226,7 +226,7 @@ class Partner(models.Model):
                                     }
                         })
         return action
-
+    """
 
     def _get_name(self):
         """ Utility method to allow name_get to be overrided without re-browse the partner """
