@@ -195,7 +195,6 @@
         <record id="sharevault_fields_persona_action" model="ir.actions.act_window">
             <field name="name">Persona</field>
             <field name="res_model">res.partner.persona</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
@@ -213,7 +212,6 @@
         <record id="sharevault_fields_job_function_action" model="ir.actions.act_window">
             <field name="name">Job Function</field>
             <field name="res_model">res.partner.job_function</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
@@ -231,7 +229,6 @@
         <record id="sharevault_fields_confidential_action" model="ir.actions.act_window">
             <field name="name">Confidential</field>
             <field name="res_model">res.partner.confidential</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
@@ -249,7 +246,6 @@
         <record id="sharevault_fields_tecnology_action" model="ir.actions.act_window">
             <field name="name">Tecnology</field>
             <field name="res_model">res.partner.tecnology</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
@@ -267,7 +263,6 @@
         <record id="sharevault_fields_matter_action" model="ir.actions.act_window">
             <field name="name">Matter</field>
             <field name="res_model">res.partner.matter</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
@@ -285,7 +280,6 @@
         <record id="sharevault_fields_contact_type_action" model="ir.actions.act_window">
             <field name="name">Contact Type</field>
             <field name="res_model">res.partner.contact_type</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
@@ -303,7 +297,6 @@
         <record id="sharevault_fields_subindustry_action" model="ir.actions.act_window">
             <field name="name">Subindustry</field>
             <field name="res_model">res.partner.subindustry</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
@@ -321,7 +314,6 @@
         <record id="sharevault_fields_data_source_action" model="ir.actions.act_window">
             <field name="name">Data Source</field>
             <field name="res_model">res.partner.data_source</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
@@ -339,7 +331,6 @@
         <record id="sharevault_fields_account_status_action" model="ir.actions.act_window">
             <field name="name">Account Status</field>
             <field name="res_model">res.partner.account_status</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
