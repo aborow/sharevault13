@@ -13,7 +13,7 @@
 """,
     'depends': [
                 'crm',
-                'auditlog',
+                #'auditlog',
                 'helpdesk',
                 'sale_management',
                 'account',
