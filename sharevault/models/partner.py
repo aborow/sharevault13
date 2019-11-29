@@ -116,6 +116,12 @@ class JobFunction(models.Model):
 class Partner(models.Model):
     _inherit = 'res.partner'
 
+    _sql_constraints = [
+        ('email_uniq',
+         'unique (email)',
+         'An email of partner could be defined only one time for one partner.')
+    ]
+
     sharevault_ids = fields.One2many('sharevault.sharevault', 'partner_id', 'ShareVaults')
     sharevault_ids_count = fields.Integer('ShareVault count', compute='get_sharevault_count')
     #auditlog_ids_count = fields.Integer('Auditlog count', compute='get_auditlog_count')
