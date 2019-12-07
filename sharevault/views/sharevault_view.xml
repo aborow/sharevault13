@@ -38,10 +38,13 @@
                                 </div>
                                 <div class="o_kanban_record_bottom">
                                     <div class="oe_kanban_bottom_left text-muted">
-                                        <span><t t-esc="record.name.value"/> (<field name="type"/>)</span>
+                                        <span>
+                                            <t t-esc="record.name.value"/>
+                                            <span t-if="record.type.value">(<field name="type"/>)</span>
+                                        </span>
                                     </div>
                                     <div class="oe_kanban_bottom_right">
-                                        <field name="locked"/>
+                                        <p t-if="record.locked.raw_value">Locked\</p>
                                     </div>
                                 </div>
                             </div>
@@ -61,6 +64,8 @@
                     <field name="date_creation"/>
                     <field name="date_expiration"/>
                     <field name="date_last_login"/>
+                    <field name="term_start_date"/>
+                    <field name="term_end_date"/>
                 </tree>
             </field>
         </record>
@@ -105,6 +110,8 @@
                                 <field name="date_last_upload"/>
                                 <field name="date_last_download"/>
                                 <field name="date_last_login"/>
+                                <field name="term_start_date"/>
+                                <field name="term_end_date"/>
                             </group>
                         </group>
                         <group>
