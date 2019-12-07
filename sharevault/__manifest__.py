@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'ShareVault',
-    'version': '1.1',
+    'version': '1.2',
     'category': 'Tools',
     'author': 'Wibtec',
     'website': 'www.wibtec.com',
     'summary': 'Setup for ShareVault',
     'description': """
 
-- ShareVault data model
-
+Version(1.1) - ShareVault data model
+Version(1.2) - Added constraint on the email field for partner.
 """,
     'depends': [
                 'crm',
