@@ -22,6 +22,8 @@ class Sharevault(models.Model):
     date_last_upload = fields.Date('Last upload')
     date_last_download = fields.Date('Last download')
     date_last_login = fields.Date('Last login')
+    term_start_date = fields.Date('Term Start Date')
+    term_end_date = fields.Date('Term End Date')
     quota_pages = fields.Integer('Quota: pages')
     quota_users = fields.Integer('Quota: users')
     quota_mb = fields.Integer('Quota: MB')
