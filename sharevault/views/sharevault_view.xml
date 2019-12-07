@@ -149,7 +149,6 @@
             parent="sharevault_menu_root"
             sequence="2"/>
 
-
         <record id="action_sharevault_sharevault" model="ir.actions.act_window">
             <field name="name">ShareVaults</field>
             <field name="res_model">sharevault.sharevault</field>
