@@ -162,6 +162,5 @@
             parent="sharevault_menu"
             action="action_sharevault_sharevault"
             sequence="4"/>
-
     </data>
 </odoo>
