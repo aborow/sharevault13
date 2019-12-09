@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, tools, _
+from odoo.exceptions import UserError
 
 class AccountStatus(models.Model):
     _name = 'res.partner.account_status'
@@ -117,9 +118,8 @@ class Partner(models.Model):
     _inherit = 'res.partner'
 
     _sql_constraints = [
-        ('email_uniq',
-         'unique (email)',
-         'An email of partner could be defined only one time for one partner.')
+        ('uniq_email', 'unique(email)',
+         ("An email of partner could be defined only one time for one partner."))
     ]
 
     sharevault_ids = fields.One2many('sharevault.sharevault', 'partner_id', 'ShareVaults')
