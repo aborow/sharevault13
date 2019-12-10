@@ -25,8 +25,10 @@ Version(1.2) - Added constraint on the email field for partner.
             #'data/auditlog_data.xml',
             #'data/generic_data.xml',
             'views/sharevault_view.xml',
+
             'views/partner_view.xml',
             'views/crm_view.xml',
+
             'views/templates.xml',
             ],
     'installable': True,
