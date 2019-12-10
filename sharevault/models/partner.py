@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, tools, _
+from odoo.exceptions import ValidationError
+
 
 class AccountStatus(models.Model):
     _name = 'res.partner.account_status'
@@ -116,19 +118,15 @@ class JobFunction(models.Model):
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    _sql_constraints = [
-        ('email_uniq',
-         'unique (email)',
-         'An email of partner could be defined only one time for one partner.')
-    ]
-
+    email = fields.Char()
+    # email_formatted = fields.Char(
+    #     'Formatted Email', compute='_compute_email_formatted',
+    #     help='Format email address "Name <email@domain>"')
     sharevault_ids = fields.One2many('sharevault.sharevault', 'partner_id', 'ShareVaults')
     sharevault_ids_count = fields.Integer('ShareVault count', compute='get_sharevault_count')
     #auditlog_ids_count = fields.Integer('Auditlog count', compute='get_auditlog_count')
-
     first_name = fields.Char('First Name', computed='get_first_last_name', store=True)
     last_name = fields.Char('Last Name', computed='get_first_last_name', store=True)
-
     ae_targeted = fields.Boolean('AE Targeted')
     annual_revenue = fields.Monetary('Annual Revenue')
     european_union = fields.Boolean('Are you a citizen or resident of the European Union (EU)?')
@@ -188,7 +186,22 @@ class Partner(models.Model):
                                     ('services','Services'),
                                     ('tax_agency','Tax agency')
                                     ], 'Vendor Type')
+    
+    @api.model
+    def create(self,vals):
+        if vals.get('email'):
+            existing_id = self.search([('email','=', vals['email'])])
+            if existing_id:
+                raise ValidationError(_('An email of partner could be defined only one time for one partner.'))
+        return super(Partner ,self).create(vals)
 
+    def write(self,vals):
+        if 'email' in vals:
+            if vals['email']:
+                existing_id = self.search([('email','=', vals['email'])])
+                if existing_id:
+                    raise ValidationError(_('An email of partner could be defined only one time for one partner.'))
+        return super(Partner ,self).write(vals)
 
     @api.onchange('name')
     @api.depends('name')
