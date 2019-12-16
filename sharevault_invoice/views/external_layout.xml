@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sharevault_invoice_external_layout">
+        <div class="header">
+            <link href="/sharevault_invoice/static/src/css/reports.css" rel="stylesheet" type="text/css"/>
+            <div class="row">
+                <table>
+                    <tr>
+                        <td id="div_company_logo">
+                            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" id="company_logo"/>
+                        </td>
+                        <td id="div_invoice_title">
+                            <span id="invoice_title">INVOICE</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="8" id="div_company_address">
+                            <!-- <div id="div_company_address"> -->
+                            <span t-field="o.company_id.display_name" id="company_name"/>
+                            <address t-field="o.company_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;,&quot;phone&quot;,&quot;email&quot;], &quot;no_marker&quot;: True}" id="company_address"/>
+                            <!-- </div> -->
+                        </td>
+                        <td>
+                            <table align="right" id="div_invoice_data">
+                                <tr>
+                                    <td class="invoice_data_title">Date:</td>
+                                    <td><span t-field="o.invoice_date"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="invoice_data_title">Invoice No:</td>
+                                    <td><span t-field="o.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="invoice_data_title">Approval Reference:</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="invoice_data_title">Terms:</td>
+                                    <td><span t-field="o.invoice_payment_term_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="invoice_data_title">Due Date:</td>
+                                    <td><span t-field="o.invoice_date_due"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="invoice_data_title">Sales Person:</td>
+                                    <td><span t-field="o.invoice_user_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="invoice_data_title">Start Date:</td>
+                                    <td><span t-field="o.date_creation"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="invoice_data_title">End Date:</td>
+                                    <td><span t-field="o.date_expiration"/></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <t t-if="o.partner_id">
+                        <div id="div_customer_address_shipping">
+                            <span class="customer_small_title">Bill To:</span>
+                            <br/>
+                            <span t-field="o.partner_id.name"/>
+                            <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: True}" id="customer_address"/>
+                        </div>
+                    </t>
+                </div>
+                <div class="col-xs-6" style="margin-left:150px;">
+                    <t t-if="o.customer_contact_id">
+                        <div id="div_customer_address_shipping">
+                            <span class="customer_small_title">Customer Contact:</span>
+                            <br/>
+                            <span t-field="o.customer_contact_id.name"/>
+                            <address t-field="o.customer_contact_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: True}" id="customer_address"/>
+                        </div>
+                    </t>
+                </div>
+                <br/>
+            </div>
+        </div>
+
+        <div class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+          <t t-raw="0"/>
+        </div>
+
+        <div class="footer">
+            <link href="/sharevault_invoice/static/src/css/reports.css" rel="stylesheet" type="text/css"/>
+            <div class="row" id="div_footer_bank">
+                <br/>
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <t t-if="o.invoice_partner_bank_id">
+                                <table id="footer_bank">
+                                    <tr>
+                                        <td>
+                                            For ACH and Wire Transfer payment:<br/>
+                                            Account Name: <span t-esc="o.invoice_partner_bank_id.acc_holder_name"/><br/>
+                                            Bank Name: <span t-esc="o.invoice_partner_bank_id.bank_id.name"/><br/>
+                                            Account Number: <span t-esc="o.invoice_partner_bank_id.acc_number"/><br/>
+                                            Routing/ABA Number: <span t-esc="o.invoice_partner_bank_id.aba_routing"/><br/>
+                                            Swift Code: <span t-esc="o.invoice_partner_bank_id.bank_id.bic"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </t>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </template>
+
+</odoo>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_document">
+			<t t-call="sharevault_invoice.sharevault_invoice_external_layout">
+                <div class="page">
+                    <link href="/sharevault_invoice/static/src/css/reports.css" rel="stylesheet" type="text/css"/>
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div id="div_customer_address_shipping">
+                                <b>Accounts Payable Email Address:</b>
+                                <span t-field="o.partner_id.email"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-6" style="margin-left:350px;">  
+                            <div id="div_customer_address_shipping">
+                                <t t-if="o.x_studio_term_start_date">
+                                    <b>Term Start Date:</b><span t-field="o.x_studio_term_start_date" t-options='{"format": "dd/MM/yyyy"}'/><br/>
+                                </t>
+                                <t t-if="o.x_studio_term_end_date">
+                                    <b>Term End Date:</b><span t-field="o.x_studio_term_end_date" t-options='{"format": "dd/MM/yyyy"}'/>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="project_name" t-if="o.sharevault_id">
+                            <center><b>ShareVault Name: </b><span t-field="o.sharevault_id.name"/></center>
+                        </div>
+                    </div>
+                    <br/>
+                    <table class="product-table table table-condensed" id="sharevault_table_invoice">
+                        <thead>
+                            <tr class="invoice_thead">
+                                <th>PRODUCT CODE</th>
+                                <th>DESCRIPTION</th>
+                                <th>QTY</th>
+                                <th>UNIT PRICE</th>
+                                <th>AMOUNT</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-foreach="o.invoice_line_ids" t-as="l">
+                                <t t-if="l_odd">
+                                    <tr style="background-color: white;">
+                                        <td width="15%"><span t-field="l.product_id.default_code"/></td>
+                                        <td><span t-field="l.name"/></td>
+                                        <td class="text-right">
+                                            <span t-field="l.quantity"/>
+                                        </td>
+                                        <td class="text-right" width="15%">
+                                            <span t-field="l.price_unit"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-if="l_even">
+                                    <tr style="background-color: #EBF5FB;">
+                                        <td width="15%"><span t-field="l.product_id.default_code"/></td>
+                                        <td><span t-field="l.name"/></td>
+                                        <td class="text-right">
+                                            <span t-field="l.quantity"/>
+                                        </td>
+                                        <td class="text-right" width="15%">
+                                            <span t-field="l.price_unit"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                        <tr>
+                            <td colspan="3" class="msg_title">
+                                <br/><b>Thank you for your business!</b>
+                            </td>
+                            <td class="invoice_total">
+                                <span id="taxes" t-if="o.amount_tax">Untaxed<br/></span>
+                                <span id="taxes" t-if="o.amount_tax">Taxes<br/></span>
+                                <span id="total">Total</span>
+                            </td>
+                            <td class="invoice_total">
+                                <span t-if="o.amount_tax"><span t-field="o.amount_untaxed"/><br/></span>
+                                <span t-if="o.amount_tax"><span t-field="o.amount_tax"/><br/></span>
+                                <span id="total"><span t-field="o.amount_total"/></span>
+                            </td>
+                        </tr>
+                    </table><br/>
+                    <p>Amounts are in US dollars and exclude taxes, duties and tariffs.</p><br/>
+                    <table class="product-table table table-condensed" id="sharevault_table_invoice">
+                        <thead>
+                            <tr class="notes_thead">
+                                <th>NOTES</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>
+                                <br/><br/><br/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+
+        <template id="report_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="sharevault_invoice.report_invoice_document"
+                        t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+        <report
+            id="report_invoice_call"
+            string="Invoices (ShareVault)"
+            model="account.move"
+            report_type="qweb-pdf"
+            name="sharevault_invoice.report_invoice"
+            file="sharevault_invoice.report_invoice"
+            attachment="(object.state in ('open','paid')) and ('SHAREVAULT_INV'+(object.number or '').replace('/','')+'.pdf')"/>
+
+        <record id="report_invoice_call" model="ir.actions.report">
+            <field name="paperformat_id" ref="sharevault_invoice.paperformat_invoice"/>
+        </record>
+
+    </data>
+</odoo>

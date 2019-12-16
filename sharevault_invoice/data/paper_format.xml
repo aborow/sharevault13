@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="paperformat_invoice" model="report.paperformat">
+            <field name="name">Invoice (ShareVault)</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">90</field>
+            <field name="margin_bottom">68</field>
+            <field name="header_spacing">85</field>
+        </record>
+
+    </data>
+</odoo>
