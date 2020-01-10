@@ -42,7 +42,7 @@ class ImportJE(models.TransientModel):
 			analytic_account_id = analytic_account_id[0].id
 			return analytic_account_id
 		else:
-			raise Warning(_('"%s" Wrong Analytic Account Name %s') % analytic_account_name)
+			raise Warning(_('"%s" Wrong Analytic Account Name') % analytic_account_name)
 
 	def create_import_move_lines(self, values):
 		move_line_obj = self.env['account.move.line']
