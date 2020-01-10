@@ -27,3 +27,10 @@ class AccountMove(models.Model):
     date_creation = fields.Date('Creation')
     date_expiration = fields.Date('Expiration')
     customer_contact_id = fields.Many2one('res.partner',string="Customer Contact")
+    amount_paid = fields.Monetary('Amount Paid',compute='get_amount_paid')
+
+    @api.depends('amount_residual','amount_total')
+    def get_amount_paid(self):
+        for move in self:
+            if self.amount_residual:
+                self.amount_paid = self.amount_total - self.amount_residual

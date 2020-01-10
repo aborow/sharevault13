@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Representative added in Form View of Sales-->
+        <record id="sale_order_from_inherit_for_rep" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.for.rep</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='client_order_ref']" position="after">
+                    <field name="rep_id"/>
+                </xpath>
+            </field>
+        </record>
+        <!--Representative added in Search View of Sales-->
+        <record id="sale_order_view_search_inherit_quotation_for_rep" model="ir.ui.view">
+            <field name="name">sale.order.search.inherit.quotation.for.rep</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='campaign_id']" position="after">
+                    <field name="rep_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

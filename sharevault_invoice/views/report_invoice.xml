@@ -8,18 +8,18 @@
                     <div class="oe_structure"/>
                     <div class="row">
                         <div class="col-xs-6">
-                            <div id="div_customer_address_shipping">
+                           <!--  <div id="div_customer_address_shipping">
                                 <b>Accounts Payable Email Address:</b>
                                 <span t-field="o.partner_id.email"/>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="col-xs-6" style="margin-left:350px;">  
+                        <div class="col-xs-6" style="margin-left:650px;margin-top:55px;"> 
                             <div id="div_customer_address_shipping">
                                 <t t-if="o.x_studio_term_start_date">
-                                    <b>Term Start Date:</b><span t-field="o.x_studio_term_start_date" t-options='{"format": "dd/MM/yyyy"}'/><br/>
+                                    <b>Term Start Date&#160;:&#160;</b><span t-field="o.x_studio_term_start_date" t-options='{"format": "MM/dd/yyyy"}'/><br/>
                                 </t>
                                 <t t-if="o.x_studio_term_end_date">
-                                    <b>Term End Date:</b><span t-field="o.x_studio_term_end_date" t-options='{"format": "dd/MM/yyyy"}'/>
+                                    <b>Term End Date&#160;:</b>&#160;<span t-field="o.x_studio_term_end_date" t-options='{"format": "MM/dd/yyyy"}'/>
                                 </t>
                             </div>
                         </div>
@@ -44,30 +44,30 @@
                             <t t-foreach="o.invoice_line_ids" t-as="l">
                                 <t t-if="l_odd">
                                     <tr style="background-color: white;">
-                                        <td width="15%"><span t-field="l.product_id.default_code"/></td>
-                                        <td><span t-field="l.name"/></td>
-                                        <td class="text-right">
+                                        <td class="inoice_data" width="15%"><span t-field="l.product_id.default_code"/></td>
+                                        <td class="inoice_data"><span t-field="l.name"/></td>
+                                        <td class="text-right inoice_data">
                                             <span t-field="l.quantity"/>
                                         </td>
-                                        <td class="text-right" width="15%">
+                                        <td class="text-right inoice_data" width="15%">
                                             <span t-field="l.price_unit"/>
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-right inoice_data" width="10%">
                                             <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
                                         </td>
                                     </tr>
                                 </t>
                                 <t t-if="l_even">
                                     <tr style="background-color: #EBF5FB;">
-                                        <td width="15%"><span t-field="l.product_id.default_code"/></td>
-                                        <td><span t-field="l.name"/></td>
-                                        <td class="text-right">
+                                        <td class="inoice_data" width="15%"><span t-field="l.product_id.default_code"/></td>
+                                        <td class="inoice_data"><span t-field="l.name"/></td>
+                                        <td class="text-right inoice_data">
                                             <span t-field="l.quantity"/>
                                         </td>
-                                        <td class="text-right" width="15%">
+                                        <td class="text-right inoice_data" width="15%">
                                             <span t-field="l.price_unit"/>
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-right inoice_data" width="10%">
                                             <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
                                         </td>
                                     </tr>
@@ -75,22 +75,46 @@
                             </t>
                         </tbody>
                         <tr>
-                            <td colspan="3" class="msg_title">
-                                <br/><b>Thank you for your business!</b>
+                            <td colspan="3" rowspan="3" class="msg_title" style="vertical-align: middle;">
+                                <b>Thank you for your business!</b>
                             </td>
-                            <td class="invoice_total">
-                                <span id="taxes" t-if="o.amount_tax">Untaxed<br/></span>
-                                <span id="taxes" t-if="o.amount_tax">Taxes<br/></span>
-                                <span id="total">Total</span>
-                            </td>
-                            <td class="invoice_total">
-                                <span t-if="o.amount_tax"><span t-field="o.amount_untaxed"/><br/></span>
-                                <span t-if="o.amount_tax"><span t-field="o.amount_tax"/><br/></span>
-                                <span id="total"><span t-field="o.amount_total"/></span>
-                            </td>
+                            <t t-if="o.amount_total">
+                                <td class="invoice_total" width="15%">
+                                    Subtotal&#160;:&#160;
+                                </td>
+                            </t>
+                            <t t-if="o.amount_total">
+                                <td class="invoice_total" width="10%">
+                                    <span t-field="o.amount_total"/>
+                                </td>
+                            </t>
                         </tr>
-                    </table><br/>
-                    <p>Amounts are in US dollars and exclude taxes, duties and tariffs.</p><br/>
+                        <tr>
+                            <t t-if="o.amount_paid">
+                                <td class="invoice_total" width="15%">
+                                    Payments Received&#160;:&#160;
+                                </td>
+                            </t>
+                            <t t-if="o.amount_paid">
+                                <td class="invoice_total" width="10%">
+                                    <span t-field="o.amount_paid"/>
+                                </td>
+                            </t>
+                        </tr>
+                        <tr>
+                            <t t-if="o.amount_residual">
+                                <td class="invoice_total" width="15%">
+                                    Total Amount Due&#160;:&#160;
+                                </td>
+                            </t>
+                            <t t-if="o.amount_residual">
+                                <td class="invoice_total" width="10%">
+                                    <b><span t-field="o.amount_residual"/></b>
+                                </td>
+                            </t>
+                        </tr>
+                    </table>
+                    <p class="note">Amounts are in US dollars and exclude taxes, duties and tariffs.</p>
                     <table class="product-table table table-condensed" id="sharevault_table_invoice">
                         <thead>
                             <tr class="notes_thead">
@@ -101,6 +125,26 @@
                             <td>
                                 <br/><br/><br/>
                             </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr class="bank_data">
+                            <td>For ACH and Wire Transfer payment&#160;:&#160;</td>
+                        </tr>
+                        <tr class="bank_data">
+                            <td>Account Name&#160;:&#160;Pandesa Corporation DBA ShareVault</td>
+                        </tr>
+                        <tr class="bank_data">
+                            <td>Bank Name&#160;:&#160;Boston Private Bank &amp; Trust Company</td>
+                        </tr>
+                        <tr class="bank_data">
+                            <td>Account Number&#160;:&#160;0020062711</td>
+                        </tr>
+                        <tr class="bank_data">
+                            <td>Routing/ABA Number&#160;:&#160;011002343</td>
+                        </tr>
+                        <tr class="bank_data">
+                            <td>Swift Code&#160;:&#160;BPTCUS33</td>
                         </tr>
                     </table>
                 </div>
@@ -129,6 +173,18 @@
         <record id="report_invoice_call" model="ir.actions.report">
             <field name="paperformat_id" ref="sharevault_invoice.paperformat_invoice"/>
         </record>
-
+        <!-- QWeb Reports Inherited from base account mnodule-->
+        <report
+            id="account.account_invoices"
+            model="account.move"
+            string="Invoices"
+            report_type="qweb-pdf"
+            name="account.report_invoice_with_payments"
+            file="account.report_invoice_with_payments"
+            attachment="(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')"
+            print_report_name="(object._get_report_base_filename())"
+            groups="account.group_account_invoice"
+            menu="False"
+        />
     </data>
 </odoo>

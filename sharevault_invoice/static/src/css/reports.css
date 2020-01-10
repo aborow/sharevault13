@@ -1,5 +1,6 @@
 #div_company_logo {
-    width: 50%;
+    width: 45%;
+    height: 35%;
 }
 #div_company_address {
     width: 50%;
@@ -12,11 +13,11 @@
     font-size: 13px;
 }
 #div_invoice_title {
-    width: 33%;
-    text-align: center;
+    width: 38%;
+    text-align: left;
 }
 #div_invoice_data {
-    width: 33%;
+    width: 50%;
     padding-top: 15px;
     font-size: 13px;
 }
@@ -34,8 +35,9 @@
 
 
 #company_logo {
-    width: 75px;
-    margin-top: -5px;
+    width: 257px;
+    height: 75px;
+    margin-top: 1px;
 }
 #company_address {
 }
@@ -43,8 +45,8 @@
 #invoice_title{
     font-size: 25px;
     font-weight: bold;
-    text-align: center;
-    margin-left: 500px;
+    text-align: left;
+    margin-left: 450px;
     color:#39668c;
 }
 
@@ -53,15 +55,25 @@
     font-weight: bold;
     color:#39668c;
     background-color: #EBF5FB;
-    text-align:right;
+    text-align:center;
+    padding: 0px;
+    vertical-align: middle;
+    /*margin-bottom:5px;*/
 }
 
 .invoice_thead{
     text-align: center;
     color:white;
-    font-size: 13px;
+    font-size: 12px;
     background-color:#39668c; 
     margin-bottom: -50px;
+    font-style: calibri;
+}
+
+.inoice_data{
+    font-size: 12px;
+    font-style: calibri;
+    color:black;
 }
 
 .notes_thead{
@@ -73,9 +85,11 @@
 }
 
 .invoice_total{
-    font-size: 15px;
+    font-size: 12px;
     background-color: #EBF5FB;
     text-align:right;
+    font-style: calibri;
+    color:black;
 }
 
 #company_name{
@@ -103,6 +117,10 @@
     margin-top: 5px;
 }
 
+.bank_data{
+    font-size: 13px;
+    font-style: calibri;
+}
 
 #footer_bank td {
     padding: 15px;
@@ -145,5 +163,10 @@
     text-align: center
 }
 #taxes {
-    text-align: center
+    text-align: left
+}
+
+.note{
+    font-size:11px;
+    font-style: calibri;
 }

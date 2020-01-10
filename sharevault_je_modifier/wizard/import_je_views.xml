@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<!-- form view of Import JE -->
+		<record id="import_je_wizard" model="ir.ui.view">
+			<field name="name">Import Journal Entries</field>
+			<field name="model">import.je</field>
+			<field name="arch" type="xml">
+				<form string="Import JE">
+					<div class="card bg-light">
+						<div class="card-body"><i class="fa fa-fw fa-file"/> Please upload CSV formated file.</div> 
+					</div>
+					<group>
+						<group>
+							<field name="file" filename="name"/>
+						</group>
+					</group>
+					<footer>
+						<button name="import_je" string="Import" type="object" class="oe_highlight"/>
+						<button name="Cancel" string="Cancel" special="cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<!-- Action for Import JE -->
+		<record id="action_import_je" model="ir.actions.act_window">
+			<field name="name">Import JE</field>
+			<field name="res_model">import.je</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<!-- Menuitem for Import JE -->
+		<menuitem id="menu_je_import" name="Import JE"
+        action="action_import_je" parent="account.menu_finance_entries_accounting_miscellaneous" sequence="10"/>
+
+	</data>
+</odoo>

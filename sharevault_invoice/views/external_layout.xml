@@ -17,7 +17,19 @@
                         <td rowspan="8" id="div_company_address">
                             <!-- <div id="div_company_address"> -->
                             <span t-field="o.company_id.display_name" id="company_name"/>
-                            <address t-field="o.company_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;,&quot;phone&quot;,&quot;email&quot;], &quot;no_marker&quot;: True}" id="company_address"/>
+                            <t t-if="o.company_id.partner_id.street">
+                               <br/><span t-field="o.company_id.partner_id.street"/>&#160;,&#160;<span t-field="o.company_id.partner_id.street2"/>
+                            </t>
+                            <br/><span t-field="o.company_id.partner_id.city"/>,<span t-field="o.company_id.partner_id.state_id"/>,<span t-field="o.company_id.partner_id.zip"/>
+                            <t t-if="o.company_id.partner_id.country_id">
+                                <br/><span t-field="o.company_id.partner_id.country_id"/>
+                            </t>
+                            <t t-if="o.company_id.phone">
+                                <br/><span t-field="o.company_id.phone"/>
+                            </t>
+                            <t t-if="o.company_id.email">
+                                <br/><span t-field="o.company_id.email"/>
+                            </t>
                             <!-- </div> -->
                         </td>
                         <td>
@@ -31,34 +43,35 @@
                                     <td><span t-field="o.name"/></td>
                                 </tr>
                                 <tr>
+                                    <td class="invoice_data_title">Due Date:</td>
+                                    <td><span t-field="o.invoice_date_due"/></td>
+                                </tr>
+                                <tr>
                                     <td class="invoice_data_title">Approval Reference:</td>
-                                    <td></td>
+                                    <td><span t-field="o.ref"/></td>
                                 </tr>
                                 <tr>
                                     <td class="invoice_data_title">Terms:</td>
                                     <td><span t-field="o.invoice_payment_term_id.name"/></td>
                                 </tr>
                                 <tr>
-                                    <td class="invoice_data_title">Due Date:</td>
-                                    <td><span t-field="o.invoice_date_due"/></td>
-                                </tr>
-                                <tr>
                                     <td class="invoice_data_title">Sales Person:</td>
                                     <td><span t-field="o.invoice_user_id.name"/></td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td class="invoice_data_title">Start Date:</td>
                                     <td><span t-field="o.date_creation"/></td>
                                 </tr>
                                 <tr>
                                     <td class="invoice_data_title">End Date:</td>
                                     <td><span t-field="o.date_expiration"/></td>
-                                </tr>
+                                </tr> -->
                             </table>
                         </td>
                     </tr>
                 </table>
             </div>
+            <br/>
             <div class="row">
                 <div class="col-xs-6">
                     <t t-if="o.partner_id">
@@ -75,8 +88,11 @@
                         <div id="div_customer_address_shipping">
                             <span class="customer_small_title">Customer Contact:</span>
                             <br/>
-                            <span t-field="o.customer_contact_id.name"/>
-                            <address t-field="o.customer_contact_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: True}" id="customer_address"/>
+                            <span t-field="o.customer_contact_id.name"/><br/>
+                            <t t-if="o.customer_contact_id.email"><span t-field="o.customer_contact_id.email"/><br/></t>
+                            <t t-if="o.customer_contact_id.phone"><span t-field="o.customer_contact_id.phone"/><br/></t>
+                            <t t-if="o.customer_contact_id.mobile"><span t-field="o.customer_contact_id.mobile"/><br/></t>
+                            <!-- <address t-field="o.customer_contact_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: True}" id="customer_address"/> -->
                         </div>
                     </t>
                 </div>
@@ -90,9 +106,9 @@
 
         <div class="footer">
             <link href="/sharevault_invoice/static/src/css/reports.css" rel="stylesheet" type="text/css"/>
-            <div class="row" id="div_footer_bank">
-                <br/>
-                <table width="100%">
+           <!--  <div class="row" id="div_footer_bank">
+                <br/> -->
+                <!-- <table width="100%">
                     <tr>
                         <td>
                             <t t-if="o.invoice_partner_bank_id">
@@ -111,8 +127,9 @@
                             </t>
                         </td>
                     </tr>
-                </table>
-            </div>
+                </table> -->
+                <center>Page:<span class="page"/> / <span class="topage"/></center>
+            <!-- </div> -->
         </div>
     </template>
 
