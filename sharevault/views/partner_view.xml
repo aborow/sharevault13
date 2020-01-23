@@ -26,6 +26,19 @@
             </field>
         </record>
 
+        <!-- SV-49 Related changes -->
+        <record id="add_fields_partner_form_view" model="ir.ui.view">
+            <field name="name">Partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="category_id" position="after">
+                    <field name="opt_out"/>
+                    <field name="source"/>
+                </field>
+            </field>
+        </record>
+
         <record model="ir.ui.view" id="view_partner_form">
             <field name="name">Partner</field>
             <field name="model">res.partner</field>

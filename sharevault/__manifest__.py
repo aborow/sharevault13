@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'ShareVault',
-    'version': '1.2',
+    'version': '13.0.1.0.5',
     'category': 'Tools',
     'author': 'Wibtec',
     'website': 'www.wibtec.com',
@@ -10,6 +10,9 @@
 
 Version(1.1) - ShareVault data model
 Version(1.2) - Added constraint on the email field for partner.
+13.0.1.0.1 - New Fields in Contact object - "Opt Out" and "Source ID".
+13.0.1.0.2 - New Commit add it just for Adding changes in the odoo.sh.
+13.0.1.0.3 - change to define Xpath for new added field because Error displayed in the odoo.sh.
 """,
     'depends': [
                 'crm',
