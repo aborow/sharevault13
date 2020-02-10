@@ -19,3 +19,7 @@ New Commit add it just for Adding changes in the odoo.sh.
 Version - 13.0.1.0.3 and 13.0.1.0.4 and 13.0.1.0.5
 =======================
 change to define Xpath for new added field because Error displayed in the odoo.sh.
+
+Version - 13.0.1.0.2
+================
+[SV-53] hided fields based on company type

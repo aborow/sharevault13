@@ -36,6 +36,13 @@
                     <field name="opt_out"/>
                     <field name="source"/>
                 </field>
+                <!--SV-53: Hided for individual company type-->
+                <field name="website" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_company', '=', False)]}</attribute>
+                </field>
+                <field name="industry_id" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_company', '=', False)]}</attribute>
+                </field>
             </field>
         </record>
 
@@ -146,12 +153,14 @@
                         <group>
                             <group>
                                 <field name="ae_targeted"/>
-                                <field name="annual_revenue"/>
+                                <!--Hided for individual company type-->
+                                <field name="annual_revenue" attrs="{'invisible': [('is_company', '=', False)]}"/>
                                 <field name="european_union"/>
                                 <field name="data_source_details"/>
                                 <field name="domain"/>
                                 <field name="imported_phone"/>
-                                <field name="number_employees"/>
+                                <!--Hided for individual company type-->
+                                <field name="number_employees" attrs="{'invisible': [('is_company', '=', False)]}"/>
                             </group>
                             <group>
                                 <field name="marketing_flag"/>
