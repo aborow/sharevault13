@@ -33,7 +33,7 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <field name="category_id" position="after">
-                    <field name="opt_out"/>
+                    <field name="opt_out" string="Email Opt Out"/>
                     <field name="source"/>
                 </field>
             </field>
