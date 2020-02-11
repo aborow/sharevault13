@@ -20,6 +20,10 @@ Version - 13.0.1.0.3 and 13.0.1.0.4 and 13.0.1.0.5
 =======================
 change to define Xpath for new added field because Error displayed in the odoo.sh.
 
-Version - 13.0.1.0.2
+Version - 13.0.1.0.6
 ================
 [SV-53] hided fields based on company type
+
+Version - 13.0.1.0.7
+================
+SV-49: Modify display name to “Email Opt Out” instead of just “Opt Out”.
