@@ -186,7 +186,7 @@ class Partner(models.Model):
                                     ('services','Services'),
                                     ('tax_agency','Tax agency')
                                     ], 'Vendor Type')
-    opt_out = fields.Boolean('Email Opt Out')
+    opt_out = fields.Boolean('Opt Out')
     source = fields.Text('Source ID')
 
     @api.model
