@@ -23,3 +23,7 @@ change to define Xpath for new added field because Error displayed in the odoo.s
 Version - 13.0.1.0.6
 ================
 SV-49: Modify display name to Email Opt Out instead of just Opt Out.
+
+Version - 13.0.1.0.7
+================
+added base module dependency for resolve the odoo.sh issue of test Failed
