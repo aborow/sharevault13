@@ -66,6 +66,12 @@ class Status(models.Model):
     name = fields.Char('Name')
     active = fields.Boolean('Active', default=True)
 
+class Accindustry(models.Model):
+    _name = 'res.partner.accindustry'
+    _description = "Accounting Industry"
+
+    name = fields.Char('Name')
+    active = fields.Boolean('Active', default=True)
 
 class Subindustry(models.Model):
     _name = 'res.partner.subindustry'
@@ -288,9 +294,3 @@ class Partner(models.Model):
             name = "%s ‒ %s" % (name, partner.vat)
         return name
 
-class Accindustry(models.Model):
-    _name = 'res.partner.accindustry'
-    _description = "Accounting Industry"
-
-    name = fields.Char('Name')
-    active = fields.Boolean('Active', default=True)
