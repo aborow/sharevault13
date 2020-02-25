@@ -27,3 +27,7 @@ SV-49: Modify display name to Email Opt Out instead of just Opt Out.
 Version - 13.0.1.0.7
 ================
 added base module dependency for resolve the odoo.sh issue of test Failed
+
+Version - 13.0.1.0.8
+================
+[SV-46] Industry / Sub Industry / Accounting Industry.

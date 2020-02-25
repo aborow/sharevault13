@@ -29,3 +29,5 @@ acess_matter_manager,Subject Matter,model_res_partner_matter,sharevault.sharevau
 acess_tecnology_manager,Technology,model_res_partner_tecnology,sharevault.sharevault_manager,1,1,1,1
 acess_confidential_manager,Confidential,model_res_partner_confidential,sharevault.sharevault_manager,1,1,1,1
 acess_job_function_manager,Job Function,model_res_partner_job_function,sharevault.sharevault_manager,1,1,1,1
+acess_accindustry_general,Accouting Industry,model_res_partner_accindustry,,1,0,0,0
+acess_accindustry_manager,Accouting Industry,model_res_partner_accindustry,sharevault.sharevault_manager,1,1,1,1
