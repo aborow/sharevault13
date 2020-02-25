@@ -46,7 +46,7 @@
             </field>
         </record>
 
-        <record model="ir.ui.view" id="view_partner_form">
+        <record model="ir.ui.view" id="view_partner_form_inherit">
             <field name="name">Partner</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
@@ -183,7 +183,9 @@
                             <group>
                                 <field name="persona_id" required="1"/>
                                 <field name="status_id" string="Status"/>
-                                <field name="subindustry_id"/>
+                                <!-- Sub industry comes based on Industry-->
+                                <field name="subindustry_id" domain="[('industry_id', '=', industry_id)]"/>
+                                <field name="accindustry_id" />
                             </group>
                         </group>
                         <group>
@@ -307,17 +309,19 @@
         </record>
 
         <record id="sharevault_fields_subindustry_tree" model="ir.ui.view">
-            <field name="name">Subindustry</field>
+            <field name="name">Sub Industry</field>
             <field name="model">res.partner.subindustry</field>
             <field name="arch" type="xml">
                 <tree editable="top">
                     <field name="name"/>
                     <field name="active"/>
+                    <field name="industry_id"/>
+                    <field name="accindustry_id"/>
                 </tree>
             </field>
         </record>
         <record id="sharevault_fields_subindustry_action" model="ir.actions.act_window">
-            <field name="name">Subindustry</field>
+            <field name="name">Sub Industry</field>
             <field name="res_model">res.partner.subindustry</field>
             <field name="view_mode">tree</field>
             <field name="domain">[('active','in',[True,False])]</field>
@@ -357,6 +361,22 @@
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
 
+        <record id="sharevault_fields_accindustry_tree" model="ir.ui.view">
+            <field name="name">Accounting Industry</field>
+            <field name="model">res.partner.accindustry</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+        <record id="sharevault_fields_accindustry_action" model="ir.actions.act_window">
+            <field name="name">Accounting Industry</field>
+            <field name="res_model">res.partner.accindustry</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('active','in',[True,False])]</field>
+        </record>
 
         <menuitem id="sharevault_menu_config"
             name="Config"
@@ -381,9 +401,15 @@
             sequence="2"/>
 
         <menuitem id="sharevault_menu_fields_subindustry"
-            name="Subindustry"
+            name="Sub Industry"
             parent="sharevault_menu_fields_root"
             action="sharevault_fields_subindustry_action"
+            sequence="3"/>
+
+        <menuitem id="sharevault_menu_fields_accindustry"
+            name="Accounting Industry"
+            parent="sharevault_menu_fields_root"
+            action="sharevault_fields_accindustry_action"
             sequence="3"/>
 
         <menuitem id="sharevault_menu_fields_contact_type"

@@ -73,7 +73,8 @@ class Subindustry(models.Model):
 
     name = fields.Char('Name')
     active = fields.Boolean('Active', default=True)
-
+    industry_id = fields.Many2one('res.partner.industry', 'Industry')
+    accindustry_id = fields.Many2one('res.partner.accindustry', 'Accounting Industry')
 
 class ContactType(models.Model):
     _name = 'res.partner.contact_type'
@@ -152,6 +153,7 @@ class Partner(models.Model):
     persona_id = fields.Many2one('res.partner.persona', 'Persona')
     status_id = fields.Many2one('res.partner.status', 'Partner Status')
     subindustry_id = fields.Many2one('res.partner.subindustry', 'Sub Industry')
+    accindustry_id = fields.Many2one('res.partner.accindustry', 'Accounting Industry')
     contact_type_id = fields.Many2one('res.partner.contact_type', 'Contact Type')
     matter_id = fields.Many2one('res.partner.matter', 'Subject matter most interested in?')
     tecnology_id = fields.Many2one('res.partner.tecnology', 'Technology solution used to share documents with 3rd parties?')
@@ -188,6 +190,14 @@ class Partner(models.Model):
                                     ], 'Vendor Type')
     opt_out = fields.Boolean('Opt Out')
     source = fields.Text('Source ID')
+
+    @api.onchange('subindustry_id')
+    @api.depends('subindustry_id')
+    def get_accindustry(self):
+        id = False
+        if self.subindustry_id:
+            id = self.subindustry_id.accindustry_id.id
+        self.accindustry_id = id
 
     @api.model
     def create(self,vals):
@@ -277,3 +287,10 @@ class Partner(models.Model):
         if self._context.get('show_vat') and partner.vat:
             name = "%s ‒ %s" % (name, partner.vat)
         return name
+
+class Accindustry(models.Model):
+    _name = 'res.partner.accindustry'
+    _description = "Accounting Industry"
+
+    name = fields.Char('Name')
+    active = fields.Boolean('Active', default=True)

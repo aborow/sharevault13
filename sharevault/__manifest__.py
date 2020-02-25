@@ -14,6 +14,7 @@ Version(1.2) - Added constraint on the email field for partner.
 13.0.1.0.2 - New Commit add it just for Adding changes in the odoo.sh.
 13.0.1.0.3 - change to define Xpath for new added field because Error displayed in the odoo.sh.
 13.0.1.0.6 - [SV-53] hided fields based on company type.
+13.0.1.0.11 - [SV-46] Industry / Sub Industry / Accounting Industry.
 """,
     'depends': [
                 'crm',
