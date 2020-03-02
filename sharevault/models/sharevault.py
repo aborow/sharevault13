@@ -38,3 +38,6 @@ class Sharevault(models.Model):
     locked = fields.Boolean('Locked')
     published_last_30_days_mb = fields.Integer('Published in the last 30 days')
     lead_id = fields.Many2one('crm.lead', 'Opportunity')
+    title = fields.Char('Contact Title')
+    contact_email = fields.Char('Contact Email')
+    contact_phone = fields.Char('Contact Phone')

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'ShareVault',
-    'version': '13.0.1.0.12',
+    'version': '13.0.1.0.13',
     'category': 'Tools',
     'author': 'Wibtec',
     'website': 'www.wibtec.com',
@@ -15,6 +15,7 @@ Version(1.2) - Added constraint on the email field for partner.
 13.0.1.0.3 - change to define Xpath for new added field because Error displayed in the odoo.sh.
 13.0.1.0.6 - [SV-53] hided fields based on company type.
 13.0.1.0.11 - [SV-46] Industry / Sub Industry / Accounting Industry.
+13.0.1.0.13 - [SV-66] add new fields to Sharevault Module.
 """,
     'depends': [
                 'crm',

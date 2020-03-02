@@ -35,3 +35,7 @@ Update base_automation dependency for resolve error in odoo.sh
 Version - 13.0.1.0.11
 ================
 [SV-46] Industry / Sub Industry / Accounting Industry.
+
+Version - 13.0.1.0.13
+================
+SV-66: add new fields to Sharevault Module
