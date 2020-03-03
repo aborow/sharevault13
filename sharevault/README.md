@@ -31,3 +31,7 @@ added base module dependency for resolve the odoo.sh issue of test Failed
 Version - 13.0.1.0.8
 ================
 [SV-46] Industry / Sub Industry / Accounting Industry.
+
+Version - 13.0.1.0.9
+================
+SV-66: add new fields to Sharevault Module
