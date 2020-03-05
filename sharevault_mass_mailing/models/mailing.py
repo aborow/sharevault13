@@ -5,9 +5,7 @@ from odoo import api, fields, models
 class MassMailing(models.Model):
     _inherit = "mailing.mailing"
 
-    state = fields.Selection(
-        [('draft', 'Draft'), ('in_queue', 'In Queue'), ('sending', 'Sending'), ('done', 'Sent'), ('error', 'Error')],
-        string='Status', required=True, tracking=True, copy=False, default='draft', group_expand='_group_expand_states')
+    state = fields.Selection(selection_add=[('error', 'Error')])
 
     @api.model
     def _process_mass_mailing_queue(self):
