@@ -44,7 +44,7 @@
                                         </span>
                                     </div>
                                     <div class="oe_kanban_bottom_right">
-                                        <p t-if="record.locked.raw_value">Locked\</p>
+                                        <p t-if="record.locked.raw_value == 'locked'">Locked\</p>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +94,8 @@
                             <group>
                                 <field name="type"/>
                                 <field name="lead_id"/>
-                                <field name="company_id" invisible="1"/>
+                                <field name="sharevault_id"/>
+                                <field name="company_id" invisible="0"/>
                             </group>
                         </group>
                         <group>
