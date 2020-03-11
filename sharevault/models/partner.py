@@ -294,3 +294,9 @@ class Partner(models.Model):
             name = "%s ‒ %s" % (name, partner.vat)
         return name
 
+
+class ResCompany(models.Model):
+    _inherit = "res.company"
+
+    sic_code = fields.Char('SIC Code')
+    naics_code = fields.Char('NAICS Code')
