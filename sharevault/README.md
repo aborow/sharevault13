@@ -47,3 +47,8 @@ SV-63 getting this error on the import (modified the existing fields)
 Version - 13.0.1.0.15
 ================
 SV-68 Create new Fields in Sharevault in for Companies.
+
+Version - 13.0.1.0.16
+================
+moved fields from company to contacts view
+new field added Zoom Company ID.

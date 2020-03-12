@@ -46,18 +46,6 @@
             </field>
         </record>
 
-        <!-- SV-68 Create new Fields in Sharevault for Companies -->
-        <record id="add_fields_res_company_form_view" model="ir.ui.view">
-            <field name="name">Company Inherit for sharevault</field>
-            <field name="model">res.company</field>
-            <field name="inherit_id" ref="base.view_company_form"/>
-            <field name="arch" type="xml">
-                <field name="vat" position="after">
-                    <field name="sic_code"/>
-                    <field name="naics_code"/>
-                </field>
-            </field>
-        </record>
 
         <record model="ir.ui.view" id="view_partner_form_inherit">
             <field name="name">Partner</field>
@@ -199,6 +187,10 @@
                                 <!-- Sub industry comes based on Industry-->
                                 <field name="subindustry_id" domain="[('industry_id', '=', industry_id)]"/>
                                 <field name="accindustry_id" />
+                                <!-- SV-68 Create new Fields in Sharevault for Companies -->
+                                <field name="sic_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                <field name="naics_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                <field name="zoom_company_id" attrs="{'invisible': [('is_company', '=', False)]}"/>
                             </group>
                         </group>
                         <group>
