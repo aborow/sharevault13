@@ -35,3 +35,7 @@ Version - 13.0.1.0.8
 Version - 13.0.1.0.9
 ================
 SV-66: add new fields to Sharevault Module
+
+Version - 13.0.1.0.10
+================
+SV-68: Create new Fields in Sharevault contacts module

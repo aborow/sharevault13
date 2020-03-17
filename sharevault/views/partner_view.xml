@@ -186,6 +186,10 @@
                                 <!-- Sub industry comes based on Industry-->
                                 <field name="subindustry_id" domain="[('industry_id', '=', industry_id)]"/>
                                 <field name="accindustry_id" />
+                                <!-- SV-68 Create new Fields in Sharevault for Companies -->
+                                <field name="sic_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                <field name="naics_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                <field name="zoom_company_id" attrs="{'invisible': [('is_company', '=', False)]}"/>
                             </group>
                         </group>
                         <group>

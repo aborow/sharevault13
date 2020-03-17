@@ -196,6 +196,10 @@ class Partner(models.Model):
                                     ], 'Vendor Type')
     opt_out = fields.Boolean('Opt Out')
     source = fields.Text('Source ID')
+    # SV-68
+    sic_code = fields.Char('SIC Code')
+    naics_code = fields.Char('NAICS Code')
+    zoom_company_id = fields.Char('Zoom Company ID')
 
     @api.onchange('subindustry_id')
     @api.depends('subindustry_id')
