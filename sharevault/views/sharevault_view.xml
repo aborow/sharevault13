@@ -7,9 +7,9 @@
             <field name="model">sharevault.sharevault</field>
             <field name="arch" type="xml">
                 <search string="Search ShareVaults">
-                    <field name="name"/>
-                    <field name="type"/>
-                    <field name="partner_id"/>
+                    <field name="sharevault_name"/>
+                    <field name="sv_type"/>
+                    <field name="sharevault_owner"/>
                 </search>
             </field>
         </record>
@@ -19,32 +19,32 @@
             <field name="model">sharevault.sharevault</field>
             <field name="arch" type="xml">
                 <kanban class="o_kanban_mobile">
-                    <field name="name"/>
-                    <field name="type"/>
-                    <field name="partner_id"/>
-                    <field name="date_creation"/>
-                    <field name="date_expiration"/>
-                    <field name="locked"/>
+                    <field name="sharevault_name"/>
+                    <field name="sv_type"/>
+                    <field name="sharevault_owner"/>
+                    <field name="sv_creation_dt"/>
+                    <field name="sv_expiration_dt"/>
+                    <field name="locked_unlocked"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div t-attf-class="oe_kanban_card oe_kanban_global_click">
                                 <div class="o_kanban_record_top mb16">
                                     <div class="o_kanban_record_headings mt4">
-                                        <strong class="o_kanban_record_title"><span><t t-esc="record.partner_id.value"/></span></strong>
+                                        <strong class="o_kanban_record_title"><span><t t-esc="record.sharevault_owner.value"/></span></strong>
                                     </div>
                                     <strong>
-                                        <field name="date_creation"/> - <field name="date_expiration"/>
+                                        <field name="sv_creation_dt"/> - <field name="sv_expiration_dt"/>
                                     </strong>
                                 </div>
                                 <div class="o_kanban_record_bottom">
                                     <div class="oe_kanban_bottom_left text-muted">
                                         <span>
-                                            <t t-esc="record.name.value"/>
-                                            <span t-if="record.type.value">(<field name="type"/>)</span>
+                                            <t t-esc="record.sharevault_name.value"/>
+                                            <span t-if="record.sv_type.value">(<field name="sv_type"/>)</span>
                                         </span>
                                     </div>
                                     <div class="oe_kanban_bottom_right">
-                                        <p t-if="record.locked.raw_value == 'locked'">Locked\</p>
+                                        <p t-if="record.locked_unlocked.raw_value == 'locked'">Locked\</p>
                                     </div>
                                 </div>
                             </div>
@@ -59,11 +59,11 @@
             <field name="model">sharevault.sharevault</field>
             <field name="arch" type="xml">
                 <tree string="ShareVaults">
-                    <field name="name"/>
-                    <field name="type"/>
-                    <field name="date_creation"/>
-                    <field name="date_expiration"/>
-                    <field name="date_last_login"/>
+                    <field name="sharevault_name"/>
+                    <field name="sv_type"/>
+                    <field name="sv_creation_dt"/>
+                    <field name="sv_expiration_dt"/>
+                    <field name="dt_last_login"/>
                     <field name="term_start_date"/>
                     <field name="term_end_date"/>
                 </tree>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="oe_title">
                             <h1>
-                                <field name="name"/>
+                                <field name="sharevault_name"/>
                             </h1>
                         </div>
                         <group>
@@ -92,7 +92,7 @@
                                 <field name="contact_phone"/>
                             </group>
                             <group>
-                                <field name="type"/>
+                                <field name="sv_type"/>
                                 <field name="lead_id"/>
                                 <field name="sharevault_id"/>
                                 <field name="company_id" invisible="0"/>
@@ -100,7 +100,7 @@
                         </group>
                         <group>
                             <group string="Owner">
-                                <field name="partner_id"
+                                <field name="sharevault_owner"
                                         widget="res_partner_many2one"
                                         domain="[('customer_rank','!=',False)]"
                                         context="{'show_address': 1, 'show_vat': True}"
@@ -110,11 +110,11 @@
                                 <field name="partner_id_phone" readonly="1"/>
                             </group>
                             <group string="Dates">
-                                <field name="date_creation"/>
-                                <field name="date_expiration"/>
-                                <field name="date_last_upload"/>
-                                <field name="date_last_download"/>
-                                <field name="date_last_login"/>
+                                <field name="sv_creation_dt"/>
+                                <field name="sv_expiration_dt"/>
+                                <field name="dt_last_upload"/>
+                                <field name="dt_last_download"/>
+                                <field name="dt_last_login"/>
                                 <field name="term_start_date"/>
                                 <field name="term_end_date"/>
                             </group>
@@ -140,7 +140,7 @@
                             </group>
                             <group string="Misc">
                                 <field name="uncounted_filesize_mb"/>
-                                <field name="locked"/>
+                                <field name="locked_unlocked"/>
                                 <field name="published_last_30_days_mb"/>
                             </group>
                         </group>

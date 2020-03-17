@@ -129,7 +129,7 @@ class Partner(models.Model):
     # email_formatted = fields.Char(
     #     'Formatted Email', compute='_compute_email_formatted',
     #     help='Format email address "Name <email@domain>"')
-    sharevault_ids = fields.One2many('sharevault.sharevault', 'partner_id', 'ShareVaults')
+    sharevault_ids = fields.One2many('sharevault.sharevault', 'sharevault_owner', 'ShareVaults')
     sharevault_ids_count = fields.Integer('ShareVault count', compute='get_sharevault_count')
     #auditlog_ids_count = fields.Integer('Auditlog count', compute='get_auditlog_count')
     first_name = fields.Char('First Name', computed='get_first_last_name', store=True)
@@ -215,6 +215,15 @@ class Partner(models.Model):
             existing_id = self.search([('email','=', vals['email'])])
             if existing_id:
                 raise ValidationError(_('An email of partner could be defined only one time for one partner.'))
+        if vals.get('name'):
+            existing_name = self.search([('name', '=', vals['name'])])
+            if existing_name.company_type == 'company':
+                raise ValidationError(_('Name of company must be unique'))
+        if vals.get('domain'):
+            existing_domain = self.search([('domain', '=', vals['domain'])])
+            if existing_domain:
+                raise ValidationError(_('Domain of partner must be unique'))
+
         return super(Partner ,self).create(vals)
 
     def write(self,vals):
@@ -223,6 +232,16 @@ class Partner(models.Model):
                 existing_id = self.search([('email','=', vals['email'])])
                 if existing_id:
                     raise ValidationError(_('An email of partner could be defined only one time for one partner.'))
+        if 'name' in vals:
+            if vals['name']:
+                existing_name = self.search([('name', '=', vals['name'])])
+                if existing_name.company_type == 'company':
+                    raise ValidationError(_('Name of company must be unique'))
+        if 'domain' in vals:
+            if vals['domain']:
+                existing_domain = self.search([('domain', '=', vals['domain'])])
+                if existing_domain:
+                    raise ValidationError(_('Domain of partner must be unique'))
         return super(Partner ,self).write(vals)
 
     @api.onchange('name')

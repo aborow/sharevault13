@@ -52,3 +52,7 @@ Version - 13.0.1.0.16
 ================
 moved fields from company to contacts view
 new field added Zoom Company ID.
+
+Version - 13.0.1.0.17
+================
+SV-63 modify the sharevault fields and added unique constrain raise for domain and company name.
