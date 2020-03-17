@@ -56,3 +56,7 @@ new field added Zoom Company ID.
 Version - 13.0.1.0.17
 ================
 SV-63 modify the sharevault fields and added unique constrain raise for domain and company name.
+
+Version - 13.0.1.0.18
+================
+SV-68 make the field “Zoom Company ID” a char field instead of an integer field

@@ -199,7 +199,7 @@ class Partner(models.Model):
     #SV-68
     sic_code = fields.Char('SIC Code')
     naics_code = fields.Char('NAICS Code')
-    zoom_company_id = fields.Integer('Zoom Company ID')
+    zoom_company_id = fields.Char('Zoom Company ID')
 
     @api.onchange('subindustry_id')
     @api.depends('subindustry_id')
