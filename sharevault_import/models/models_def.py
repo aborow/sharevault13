@@ -281,5 +281,9 @@ class BaseModelExtend(models.AbstractModel):
         # This way, the rest of the code remains unchanged
         for data in data_list:
             if 'partner' in data.get('xml_id'):
-                data = self.env['base']._sharevault_check(data)
+                try:
+                    data = self.env['base']._sharevault_check(data)
+                except Exception as e:
+                    _logger.error("ERROR: %s" % e)
+                    pass
         return super(BaseModelExtend, self)._load_records(data_list, update=update)
