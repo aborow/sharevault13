@@ -229,7 +229,10 @@ class Partner(models.Model):
     def write(self,vals):
         if 'email' in vals:
             if vals['email']:
-                existing_id = self.search([('email','=', vals['email'])])
+                existing_id = self.env['res.partner'].search([
+                                            ('email','=', vals['email']),
+                                            ('id','!=', s.id)
+                                            ])
                 if existing_id:
                     raise ValidationError(_('An email of partner could be defined only one time for one partner.'))
         if 'name' in vals:
@@ -316,4 +319,3 @@ class Partner(models.Model):
         if self._context.get('show_vat') and partner.vat:
             name = "%s ‒ %s" % (name, partner.vat)
         return name
-
