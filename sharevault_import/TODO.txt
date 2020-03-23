@@ -1,0 +1,10 @@
+"""
+https://wibtec.atlassian.net/browse/SV-63
+
+"""
+
+- dynamic rules - how to? should we?
+
+- what if there is no xml_id from where we can get the model?
+
+- what about contacts with different types?
