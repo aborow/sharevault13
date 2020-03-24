@@ -228,26 +228,27 @@ class Partner(models.Model):
         return super(Partner ,self).create(vals)
 
     def write(self,vals):
-        if 'email' in vals:
-            if vals['email']:
-                existing_id = self.env['res.partner'].search([
-                                            ('email','=', vals['email']),
-                                            ('id','!=', s.id)
-                                            ])
-                if existing_id:
-                    raise ValidationError(_('An email of partner could be defined only one time for one partner.'))
-        """
-        if 'name' in vals:
-            if vals['name']:
-                existing_name = self.search([('name', '=', vals['name'])])
-                if existing_name.company_type == 'company':
-                    raise ValidationError(_('Name of company must be unique'))
-        if 'domain' in vals:
-            if vals['domain']:
-                existing_domain = self.search([('domain', '=', vals['domain'])])
-                if existing_domain:
-                    raise ValidationError(_('Domain of partner must be unique'))
-        """
+        for s in self:
+            if 'email' in vals:
+                if vals['email']:
+                    existing_id = self.env['res.partner'].search([
+                                                ('email','=', vals['email']),
+                                                ('id','!=', s.id)
+                                                ])
+                    if existing_id:
+                        raise ValidationError(_('An email of partner could be defined only one time for one partner.'))
+            """
+            if 'name' in vals:
+                if vals['name']:
+                    existing_name = self.search([('name', '=', vals['name'])])
+                    if existing_name.company_type == 'company':
+                        raise ValidationError(_('Name of company must be unique'))
+            if 'domain' in vals:
+                if vals['domain']:
+                    existing_domain = self.search([('domain', '=', vals['domain'])])
+                    if existing_domain:
+                        raise ValidationError(_('Domain of partner must be unique'))
+            """
         return super(Partner ,self).write(vals)
 
     @api.onchange('name')
