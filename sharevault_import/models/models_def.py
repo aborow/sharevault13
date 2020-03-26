@@ -94,6 +94,8 @@ class BaseModelExtend(models.AbstractModel):
                     found_match = email_exists.id
                 else:
                     check_domain = True
+            else:
+                check_domain = True
 
             if check_domain:
                 if DEBUG_MODE:
