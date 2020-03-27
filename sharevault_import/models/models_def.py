@@ -59,6 +59,7 @@ DEBUG_MODE = True
 
 class BaseModelExtend(models.AbstractModel):
     _name = 'basemodel.extend'
+    _description = 'Base model extend'
 
     def _register_hook(self):
 
