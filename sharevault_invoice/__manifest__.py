@@ -9,6 +9,7 @@
     'description': 'Invoice',
     'depends': [
                 'sharevault',
+                'account'
                 ],
     'data': [
                 'data/paper_format.xml',
