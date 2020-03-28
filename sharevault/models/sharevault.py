@@ -1,17 +1,26 @@
 # -*- coding: utf-8 -*-
-from odoo import api, fields, models, tools, _
-#from odoo.exceptions import ValidationError
-
 #import logging
+
+from odoo import api, fields, models, tools, _
+
 #_logger = logging.getLogger(__name__)
 
 class Sharevault(models.Model):
     _name = 'sharevault.sharevault'
     _description = 'ShareVaults'
+    _rec_name = 'sharevault_name'
+
+    def name_get(self):
+        res = []
+        for s in self:
+            name = s.sharevault_name
+            if s.sharevault_owner:
+                name = "%s (%s)" % (name, s.sharevault_owner.name)
+            res.append((s.id, name))
+        return res
 
     sharevault_name = fields.Char('Name', required=True)
     key = fields.Integer('Key')
-    #company_id = fields.Many2one('res.company', 'Company')
     company_id = fields.Many2one('res.partner', 'Company')
     sv_type = fields.Selection([('sv','SV'),('sve','SVe')], 'Type')
     sharevault_owner = fields.Many2one('res.partner', 'Owner')

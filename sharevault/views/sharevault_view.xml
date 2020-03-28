@@ -10,6 +10,12 @@
                     <field name="sharevault_name"/>
                     <field name="sv_type"/>
                     <field name="sharevault_owner"/>
+                    <group expand="0" name="group_by" string="Group By">
+                        <filter name="groupby_sv_type" string="Type"
+                                context="{'group_by' : 'sv_type'}"/>
+                        <filter name="groupby_sharevault_owner" string="Owner"
+                                context="{'group_by': 'sharevault_owner'}"/>
+                    </group>
                 </search>
             </field>
         </record>
@@ -59,6 +65,7 @@
             <field name="model">sharevault.sharevault</field>
             <field name="arch" type="xml">
                 <tree string="ShareVaults">
+                    <field name="sharevault_owner"/>
                     <field name="sharevault_name"/>
                     <field name="sv_type"/>
                     <field name="sv_creation_dt"/>
