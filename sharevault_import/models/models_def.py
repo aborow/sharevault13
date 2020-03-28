@@ -35,7 +35,6 @@ def _predict_nextval(self, seq_id):
 
 DEBUG_MODE = True
 
-
 class BaseModelExtend(models.AbstractModel):
     _name = 'basemodel.extend'
     _description = 'Base model extend'
