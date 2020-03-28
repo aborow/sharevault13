@@ -36,8 +36,6 @@ def _predict_nextval(self, seq_id):
 DEBUG_MODE = True
 
 
-
-
 class BaseModelExtend(models.AbstractModel):
     _name = 'basemodel.extend'
     _description = 'Base model extend'
@@ -184,17 +182,22 @@ class BaseModelExtend(models.AbstractModel):
             _logger.info("_load_records SUPER")
         # We prepare the data according to SV's rules
         # This way, the rest of the code remains unchanged
+        BaseObj = self.env['base']
         for data in data_list:
             if 'sharevault' in data.get('xml_id'):
+                if DEBUG_MODE:
+                    _logger.info("ShareVault import")
                 try:
-                    data = self.env['base']._sharevault_sharevault_check(data)
+                    data = BaseObj._sharevault_sharevault_check(data)
                 except Exception as e:
                     _logger.error("ERROR: %s" % e)
                     pass
 
             if 'partner' in data.get('xml_id'):
+                if DEBUG_MODE:
+                    _logger.info("Contact import")
                 try:
-                    data = self.env['base']._sharevault_contact_check(data)
+                    data = BaseObj._sharevault_contact_check(data)
                 except Exception as e:
                     _logger.error("ERROR: %s" % e)
                     pass
