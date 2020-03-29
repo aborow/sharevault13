@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-#import logging
+import logging
 import re
 
 from odoo import api, fields, models
 from odoo.osv.expression import get_unaccent_wrapper
 
-#_logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 class Partner(models.Model):
     _inherit = 'res.partner'
@@ -51,12 +51,15 @@ class Partner(models.Model):
             if 'import_file' in self._context:
                 query = """SELECT res_partner.id
                              FROM {from_str}
+		                           LEFT JOIN res_partner AS partner_company ON res_partner.parent_id=partner_company.id
                           {where} ({email} {operator} {percent}
                                OR {display_name} {operator} {percent}
                                OR {reference} {operator} {percent}
                                OR {vat} {operator} {percent}
-                               OR (res_partner.parent_id IS NOT NULL AND {display_name} LIKE {percent})
-                               )
+                               OR (
+                                    res_partner.parent_id IS NOT NULL
+                                    AND {display_name} LIKE CONCAT(partner_company.name, ', ', {percent})
+                               ))
 
                                -- don't panic, trust postgres bitmap
                          ORDER BY {fields} {display_name} {operator} {percent} desc,
@@ -96,7 +99,7 @@ class Partner(models.Model):
             where_clause_params += [re.sub('[^a-zA-Z0-9]+', '', search_name) or None]  # for vat
 
             if 'import_file' in self._context:
-                where_clause_params += ['%%, %s' % name]
+                where_clause_params += [name]
 
             where_clause_params += [search_name]  # for order by
             if limit:
@@ -104,6 +107,9 @@ class Partner(models.Model):
                 where_clause_params.append(limit)
 
             self.env.cr.execute(query, where_clause_params)
+
+            # Check the query that was executed
+            #_logger.info(self.env.cr.query)
 
             partner_ids = [row[0] for row in self.env.cr.fetchall()]
 
