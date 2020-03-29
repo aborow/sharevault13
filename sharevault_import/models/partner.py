@@ -66,7 +66,6 @@ class Partner(models.Model):
                                     AND {display_name} LIKE CONCAT(partner_company.name, ', ', {percent})
                                ))
 
-                               -- don't panic, trust postgres bitmap
                          ORDER BY {fields} {display_name} {operator} {percent} desc,
                                   {display_name}
                         """.format(from_str=from_str,
@@ -87,7 +86,6 @@ class Partner(models.Model):
                                OR {vat} {operator} {percent}
                                )
 
-                               -- don't panic, trust postgres bitmap
                          ORDER BY {fields} {display_name} {operator} {percent} desc,
                                   {display_name}
                         """.format(from_str=from_str,
@@ -114,7 +112,7 @@ class Partner(models.Model):
             self.env.cr.execute(query, where_clause_params)
 
             # Check the query that was executed
-            #_logger.info(self.env.cr.query)
+            _logger.info(str(self.env.cr.query).replace('\\n', ' ').replace('\\t', ' ').replace('\\', ""))
 
             partner_ids = [row[0] for row in self.env.cr.fetchall()]
 
