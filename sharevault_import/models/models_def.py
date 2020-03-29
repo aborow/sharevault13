@@ -33,7 +33,7 @@ def _predict_nextval(self, seq_id):
     return last_value
 
 
-DEBUG_MODE = True
+DEBUG_MODE = False
 
 class BaseModelExtend(models.AbstractModel):
     _name = 'basemodel.extend'
@@ -46,9 +46,9 @@ class BaseModelExtend(models.AbstractModel):
                 _logger.info("_sharevault_sharevault_check")
                 _logger.info("ORIGINAL DATA: %s" % data)
 
-                ShareVault = self.env['sharevault.sharevault']
-                data_values = data['values']
-                found_match = False
+            ShareVault = self.env['sharevault.sharevault']
+            data_values = data['values']
+            found_match = False
 
             if data_values.get('sharevault_id'):
                 if DEBUG_MODE:
