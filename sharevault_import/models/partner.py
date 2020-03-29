@@ -48,7 +48,12 @@ class Partner(models.Model):
             # ShareVault - let's make sure we get the display name for a record
             # that is a child of another
             # Sure... there probably is a better and more elegant way of doing this...
-            if 'XXXimport_file' in self._context:
+
+            mind_parent_query = False
+            if 'import_file' in self._context:
+                mind_parent_query = True
+
+            if mind_parent_query:
                 query = """SELECT res_partner.id
                              FROM {from_str}
 		                           LEFT JOIN res_partner AS partner_company ON res_partner.parent_id=partner_company.id
@@ -98,7 +103,7 @@ class Partner(models.Model):
             where_clause_params += [search_name]*3  # for email / display_name, reference
             where_clause_params += [re.sub('[^a-zA-Z0-9]+', '', search_name) or None]  # for vat
 
-            if 'import_file' in self._context:
+            if mind_parent_query:
                 where_clause_params += [name]
 
             where_clause_params += [search_name]  # for order by
