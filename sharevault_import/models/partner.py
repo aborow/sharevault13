@@ -48,7 +48,7 @@ class Partner(models.Model):
             # ShareVault - let's make sure we get the display name for a record
             # that is a child of another
             # Sure... there probably is a better and more elegant way of doing this...
-            if 'import_file' in self._context:
+            if 'XXXimport_file' in self._context:
                 query = """SELECT res_partner.id
                              FROM {from_str}
 		                           LEFT JOIN res_partner AS partner_company ON res_partner.parent_id=partner_company.id
