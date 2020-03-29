@@ -50,7 +50,7 @@ class Partner(models.Model):
             # Sure... there probably is a better and more elegant way of doing this...
 
             mind_parent_query = False
-            if 'import_file' in self._context:
+            if 'XXXimport_file' in self._context:
                 mind_parent_query = True
 
             if mind_parent_query:
