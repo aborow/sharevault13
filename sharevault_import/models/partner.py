@@ -121,7 +121,3 @@ class Partner(models.Model):
             else:
                 return []
         return super(Partner, self)._name_search(name, args, operator=operator, limit=limit, name_get_uid=name_get_uid)
-
-
-    _sql_constraints = [('contact_unique', 'UNIQUE(name, parent_id, email)',
-                            'Name/Related Company/Email has to be unique')]
