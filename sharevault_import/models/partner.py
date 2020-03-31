@@ -82,10 +82,11 @@ class Partner(models.Model):
             if self.id:
                 args_search.append(('id','!=',self.id))
 
-        find_dup = Partner.search(args_search)
-        if find_dup:
-            _logger.info("FIND_DUP: %s" % find_dup)
-            raise ValidationError('There are, already partners with the same info: %s' % ' / '.join(fields_check))
+        if fields_check:
+            find_dup = Partner.search(args_search)
+            if find_dup:
+                _logger.info("FIND_DUP: %s" % find_dup)
+                raise ValidationError('There are, already partners with the same info: %s' % ' / '.join(fields_check))
 
 
     # A partner's name was not being properly searched when the contact was of the
