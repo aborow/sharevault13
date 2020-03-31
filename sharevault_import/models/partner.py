@@ -64,6 +64,7 @@ class Partner(models.Model):
         #1.  For a Company Type record - Name + Domain should always be unique
         #2.  For a contact type record - Name + related company (i.e. parent) + domain + email should always be unique
 
+        args_search = [('id','!=',0)]
         if company_type == 'company':
             args_search = [('name','=',name), ('domain','=',domain)]
             fields_check = ['Name', 'Domain']
