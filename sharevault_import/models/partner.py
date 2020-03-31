@@ -65,6 +65,7 @@ class Partner(models.Model):
         #2.  For a contact type record - Name + related company (i.e. parent) + domain + email should always be unique
 
         args_search = [('id','!=',0)]
+        fields_check = []
         if company_type == 'company':
             args_search = [('name','=',name), ('domain','=',domain)]
             fields_check = ['Name', 'Domain']
@@ -82,7 +83,6 @@ class Partner(models.Model):
                 args_search.append(('id','!=',self.id))
 
         find_dup = Partner.search(args_search)
-
         if find_dup:
             _logger.info("FIND_DUP: %s" % find_dup)
             raise ValidationError('There are, already partners with the same info: %s' % ' / '.join(fields_check))
