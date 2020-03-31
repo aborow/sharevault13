@@ -1,16 +1,90 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 import logging
 import re
 
 from odoo import api, fields, models
 from odoo.osv.expression import get_unaccent_wrapper
+from odoo.exceptions import ValidationError
+
 
 _logger = logging.getLogger(__name__)
 
 class Partner(models.Model):
     _inherit = 'res.partner'
+
+    @api.model
+    def create(self, vals):
+        self.check_uniqueness(vals)
+        return super(Partner, self).create(vals)
+
+    def write(self, vals):
+        self.check_uniqueness(vals)
+        return super(Partner, self).write(vals)
+
+
+
+    # Constraint needs to be created in create() and write()
+    def check_uniqueness(self, vals):
+        #_logger.info("XXXXX check_uniqueness XXXXX")
+
+        Partner = self.env['res.partner']
+        if self.id:
+            operation = 'write'
+            if 'company_type' in vals:
+                company_type = vals.get('company_type', '')
+            else:
+                company_type = self.company_type
+            if 'name' in vals:
+                name = vals.get('name', '')
+            else:
+                name = self.name
+            if 'domain' in vals:
+                domain = vals.get('domain', '')
+            else:
+                domain = self.domain
+            if 'email' in vals:
+                email = vals.get('email', '')
+            else:
+                email = self.email
+            if 'parent_id' in vals:
+                parent_id = vals.get('parent_id', False)
+            else:
+                parent_id = self.parent_id and self.parent_id.id or False
+        else:
+            operation = 'create'
+            company_type = vals.get('company_type')
+            name = vals.get('name', '')
+            domain = vals.get('domain', '')
+            email = vals.get('email', '')
+            parent_id = vals.get('parent_id', False)
+
+        _logger.info("Operation: %s / Name: %s / Domain: %s / Email: %s / Parent ID: %s" % (operation, name, domain, email, parent_id))
+
+        #1.  For a Company Type record - Name + Domain should always be unique
+        #2.  For a contact type record - Name + related company (i.e. parent) + domain + email should always be unique
+
+        if company_type == 'company':
+            args_search = [('name','=',name), ('domain','=',domain)]
+            fields_check = ['Name', 'Domain']
+            if self.id:
+                args_search.append(('id','!=',self.id))
+        elif company_type == 'person':
+            args_search = [
+                            ('name','=',name),
+                            ('domain','=',domain),
+                            ('email','=',email),
+                            ('parent_id','=',parent_id or False)
+                            ]
+            fields_check = ['Name', 'Domain', 'Email', 'Related Company']
+            if self.id:
+                args_search.append(('id','!=',self.id))
+
+        find_dup = Partner.search(args_search)
+
+        if find_dup:
+            _logger.info("FIND_DUP: %s" % find_dup)
+            raise ValidationError('There are, already partners with the same info: %s' % ' / '.join(fields_check))
 
 
     # A partner's name was not being properly searched when the contact was of the
