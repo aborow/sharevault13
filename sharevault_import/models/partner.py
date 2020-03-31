@@ -121,10 +121,9 @@ class Partner(models.Model):
             unaccent = get_unaccent_wrapper(self.env.cr)
             fields = self._get_name_search_order_by_fields()
 
-            # ShareVault - let's make sure we get the display name for a record
+            # SV - let's make sure we get the display name for a record
             # that is a child of another
             # Sure... there probably is a better and more elegant way of doing this...
-
             mind_parent_query = False
             if 'import_file' in self._context:
                 mind_parent_query = True
@@ -187,12 +186,22 @@ class Partner(models.Model):
 
             self.env.cr.execute(query, where_clause_params)
 
-            # Check the query that was executed
+            # SV - Check the query that was executed
             _logger.info(str(self.env.cr.query).replace('\\n', ' ').replace('\\t', ' ').replace('\\', ""))
 
             partner_ids = [row[0] for row in self.env.cr.fetchall()]
 
             if partner_ids:
+
+                # SV - if there are several records, we just choose one.
+                # This way we avoid conflicts.
+                if mind_parent_query:
+                    try:
+                        partner_ids = partner_ids[0]
+                    except Exception as e:
+                        _logger.error(e)
+                        pass
+    
                 return models.lazy_name_get(self.browse(partner_ids))
             else:
                 return []
