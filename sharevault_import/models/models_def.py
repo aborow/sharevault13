@@ -33,7 +33,7 @@ def _predict_nextval(self, seq_id):
     return last_value
 
 
-DEBUG_MODE = False
+DEBUG_MODE = True
 
 class BaseModelExtend(models.AbstractModel):
     _name = 'basemodel.extend'
