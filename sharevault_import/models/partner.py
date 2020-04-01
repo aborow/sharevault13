@@ -138,7 +138,7 @@ class Partner(models.Model):
                                OR {vat} {operator} {percent}
                                OR (
                                     res_partner.parent_id IS NOT NULL
-                                    AND {display_name} LIKE CONCAT(partner_company.name, ', ', {percent})
+                                    AND {display_name} LIKE CONCAT({partner_company_name}, ', ', {percent})
                                ))
 
                          ORDER BY {fields} {display_name} {operator} {percent} desc,
@@ -151,7 +151,8 @@ class Partner(models.Model):
                                    display_name=unaccent('res_partner.display_name'),
                                    reference=unaccent('res_partner.ref'),
                                    percent=unaccent('%s'),
-                                   vat=unaccent('res_partner.vat'),)
+                                   vat=unaccent('res_partner.vat'),
+                                   partner_company_name=unaccent('partner_company.name'),)
             else:
                 query = """SELECT res_partner.id
                              FROM {from_str}
@@ -201,7 +202,7 @@ class Partner(models.Model):
                     except Exception as e:
                         _logger.error(e)
                         pass
-    
+
                 return models.lazy_name_get(self.browse(partner_ids))
             else:
                 return []
