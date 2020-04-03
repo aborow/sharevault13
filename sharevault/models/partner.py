@@ -270,6 +270,16 @@ class Partner(models.Model):
         for partner in self:
             partner.sharevault_ids_count = len(partner.sharevault_ids)
 
+    def get_sharevault(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sharevault',
+            'view_mode': 'tree,form',
+            'res_model': 'sharevault.sharevault',
+            'domain': [('sharevault_owner', '=', self.id)],
+        }
+
     """
     def get_auditlog_count(self):
         # self.ensure_one()

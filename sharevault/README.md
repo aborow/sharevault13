@@ -60,3 +60,9 @@ SV-63 modify the sharevault fields and added unique constrain raise for domain a
 Version - 13.0.1.0.18
 ================
 SV-68 make the field “Zoom Company ID” a char field instead of an integer field
+
+Version - 13.0.1.0.19
+================
+SV-75 Sharevault Smart Button: filtered the sharevault data in contact smart button.
+
+SV-79 Update ShareVault Display Card: modified the kanban view and top header name of sharevault.

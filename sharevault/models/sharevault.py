@@ -15,7 +15,11 @@ class Sharevault(models.Model):
         for s in self:
             name = s.sharevault_name
             if s.sharevault_owner:
-                name = "%s (%s)" % (name, s.sharevault_owner.name)
+                if s.company_id:
+                    name = "%s (%s; %s)" % (name, s.company_id.name, s.sharevault_owner.name)
+                else:
+                    name = "%s (%s)" % (name, s.sharevault_owner.name)
+
             res.append((s.id, name))
         return res
 
@@ -54,3 +58,13 @@ class Sharevault(models.Model):
     contact_email = fields.Char('Contact Email')
     contact_phone = fields.Char('Contact Phone')
     sharevault_id = fields.Char('Sharevault ID', required=True)
+    kanban_name = fields.Char('Kanban Name', compute='get_kanban_name')
+
+    def get_kanban_name(self):
+        for rec in self:
+            if rec.sharevault_owner:
+                if rec.company_id:
+                    name = rec.company_id.name + '; ' + rec.sharevault_owner.name
+                else:
+                    name = rec.sharevault_owner.name
+                rec.kanban_name = name
