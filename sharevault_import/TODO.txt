@@ -10,3 +10,6 @@ https://wibtec.atlassian.net/browse/SV-63
 - what about contacts with different types?
 ------------------------------->
 -Removed unused .xml file from views.
+--------------------------------->
+Comment the code in models_def.py line no:192,  for resolve the
+error log "ERROR: 'base' object has no attribute '_sharevault_sharevault_check'"
