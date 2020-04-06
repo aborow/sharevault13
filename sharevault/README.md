@@ -66,3 +66,11 @@ Version - 13.0.1.0.19
 SV-75 Sharevault Smart Button: filtered the sharevault data in contact smart button.
 
 SV-79 Update ShareVault Display Card: modified the kanban view and top header name of sharevault.
+
+Version - 13.0.1.0.20
+================
+SV-75 Added smartbutton for contact type company
+
+SV-76 Update Tab Name and display only for Individual type contacts
+
+SV-77 Dispay Contact Type field only for Companies

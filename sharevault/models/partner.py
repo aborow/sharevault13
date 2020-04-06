@@ -200,6 +200,14 @@ class Partner(models.Model):
     sic_code = fields.Char('SIC Code')
     naics_code = fields.Char('NAICS Code')
     zoom_company_id = fields.Char('Zoom Company ID')
+    sharevault_company_count = fields.Integer(
+        'Sharevault Company Count', compute='get_sharevault_company_count', copy=False, store=True)
+
+    def get_sharevault_company_count(self):
+        for rec in self:
+            sharevault_obj = self.env['sharevault.sharevault'].search(
+                [('company_id', '=', rec.id)])
+            rec.sharevault_company_count = len(sharevault_obj)
 
     @api.onchange('subindustry_id')
     @api.depends('subindustry_id')
@@ -278,6 +286,16 @@ class Partner(models.Model):
             'view_mode': 'tree,form',
             'res_model': 'sharevault.sharevault',
             'domain': [('sharevault_owner', '=', self.id)],
+        }
+
+    def get_sharevault_for_company(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Sharevault',
+            'view_mode': 'tree,form',
+            'res_model': 'sharevault.sharevault',
+            'domain': [('company_id', '=', self.id)],
         }
 
     """
