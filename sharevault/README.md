@@ -74,3 +74,7 @@ SV-75 Added smartbutton for contact type company
 SV-76 Update Tab Name and display only for Individual type contacts
 
 SV-77 Dispay Contact Type field only for Companies
+
+Version - 13.0.1.0.21
+=====================
+SV-80 Company and Individual Contact Types - View Updates
