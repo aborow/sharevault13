@@ -25,6 +25,54 @@
                 </xpath>
             </field>
         </record>
+        <!--Sales Button of Button Box-->
+        <record id="view_res_partner_buttons_inherited" model="ir.ui.view">
+            <field name="name">Partner Inherited for hide buttons</field>
+            <field name="model">res.partner</field>
+            <field name="priority">3</field>
+            <field name="inherit_id" ref="sale.res_partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(sale.act_res_partner_2_sale_order)d']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('company_type','!=','company')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--Invoices Button of Button Box-->
+        <record id="view_res_partner_buttons_inherited_for_iv" model="ir.ui.view">
+            <field name="name">Partner Inherited for hide button of Invoiced</field>
+            <field name="model">res.partner</field>
+            <field name="priority">11</field>
+            <field name="inherit_id" ref="account.partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_partner_invoices']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('company_type','!=','company')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--Partner Ledger Button of Button Box-->
+        <record id="view_res_partner_buttons_inherited_for_pl" model="ir.ui.view">
+            <field name="name">Partner Inherited for hide button of PL</field>
+            <field name="model">res.partner</field>
+            <field name="priority">13</field>
+            <field name="inherit_id" ref="account_reports.partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='open_partner_ledger']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('company_type','!=','company')]}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--Website Button of Button Box-->
+        <record id="view_res_partner_buttons_inherited_for_web" model="ir.ui.view">
+            <field name="name">Partner Inherited for hide button of gtw</field>
+            <field name="model">res.partner</field>
+            <field name="priority">17</field>
+            <field name="inherit_id" ref="website_partner.view_partners_form_website"/>
+            <field name="arch" type="xml">
+                <field name="is_published" position="attributes">
+                    <attribute name="attrs">{'invisible': [('company_type','!=','company')]}</attribute>
+                </field>
+            </field>
+        </record>
 
         <!-- SV-49 Related changes -->
         <record id="add_fields_partner_form_view" model="ir.ui.view">
@@ -32,8 +80,15 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button icon="fa-user" class="oe_left" style="width: 100px !important;"
+                        attrs="{'invisible':[('company_type','=','company')]}" string="Individual">
+                    </button>
+                    <button icon="fa-building-o" class="oe_left" style="width: 100px !important;"
+                        attrs="{'invisible':[('company_type','!=','company')]}" string="Company">
+                    </button>
+                </xpath>
                 <field name="category_id" position="after">
-                    <field name="opt_out" string="Email Opt Out"/>
                     <field name="source"/>
                 </field>
                 <!--SV-53: Hided for individual company type-->
@@ -43,9 +98,52 @@
                 <field name="industry_id" position="attributes">
                     <attribute name="attrs">{'invisible': [('is_company', '=', False)]}</attribute>
                 </field>
+                <!--SV-80-->
+                <field name="vat" position="attributes">
+                    <attribute name="attrs">{'invisible': [('company_type','!=','company')]}</attribute>
+                </field>
             </field>
         </record>
 
+        <record model="ir.ui.view" id="view_partner_form_inherit_from_sms_sv">
+            <field name="name">Partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sms.res_partner_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobile']" position="replace">
+                        <field name="mobile"
+                               widget="phone"
+                               options="{'enable_sms': True}"
+                               attrs="{'invisible': [('is_company', '=', True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_partner_form_inherit_from_mail_sv">
+            <field name="name">Partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="mail.res_partner_view_form_inherit_mail"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='email']" position="replace">
+                        <div>
+                            <t attrs="{'invisible':[('is_company', '=', True)]}">
+                            <table>
+                                <tr>
+                                    <td><field name="email"/></td>
+                                    <td> </td>
+                                    <td>
+                                        (
+                                        <field name="opt_out"/>
+                                        <label for="opt_out" string="Opt Out"/>
+                                        )
+                                    </td>
+                                </tr>
+                            </table>
+                            </t>
+                        </div>
+                </xpath>
+            </field>
+        </record>
 
         <record model="ir.ui.view" id="view_partner_form_inherit">
             <field name="name">Partner</field>
@@ -95,7 +193,7 @@
                 </xpath>
 
 
-                <xpath expr="//field[@name='company_type']" position="after">
+                <xpath expr="//field[@name='parent_id']" position="before">
                     <!--SV-77-->
                     <t attrs="{'invisible':[('company_type','!=','company')]}">
                         (<label for="contact_type_id"/> <field name="contact_type_id"/>)
@@ -123,21 +221,21 @@
                 <xpath expr="//field[@name='function']" position="replace"/>
 
                 <xpath expr="//field[@name='vat']" position="after">
-                    <field name="function"/>
-                    <field name="job_function"/>
-                    <field name="job_level"/>
+                    <field name="function" attrs="{'invisible':[('company_type','=','company')]}"/>
+                    <field name="job_function" attrs="{'invisible':[('company_type','=','company')]}"/>
+                    <field name="job_level" attrs="{'invisible':[('company_type','=','company')]}"/>
 
                     <field name="print_on_check_as"
-                            attrs="{'invisible':[('supplier_rank','=',False)]}"/>
+                            attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
                     <field name="eligible_1099"
-                            attrs="{'invisible':[('supplier_rank','=',False)]}"/>
+                            attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
                     <field name="vendor_type"
-                            attrs="{'invisible':[('supplier_rank','=',False)]}"/>
+                            attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
                 </xpath>
 
                 <xpath expr="//page[last()]" position="after">
                     <!--SV-76-->
-                    <page string="SV Membership" attrs="{'invisible':[('company_type','=','company')]}">
+                    <page string="SV User Info" attrs="{'invisible':[('company_type','=','company')]}">
                         <group>
                             <group>
                                 <field name="sharevault_last_login_date"
@@ -161,61 +259,71 @@
                             </group>
                         </group>
                     </page>
-
-                    <page string="New fields">
-                        <group>
-                            <group>
-                                <field name="ae_targeted"/>
-                                <!--Hided for individual company type-->
-                                <field name="annual_revenue" attrs="{'invisible': [('is_company', '=', False)]}"/>
-                                <field name="european_union"/>
-                                <field name="data_source_details"/>
-                                <field name="domain"/>
-                                <field name="imported_phone"/>
-                                <!--Hided for individual company type-->
-                                <field name="number_employees" attrs="{'invisible': [('is_company', '=', False)]}"/>
-                            </group>
-                            <group>
-                                <field name="marketing_flag"/>
-                                <field name="marketing_note"/>
-                                <field name="salesforce_contact_id"/>
-                                <field name="salesforce_lead_id"/>
-                                <field name="agree_data_collection"/>
-                            </group>
-                        </group>
-
-                        <group>
-                            <group>
-                                <field name="account_status_id"/>
-                                <field name="data_source_id"/>
-                                <field name="data_update_request_id"/>
-                                <field name="lead_type_id"/>
-                                <field name="lifecycle_stage_id"/>
-                                <field name="organization_type_id"/>
-                            </group>
-                            <group>
-                                <field name="persona_id" required="1"/>
-                                <field name="status_id" string="Status"/>
-                                <!-- Sub industry comes based on Industry-->
-                                <field name="subindustry_id" domain="[('industry_id', '=', industry_id)]"/>
-                                <field name="accindustry_id" />
-                                <!-- SV-68 Create new Fields in Sharevault for Companies -->
-                                <field name="sic_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
-                                <field name="naics_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
-                                <field name="zoom_company_id" attrs="{'invisible': [('is_company', '=', False)]}"/>
-                            </group>
-                        </group>
-                        <group>
-                            <group colspan="4">
-                                <label for="matter_id" colspan="2"/>
-                                <field name="matter_id" colspan="2" nolabel="1"/>
-                                <label for="tecnology_id" colspan="2"/>
-                                <field name="tecnology_id" colspan="2" nolabel="1"/>
-                                <label for="confidential_id" colspan="2"/>
-                                <field name="confidential_id" colspan="2" nolabel="1"/>
-                            </group>
-                        </group>
+                    <page string="Sharevaults" attrs="{'invisible':[('company_type','!=','company')]}">
+                        <field name="sharevault_c_ids" nolabel="1">
+                            <tree string="Sharevaults" readonly="1">
+                                <field name="sharevault_name"/>
+                                <field name="sharevault_owner"/>
+                                <field name="sv_type"/>
+                            </tree>
+                        </field>
                     </page>
+                </xpath>
+                <xpath expr="//page[1]" position="after">
+                        <page string="Additional Info">
+                            <group>
+                                <group>
+                                    <field name="ae_targeted"/>
+                                    <!--Hided for individual company type-->
+                                    <field name="annual_revenue" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                    <field name="european_union"/>
+                                    <field name="data_source_details"/>
+                                    <field name="domain"/>
+                                    <field name="imported_phone"/>
+                                    <!--Hided for individual company type-->
+                                    <field name="number_employees" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                </group>
+                                <group>
+                                    <field name="marketing_flag"/>
+                                    <field name="marketing_note"/>
+                                    <field name="salesforce_contact_id"/>
+                                    <field name="salesforce_lead_id"/>
+                                    <field name="agree_data_collection"/>
+                                </group>
+                            </group>
+
+                            <group>
+                                <group>
+                                    <field name="account_status_id"/>
+                                    <field name="data_source_id"/>
+                                    <field name="data_update_request_id"/>
+                                    <field name="lead_type_id"/>
+                                    <field name="lifecycle_stage_id"/>
+                                    <field name="organization_type_id"/>
+                                </group>
+                                <group>
+                                    <field name="persona_id" required="1"/>
+                                    <field name="status_id" string="Status"/>
+                                    <!-- Sub industry comes based on Industry-->
+                                    <field name="subindustry_id" domain="[('industry_id', '=', industry_id)]"/>
+                                    <field name="accindustry_id" />
+                                    <!-- SV-68 Create new Fields in Sharevault for Companies -->
+                                    <field name="sic_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                    <field name="naics_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                    <field name="zoom_company_id" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group colspan="4">
+                                    <label for="matter_id" colspan="2"/>
+                                    <field name="matter_id" colspan="2" nolabel="1"/>
+                                    <label for="tecnology_id" colspan="2"/>
+                                    <field name="tecnology_id" colspan="2" nolabel="1"/>
+                                    <label for="confidential_id" colspan="2"/>
+                                    <field name="confidential_id" colspan="2" nolabel="1"/>
+                                </group>
+                            </group>
+                        </page>
                 </xpath>
 
             </field>

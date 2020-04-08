@@ -130,6 +130,9 @@ class Partner(models.Model):
     #     'Formatted Email', compute='_compute_email_formatted',
     #     help='Format email address "Name <email@domain>"')
     sharevault_ids = fields.One2many('sharevault.sharevault', 'sharevault_owner', 'ShareVaults')
+    sharevault_c_ids = fields.One2many('sharevault.sharevault',
+                                       string='ShareVault',
+                                       compute='get_sharevault_records')
     sharevault_ids_count = fields.Integer('ShareVault count', compute='get_sharevault_count')
     #auditlog_ids_count = fields.Integer('Auditlog count', compute='get_auditlog_count')
     first_name = fields.Char('First Name', computed='get_first_last_name', store=True)
@@ -160,7 +163,7 @@ class Partner(models.Model):
     status_id = fields.Many2one('res.partner.status', 'Partner Status')
     subindustry_id = fields.Many2one('res.partner.subindustry', 'Sub Industry')
     accindustry_id = fields.Many2one('res.partner.accindustry', 'Accounting Industry')
-    contact_type_id = fields.Many2one('res.partner.contact_type', 'Contact Type')
+    contact_type_id = fields.Many2one('res.partner.contact_type', 'Contact Type: ')
     matter_id = fields.Many2one('res.partner.matter', 'Subject matter most interested in?')
     tecnology_id = fields.Many2one('res.partner.tecnology', 'Technology solution used to share documents with 3rd parties?')
     confidential_id = fields.Many2one('res.partner.confidential', 'When will be sharing confidential information with a third party?')
@@ -208,6 +211,11 @@ class Partner(models.Model):
             sharevault_obj = self.env['sharevault.sharevault'].search(
                 [('company_id', '=', rec.id)])
             rec.sharevault_company_count = len(sharevault_obj)
+
+    def get_sharevault_records(self):
+        for rec in self:
+            rec.sharevault_c_ids = self.env['sharevault.sharevault'].search(
+                [('company_id', '=', rec.id)])
 
     @api.onchange('subindustry_id')
     @api.depends('subindustry_id')
