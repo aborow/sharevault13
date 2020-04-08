@@ -123,6 +123,10 @@ class BaseModelExtend(models.AbstractModel):
                 if data_values.get('is_company'):
                     args_search_name_domain.append(('is_company','=',data_values['is_company']))
 
+                if DEBUG_MODE:
+                    _logger.info("data_values: %s" % data_values)
+                    _logger.info("args_search_name_domain: %s" % args_search_name_domain)
+
                 name_domain_exists = Partner.search(args_search_name_domain)
                 if name_domain_exists:
                     if DEBUG_MODE:
