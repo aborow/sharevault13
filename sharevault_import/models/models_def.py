@@ -120,8 +120,8 @@ class BaseModelExtend(models.AbstractModel):
                                             ('name','=ilike',data_values['name']),
                                             ('domain','=ilike',data_values['domain']),
                                             ]
-                if data_values.get('company_type'):
-                    args_search_name_domain.append(('company_type','=ilike',data_values['company_type']))
+                #if data_values.get('company_type'):
+                #    args_search_name_domain.append(('company_type','=ilike',data_values['company_type']))
 
                 name_domain_exists = Partner.search(args_search_name_domain)
                 if name_domain_exists:
