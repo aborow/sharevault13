@@ -26,7 +26,7 @@ class Partner(models.Model):
 
     # Constraint needs to be created in create() and write()
     def check_uniqueness(self, vals):
-        #_logger.info("XXXXX check_uniqueness XXXXX")
+        _logger.info("XXXXX check_uniqueness XXXXX")
 
         Partner = self.env['res.partner']
         if self.id:
@@ -59,7 +59,8 @@ class Partner(models.Model):
             email = vals.get('email', '')
             parent_id = vals.get('parent_id', False)
 
-        _logger.info("Operation: %s / Name: %s / Domain: %s / Email: %s / Parent ID: %s" % (operation, name, domain, email, parent_id))
+        _logger.info("Self (ID): %s / Operation: %s / Name: %s / Domain: %s / Email: %s / Parent ID: %s"\
+                        % (self.id, operation, name, domain, email, parent_id))
 
         #1.  For a Company Type record - Name + Domain should always be unique
         #2.  For a contact type record - Name + related company (i.e. parent) + domain + email should always be unique
@@ -83,6 +84,7 @@ class Partner(models.Model):
                 args_search.append(('id','!=',self.id))
 
         if fields_check:
+            _logger.info("args_search: %s" % args_search)
             find_dup = Partner.search(args_search)
             if find_dup:
                 _logger.info("FIND_DUP: %s" % find_dup)
