@@ -27,6 +27,7 @@ class Partner(models.Model):
     # Constraint needs to be created in create() and write()
     def check_uniqueness(self, vals):
         _logger.info("XXXXX check_uniqueness XXXXX")
+        _logger.info(vals)
 
         Partner = self.env['res.partner']
         if self.id:
@@ -68,7 +69,7 @@ class Partner(models.Model):
         args_search = [('id','!=',0)]
         fields_check = []
         if company_type == 'company':
-            args_search = [('name','=',name), ('domain','=',domain)]
+            args_search = [('name','=',name), ('domain','=',domain),('company_type','=',company_type)]
             fields_check = ['Name', 'Domain']
             if self.id:
                 args_search.append(('id','!=',self.id))
@@ -77,6 +78,7 @@ class Partner(models.Model):
                             ('name','=',name),
                             ('domain','=',domain),
                             ('email','=',email),
+                            ('company_type','=',company_type),
                             ('parent_id','=',parent_id or False)
                             ]
             fields_check = ['Name', 'Domain', 'Email', 'Related Company']
