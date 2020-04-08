@@ -131,7 +131,7 @@ class Partner(models.Model):
     #     help='Format email address "Name <email@domain>"')
     sharevault_ids = fields.One2many('sharevault.sharevault', 'sharevault_owner', 'ShareVaults')
     sharevault_c_ids = fields.One2many('sharevault.sharevault',
-                                       string='ShareVaults',
+                                       string='ShareVault',
                                        compute='get_sharevault_records')
     sharevault_ids_count = fields.Integer('ShareVault count', compute='get_sharevault_count')
     #auditlog_ids_count = fields.Integer('Auditlog count', compute='get_auditlog_count')
