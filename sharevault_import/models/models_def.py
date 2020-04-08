@@ -115,10 +115,15 @@ class BaseModelExtend(models.AbstractModel):
 
                 # If there is no email, it tries to match against name AND domain
                 # then, updates the record with the info on the file, except if the new info is blank
-                name_domain_exists = Partner.search([
-                                                    ('name','=ilike',data_values['name']),
-                                                    ('domain','=ilike',data_values['domain'])
-                                                    ])
+
+                args_search_name_domain = [
+                                            ('name','=ilike',data_values['name']),
+                                            ('domain','=ilike',data_values['domain']),
+                                            ]
+                if data_values.get('company_type'):
+                    args_search_name_domain.append(('company_type','=ilike',data_values['company_type']))
+
+                name_domain_exists = Partner.search(args_search_name_domain)
                 if name_domain_exists:
                     if DEBUG_MODE:
                         _logger.info("NAME+DOMAIN FOUND")
