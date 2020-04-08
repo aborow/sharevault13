@@ -32,10 +32,10 @@ class Partner(models.Model):
         Partner = self.env['res.partner']
         if self.id:
             operation = 'write'
-            if 'company_type' in vals:
-                company_type = vals.get('company_type', '')
+            if 'is_company' in vals:
+                is_company = vals.get('is_company', '')
             else:
-                company_type = self.company_type
+                is_company = self.is_company
             if 'name' in vals:
                 name = vals.get('name', '')
             else:
@@ -54,7 +54,7 @@ class Partner(models.Model):
                 parent_id = self.parent_id and self.parent_id.id or False
         else:
             operation = 'create'
-            company_type = vals.get('company_type')
+            is_company = vals.get('is_company')
             name = vals.get('name', '')
             domain = vals.get('domain', '')
             email = vals.get('email', '')
@@ -68,17 +68,21 @@ class Partner(models.Model):
 
         args_search = [('id','!=',0)]
         fields_check = []
-        if company_type == 'company':
-            args_search = [('name','=',name), ('domain','=',domain),('company_type','=',company_type)]
+        if is_company == True:
+            args_search = [
+                            ('name','=',name),
+                            ('domain','=',domain),
+                            ('is_company','=',is_company)
+                            ]
             fields_check = ['Name', 'Domain']
             if self.id:
                 args_search.append(('id','!=',self.id))
-        elif company_type == 'person':
+        else:
             args_search = [
                             ('name','=',name),
                             ('domain','=',domain),
                             ('email','=',email),
-                            ('company_type','=',company_type),
+                            ('is_company','=',is_company),
                             ('parent_id','=',parent_id or False)
                             ]
             fields_check = ['Name', 'Domain', 'Email', 'Related Company']
