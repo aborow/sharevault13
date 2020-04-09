@@ -78,3 +78,7 @@ SV-77 Dispay Contact Type field only for Companies
 Version - 13.0.1.0.21
 =====================
 SV-80 Company and Individual Contact Types - View Updates
+
+Version - 13.0.1.0.22
+=====================
+SV-80 Change the label Contact Type to Company Type and make invisible the email and mobile for contact type company.
