@@ -132,6 +132,22 @@
             </field>
         </record>
 
+        <!--Inherit sms view-->
+        <record id="sms_ res_partner_view_form" model="ir.ui.view">
+            <field name="name">res.partner.view.form.inherit.sms.for.imported.phone</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sms.res_partner_view_form"/>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group[2]/div[1]" position="after">
+                    <label for="imported_phone"/>
+                    <div class="o_row">
+                        <field name="imported_phone" widget="phone" options="{'enable_sms': True}"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
         <!--Overrided from email module for invisible the email label-->
         <record id="mail.res_partner_view_form_inherit_mail" model="ir.ui.view">
             <field name="name">res.partner.view.form.inherit.mail</field>
@@ -298,7 +314,7 @@
                             </group>
                         </group>
                     </page>
-                    <page string="Sharevaults" attrs="{'invisible':[('company_type','!=','company')]}">
+                    <page string="ShareVaults" attrs="{'invisible':[('company_type','!=','company')]}">
                         <field name="sharevault_c_ids" nolabel="1">
                             <tree string="Sharevaults" readonly="1">
                                 <field name="sharevault_name"/>
@@ -318,7 +334,7 @@
                                     <field name="european_union"/>
                                     <field name="data_source_details"/>
                                     <field name="domain"/>
-                                    <field name="imported_phone"/>
+                                    <!--<field name="imported_phone"/>-->
                                     <!--Hided for individual company type-->
                                     <field name="number_employees" attrs="{'invisible': [('is_company', '=', False)]}"/>
                                 </group>

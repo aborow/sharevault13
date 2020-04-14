@@ -82,3 +82,7 @@ SV-80 Company and Individual Contact Types - View Updates
 Version - 13.0.1.0.22
 =====================
 SV-80 Change the label Contact Type to Company Type and make invisible the email and mobile for contact type company.
+
+Version - 13.0.1.0.23
+=====================
+SV-80 Change the page name ShareVaults and moved the imported phone field from additional info to main screen.
