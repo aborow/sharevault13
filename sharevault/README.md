@@ -39,3 +39,8 @@ SV-66: add new fields to Sharevault Module
 Version - 13.0.1.0.10
 ================
 SV-68: Create new Fields in Sharevault contacts module
+
+Version - 13.0.1.0.11
+==================
+Added code from staging2 to master for below tickets:
+SV-75,SV-76,SV-77,SV-79 and SV-80

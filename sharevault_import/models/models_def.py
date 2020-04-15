@@ -11,25 +11,6 @@ _logger = logging.getLogger(__name__)
 Every model has a load() method. This could be used if we wanted to do changes
 to imported data. However, our goal is to change the data before being imported, so,
 we have to go to the mewthod that is executed for each line.
-
-[ RULES ]
-----------------------------------------------------------------------------
-If there is an existing mail address, then, updates the record with the info
-    on the file, except if the new info is blank
-
-If there is no email, it tries to match against name AND domain
-    and the behaviour is the same
-
-
-If no match is found, we create a new record
-    ... and ...
-
-    if email is blank:
-        if domain is blank
-        email = sequence of [sequence]-unk@unkowndomain.com
-
-        if domain is populated
-        email = sequence of [sequence]-unk@[domain.com]
 """
 
 # THIS SHOULD COME FROM base/models/ir_sequence.py rather then being redefined here
@@ -54,23 +35,54 @@ def _predict_nextval(self, seq_id):
 
 DEBUG_MODE = True
 
-
-
-
 class BaseModelExtend(models.AbstractModel):
     _name = 'basemodel.extend'
+    _description = 'Base model extend'
 
     def _register_hook(self):
 
+        def _sharevault_sharevault_check(self, data):
+            if DEBUG_MODE:
+                _logger.info("_sharevault_sharevault_check")
+                _logger.info("ORIGINAL DATA: %s" % data)
+
+            ShareVault = self.env['sharevault.sharevault']
+            data_values = data['values']
+            found_match = False
+
+            if data_values.get('sharevault_id'):
+                if DEBUG_MODE:
+                    _logger.info("LOOKING FOR %s" % data_values['sharevault_id'])
+                sharevault_exists = ShareVault.search([('sharevault_id','=ilike',data_values['sharevault_id'])], limit=1)
+                if sharevault_exists:
+                    if DEBUG_MODE:
+                        _logger.info("SHAREVAULT FOUND")
+                    for k in data_values.keys():
+                        if not data_values[k]:
+                            data_values[k] = eval('sharevault_exists.' + k)
+                    found_match = sharevault_exists.id
+
+            data['xml_id'] = ''
+            if found_match:
+                data_values['id'] = found_match
+
+            if DEBUG_MODE:
+                _logger.info("NEW DATA: %s" % data)
+                if not found_match:
+                    _logger.info("TO CREATE")
+                else:
+                    _logger.info("TO UPDATE (%s)" % data['values']['id'])
+                _logger.info("---------------------------------------------------")
+
+            return data
+
+
         # This method runs the rules defined by ShareVault and returns a dataset
         # that has been changed according to those rules
-        def _sharevault_check(self, data):
+        def _sharevault_contact_check(self, data):
             if DEBUG_MODE:
-                _logger.info("_sharevault_check")
-                _logger.info("SV prepare")
+                _logger.info("_sharevault_contact_check")
                 _logger.info("ORIGINAL DATA: %s" % data)
-                _logger.info(self.env.context)
-
 
             Partner = self.env['res.partner']
             data_values = data['values']
@@ -103,10 +115,19 @@ class BaseModelExtend(models.AbstractModel):
 
                 # If there is no email, it tries to match against name AND domain
                 # then, updates the record with the info on the file, except if the new info is blank
-                name_domain_exists = Partner.search([
-                                                    ('name','=ilike',data_values['name']),
-                                                    ('domain','=ilike',data_values['domain'])
-                                                    ])
+
+                args_search_name_domain = [
+                                            ('name','=ilike',data_values['name']),
+                                            ('domain','=ilike',data_values['domain']),
+                                            ]
+                if data_values.get('is_company'):
+                    args_search_name_domain.append(('is_company','=',data_values['is_company']))
+
+                if DEBUG_MODE:
+                    _logger.info("data_values: %s" % data_values)
+                    _logger.info("args_search_name_domain: %s" % args_search_name_domain)
+
+                name_domain_exists = Partner.search(args_search_name_domain)
                 if name_domain_exists:
                     if DEBUG_MODE:
                         _logger.info("NAME+DOMAIN FOUND")
@@ -155,120 +176,8 @@ class BaseModelExtend(models.AbstractModel):
 
             return data
 
-        """
-        # TEST - START
-        # This is just the original method, so that we can log values
-        def _sharevault_load_records(self, data_list, update=False):
-
-            _logger.info("AAAAA _sharevault_load_records AAAAA")
-
-            original_self = self.browse()
-            # records created during installation should not display messages
-            self = self.with_context(install_mode=True)
-            imd = self.env['ir.model.data'].sudo()
-
-            # The algorithm below partitions 'data_list' into three sets: the ones
-            # to create, the ones to update, and the others. For each set, we assign
-            # data['record'] for each data. All those records are then retrieved for
-            # the result.
-
-            # determine existing xml_ids
-            xml_ids = [data['xml_id'] for data in data_list if data.get('xml_id')]
-            existing = {
-                ("%s.%s" % row[1:3]): row
-                for row in imd._lookup_xmlids(xml_ids, self)
-            }
-
-            # ShareVault - START **********************************************
-            # We prepare the data according to SV's rules
-            # This way, the rest of the code remains unchanged
-            #for data in data_list:
-            #    if 'res_partner' in data.get('xml_id'):
-            #        data = self._sharevault_check(data)
-            # ShareVault - END ************************************************
-
-            # determine which records to create and update
-            to_create = []                  # list of data
-            to_update = []                  # list of data
-
-            #for each line...
-            for data in data_list:
-                xml_id = data.get('xml_id')
-                if not xml_id:
-                    vals = data['values']
-                    if vals.get('id'):
-                        data['record'] = self.browse(vals['id'])
-                        to_update.append(data)
-                    elif not update:
-                        to_create.append(data)
-                    continue
-
-                row = existing.get(xml_id)
-                # If the xmlid does not exist in the database
-                if not row:
-                    # Record will be created
-                    to_create.append(data)
-                    # Move on to the next record
-                    continue
-
-                # The record exists, let's get some values
-                d_id, d_module, d_name, d_model, d_res_id, d_noupdate, r_id = row
-                record = self.browse(d_res_id)
-                if update and d_noupdate:
-                    data['record'] = record
-                elif r_id:
-                    data['record'] = record
-                    to_update.append(data)
-                else:
-                    imd.browse(d_id).unlink()
-                    to_create.append(data)
-
-            # update existing records
-            for data in to_update:
-                data['record']._load_records_write(data['values'])
-
-            # determine existing parents for new records
-            for parent_model, parent_field in self._inherits.items():
-                suffix = '_' + parent_model.replace('.', '_')
-                xml_ids_vals = {
-                    (data['xml_id'] + suffix): data['values']
-                    for data in to_create
-                    if data.get('xml_id')
-                }
-                for row in imd._lookup_xmlids(xml_ids_vals, self.env[parent_model]):
-                    d_id, d_module, d_name, d_model, d_res_id, d_noupdate, r_id = row
-                    if r_id:
-                        xml_id = '%s.%s' % (d_module, d_name)
-                        xml_ids_vals[xml_id][parent_field] = r_id
-                    else:
-                        imd.browse(d_id).unlink()
-
-            # check for records to create with an XMLID from another module
-            module = self.env.context.get('install_module')
-            if module:
-                prefix = module + "."
-                for data in to_create:
-                    if data.get('xml_id') and not data['xml_id'].startswith(prefix):
-                        _logger.warning("Creating record %s in module %s.", data['xml_id'], module)
-
-            # create records
-            records = self._load_records_create([data['values'] for data in to_create])
-            for data, record in zip(to_create, records):
-                data['record'] = record
-
-            # create or update XMLIDs
-            if to_create or to_update:
-                imd_data_list = [data for data in data_list if data.get('xml_id')]
-                imd._update_xmlids(imd_data_list, update)
-
-            return original_self.concat(*(data['record'] for data in data_list))
-
-        models.BaseModel._load_records = _sharevault_load_records
-        # TEST - END
-        """
-
-
-        models.BaseModel._sharevault_check = _sharevault_check
+        models.BaseModel._sharevault_sharevault_check = _sharevault_sharevault_check
+        models.BaseModel._sharevault_contact_check = _sharevault_contact_check
 
         return super(BaseModelExtend, self)._register_hook()
 
@@ -281,10 +190,22 @@ class BaseModelExtend(models.AbstractModel):
             _logger.info("_load_records SUPER")
         # We prepare the data according to SV's rules
         # This way, the rest of the code remains unchanged
+        BaseObj = self.env['base']
         for data in data_list:
-            if 'partner' in data.get('xml_id'):
+            if 'sharevault' in data.get('xml_id'):
+                if DEBUG_MODE:
+                    _logger.info("ShareVault import")
                 try:
-                    data = self.env['base']._sharevault_check(data)
+                    data = BaseObj._sharevault_sharevault_check(data)
+                except Exception as e:
+                    # _logger.error("ERROR: %s" % e)
+                    pass
+
+            if 'partner' in data.get('xml_id'):
+                if DEBUG_MODE:
+                    _logger.info("Contact import")
+                try:
+                    data = BaseObj._sharevault_contact_check(data)
                 except Exception as e:
                     _logger.error("ERROR: %s" % e)
                     pass

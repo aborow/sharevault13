@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'ShareVault',
-    'version': '13.0.1.0.10',
+    'version': '13.0.1.0.11',
     'category': 'Tools',
     'author': 'Wibtec',
     'website': 'www.wibtec.com',
@@ -20,8 +20,14 @@ Version(1.2) - Added constraint on the email field for partner.
                 'helpdesk',
                 'sale_management',
                 'account',
-                #'sic_code',
+                #'sic_code'
                 'base',
+                'sale',
+                'account',
+                'website_partner',
+                'account_reports',
+                'sms',
+                'mail',
                 ],
     'data': [
             'security/groups_data.xml',
