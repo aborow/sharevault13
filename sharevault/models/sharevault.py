@@ -68,3 +68,8 @@ class Sharevault(models.Model):
                 else:
                     name = rec.sharevault_owner.name
                 rec.kanban_name = name
+            else:
+                if rec.company_id:
+                    rec.kanban_name = rec.company_id.name
+                else:
+                    rec.kanban_name = ''
