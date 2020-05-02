@@ -14,6 +14,7 @@ subindustries in a different way.
                 'sharevault',
                 ],
     'data': [
+            'security/ir.model.access.csv',
             'views/partner_view.xml',
             ],
     'installable': True,
