@@ -22,7 +22,7 @@ class Partner(models.Model):
         id = False
         if self.industry_id:
             id = self.industry_id.accindustry_id\
-                    and self.industry_id.accindustry_id.id
+                    and self.industry_id.accindustry_id.id or False
         self.accindustry_id = id
 
 
@@ -38,7 +38,7 @@ class Industry(models.Model):
     accindustry_id = fields.Many2one('res.partner.industry', 'Accounting Industry')
 
 
-class IndustryTags(models.Model):
+class IndustryTag(models.Model):
     _name = 'res.partner.industry_tag'
     _description = "Industry tags"
     _order = 'display_name ASC'
@@ -50,7 +50,7 @@ class IndustryTags(models.Model):
 
     def name_get(self):
         if self._context.get('partner_industry_tag_display') == 'short':
-            return super(IndustryTags, self).name_get()
+            return super(IndustryTag, self).name_get()
         res = []
         for s in self:
             names = []
