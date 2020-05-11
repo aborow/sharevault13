@@ -16,7 +16,10 @@
                             invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='invoice_date']" position="after">
-                    <field name="customer_contact_id" domain="[('parent_id','=',partner_id)]"/>
+                    <field name="customer_contact_id" domain="[('parent_id','=',partner_id)]" attrs="{'invisible':[('type', '=', 'in_invoice')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_incoterm_id']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('type', '=', 'in_invoice')]}</attribute>
                 </xpath>
             </field>
         </record>

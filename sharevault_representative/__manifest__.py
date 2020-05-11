@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "ShareVault Representative",
-    'version': '13.0.1.0.1',
+    'version': '13.0.1.0.2',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Extra tools',
