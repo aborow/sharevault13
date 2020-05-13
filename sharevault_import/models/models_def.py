@@ -138,7 +138,7 @@ class BaseModelExtend(models.AbstractModel):
                     found_match = name_domain_exists.id
 
             if not found_match:
-                if not data_values.get('email'):
+                if not data_values.get('email') and not data_values.get('is_company'):
                     if self._context.get('import_test_mode'):
                         # For testing purposes, we just create a fake sequence
                         sequence = uuid.uuid1()
