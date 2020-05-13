@@ -2,6 +2,21 @@
 <odoo>
     <data>
 
+        <!-- SV-95 -->
+        <act_window id="call_dedup"
+            name="Deduplication"
+            binding_model="res.partner"
+            res_model="base.partner.merge.automatic.wizard"
+            view_mode="form"
+            target="new"
+            groups="base.group_partner_manager"
+            context="{'active_test': False}"/>
+        <menuitem id="partner_dedup"
+                name="Deduplication"
+                parent="contacts.res_partner_menu_config"
+                action="call_dedup"
+                sequence="9"/>
+
         <!-- SV-93 -->
         <record id="res_partner_kanban_view" model="ir.ui.view">
             <field name="name">Partner</field>
