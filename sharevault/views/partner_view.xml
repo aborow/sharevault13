@@ -2,6 +2,23 @@
 <odoo>
     <data>
 
+        <!-- SV-93 -->
+        <record id="res_partner_kanban_view" model="ir.ui.view">
+            <field name="name">Partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="domain"/>
+                </xpath>
+
+                <xpath expr="//li[@t-if='record.email.raw_value']" position="replace">
+                    <li t-if="record.email.raw_value and !record.is_company.raw_value" class="o_text_overflow"><field name="email"/></li>
+                    <li t-if="record.domain.raw_value and record.is_company.raw_value" class="o_text_overflow"><field name="domain"/></li>
+                </xpath>
+            </field>
+        </record>
+
         <record id="view_res_partner_filter" model="ir.ui.view">
             <field name="name">Partner</field>
             <field name="model">res.partner</field>
