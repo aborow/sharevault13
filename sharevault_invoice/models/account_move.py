@@ -43,6 +43,5 @@ class AccountMoveLine(models.Model):
 
     @api.constrains('analytic_account_id')
     def _constraint_analytic_account_id(self):
-        for record in self:
-            if record.move_id.type == 'in_invoice' and not record.analytic_account_id:
-                raise ValidationError(_("WARNING: No Analytic Account Found"))
+        if self.move_id.type == 'in_invoice' and not self.analytic_account_id:
+            raise ValidationError(_("WARNING: No Analytic Account Found"))
