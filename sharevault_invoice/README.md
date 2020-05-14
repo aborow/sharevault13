@@ -22,3 +22,7 @@ Version - 13.0.1.0.7
 Version - 13.0.1.0.8
 =======================
 -SV-90: Add warning message if analytic account field is not filled out in Vendor Bill (not invoices)
+
+Version - 13.0.1.0.9
+=======================
+-SV-97 : Update Check Format

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
+        <!-- CSS Called -->
+        <template id="assets_common_check" name="sharevault_invoice_check_bottom pdf assets" inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss" href="/sharevault_invoice/static/src/scss/report_check_top.scss"/>
+            </xpath>
+        </template>
+
+
         <template id="report_invoice_document">
 			<t t-call="sharevault_invoice.sharevault_invoice_external_layout">
                 <div class="page">
