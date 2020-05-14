@@ -18,3 +18,7 @@ Version - 13.0.1.0.6
 Version - 13.0.1.0.7
 =======================
 -SV-91: Added domain that only customer invoice can see the field incorterm and customer contact.
+
+Version - 13.0.1.0.8
+=======================
+-SV-90: Add warning message if analytic account field is not filled out in Vendor Bill (not invoices)
