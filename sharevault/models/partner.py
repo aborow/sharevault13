@@ -228,7 +228,10 @@ class Partner(models.Model):
     @api.model
     def create(self,vals):
         if vals.get('email'):
-            existing_id = self.search([('email','=', vals['email'])])
+            existing_id = self.search([
+                                        ('email','=', vals['email']),
+                                        ('active','=',True)
+                                        ])
             if existing_id:
                 raise ValidationError(_('An email of partner could be defined only one time for one partner.'))
         """
@@ -249,6 +252,7 @@ class Partner(models.Model):
                 if vals['email']:
                     existing_id = self.env['res.partner'].search([
                                                 ('email','=', vals['email']),
+                                                ('active','=',True),
                                                 ('id','!=', s.id)
                                                 ])
                     if existing_id:
