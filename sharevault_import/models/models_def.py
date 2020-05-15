@@ -119,6 +119,7 @@ class BaseModelExtend(models.AbstractModel):
                 args_search_name_domain = [
                                             ('name','=ilike',data_values['name']),
                                             ('domain','=ilike',data_values['domain']),
+                                            ('active','=',True)
                                             ]
                 if data_values.get('is_company'):
                     args_search_name_domain.append(('is_company','=',data_values['is_company']))

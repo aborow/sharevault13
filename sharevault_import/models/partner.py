@@ -76,7 +76,8 @@ class Partner(models.Model):
             args_search = [
                             ('name','=ilike',name),
                             ('domain','=ilike',domain),
-                            ('is_company','=',is_company)
+                            ('is_company','=',is_company),
+                            ('active','=',True)
                             ]
             fields_check = ['Name', 'Domain']
             if self.id:
@@ -87,7 +88,8 @@ class Partner(models.Model):
                             ('domain','=ilike',domain),
                             ('email','=ilike',email),
                             ('is_company','=',is_company),
-                            ('parent_id','=',parent_id or False)
+                            ('parent_id','=',parent_id or False),
+                            ('active','=',True)
                             ]
             fields_check = ['Name', 'Domain', 'Email', 'Related Company']
             if self.id:
