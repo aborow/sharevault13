@@ -76,8 +76,7 @@ class Partner(models.Model):
             args_search = [
                             ('name','=ilike',name),
                             ('domain','=ilike',domain),
-                            ('is_company','=',is_company),
-                            ('active','in',[True,False])
+                            ('is_company','=',is_company)
                             ]
             fields_check = ['Name', 'Domain']
             if self.id:
@@ -88,8 +87,7 @@ class Partner(models.Model):
                             ('domain','=ilike',domain),
                             ('email','=ilike',email),
                             ('is_company','=',is_company),
-                            ('parent_id','=',parent_id or False),
-                            ('active','in',[True,False])
+                            ('parent_id','=',parent_id or False)
                             ]
             fields_check = ['Name', 'Domain', 'Email', 'Related Company']
             if self.id:
@@ -97,7 +95,7 @@ class Partner(models.Model):
 
         if fields_check:
             _logger.info("args_search: %s" % args_search)
-            find_dup = Partner.search(args_search)
+            find_dup = Partner.with_context(active_test=False).search(args_search)
             if find_dup:
                 _logger.info("FIND_DUP: %s" % find_dup)
                 raise ValidationError('There are, already partners with the same info: %s' % ' / '.join(fields_check))

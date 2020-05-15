@@ -120,8 +120,7 @@ class BaseModelExtend(models.AbstractModel):
 
                 args_search_name_domain = [
                                             ('name','=ilike',data_values['name']),
-                                            ('domain','=ilike',data_values['domain']),
-                                            ('active','in',[True,False])
+                                            ('domain','=ilike',data_values['domain'])
                                             ]
                 if data_values.get('is_company'):
                     args_search_name_domain.append(('is_company','=',data_values['is_company']))
@@ -130,7 +129,7 @@ class BaseModelExtend(models.AbstractModel):
                     _logger.info("data_values: %s" % data_values)
                     _logger.info("args_search_name_domain: %s" % args_search_name_domain)
 
-                name_domain_exists = Partner.search(args_search_name_domain)
+                name_domain_exists = Partner.with_context(active_test=False).search(args_search_name_domain)
                 if name_domain_exists:
                     if DEBUG_MODE:
                         _logger.info("NAME+DOMAIN FOUND")
