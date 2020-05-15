@@ -93,7 +93,10 @@ class BaseModelExtend(models.AbstractModel):
                 if DEBUG_MODE:
                     _logger.info("LOOKING FOR %s" % data_values['email'])
                 # Is there an email like this one?
-                email_exists = Partner.search([('email','=ilike',data_values['email'])], limit=1)
+                email_exists = Partner.search([
+                                            ('email','=ilike',data_values['email']),
+                                            ('active','in',[True,False])
+                                            ], limit=1)
                 if email_exists:
                     if DEBUG_MODE:
                         _logger.info("EMAIL FOUND")
@@ -119,7 +122,7 @@ class BaseModelExtend(models.AbstractModel):
                 args_search_name_domain = [
                                             ('name','=ilike',data_values['name']),
                                             ('domain','=ilike',data_values['domain']),
-                                            ('active','=',True)
+                                            ('active','in',[True,False])
                                             ]
                 if data_values.get('is_company'):
                     args_search_name_domain.append(('is_company','=',data_values['is_company']))
