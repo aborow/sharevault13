@@ -146,12 +146,12 @@ class Partner(models.Model):
                              FROM {from_str}
 		                           LEFT JOIN res_partner AS partner_company ON res_partner.parent_id=partner_company.id
                           {where} ({email} {operator} {percent}
-                               OR {display_name} {operator} {percent}
+                               OR {display_name} {operator2} {percent}
                                OR {reference} {operator} {percent}
                                OR {vat} {operator} {percent}
                                OR (
                                     res_partner.parent_id IS NOT NULL
-                                    AND {display_name} LIKE CONCAT({partner_company_name}, ', ', {percent})
+                                    AND {display_name} ILIKE CONCAT({partner_company_name}, ', ', {percent})
                                ))
 
                          ORDER BY {fields} {display_name} {operator} {percent} desc,
@@ -160,6 +160,7 @@ class Partner(models.Model):
                                    fields=fields,
                                    where=where_str,
                                    operator=operator,
+                                   operator2='ILIKE',
                                    email=unaccent('res_partner.email'),
                                    display_name=unaccent('res_partner.display_name'),
                                    reference=unaccent('res_partner.ref'),
@@ -171,7 +172,7 @@ class Partner(models.Model):
                 query = """SELECT res_partner.id
                              FROM {from_str}
                           {where} ({email} {operator} {percent}
-                               OR {display_name} {operator} {percent}
+                               OR {display_name} {operator2} {percent}
                                OR {reference} {operator} {percent}
                                OR {vat} {operator} {percent}
                                )
@@ -182,6 +183,7 @@ class Partner(models.Model):
                                    fields=fields,
                                    where=where_str,
                                    operator=operator,
+                                   operator2='ILIKE',
                                    email=unaccent('res_partner.email'),
                                    display_name=unaccent('res_partner.display_name'),
                                    reference=unaccent('res_partner.ref'),
