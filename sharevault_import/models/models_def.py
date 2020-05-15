@@ -93,9 +93,8 @@ class BaseModelExtend(models.AbstractModel):
                 if DEBUG_MODE:
                     _logger.info("LOOKING FOR %s" % data_values['email'])
                 # Is there an email like this one?
-                email_exists = Partner.search([
-                                            ('email','=ilike',data_values['email']),
-                                            ('active','in',[True,False])
+                email_exists = Partner.with_context(active_test=False).search([
+                                            ('email','=ilike',data_values['email'])
                                             ], limit=1)
                 if email_exists:
                     if DEBUG_MODE:
