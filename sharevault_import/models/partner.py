@@ -76,8 +76,7 @@ class Partner(models.Model):
             args_search = [
                             ('name','=ilike',name),
                             ('domain','=ilike',domain),
-                            ('is_company','=',is_company),
-                            ('active','=',True)
+                            ('is_company','=',is_company)
                             ]
             fields_check = ['Name', 'Domain']
             if self.id:
@@ -88,8 +87,7 @@ class Partner(models.Model):
                             ('domain','=ilike',domain),
                             ('email','=ilike',email),
                             ('is_company','=',is_company),
-                            ('parent_id','=',parent_id or False),
-                            ('active','=',True)
+                            ('parent_id','=',parent_id or False)
                             ]
             fields_check = ['Name', 'Domain', 'Email', 'Related Company']
             if self.id:
@@ -97,7 +95,7 @@ class Partner(models.Model):
 
         if fields_check:
             _logger.info("args_search: %s" % args_search)
-            find_dup = Partner.search(args_search)
+            find_dup = Partner.with_context(active_test=False).search(args_search)
             if find_dup:
                 _logger.info("FIND_DUP: %s" % find_dup)
                 raise ValidationError('There are, already partners with the same info: %s' % ' / '.join(fields_check))
@@ -143,6 +141,7 @@ class Partner(models.Model):
                 mind_parent_query = True
 
             if mind_parent_query:
+                _logger.info("CASE 1")
                 query = """SELECT res_partner.id
                              FROM {from_str}
 		                           LEFT JOIN res_partner AS partner_company ON res_partner.parent_id=partner_company.id
@@ -168,6 +167,7 @@ class Partner(models.Model):
                                    vat=unaccent('res_partner.vat'),
                                    partner_company_name=unaccent('partner_company.name'),)
             else:
+                _logger.info("CASE 2")
                 query = """SELECT res_partner.id
                              FROM {from_str}
                           {where} ({email} {operator} {percent}
@@ -203,6 +203,8 @@ class Partner(models.Model):
 
             # SV - Check the query that was executed
             _logger.info(str(self.env.cr.query).replace('\\n', ' ').replace('\\t', ' ').replace('\\', ""))
+            _logger.info("ARGS: %s" % args)
+            _logger.info("mind_parent_query: %s" % mind_parent_query)
 
             partner_ids = [row[0] for row in self.env.cr.fetchall()]
 
