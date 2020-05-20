@@ -196,20 +196,22 @@ var DataImport = AbstractAction.extend({
         });
     },
     setup_encoding_picker: function () {
+        // var self = this;
         var data_option = this.$('input.oe_import_encoding').select2({
             width: '50%',
             data: _.map(('utf-8 utf-16 windows-1252 latin1 latin2 big5 gb18030 shift_jis windows-1251 koir8_r').split(/\s+/), _make_option),
             query: dataFilteredQuery,
             initSelection: function ($e, c) {
-                var models_find = self.location.hash.split('&model=')[1]
-                var model_name = models_find.split('&')[0]
-                console.log("\n\n\n\n::model_name", model_name)
-                if (['res.partner', 'sharevault.sharevault'].includes(model_name)){
-                    if ($e && $e[0].value && $e[0].value != 'utf-8'){
+                // var models_find = self.location.hash.split('&model=')[1]
+                // var model_name = models_find.split('&')[0]
+                // console.log("\n\n\n\n::model_name", model_name)
+                // console.log("\n\n\n\n::thisssssssss", this)
+                // if (['res.partner', 'sharevault.sharevault'].includes(model_name)){
+                //     console.log("\n\n\n\n:::$e[0].value", $e[0].value)
+                // }
+                if ($e && $e[0].value && $e[0].value != 'utf-8'){
                         $e[0].value = 'utf-8'
                     }
-                }
-                    
                 return c(_make_option($e.val()));
             }
         });
