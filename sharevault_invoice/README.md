@@ -26,3 +26,7 @@ Version - 13.0.1.0.8
 Version - 13.0.1.0.9
 =======================
 -SV-97 : Update Check Format
+
+Version - 13.0.1.0.10
+======================
+-SV-97 : Updated check below part based on the description.
