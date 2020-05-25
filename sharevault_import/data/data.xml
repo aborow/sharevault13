@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data>
 
         <record id="sharevault_partner_check_action" model="ir.actions.server">
             <field name="name">Partner Data Check</field>
