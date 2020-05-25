@@ -245,7 +245,7 @@ class Partner(models.Model):
                 }
 
     def _post_import_check(self):
-        self._cr.execute("UPDATE res_partner SET check_message = '';")
+        self._cr.execute("UPDATE res_partner SET check_message = NULL;")
 
         # domain is different from the company's
         self._cr.execute("""
@@ -263,14 +263,13 @@ class Partner(models.Model):
         # companies with no domain
         self._cr.execute("""
                         UPDATE res_partner
-                        SET check_message = check_message || ', No domain'
+                        SET check_message = COALESCE(check_message,'') || ', No domain'
                         WHERE id IN (
                                     SELECT id
                                     FROM res_partner
                                     WHERE is_company IS TRUE
                                     AND domain IS NULL
                                     );""")
-
 
         self._cr.execute("UPDATE res_partner SET check_message = LTRIM(check_message , ', ');")
 

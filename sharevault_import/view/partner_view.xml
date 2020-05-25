@@ -12,7 +12,7 @@
                             invisible="context.get('show_check_message',True)"/>
                 </xpath>
                 <xpath expr="//tree" position="attributes">
-                    <attribute name="decoration-danger">check_message!=False</attribute>
+                    <attribute name="decoration-danger">check_message!=''</attribute>
                 </xpath>
             </field>
         </record>
