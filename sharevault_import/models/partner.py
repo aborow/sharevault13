@@ -232,9 +232,7 @@ class Partner(models.Model):
     - companies with no domain
     """
     def call_post_import_check(self):
-        _logger.info("XXXXXXXXXXXXXXXXXXXXXX")
         self._post_import_check()
-        _logger.info("YYYYYYYYYYYYYYYYYYYYYY")
         return {
                 'name': 'Partner Data Check',
                 'type': 'ir.actions.act_window',
@@ -247,8 +245,37 @@ class Partner(models.Model):
                 }
 
     def _post_import_check(self):
-        self._cr.execute('UPDATE res_partner SET check_message = NULL')
+        self._cr.execute("UPDATE res_partner SET check_message = '';")
 
+        # domain is different from the company's
+        self._cr.execute("""
+                        UPDATE res_partner
+                        SET check_message = 'Different domain'
+                        WHERE id IN (
+                                    SELECT A.id
+                                    FROM res_partner A
+                                        LEFT JOIN res_partner B ON A.parent_id=B.id
+                                    WHERE A.parent_id IS NOT NULL
+                                    AND A.domain IS NOT NULL
+                                    AND A.domain NOT LIKE B.domain
+                                    );""")
+
+        # companies with no domain
+        self._cr.execute("""
+                        UPDATE res_partner
+                        SET check_message = check_message || ', No domain'
+                        WHERE id IN (
+                                    SELECT id
+                                    FROM res_partner
+                                    WHERE is_company IS TRUE
+                                    AND domain IS NULL
+                                    );""")
+
+
+        self._cr.execute("UPDATE res_partner SET check_message = LTRIM(check_message , ', ');")
+
+        # Using Odoo API would take too long...
+        """
         Partner = self.env['res.partner']
 
         # domain is different from the company's
@@ -273,9 +300,10 @@ class Partner(models.Model):
                         ]
         res_2 = Partner.search(args_search_2)
         for r in res_2:
-            msg = 'Domain is lacking'
+            msg = 'No domain'
             if r.check_message:
                 aux = ','.join(list((r.check_message,msg)))
             else:
                 aux = msg
             r.write({'check_message': aux.strip()})
+        """
