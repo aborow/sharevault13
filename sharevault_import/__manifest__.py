@@ -15,7 +15,9 @@
                 'base_import'
                 ],
     'data': [
-            'data/ir_sequence_data.xml'
+            'data/ir_sequence_data.xml',
+            'data/data.xml',
+            'view/partner_view.xml'
             ],
     'installable': True,
     'auto_install': False,

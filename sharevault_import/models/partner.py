@@ -17,6 +17,10 @@ class Partner(models.Model):
     email = fields.Char(index=True)
     is_company = fields.Boolean(index=True)
 
+    # a field to show a message related to post import data checking
+    check_message = fields.Char('Message', help='Problems')
+
+
     @api.model
     def create(self, vals):
         self.check_uniqueness(vals)
@@ -27,12 +31,8 @@ class Partner(models.Model):
         return super(Partner, self).write(vals)
 
 
-
     # Constraint needs to be created in create() and write()
     def check_uniqueness(self, vals):
-        _logger.info("XXXXX check_uniqueness XXXXX")
-        _logger.info(vals)
-
         Partner = self.env['res.partner']
         if self.id:
             operation = 'write'
@@ -64,8 +64,10 @@ class Partner(models.Model):
             email = vals.get('email', '')
             parent_id = vals.get('parent_id', False)
 
+        """
         _logger.info("Self (ID): %s / Operation: %s / Name: %s / Domain: %s / Email: %s / Parent ID: %s"\
                         % (self.id, operation, name, domain, email, parent_id))
+        """
 
         #1.  For a Company Type record - Name + Domain should always be unique
         #2.  For a contact type record - Name + related company (i.e. parent) + domain + email should always be unique
@@ -94,10 +96,10 @@ class Partner(models.Model):
                 args_search.append(('id','!=',self.id))
 
         if fields_check:
-            _logger.info("args_search: %s" % args_search)
+            #_logger.info("args_search: %s" % args_search)
             find_dup = Partner.with_context(active_test=False).search(args_search)
             if find_dup:
-                _logger.info("FIND_DUP: %s" % find_dup)
+                #_logger.info("FIND_DUP: %s" % find_dup)
                 raise ValidationError('There are, already partners with the same info: %s' % ' / '.join(fields_check))
 
 
@@ -141,7 +143,7 @@ class Partner(models.Model):
                 mind_parent_query = True
 
             if mind_parent_query:
-                _logger.info("CASE 1")
+                #_logger.info("CASE 1")
                 query = """SELECT res_partner.id
                              FROM {from_str}
 		                           LEFT JOIN res_partner AS partner_company ON res_partner.parent_id=partner_company.id
@@ -168,7 +170,7 @@ class Partner(models.Model):
                                    vat=unaccent('res_partner.vat'),
                                    partner_company_name=unaccent('partner_company.name'),)
             else:
-                _logger.info("CASE 2")
+                #_logger.info("CASE 2")
                 query = """SELECT res_partner.id
                              FROM {from_str}
                           {where} ({email} {operator} {percent}
@@ -204,14 +206,12 @@ class Partner(models.Model):
             self.env.cr.execute(query, where_clause_params)
 
             # SV - Check the query that was executed
-            _logger.info(str(self.env.cr.query).replace('\\n', ' ').replace('\\t', ' ').replace('\\', ""))
-            _logger.info("ARGS: %s" % args)
-            _logger.info("mind_parent_query: %s" % mind_parent_query)
+            #_logger.info(str(self.env.cr.query).replace('\\n', ' ').replace('\\t', ' ').replace('\\', ""))
+            #_logger.info("ARGS: %s" % args)
+            #_logger.info("mind_parent_query: %s" % mind_parent_query)
 
             partner_ids = [row[0] for row in self.env.cr.fetchall()]
-
             if partner_ids:
-
                 # SV - if there are several records, we just choose one.
                 # This way we avoid conflicts.
                 if mind_parent_query:
@@ -220,8 +220,62 @@ class Partner(models.Model):
                     except Exception as e:
                         _logger.error(e)
                         pass
-
                 return models.lazy_name_get(self.browse(partner_ids))
             else:
                 return []
         return super(Partner, self)._name_search(name, args, operator=operator, limit=limit, name_get_uid=name_get_uid)
+
+
+    """
+    Checks to be made periodically, in order to find data problems
+    - domain is different from the company's
+    - companies with no domain
+    """
+    def call_post_import_check(self):
+        _logger.info("XXXXXXXXXXXXXXXXXXXXXX")
+        self._post_import_check()
+        _logger.info("YYYYYYYYYYYYYYYYYYYYYY")
+        return {
+                'name': 'Partner Data Check',
+                'type': 'ir.actions.act_window',
+                'view_type': 'form',
+                'view_mode': 'tree,form',
+                'res_model': 'res.partner',
+                'domain': [('check_message','!=',False)],
+                'target': 'current',
+                'context': {'show_check_message':False},
+                }
+
+    def _post_import_check(self):
+        self._cr.execute('UPDATE res_partner SET check_message = NULL')
+
+        Partner = self.env['res.partner']
+
+        # domain is different from the company's
+        args_search_1 = [
+                        ('parent_id','!=',False),
+                        ('domain','!=',False),
+                        ('domain','!=','parent_id.domain')
+                        ]
+        res_1 = Partner.search(args_search_1)
+        for r in res_1:
+            msg = 'Different domain'
+            if r.check_message:
+                aux = ','.join(list((r.check_message,msg)))
+            else:
+                aux = msg
+            r.write({'check_message': aux.strip()})
+
+        # companies with no domain
+        args_search_2 = [
+                        ('is_company','=',True),
+                        ('domain','=',False)
+                        ]
+        res_2 = Partner.search(args_search_2)
+        for r in res_2:
+            msg = 'Domain is lacking'
+            if r.check_message:
+                aux = ','.join(list((r.check_message,msg)))
+            else:
+                aux = msg
+            r.write({'check_message': aux.strip()})
