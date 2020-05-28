@@ -194,7 +194,7 @@ class BaseModelExtend(models.AbstractModel):
         # This way, the rest of the code remains unchanged
         BaseObj = self.env['base']
         for data in data_list:
-            if 'sharevault' in data.get('xml_id').lower():
+            if 'sharevault' in data.get('xml_id','').lower():
                 if DEBUG_MODE:
                     _logger.info("ShareVault import")
                 try:
@@ -203,7 +203,7 @@ class BaseModelExtend(models.AbstractModel):
                     # _logger.error("ERROR: %s" % e)
                     pass
 
-            if 'partner' in data.get('xml_id').lower():
+            if 'partner' in data.get('xml_id','').lower():
                 if DEBUG_MODE:
                     _logger.info("Contact import")
                 try:
