@@ -68,7 +68,7 @@ class AccountPayment(models.Model):
 					if line.credit == 0.0:
 						invoice_lines = {
 							'invoice_date' : format_date(self.env, line.move_id.invoice_date),
-							'account_number' : line.account_id.code,
+							'account_number' : line.account_id.code + ' ' + line.account_id.name,
 							'analytic_account': line.analytic_account_id.name,
 							'description': line.name or line.product_id.name,
 							'amount_total': formatLang(self.env, line.price_total, currency_obj=line.move_id.currency_id),
