@@ -13,7 +13,8 @@ _logger = logging.getLogger(__name__)
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    parent_id_domain = fields.Char(index=True, related="parent_id.domain")
+    parent_id_domain = fields.Char(index=True, related="parent_id.domain",
+                                    string="Related Company Domain")
     domain = fields.Char(index=True)
     email = fields.Char(index=True)
     is_company = fields.Boolean(index=True)
