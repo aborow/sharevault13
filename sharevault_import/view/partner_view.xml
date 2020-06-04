@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_partner_tree" model="ir.ui.view">
+            <field name="name">Show check message</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[last()]" position="after">
+                    <field name="check_message"
+                            invisible="context.get('show_check_message',True)"/>
+                    <field name="parent_id_domain"
+                            invisible="context.get('show_check_message',True)"/>
+                    <field name="parent_id"
+                            invisible="context.get('show_check_message',True)"/>
+                    <field name="domain"
+                            invisible="context.get('show_check_message',True)"/>
+                </xpath>
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-danger">check_message!=''</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem id="sharevault_partner_import_check"
+                name="Partner Check"
+                parent="contacts.res_partner_menu_config"
+                action="sharevault_partner_check_action"
+                sequence="10"/>
+
+    </data>
+</odoo>
