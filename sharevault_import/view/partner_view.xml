@@ -10,6 +10,12 @@
                 <xpath expr="//field[last()]" position="after">
                     <field name="check_message"
                             invisible="context.get('show_check_message',True)"/>
+                    <field name="parent_id_domain"
+                            invisible="context.get('show_check_message',True)"/>
+                    <field name="parent_id"
+                            invisible="context.get('show_check_message',True)"/>
+                    <field name="domain"
+                            invisible="context.get('show_check_message',True)"/>
                 </xpath>
                 <xpath expr="//tree" position="attributes">
                     <attribute name="decoration-danger">check_message!=''</attribute>
