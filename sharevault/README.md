@@ -86,3 +86,7 @@ SV-80 Change the label Contact Type to Company Type and make invisible the email
 Version - 13.0.1.0.23
 =====================
 SV-80 Change the page name ShareVaults and moved the imported phone field from additional info to main screen.
+
+Version - 13.0.1.0.24
+=====================
+SV-102 Company and Contact Record view changes
