@@ -10,3 +10,7 @@ SV-39: Upload ShareVault Rep List.
 Version - 13.0.1.0.1
 =======================
 Added Representative in SO and Invoice.
+
+Version - 13.0.1.0.2
+=====================
+-Added domain that only customer invoice can see the field representative.
