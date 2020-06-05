@@ -40,7 +40,6 @@ class AccountMoveLine(models.Model):
 
     _inherit = 'account.move.line'
 
-
     @api.constrains('analytic_account_id')
     def _constraint_analytic_account_id(self):
         if self.move_id.type == 'in_invoice' and not self.analytic_account_id:
