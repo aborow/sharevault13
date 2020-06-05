@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
         <template id="report_invoice_document">
 			<t t-call="sharevault_invoice.sharevault_invoice_external_layout">
                 <div class="page">

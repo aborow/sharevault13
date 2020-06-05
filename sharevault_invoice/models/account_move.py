@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 _logger = logging.getLogger(__name__)
 
 
@@ -34,3 +35,13 @@ class AccountMove(models.Model):
         for move in self:
             if self.amount_residual:
                 self.amount_paid = self.amount_total - self.amount_residual
+
+class AccountMoveLine(models.Model):
+
+    _inherit = 'account.move.line'
+
+
+    @api.constrains('analytic_account_id')
+    def _constraint_analytic_account_id(self):
+        if self.move_id.type == 'in_invoice' and not self.analytic_account_id:
+            raise ValidationError(_("WARNING: No Analytic Account Found"))
