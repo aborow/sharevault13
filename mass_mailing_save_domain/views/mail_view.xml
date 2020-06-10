@@ -2,35 +2,6 @@
 <odoo>
     <data>
 
-        <record id="save_mailing_domain_wizard_form" model="ir.ui.view">
-            <field name="name">Mailing Domains</field>
-            <field name="model">mailing.domain.wizard</field>
-            <field name="arch" type="xml">
-                <form>
-                    <group>
-                        <field name="name"/>
-                        <field name="mailing_domain"/>
-                    </group>
-                    <footer>
-                        <!--
-                        <button name="create_units" type="object"
-                                string="Create" class="oe_highlight"/>
-                        -->
-                        <button class="btn btn-secondary oe_button oe_form_button"
-                                special="cancel" string="Cancel"/>
-                    </footer>
-                </form>
-            </field>
-        </record>
-
-        <record id="save_mailing_domain_wizard_action" model="ir.actions.act_window">
-            <field name="name">Mailing Domain Wizard</field>
-            <field name="res_model">mailing.domain.wizard</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="view_mode">form</field>
-            <field name="target">new</field>
-        </record>
-
         <record id="view_mail_mass_mailing_form" model="ir.ui.view">
             <field name="name">Changes to mailing (domain)</field>
             <field name="model">mailing.mailing</field>
@@ -39,11 +10,11 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='mailing_domain']" position="after">
                     <div style="text-align:right;">
-                        <button name="save_domain" type="action"
+                        <button name="call_save_domain"
+                                type="object"
                                 string="SAVE DOMAIN"
-                                action="%(save_mailing_domain_wizard_action)d"
                                 attrs="{'invisible':[('mailing_domain','=',False)]}"
-                                context="{'default_mailing_domain':mailing_domain}"/>
+                                class="oe_edit_only"/>
                     </div>
                 </xpath>
 
