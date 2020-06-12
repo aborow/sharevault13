@@ -12,14 +12,14 @@
                     <div style="text-align:right;">
                         <button name="call_save_domain"
                                 type="object"
-                                string="SAVE DOMAIN"
+                                string="SAVE LIST"
                                 attrs="{'invisible':[('mailing_domain','=',False)]}"
                                 class="oe_edit_only"/>
                     </div>
                 </xpath>
 
                 <xpath expr="//field[@name='mailing_domain']" position="before">
-                    <label for="mailing_domain_id"/>
+                    <label for="mailing_domain_id" string="Saved Lists"/>
                     <field name="mailing_domain_id"/>
                 </xpath>
             </field>
@@ -31,7 +31,7 @@
             <field name="name">Mailing Domain</field>
             <field name="model">mailing.domain</field>
             <field name="arch" type="xml">
-                <search string="Mailing Domain">
+                <search string="Saved Lists">
                     <field name="name"/>
                     <separator/>
                     <filter string="Archived" name="inactive"
@@ -59,7 +59,7 @@
         </record>
 
         <record id="mailing_domain_list_tree" model="ir.ui.view">
-            <field name="name">Mailing Domains</field>
+            <field name="name">Saved Lists</field>
             <field name="model">mailing.domain</field>
             <field name="arch" type="xml">
                 <tree>
@@ -70,13 +70,13 @@
         </record>
 
         <record id="mailing_domain_list_action" model="ir.actions.act_window">
-            <field name="name">Mailing Domains</field>
+            <field name="name">Saved Lists</field>
             <field name="res_model">mailing.domain</field>
             <field name="view_mode">tree,form</field>
         </record>
 
         <menuitem id="menu_mailing_domain"
-                    name="Mailing Domains"
+                    name="Saved Lists"
                     parent="mass_mailing.mass_mailing_configuration"
                     action="mailing_domain_list_action"
                     sequence="4"/>
