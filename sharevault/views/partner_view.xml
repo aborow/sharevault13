@@ -306,12 +306,15 @@
                             <tr>
                                 <td><field name="fax"/></td>
                                 <td> </td>
-                                <td>
-                                    (
-                                    <field name="fax_opt_out"/>
-                                    <label for="fax_opt_out" string="Opt Out"/>
-                                    )
-                                </td>
+                                <!-- SV-102 : Opt Out field invisible for Company Contact -->
+                                <t attrs="{'invisible':[('is_company', '=', True)]}">
+                                    <td >
+                                        (
+                                        <field name="fax_opt_out"/>
+                                        <label for="fax_opt_out" string="Opt Out"/>
+                                        )
+                                    </td>
+                                </t>
                             </tr>
                         </table>
                     </div>
@@ -393,7 +396,9 @@
 
                             <group>
                                 <group>
-                                    <field name="account_status_id"/>
+                                    <!-- SV-102 : Account Status field invisible for Individual Contact -->
+                                    <field name="account_status_id" 
+                                        attrs="{'invisible': [('is_company', '=', False)]}"/>
                                     <field name="data_source_id"/>
                                     <field name="data_update_request_id"/>
                                     <field name="lead_type_id"/>

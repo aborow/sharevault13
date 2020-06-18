@@ -90,3 +90,8 @@ SV-80 Change the page name ShareVaults and moved the imported phone field from a
 Version - 13.0.1.0.24
 =====================
 SV-102 Company and Contact Record view changes
+
+Version - 13.0.1.0.25
+=====================
+- SV-102 (Out put label hide in Company records)
+- SV-102 (Account Status label hide in Individual records)
