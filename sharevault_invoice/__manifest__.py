@@ -9,7 +9,8 @@
     'description': 'Invoice',
     'depends': [
                 'sharevault',
-                'account'
+                'account',
+                'l10n_us_check_printing',
                 ],
     'data': [
                 'data/paper_format.xml',
