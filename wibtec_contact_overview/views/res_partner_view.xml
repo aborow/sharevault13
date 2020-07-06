@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_partner_form_inherit">
+            <field name="name">Partner</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[last()]" position="after">
+                    <page string="Dashboard" attrs="{'invisible':[('company_type','!=','company')]}">
+                        <group>
+                            <group>
+                                <field name="lead_dash"/>
+                                <field name="so_dash"/>
+                                <field name="inv_dash"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.server" id="action_see_dashboard_partner">
+            <field name="name">See dashboard</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="binding_model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                action = records.get_result()
+            </field>
+        </record>
+
+
+        <record id="action_view_crm_lead" model="ir.actions.act_window">
+            <field name="name">CRM Lead</field>
+            <field name="res_model">crm.lead</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="crm.crm_case_tree_view_leads"/>
+        </record>
+
+        <record id="action_view_invoice" model="ir.actions.act_window">
+            <field name="name">Invoices</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="account.view_invoice_tree"/>
+        </record>
+
+        <record id="action_view_sales" model="ir.actions.act_window">
+            <field name="name">Sales</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+        </record>
+
+        <record id="board_partner_form_l" model="ir.ui.view">
+            <field name="name">board.partner.form</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_crm_lead)d" string="Leads"
+                                    view_mode="list" modifiers="{}" id="action_lead"/>
+                        </column>
+                        <column>
+                        </column>
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record id="board_partner_form_i" model="ir.ui.view">
+            <field name="name">board.partner.form</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_invoice)d" string="Invoices"
+                                    view_mode="list" modifiers="{}" id="action_invoice"/>
+                        </column>
+                        <column>
+                        </column>
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record id="board_partner_form_s" model="ir.ui.view">
+            <field name="name">board.partner.form</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_sales)d" string="Sales"
+                                    view_mode="list" modifiers="{}" id="action_sales"/>
+                        </column>
+                        <column>
+                        </column>
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record id="board_partner_form_is" model="ir.ui.view">
+            <field name="name">board.partner.form</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_invoice)d" string="Invoices"
+                                    view_mode="list" modifiers="{}" id="action_invoice"/>
+                        </column>
+                        <column>
+                        </column>
+                        <column>
+                        </column>
+                    </board>
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_sales)d" string="Sales"
+                                    view_mode="list" modifiers="{}" id="action_sales"/>
+                        </column>
+                        <column>
+                        </column>
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record id="board_partner_form_il" model="ir.ui.view">
+            <field name="name">board.partner.form</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_crm_lead)d" string="Leads"
+                                    view_mode="list" modifiers="{}" id="action_lead"/>
+                        </column>
+                        <column>
+                        </column>
+                        <column>
+                        </column>
+                    </board>
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_invoice)d" string="Invoices"
+                                    view_mode="list" modifiers="{}" id="action_invoice"/>
+                        </column>
+                        <column>
+                        </column>
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+        <record id="board_partner_form_f" model="ir.ui.view">
+            <field name="name">board.partner.form</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+
+                </form>
+            </field>
+        </record>
+
+        <record id="board_partner_form_ls" model="ir.ui.view">
+            <field name="name">board.partner.form</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_crm_lead)d" string="Leads"
+                                    view_mode="list" modifiers="{}" id="action_lead"/>
+                        </column>
+                        <column>
+                        </column>
+                        <column>
+                        </column>
+                    </board>
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_sales)d" string="Sales"
+                                    view_mode="list" modifiers="{}" id="action_sales"/>
+                        </column>
+                        <column>
+                        </column>
+                        <column>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record id="board_partner_form" model="ir.ui.view">
+            <field name="name">board.partner.form</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_crm_lead)d" string="Leads"
+                                    view_mode="list" modifiers="{}" id="action_lead"/>
+                        </column>
+                        <column>
+
+                        </column>
+                        <column>
+
+                        </column>
+                    </board>
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_invoice)d" string="Invoices"
+                                    view_mode="list" modifiers="{}" id="action_invoice"/>
+                        </column>
+                        <column>
+
+                        </column>
+                        <column>
+
+                        </column>
+                    </board>
+                    <board style="1-1-1">
+                        <column>
+                            <action
+                                    name="%(action_view_sales)d" string="Sales"
+                                    view_mode="list" modifiers="{}" id="action_sales"/>
+                        </column>
+                        <column>
+
+                        </column>
+                        <column>
+
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
