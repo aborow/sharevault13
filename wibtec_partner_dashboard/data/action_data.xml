@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.server" id="action_see_dashboard_partner">
+            <field name="name">Dashboard</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="binding_model_id" ref="model_res_partner"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.get_partner_dashboard()
+            </field>
+        </record>
+
+    </data>
+</odoo>
