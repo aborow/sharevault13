@@ -18,7 +18,12 @@
                                 <label for="partner_dashboard_action_ids"
                                         string="Dashboard views"/>
                                 <div class="text-muted">
-                                    <field name="partner_dashboard_action_ids"/>
+                                    <field name="partner_dashboard_action_ids">
+                                        <tree>
+                                            <field name="name"/>
+                                            <field name="domain"/>
+                                        </tree>
+                                    </field>
                                 </div>
                             </div>
                         </div>

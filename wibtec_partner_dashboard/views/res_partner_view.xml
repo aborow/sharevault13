@@ -2,15 +2,6 @@
 <odoo>
     <data>
 
-<!--
-<action name="136" string="Meetings" view_mode="list"
-context="{'lang': 'en_US', 'tz': 'Europe/Brussels', 'uid': 2, 'allowed_company_ids': [1],
-'partner_id': 14, 'partner_name': 'Azure Interior', 'active_model': 'res.partner',
-'active_id': 14, 'active_ids': [14], 'default_partner_ids': [14, 3], 'group_by': [],
-'orderedBy': [], 'dashboard_merge_domains_contexts': False}"
-domain="[]" modifiers="{}" id="action_0_0"></action>
--->
-
         <record id="board_partner_form" model="ir.ui.view">
             <field name="name">Wibtec Partner Dashboard</field>
             <field name="model">board.board</field>

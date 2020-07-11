@@ -7,7 +7,7 @@
     'category': 'Extra Tools',
     'summary': '',
     'description': '',
-    'depends': ['base', 'board'],
+    'depends': ['base_setup', 'board'],
     'data': [
             'data/action_data.xml',
             'views/res_partner_view.xml',
