@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    # return the data models that connect to res.partner as oe2many
+    # return the data models that connect to res.partner as one2many
     @api.model
     def _get_action_domain(self):
         allowed_models = ['res.partner']
