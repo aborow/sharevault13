@@ -44,13 +44,6 @@ class ResConfigSettings(models.TransientModel):
         return res
 
 
-    """
-    USAR OS MODELOS E, PARA CADA UM ESCOLHIDO, CRIAR UMA AÇÃO SIMPLES, SEM CONTEXTO
-
-    adicionar o context['active_id']???
-    """
-
-
     @api.model
     def get_values(self):
         res = super(ResConfigSettings, self).get_values()
@@ -74,22 +67,15 @@ class ResConfigSettings(models.TransientModel):
             pass
         return res
 
+
     @api.constrains('partner_dashboard_action_ids')
     def rebuild_partner_dashboard(self):
         view_id = self.env.ref('wibtec_partner_dashboard.board_partner_form')
-        aux = '<action name="%s" string="%s" view_mode="list" context="%s" domain="[]" modifiers="{}" id="action_%s"/>'
-
+        aux = '<action name="%s" string="%s" view_mode="list" context="{}" domain="[]" modifiers="{}" id="%s"/>'
         actions = []
         for a in self.partner_dashboard_action_ids:
             actions.append("<board style='1'>\n<column>")
-            actions.append(
-                            aux % (
-                                a.id,
-                                a.name,
-                                a.context.replace('\n','').replace('  ',''),
-                                a.id
-                                )
-                            )
+            actions.append(aux % (a.id, a.name, a.id))
             actions.append("</column>\n<column/>\n<column/>\n</board>\n")
         start = "<?xml version='1.0'?>\n<form string='Dashboard'>\n"
         end = "</form>"
