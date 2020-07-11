@@ -26,7 +26,9 @@ class Board(models.AbstractModel):
             aux_id = int(node.attrib['id'].replace(',',''))
             action = self.env['ir.actions.act_window'].sudo().browse(aux_id)
             domain = action.domain
-            domain_partner = str(('partner_id','=',self._context.get('default_partner_id')))
+            domain_partner = """'|', ('partner_id','=',XPTO),
+                            ('partner_id','child_of',XPTO)""" \
+                            .replace("XPTO", str(self._context.get('default_partner_id')))
             if domain:
                 domain = domain.replace('[', '[' + domain_partner + ',')
             else:
