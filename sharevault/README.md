@@ -95,3 +95,7 @@ Version - 13.0.1.0.25
 =====================
 - SV-102 (Out put label hide in Company records)
 - SV-102 (Account Status label hide in Individual records)
+
+Version - 13.0.1.0.25
+=====================
+-SV-108: (partner_id field added in sharevault.sharevault for resolve error in dashboard.)
