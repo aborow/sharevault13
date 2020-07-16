@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-#import logging
+import logging
 from lxml import etree
 from odoo import api, fields, models, _
-#_logger = logging.getLogger(__name__)
+_logger = logging.getLogger(__name__)
 
 
 class Board(models.AbstractModel):
@@ -26,13 +26,27 @@ class Board(models.AbstractModel):
             aux_id = int(node.attrib['id'].replace(',',''))
             action = self.env['ir.actions.act_window'].sudo().browse(aux_id)
             domain = action.domain
-            domain_partner = """'|', ('partner_id','=',XPTO),
-                            ('partner_id','child_of',XPTO)""" \
-                            .replace("XPTO", str(self._context.get('default_partner_id')))
-            if domain:
-                domain = domain.replace('[', '[' + domain_partner + ',')
-            else:
-                domain = "[" + domain_partner + "]"
+
+            try:
+                model_id = self.env['ir.model'].sudo().search([
+                                            ('model','=',action.res_model)])
+                if self.env['ir.model.fields'].sudo().search([
+                                            ('model_id','=',model_id.id),
+                                            ('name','=','x_partner_id')]):
+                    domain_partner = """'|', ('x_partner_id','=',XPTO),
+                                    ('x_partner_id','child_of',XPTO)""" \
+                                    .replace("XPTO", str(self._context.get('default_partner_id')))
+                else:
+                    domain_partner = """'|', ('partner_id','=',XPTO),
+                                    ('partner_id','child_of',XPTO)""" \
+                                    .replace("XPTO", str(self._context.get('default_partner_id')))
+                if domain:
+                    domain = domain.replace('[', '[' + domain_partner + ',')
+                else:
+                    domain = "[" + domain_partner + "]"
+            except Exception as e:
+                _logger.error(e)
+                pass
             node.attrib.update({'domain': domain})
         res['arch'] = etree.tostring(doc)
         return res
