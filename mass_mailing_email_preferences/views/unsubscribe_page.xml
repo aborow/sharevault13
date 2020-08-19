@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="unsubscribe_page" name="Unsubscribe page">
+        <div class="container o_unsubscribe_form">
+            <div class="row">
+                <div>
+                    <center>
+                        <h1 class="o_page_header">EMAIL PREFERENCES</h1>
+                        <div id="subscription_info" style="color: #005326; background-color: #ccecdb; border-color: #b8e4cc; padding: 0.75rem 1.25rem; margin-left: 100px;
+    margin-right: 100px;" role="status">
+                            <b>
+                                <p>You have been successfully updated email preferences in contact.
+                                </p>
+                            </b>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="mass_mailing.unsubscribed">
+        <div class="container o_unsubscribe_form">
+            <div class="row">
+                <input type="hidden" name="email" t-att-value="email"/>
+                <input type="hidden" name="mailing_id" t-att-value="mailing_id"/>
+                <input type="hidden" name="res_id" t-att-value="res_id"/>
+                <div id="div_blacklist" class="col-lg-6 offset-lg-3">
+                    <h1 class="o_page_header">Mailing Subscriptions</h1>
+
+                    <div id="subscription_info" class="alert alert-success text-center" role="status">
+                        <p>You have been successfully <strong>unsubscribed</strong>!
+                        </p>
+                    </div>
+                    <t t-if="is_partner">
+                        <form method="post" action="/update/contact">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <input type="hidden" name="email" t-att-value="email"/>
+                            <div class="container">
+                                <left>
+                                    <h3>UPDATE EMAIL PREFERENCES IN CONTACT</h3>
+                                    <input type="checkbox" id="confirmation_email" name="confirmation_email"/>
+                                    Confirmation Email
+                                    <br/>
+                                    <input type="checkbox" id="customer_updates" name="customer_updates"/>
+                                    Customer Updates
+                                    <br/>
+                                    <input type="checkbox" id="hubspot_blog" name="hubspot_blog"/>
+                                    Default HubSpot Blog Subscription
+                                    <br/>
+                                    <input type="checkbox" id="life_science" name="life_science"/>
+                                    Life Sciences White Papers, Webinars and Useful News
+                                    <br/>
+                                    <input type="checkbox" id="mergers_webinars" name="mergers_webinars"/>
+                                    Mergers &amp; Acquisitions White Papers, Webinars, and Useful News
+                                    <br/>
+                                    <input type="checkbox" id="marketing_information" name="marketing_information"/>
+                                    Marketing Information
+                                    <br/>
+                                    <input type="checkbox" id="sv_blog_subscription" name="sv_blog_subscription"/>
+                                    ShareVault Blog Subscription
+                                    <br/>
+                                    <input type="checkbox" id="sv_comp_info" name="sv_comp_info"/>
+                                    ShareVault Company Information
+                                    <br/>
+                                    <input type="checkbox" id="sv_product_info" name="sv_product_info"/>
+                                    ShareVault Product Information
+                                    <br/>
+                                    <input type="checkbox" id="sv_subscription" name="sv_subscription"/>
+                                    ShareVault Subscription
+                                    <br/>
+                                    <input type="checkbox" id="oto" name="one_to_one"/>
+                                    One to One
+                                    <br/>
+                                    <input type="checkbox" id="scm" name="sc_message"/>
+                                    Subscriptions Confirmation Message
+                                    <br/>
+                                    <button type="submit" class="btn btn-primary">UPDATE EMAIL PREFERENCES</button>
+                                </left>
+                            </div>
+                        </form>
+                    </t>
+                    <div t-if="list_ids" class="alert alert-warning">
+                        <p class="text-center">You were still subscribed to those newsletters. You will not receive any
+                            news from them anymore:
+                        </p>
+                        <ul class="list-group mb-4">
+                            <t t-foreach="list_ids" t-as="list_id">
+                                <t t-if="list_id.is_public == True">
+                                    <li class="list-group-item bg-transparent">
+                                        <strong>
+                                            <t t-esc="list_id.name"/>
+                                        </strong>
+                                    </li>
+                                </t>
+                            </t>
+                        </ul>
+                    </div>
+
+                    <div t-if="show_blacklist_button" class="mb64">
+                        <div class="btn btn-secondary pull-right" id="button_add_blacklist" style="display:none">
+                            Blacklist Me
+                        </div>
+                        <div class="btn btn-secondary pull-right" id="button_remove_blacklist" style="display:none">Come
+                            Back
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>
+

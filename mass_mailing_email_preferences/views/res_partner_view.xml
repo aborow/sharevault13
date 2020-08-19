@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Email Preferences Tab-->
+        <record id="res_partner_from_inherit_for_ep_tab" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.for.ep.tab</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page id="ep_tab" string="Email Preferences" name="email_pref">
+                        <group id="ep_tab_group">
+                            <group>
+                                <field name="email_preference_confirmation"/>
+                                <field name="email_preference_customer_updates"/>
+                                <field name="email_preference_hubspot_blog"/>
+                                <field name="email_preference_life_science"/>
+                                <field name="email_preference_merger"/>
+                                <field name="email_preference_marketing"/>
+                            </group>
+                            <group>
+                                <field name="email_preference_sv_blog"/>
+                                <field name="email_preference_sv_company_info"/>
+                                <field name="email_preference_sv_product_info"/>
+                                <field name="email_preference_sv_subscription"/>
+                                <field name="email_preference_one"/>
+                                <field name="email_preference_subscription_confirmation"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
