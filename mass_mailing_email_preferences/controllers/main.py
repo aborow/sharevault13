@@ -15,7 +15,7 @@ class UnsubscribeList(http.Controller):
     @http.route('/update/contact', type='http', auth='public', website=True)
     def update_value_in_contact(self, email=None, token="", **kw):
         if email:
-            partner = request.env['res.partner'].search([('email','=',email)])
+            partner = request.env['res.partner'].sudo().search([('email','=',email)])
             if not self._valid_unsubscribe_tokens(email, str(token)):
                 raise exceptions.AccessDenied()
             vals = {}
