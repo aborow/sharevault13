@@ -78,7 +78,7 @@ class UnsubscribeList(http.Controller):
             one_to_one = kw.get('one_to_one')
             sc_message = kw.get('sc_message')
             email = kw.get('email')
-            partner = request.env['res.partner'].search([('email', '=', email)])
+            partner = request.env['res.partner'].sudo().search([('email', '=', email)])
             if partner:
                 partner.write({'email_preference_confirmation': True if confirmation_email == 'on' else False,
                                'email_preference_customer_updates': True if customer_updates == 'on' else False,
