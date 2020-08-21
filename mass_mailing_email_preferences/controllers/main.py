@@ -1,20 +1,16 @@
 # -*- coding: utf-8 -*-
 from odoo import fields, http, tools, _, exceptions
 from odoo.http import request
-from odoo.addons.mass_mailing.controllers.main import MassMailController
 from odoo.tools import consteq
-import hashlib
-import hmac
 
 
 class UnsubscribeList(http.Controller):
 
-    #TODO
     def _valid_unsubscribe_tokens(self, email, token):
         if not (email):
             return False
-        result = hashlib.md5(email.encode())
-        return result.hexdigest()
+        result = consteq(request.env['res.partner'].generate_token(email), token)
+        return result
 
     @http.route('/update/contact', type='http', auth='public', website=True)
     def update_value_in_contact(self, email=None, token="", **kw):
