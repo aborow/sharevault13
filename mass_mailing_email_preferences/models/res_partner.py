@@ -45,3 +45,48 @@ class ResPartner(models.Model):
         token = (self.env.cr.dbname, tools.ustr(email))
         result = hmac.new(secret.encode('utf-8'), repr(token).encode('utf-8'), hashlib.sha512).hexdigest()
         return result
+
+
+    @api.onchange('email_preference_confirmation','email_preference_customer_updates',
+                    'email_preference_hubspot_blog','email_preference_life_science',
+                    'email_preference_merger','email_preference_marketing',
+                    'email_preference_sv_blog','email_preference_sv_company_info',
+                    'email_preference_sv_product_info','email_preference_sv_subscription',
+                    'email_preference_one','email_preference_subscription_confirmation')
+    def onchange_email_preferences(self):
+        if any([
+                self.email_preference_confirmation,
+                self.email_preference_customer_updates,
+                self.email_preference_hubspot_blog,
+                self.email_preference_life_science,
+                self.email_preference_merger,
+                self.email_preference_marketing,
+                self.email_preference_sv_blog,
+                self.email_preference_sv_company_info,
+                self.email_preference_sv_product_info,
+                self.email_preference_sv_subscription,
+                self.email_preference_one,
+                self.email_preference_subscription_confirmation
+                ]
+            ):
+            self.opt_out = False
+
+
+    @api.onchange('opt_out')
+    def onchange_opt_out(self):
+        if self.opt_out:
+            vals = {
+                    'email_preference_confirmation':False,
+                    'email_preference_customer_updates':False,
+                    'email_preference_hubspot_blog':False,
+                    'email_preference_life_science':False,
+                    'email_preference_merger':False,
+                    'email_preference_marketing':False,
+                    'email_preference_sv_blog':False,
+                    'email_preference_sv_company_info':False,
+                    'email_preference_sv_product_info':False,
+                    'email_preference_sv_subscription':False,
+                    'email_preference_one':False,
+                    'email_preference_subscription_confirmation':False
+                    }
+            self.write(vals)
