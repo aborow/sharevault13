@@ -20,9 +20,9 @@ class UnsubscribeList(http.Controller):
                 raise exceptions.AccessDenied()
             vals = {}
             if partner:
-                confirmation_email = partner.email_preference_confirmation
-                if confirmation_email:
-                    vals['confirmation_email'] = confirmation_email
+                #confirmation_email = partner.email_preference_confirmation
+                #if confirmation_email:
+                #    vals['confirmation_email'] = confirmation_email
                 customer_updates = partner.email_preference_customer_updates
                 if customer_updates:
                     vals['customer_updates'] = customer_updates
@@ -56,6 +56,15 @@ class UnsubscribeList(http.Controller):
                 sc_message = partner.email_preference_subscription_confirmation
                 if sc_message:
                     vals['sc_message'] = sc_message
+
+                try:
+                    opt_out = partner.opt_out
+                    if opt_out:
+                        vals['opt_out'] = opt_out
+                except:
+                    vals['opt_out'] = False
+                    pass
+
                 if email:
                     vals['email'] = email
                 if partner:
@@ -65,7 +74,7 @@ class UnsubscribeList(http.Controller):
     @http.route('/updated/contact', type='http', auth='public', website=True)
     def updated_contact(self, **kw):
         if request.httprequest.method == 'POST':
-            confirmation_email = kw.get('confirmation_email')
+            #confirmation_email = kw.get('confirmation_email')
             customer_updates = kw.get('customer_updates')
             hubspot_blog = kw.get('hubspot_blog')
             life_science = kw.get('life_science')
@@ -77,10 +86,15 @@ class UnsubscribeList(http.Controller):
             sv_subscription = kw.get('sv_subscription')
             one_to_one = kw.get('one_to_one')
             sc_message = kw.get('sc_message')
+            try:
+                opt_out = kw.get('opt_out')
+            except:
+                opt_out = False
             email = kw.get('email')
             partner = request.env['res.partner'].sudo().search([('email', '=', email)])
             if partner:
-                partner.write({'email_preference_confirmation': True if confirmation_email == 'on' else False,
+                partner.write({
+                                #'email_preference_confirmation': True if confirmation_email == 'on' else False,
                                'email_preference_customer_updates': True if customer_updates == 'on' else False,
                                'email_preference_hubspot_blog': True if hubspot_blog == 'on' else False,
                                'email_preference_life_science': True if life_science == 'on' else False,
@@ -92,6 +106,7 @@ class UnsubscribeList(http.Controller):
                                'email_preference_sv_subscription': True if sv_subscription == 'on' else False,
                                'email_preference_one': True if one_to_one == 'on' else False,
                                'email_preference_subscription_confirmation': True if sc_message == 'on' else False,
+                               'opt_out': True if opt_out == 'on' else False,
                                })
 
             return http.request.render('mass_mailing_email_preferences.unsubscribe_page', {})

@@ -26,7 +26,7 @@ class ResPartner(models.Model):
             finalurl = url + '/update/contact?email=' + email + '&token=' + result
             partner_brw.write({'generated_url': finalurl})
 
-    email_preference_confirmation = fields.Boolean('Confirmation Email', default=True)
+    #email_preference_confirmation = fields.Boolean('Confirmation Email', default=True)
     email_preference_customer_updates = fields.Boolean('Customer Updates', default=True)
     email_preference_hubspot_blog = fields.Boolean('Default HubSpot Blog Subscription', default=True)
     email_preference_life_science = fields.Boolean('Life Sciences White Papers, Webinars and Useful News', default=True)
@@ -47,7 +47,9 @@ class ResPartner(models.Model):
         return result
 
 
-    @api.onchange('email_preference_confirmation','email_preference_customer_updates',
+    @api.onchange(
+                    #'email_preference_confirmation',
+                    'email_preference_customer_updates',
                     'email_preference_hubspot_blog','email_preference_life_science',
                     'email_preference_merger','email_preference_marketing',
                     'email_preference_sv_blog','email_preference_sv_company_info',
@@ -76,7 +78,7 @@ class ResPartner(models.Model):
     def onchange_opt_out(self):
         if self.opt_out:
             vals = {
-                    'email_preference_confirmation':False,
+                    #'email_preference_confirmation':False,
                     'email_preference_customer_updates':False,
                     'email_preference_hubspot_blog':False,
                     'email_preference_life_science':False,

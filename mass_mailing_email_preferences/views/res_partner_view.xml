@@ -11,7 +11,9 @@
                     <page id="ep_tab" string="Email Preferences" name="email_pref">
                         <group id="ep_tab_group">
                             <group>
+                                <!--
                                 <field name="email_preference_confirmation"/>
+                                -->
                                 <field name="email_preference_customer_updates"/>
                                 <field name="email_preference_hubspot_blog"/>
                                 <field name="email_preference_life_science"/>
