@@ -57,7 +57,7 @@ class ResPartner(models.Model):
                     'email_preference_one','email_preference_subscription_confirmation')
     def onchange_email_preferences(self):
         if any([
-                self.email_preference_confirmation,
+                #self.email_preference_confirmation,
                 self.email_preference_customer_updates,
                 self.email_preference_hubspot_blog,
                 self.email_preference_life_science,
