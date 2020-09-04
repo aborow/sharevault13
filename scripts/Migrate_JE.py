@@ -77,8 +77,12 @@ class ImportJe:
         res = self.create_import_move_lines(je[0].get('line_ids'))
         hist_res = self.create_import_hist_lines(je[0].get('hist_qba_type_ids'))
         if je[0].get('journal_id'):
-            journal = v13_models.execute_kw(v13_db, v13_uid, v13_password, 'account.journal', 'search',
-            [[['id', '=', 8]]])
+            if je[0].get('journal_id')[1] == 'Customer Invoices (USD)':
+                journal = v13_models.execute_kw(v13_db, v13_uid, v13_password, 'account.journal', 'search',
+                                                [[['id', '=', 1]]])
+            else:
+                journal = v13_models.execute_kw(v13_db, v13_uid, v13_password, 'account.journal', 'search',
+                [[['id', '=', 8]]])
             if journal:
                 input_date = je[0].get('date')
                 date = datetime.strptime(input_date, "%Y-%m-%d").strftime("%Y-%m-%d")
@@ -103,7 +107,7 @@ class ImportJe:
     def export_je(self):
         JE_ids = sv_models.execute_kw(
             db, sv_uid, password, 'account.move', 'search',
-            [[['date', '=', '10/31/2016']]])
+            [[['date', '>=', '01/01/2017'], ['date', '<=', '12/31/2017']]])
         created_records_list = []
         for je in JE_ids:
             je_read = sv_models.execute(db, sv_uid, password, 'account.move', 'read', je,
