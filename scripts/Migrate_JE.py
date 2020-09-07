@@ -107,7 +107,7 @@ class ImportJe:
     def export_je(self):
         JE_ids = sv_models.execute_kw(
             db, sv_uid, password, 'account.move', 'search',
-            [[['date', '>=', '01/01/2020'], ['date', '<=', '12/31/2020'], ['journal_id', '=', 9]]])
+            [[['date', '>=', '01/01/2021'], ['date', '<=', '12/31/2021'], ['journal_id', '=', 9]]])
         created_records_list = []
         for je in JE_ids:
             je_read = sv_models.execute(db, sv_uid, password, 'account.move', 'read', je,
