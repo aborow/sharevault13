@@ -6,7 +6,7 @@
 
 {
     'name': "Web Environment Ribbon",
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'category': 'Web',
     'author': 'Francesco OpenCode Apruzzese, '
               'Tecnativa, '
@@ -14,12 +14,15 @@
     'website': 'https://github.com/OCA/web',
     'license': 'AGPL-3',
     "depends": [
-        'web',
+        'web', 'web_enterprise'
         ],
     "data": [
         'data/ribbon_data.xml',
         'view/base_view.xml',
         ],
+    'qweb': [
+        "static/src/xml/*.xml",
+    ],
     "auto_install": False,
     'installable': True
 }
