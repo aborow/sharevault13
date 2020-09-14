@@ -12,6 +12,7 @@
         'base',
         'mass_mailing',
         'website',
+        'sharevault'
     ],
     'data': [
         'views/unsubscribe_page.xml',

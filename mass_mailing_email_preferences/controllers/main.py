@@ -26,33 +26,43 @@ class UnsubscribeList(http.Controller):
                 customer_updates = partner.email_preference_customer_updates
                 if customer_updates:
                     vals['customer_updates'] = customer_updates
+
                 hubspot_blog = partner.email_preference_hubspot_blog
                 if hubspot_blog:
                     vals['hubspot_blog'] = hubspot_blog
+
                 life_science = partner.email_preference_life_science
                 if life_science:
                     vals['life_science'] = life_science
+
                 mergers_webinars = partner.email_preference_merger
                 if mergers_webinars:
                     vals['mergers_webinars'] = mergers_webinars
+
                 marketing_information = partner.email_preference_marketing
                 if marketing_information:
                     vals['marketing_information'] = marketing_information
+
                 sv_blog_subscription = partner.email_preference_sv_blog
                 if sv_blog_subscription:
                     vals['sv_blog_subscription'] = sv_blog_subscription
+
                 sv_comp_info = partner.email_preference_sv_company_info
                 if sv_comp_info:
                     vals['sv_comp_info'] = sv_comp_info
+
                 sv_product_info = partner.email_preference_sv_product_info
                 if sv_product_info:
                     vals['sv_product_info'] = sv_product_info
+
                 sv_subscription = partner.email_preference_sv_subscription
                 if sv_subscription:
                     vals['sv_subscription'] = sv_subscription
+
                 one_to_one = partner.email_preference_one
                 if one_to_one:
                     vals['one_to_one'] = one_to_one
+
                 sc_message = partner.email_preference_subscription_confirmation
                 if sc_message:
                     vals['sc_message'] = sc_message
