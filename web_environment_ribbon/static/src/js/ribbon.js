@@ -10,9 +10,7 @@ odoo.define('web_environment_ribbon.ribbon', function(require) {
 
     var rpc = require('web.rpc');
     var core = require('web.core');
-    var HomeMenu = require('web_enterprise.HomeMenu');
 
-    var QWeb = core.qweb;
     // Code from: http://jsfiddle.net/WK_of_Angmar/xgA5C/
     function validStrColour(strToTest) {
         if (strToTest === "") {
@@ -35,30 +33,30 @@ odoo.define('web_environment_ribbon.ribbon', function(require) {
         return image.style.color !== "rgb(255, 255, 255)";
     }
 
-    HomeMenu.include({
-        _render: function () {
-            var self = this;
-            rpc.query({
-                model: 'web.environment.ribbon.backend',
-                method: 'get_environment_ribbon',
-            }).then(
-                function (ribbon_data) {
-                    if (ribbon_data.name && ribbon_data.name !== 'False') {
-                        self.$el.find('.test-ribbon').html(QWeb.render('ribbon-db', { data: ribbon_data }));
-                        self.$el.find('.test-ribbon').css('color', ribbon_data.color)
-                        self.$el.find('.test-ribbon').css('background-color', ribbon_data.background_color)
-                    }
-                     // Ribbon color
-                    if (ribbon_data.color && validStrColour(ribbon_data.color)) {
-                        self.$el.find('.test-ribbon').css('color', ribbon_data.color)
-                    }
-                    // Ribbon background color
-                    if (ribbon_data.background_color && validStrColour(ribbon_data.background_color)) {
-                        self.$el.find('.test-ribbon').css('background-color', ribbon_data.background_color)
-                    }
+    core.bus.on('web_client_ready', null, function () {
+        var ribbon = $('<div class="test-ribbon hidden"/>');
+        $('body').append(ribbon);
+        ribbon.hide();
+        // Get ribbon data from backend
+        rpc.query({
+            model: 'web.environment.ribbon.backend',
+            method: 'get_environment_ribbon',
+        }).then(
+            function (ribbon_data) {
+                // Ribbon name
+                if (ribbon_data.name && ribbon_data.name !== 'False') {
+                    ribbon.html(ribbon_data.name);
+                    ribbon.show();
                 }
-            );
-            return this._super.apply(this, arguments);
-        },
+                // Ribbon color
+                if (ribbon_data.color && validStrColour(ribbon_data.color)) {
+                    ribbon.css('color', ribbon_data.color);
+                }
+                // Ribbon background color
+                if (ribbon_data.background_color && validStrColour(ribbon_data.background_color)) {
+                    ribbon.css('background-color', ribbon_data.background_color);
+                }
+            }
+        );
     });
 });
