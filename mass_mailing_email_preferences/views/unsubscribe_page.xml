@@ -22,6 +22,214 @@
     <template id="unsubscribe_mass_mailing">
         <div class="container o_unsubscribe_form">
             <div class="row">
+                <div id="div_blacklist" class="col-lg-6 offset-lg-3"
+                        style="padding: 20px 40px; text-align: left;background-color: #f2f2f2; Font-family: Open Sans, Oxygen, Helvetica Neue,Helvetica,Arial,sans-serif;">
+                    <t t-if="is_partner">
+        				<form method="post" action="/updated/contact">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <input type="hidden" name="email" t-att-value="email"/>
+        					<div class="page-header">
+            					<h1 style="text-transform: capitalize;">Communication Preferences</h1>
+            					<p><t t-esc="email"/></p>
+            					<p>
+                                    <h4 style="margin-bottom: 0px;">Subscription setting</h4>
+            					     Manage subscription settings for <t t-esc="email"/>. If this is not your email address,
+                                     please ignore this page since the email associated with this page was likely forwarded to you.
+                                </p>
+            					<p>
+                                    <h4 style="margin-bottom: 0px;">Subscription interests</h4>
+                                    Only send me communications for the following checked categories:
+                                </p>
+            				</div>
+            				<div class="container" style="text-align: left; box-sizing: border-box;">
+            					<div style="padding: 16px 0;">
+            						<div class="item">
+            							<div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="customer_updates" name="customer_updates"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="customer_updates"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">Customer Updates</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                Information useful to ShareVault customers.
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="hubspot_blog" name="hubspot_blog"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="hubspot_blog"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">Default HubSpot Blog Subscription</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                Receive timely updates with the latest blog posts
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="life_science" name="life_science"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="life_science"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">Life Sciences White Papers, Webinars and Useful News</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                Information relevant to those in the life sciences industry, including advice on partnering, patent protection, licensing, etc.
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="mergers_webinars" name="mergers_webinars"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="mergers_webinars"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">Mergers &amp; Acquisitions White Papers, Webinars, and Useful News</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                Information relevant to those who are involved in M&amp;A, either as a buyer or seller.
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="marketing_information" name="marketing_information"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="marketing_information"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">Marketing Information</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                Marketing offers and updates.
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="sv_blog_subscription" name="sv_blog_subscription"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="sv_blog_subscription"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">ShareVault Blog Subscription</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                Receive timely updates with the latest blog posts
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="sv_comp_info" name="sv_comp_info"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="sv_comp_info"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">ShareVault Company Information</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                News and information related to ShareVault.
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="sv_product_info" name="sv_product_info"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="sv_product_info"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">ShareVault Product Information</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                ShareVault product updates.
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="sv_subscription" name="sv_subscription"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="sv_subscription"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">ShareVault Subscription</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                Receive timely updates with the latest blog posts
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="one_to_one" name="one_to_one"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="one_to_one"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">One to One</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                One to one emails
+                                            </p>
+                                        </div>
+            						</div>
+
+                                    <div class="item">
+                                        <div class="item-inner"
+                                                style="background-color: #169ded;border:1px solid #169ded;color:#ffffff;overflow: hidden;margin-top: 0;padding: 10px 15px;border-radius: 8px;width: 450px;margin: 0 0 20;max-width: 100%;">
+                                            <input type="checkbox" id="sc_message" name="sc_message"
+                                                    style="width: 20px;margin-left:0;" t-att-checked="sc_message"
+                                                    onclick="uncheck_opt_out(this.id)"/>
+                                            <span style="font-weight:600;">Subscriptions Confirmation Message</span>
+                                            <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
+                                                Supported in emails
+                                            </p>
+            							</div>
+            						</div>
+    							</div>
+        					</div>
+
+        					<div class="page-header">
+								<p style="margin-bottom: 10px;margin-top: 10px;	font-size: 18px;">Or check below to unsubscribe to all emails:</p>
+								<div class="item">
+									<div class="item-inner selected" style="margin-top: 0;width: 450px;max-width: 100%;margin: 0 0 20;">
+                                        <input type="checkbox" id="opt_out" name="opt_out" t-att-checked="opt_out"
+                                                onclick="uncheck_all()" style="width: 20px;margin-left:0;"/>
+                                        <span style="font-weight:600;font-size:14px;">Unsubscribe me from all mailing lists.</span>
+                                        <script>
+                                            function uncheck_opt_out(clicked_id){
+                                                if (document.getElementById(clicked_id).checked == true){
+                                                    document.getElementById("opt_out").checked = false;
+                                                }
+                                            }
+
+                                            function uncheck_all(){
+                                                if (document.getElementById("opt_out").checked == true){
+                                                    fields = ['customer_updates','hubspot_blog','life_science',
+                                                                'mergers_webinars','marketing_information','sv_blog_subscription',
+                                                                'sv_comp_info','sv_product_info','sv_subscription','one_to_one','sc_message'];
+                                                    for (var i = 0; i &lt; fields.length; i++){
+                                                        document.getElementById(fields[i]).checked = false;
+                                                    }
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="text-align:left;">
+                                <button type="submit" class="btn btn-primary"
+                                        style="font-family: Open Sans, Oxygen, Helvetica Neue,Helvetica,Arial,sans-serif;padding: 13px 22px;background-color: #1a1a1a;text-decoration: none;color: #fff;font-weight: 400;font-size: 15px;display: inline-block;line-height: 24px;border:none;text-transform: uppercase;width: auto !important;margin-top: 30px; color: white;">
+                                        UPDATE EMAIL PREFERENCES
+            					</button>
+    						</div>
+        				</form>
+                    </t>
+        		</div>
+
+
+
+                <!--
                 <input type="hidden" name="email" t-att-value="email"/>
                 <div id="div_blacklist" class="col-lg-6 offset-lg-3"
                      style="padding-top: 20px; text-align: center; margin-left:100px;">
@@ -34,13 +242,6 @@
                                  style="text-align: left; box-sizing: border-box; margin-left:400px; margin-right:400px;">
                                 <left>
                                     <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); padding: 16px; background-color: #f1f1f1 !important;">
-                                        <!--
-                                        <input type="checkbox" id="confirmation_email" name="confirmation_email"
-                                               t-att-checked="confirmation_email"
-                                               onclick="uncheck_opt_out(this.id)"/>
-                                        Confirmation Email
-                                        <br/>
-                                        -->
                                         <input type="checkbox" id="customer_updates" name="customer_updates"
                                                t-att-checked="customer_updates"
                                                onclick="uncheck_opt_out(this.id)"/>
@@ -118,8 +319,6 @@
                                             }
                                         </script>
                                         <br/>
-
-
                                         <div style="text-align:center;">
                                             <button type="submit" class="btn btn-primary"
                                                     style="margin-top:10px; background: #2e9fa5; color: white;">UPDATE
@@ -131,8 +330,9 @@
                             </div>
                         </form>
                     </t>
-
                 </div>
+                -->
+
             </div>
         </div>
     </template>
