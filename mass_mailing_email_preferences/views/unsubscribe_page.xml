@@ -51,7 +51,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">Customer Updates</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                Customer Updates
+                                                Information useful to ShareVault customers.
                                             </p>
                                         </div>
             						</div>
@@ -64,7 +64,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">Default HubSpot Blog Subscription</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                Default HubSpot Blog Subscription
+                                                Receive timely updates with the latest blog posts
                                             </p>
                                         </div>
             						</div>
@@ -77,7 +77,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">Life Sciences White Papers, Webinars and Useful News</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                Life Sciences White Papers, Webinars and Useful News
+                                                Information relevant to those in the life sciences industry, including advice on partnering, patent protection, licensing, etc.
                                             </p>
                                         </div>
             						</div>
@@ -90,7 +90,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">Mergers &amp; Acquisitions White Papers, Webinars, and Useful News</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                Mergers &amp; Acquisitions White Papers, Webinars, and Useful News
+                                                Information relevant to those who are involved in M&amp;A, either as a buyer or seller.
                                             </p>
                                         </div>
             						</div>
@@ -103,7 +103,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">Marketing Information</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                Marketing Information
+                                                Marketing offers and updates.
                                             </p>
                                         </div>
             						</div>
@@ -116,7 +116,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">ShareVault Blog Subscription</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                ShareVault Blog Subscription
+                                                Receive timely updates with the latest blog posts
                                             </p>
                                         </div>
             						</div>
@@ -129,7 +129,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">ShareVault Company Information</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                ShareVault Company Information
+                                                News and information related to ShareVault.
                                             </p>
                                         </div>
             						</div>
@@ -142,7 +142,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">ShareVault Product Information</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                ShareVault Product Information
+                                                ShareVault product updates.
                                             </p>
                                         </div>
             						</div>
@@ -155,7 +155,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">ShareVault Subscription</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                ShareVault Subscription
+                                                Receive timely updates with the latest blog posts
                                             </p>
                                         </div>
             						</div>
@@ -168,7 +168,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">One to One</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                One to One
+                                                One to one emails
                                             </p>
                                         </div>
             						</div>
@@ -181,7 +181,7 @@
                                                     onclick="uncheck_opt_out(this.id)"/>
                                             <span style="font-weight:600;">Subscriptions Confirmation Message</span>
                                             <p style="margin-bottom:0;margin-top: 10px;padding-left: 26px;font-size: 14px;">
-                                                Subscriptions Confirmation Message
+                                                Supported in emails
                                             </p>
             							</div>
             						</div>
