@@ -1217,7 +1217,7 @@ audio:not([controls]) {
 }*/
 
 /* Website background color and default font styles */
-b/*ody {
+/*body {
     background: url("//cdn2.hubspot.net/hub/421291/file-1960796212-jpg/top-bg-texture.jpg") repeat scroll 0 0 rgba(0, 0, 0, 0);
     height: 100%;
     width: 100%;
@@ -1369,7 +1369,7 @@ body .slick-slide img {
 .body-container,
 .footer-container {}
 
-.btn-group, .btn-group-vertical {
+/*.btn-group, .btn-group-vertical {
   display: inline-block;
   position: relative;
   vertical-align: middle;
@@ -1398,7 +1398,7 @@ nav .btn:first-child {
 .btn-group > .btn, .btn-group-vertical > .btn {
   float: left;
   position: relative;
-}
+}*/
 /*Modified because its affected to odoo default log in page*/
 /*.btn {
   background: none repeat scroll 0 0 #b0d0e4;
@@ -1410,14 +1410,14 @@ nav .btn:first-child {
   text-decoration: none;
   width: 91px;
 }*/
-.btn.btn-default:hover {
+/*.btn.btn-default:hover {
   background: none repeat scroll 0 0 #ebebeb;
   text-decoration: none;
    color: #333;
 }
 .btn.btn-default img {
   vertical-align: middle;
-}
+}*/
 /* ==========================================================================
    Header
    ========================================================================== */
@@ -1731,7 +1731,7 @@ form#cse-search-box {
     transition: all 0.2s ease 0s;
 }
 
-#menu-btn {
+/*#menu-btn {
     display: none;
     float: right;
     font-size: 25px;
@@ -1740,7 +1740,7 @@ form#cse-search-box {
     position: absolute;
     right: 20px;
     top: 0;
-}
+}*/
 
 body.mj-typ {
     padding: 0 !important;
@@ -3789,10 +3789,10 @@ outline-offset: -2px;
     position: relative;
     margin-left: -30px!important;
 }
-.btn-group {
+/*.btn-group {
     position: absolute;
     right: -11%;
-}
+}*/
 .custom-footer-top h3 {
     margin-right: -10px;
 }
@@ -3935,10 +3935,10 @@ form#cse-search-box {
     width: 211px;
     display: none;
 }
-.btn-group {
+/*.btn-group {
     position: absolute;
     right: 1.8%;
-}
+}*/
 .contact {
     font-family: Open Sans, Oxygen, Helvetica Neue,Helvetica,Arial,sans-serif;
     font-size: 16px;
@@ -3994,10 +3994,10 @@ input#search_input {
 .custom-login {
    display:none !important;
 }
-.btn {
+/*.btn {
     padding: 8px 4px 6px;
     width: 81px;
-}
+}*/
 .BLOG {
     font-size: 13px;
     font-weight: bold;
