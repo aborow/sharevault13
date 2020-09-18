@@ -27,7 +27,7 @@ class ResPartner(models.Model):
     """
 
     def unsubscribe_url(self):
-        return "/update/contact/email=%s&token=%s" % (self.email, self.generate_token())
+        return "/update/contact?email=%s&token=%s" % (self.email, self.generate_token())
 
     def generate_token(self, email=False):
         if not email:
