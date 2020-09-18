@@ -8,11 +8,8 @@
     'summary': 'Mass mailing Email preferences',
     'description': 'Added email preferences tab in contacts',
     'depends': [
-        'mail',
-        'base',
-        'mass_mailing',
-        'website',
-        'sharevault'
+                'mass_mailing',
+                'sharevault'
     ],
     'data': [
         'views/unsubscribe_page.xml',

@@ -8,27 +8,30 @@ from odoo.exceptions import ValidationError
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    def generate_url(self, email=""):
-        context = dict(self._context or {})
-        add_val_ids = context.get('active_ids')
-        partner_obj = self.env['res.partner']
-        for val_id in add_val_ids:
-            partner_brw = partner_obj.browse(val_id)
-            if partner_brw.email:
-                email = partner_brw.email
+    """
+    def _get_partner_unsubscribe_url(self):
+        for partner_rec in self:
+            if partner_rec.email:
+                email = partner_rec.email
+                secret = self.env["ir.config_parameter"].sudo().get_param("database.secret")
+                url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
+                token = (self.env.cr.dbname, tools.ustr(email))
+                result = hmac.new(secret.encode('utf-8'), repr(token).encode('utf-8'), hashlib.sha512).hexdigest()
+                email = email.replace('@', '%40')
+                finalurl = url + '/update/contact?email=' + email + '&token=' + result
+                partner_rec.email_unsubscribe_url = finalurl
             else:
-                raise ValidationError(_('Enter a email for generate URL'))
-            secret = self.env["ir.config_parameter"].sudo().get_param("database.secret")
-            url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
-            token = (self.env.cr.dbname, tools.ustr(email))
-            result = hmac.new(secret.encode('utf-8'), repr(token).encode('utf-8'), hashlib.sha512).hexdigest()
-            email = email.replace('@', '%40')
-            finalurl = url + '/update/contact?email=' + email + '&token=' + result
-            partner_brw.write({'generated_url': finalurl})
+                partner_rec.email_unsubscribe_url = False
 
-    generated_url = fields.Text('Email Webpage URL')
+    email_unsubscribe_url = fields.Char(compute='_get_partner_unsubscribe_url', string='Mail Subscribe URL')
+    """
+
+    def unsubscribe_url(self):
+        return "/update/contact/email=%s&token=%s" % (self.email, self.generate_token())
 
     def generate_token(self, email=False):
+        if not email:
+            email = self.email
         secret = self.env["ir.config_parameter"].sudo().get_param("database.secret")
         token = (self.env.cr.dbname, tools.ustr(email))
         result = hmac.new(secret.encode('utf-8'), repr(token).encode('utf-8'), hashlib.sha512).hexdigest()

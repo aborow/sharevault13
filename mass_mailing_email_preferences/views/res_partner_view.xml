@@ -25,18 +25,30 @@
                         </group>
                     </page>
                 </xpath>
+                <!--
                 <xpath expr="//form/sheet/group/group/field[@name='title']" position="after">
-                    <field name="generated_url" widget="url"/>
+                    <field name="email_unsubscribe_url" widget="url" invisible="0"/>
                 </xpath>
+                -->
             </field>
         </record>
 
-        <record model="ir.actions.server" id="action_generate_url_partner">
-            <field name="name">Generate URL</field>
-            <field name="model_id" ref="model_res_partner"/>
-            <field name="binding_model_id" ref="model_res_partner"/>
-            <field name="state">code</field>
-            <field name="code">action = model.generate_url()</field>
+        <!--
+        <record id="mail.email_template_partner" model="mail.template">
+            <field name="name">Partner Mass Mail</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="partner_to">${object.id}</field>
+            <field name="user_signature" eval="True"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <a href="${object.email_unsubscribe_url}">
+                        Unsubscribe Mail
+                    </a>
+                </div>
+            </field>
         </record>
+        -->
     </data>
 </odoo>
