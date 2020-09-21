@@ -16,9 +16,9 @@ class AccountMove(models.Model):
     def onchange_sharevault_id(self):
         self.ensure_one()
         self.date_creation = self.sharevault_id \
-                                and self.sharevault_id.date_creation or False
+                                and self.sharevault_id.sv_creation_dt or False
         self.date_expiration = self.sharevault_id \
-                                and self.sharevault_id.date_expiration or False
+                                and self.sharevault_id.sv_expiration_dt or False
 
 
     sharevault_id = fields.Many2one('sharevault.sharevault', 'ShareVault',
