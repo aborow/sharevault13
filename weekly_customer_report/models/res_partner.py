@@ -10,7 +10,8 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     def get_total(self, id):
-        invoices_recs = self.env['account.move'].search([('sharevault_id', '=', id)])
+        invoices_recs = self.env['account.move'].search(
+            [('sharevault_id', '=', id), ('state', '=', 'posted'), ('type', '=', 'out_invoice')])
         total = 0
         for inv in invoices_recs:
             for line in inv.invoice_line_ids:
@@ -36,6 +37,14 @@ class ResPartner(models.Model):
         else:
             return ''
 
+    def _check_sharevault_records(self, partner):
+        account_move = self.env['account.move'].search(
+            [('partner_id', '=', partner.id), ('state', '=', 'posted'), ('type', '=', 'out_invoice')])
+        sharevault_ids = []
+        for move in account_move:
+            if move.sharevault_id:
+                sharevault_ids.append(move.sharevault_id.id)
+        return sharevault_ids
 
     def get_weekly_report(self):
         for partner_rec in self:
@@ -84,14 +93,16 @@ class ResPartner(models.Model):
                 colm += 1
                 if not partner_rec.sharevault_c_ids:
                     raise ValidationError(_('ShareVaults not found for this customer'))
-
-                for sv in partner_rec.sharevault_c_ids:
-                    worksheet.write(row, colm, sv.sharevault_name, body)
+                sharevault_c_ids = self._check_sharevault_records(partner_rec)
+                if not sharevault_c_ids:
+                    raise ValidationError(_('ShareVault is not selected in related invoices of this customer'))
+                for sv in sharevault_c_ids:
+                    sharevault = self.env['sharevault.sharevault'].browse(sv)
+                    worksheet.write(row, colm, sharevault.sharevault_name, body)
                     row += 1
                     colm += 1
-                    invoices_recs = self.env['account.move'].search([('sharevault_id', '=', sv.id)])
-                    if not invoices_recs:
-                        raise ValidationError(_('ShareVault is not selected in related invoices of this customer'))
+                    invoices_recs = self.env['account.move'].search(
+                        [('sharevault_id', '=', sv), ('state', '=', 'posted'), ('type', '=', 'out_invoice')])
                     for inv in invoices_recs:
                         for line in inv.invoice_line_ids:
                             worksheet.write(row, colm, self.get_inv_type(line.move_id.type), body)
@@ -112,8 +123,8 @@ class ResPartner(models.Model):
                             row += 1
                             colm = 2
                     colm = 1
-                    worksheet.write(row, colm, 'Total '+str(sv.sharevault_name), body)
-                    worksheet.write(row, colm + 8, self.get_total(sv.id), body)
+                    worksheet.write(row, colm, 'Total '+str(sharevault.sharevault_name), body)
+                    worksheet.write(row, colm + 8, self.get_total(sv), body)
                     row += 1
                     colm = 1
                 colm = 0
