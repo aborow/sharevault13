@@ -78,16 +78,12 @@
 
                                                                 <div id="hs_form_target_module_148561841759560">
 
-                                                                    <form novalidate="" accept-charset="UTF-8"
-                                                                          action="https://forms.hsforms.com/submissions/v3/public/submit/formsnext/multipart/421291/b7db737d-d15f-4206-9062-06b0ae3ca2b7"
+                                                                    <form action="/website_form/" method="post"
+                                                                          class="s_website_form container-fluid mt32 o_fake_not_editable"
                                                                           enctype="multipart/form-data"
-                                                                          id="hsForm_b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
-                                                                          method="POST"
-                                                                          class="hs-form stacked hs-custom-form hs-form-private hsForm_b7db737d-d15f-4206-9062-06b0ae3ca2b7 hs-form-b7db737d-d15f-4206-9062-06b0ae3ca2b7 hs-form-b7db737d-d15f-4206-9062-06b0ae3ca2b7_8cc1804f-638e-48e1-bbdc-793946237545"
-                                                                          data-form-id="b7db737d-d15f-4206-9062-06b0ae3ca2b7"
-                                                                          data-portal-id="421291"
-                                                                          target="target_iframe_b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
-                                                                          data-reactid=".hbspt-forms-0">
+                                                                          data-name="Form Builder"
+                                                                          data-model_name="crm.lead"
+                                                                          data-success_page="/contactus-thank-you">
                                                                         <fieldset class="form-columns-1"
                                                                                   data-reactid=".hbspt-forms-0.1:$0">
                                                                             <div class="hs_email hs-email hs-fieldtype-text field hs-form-field"
@@ -2061,6 +2057,14 @@
             </xpath>
         </template>
 
-
+       <!-- <template id="website_form_builder_options" name="Form Builder Options" inherit_id="website.snippet_options">
+            <xpath expr="//div" position="after">
+                <div data-js='html_form_builder'
+                    data-selector=".html_form"
+                    data-drop-in=".oe_structure, [data-oe-type=html]">
+                </div>
+            </xpath>
+        </template>
+-->
     </data>
 </odoo>
