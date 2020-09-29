@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.view.form.inherit.custom</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group/field[@name='type']" position="after">
+                    <field name="information_sharing"/>
+                    <field name="typ_id"/>
+                </xpath>
+            </field>
+        </record>
+        <function model="ir.model.fields" name="formbuilder_whitelist">
+            <value>crm.lead</value>
+            <value eval="[
+                'contact_name',
+                'description',
+                'email_from',
+                'name',
+                'partner_name',
+                'phone',
+                'team_id',
+                'user_id',
+                'information_sharing',
+                'typ_id',
+                'source_id',
+                'function',
+            ]"/>
+        </function>
+    </data>
+</odoo>

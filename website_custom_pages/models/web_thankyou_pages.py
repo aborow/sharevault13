@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields,api, _
-import base64
-import io
-import xlsxwriter
-from odoo.exceptions import Warning,ValidationError
 
 
 class WebThankYouPages(models.Model):
@@ -13,3 +9,12 @@ class WebThankYouPages(models.Model):
     name = fields.Char('Name')
     text = fields.Html('Text')
     active = fields.Boolean('Active')
+
+
+class ResCompany(models.Model):
+
+    _inherit = "res.company"
+
+    typ_id = fields.Many2one('web.thankyou.pages', 'Thank You Pages')
+    source_id = fields.Many2one('utm.source', 'Source',
+                                help="This is the source of the link, e.g. Search Engine, another domain, or name of email list")

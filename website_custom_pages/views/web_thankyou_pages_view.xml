@@ -4,7 +4,7 @@
         <field name="name">web.thankyou.pages.form</field>
         <field name="model">web.thankyou.pages</field>
         <field name="arch" type="xml">
-            <form string="Thank You Pages">
+            <form string="Thank You Messages">
                 <group>
                     <field name="name"/>
                     <field name="text"/>
@@ -18,23 +18,22 @@
         <field name="name">web.thankyou.pages.tree</field>
         <field name="model">web.thankyou.pages</field>
         <field name="arch" type="xml">
-            <tree string="Thank You Pages">
+            <tree string="Thank You Messages">
                 <field name="name"/>
-                <field name="text"/>
                 <field name="active"/>
             </tree>
         </field>
     </record>
 
     <record id="action_web_thankyou_pages" model="ir.actions.act_window">
-            <field name="name">Thank You Pages</field>
+            <field name="name">Thank You Messages</field>
             <field name="res_model">web.thankyou.pages</field>
             <field name="view_mode">tree,form</field>
             <field name="view_id" ref="view_web_thankyou_pages_tree"/>
             <field name="target">current</field>
         </record>
 
-    <menuitem id="menu_web_thankyou_pages" name="Thank You Pages"
+    <menuitem id="menu_web_thankyou_pages" name="Thank You Messages"
               action="action_web_thankyou_pages" parent="website.menu_website_global_configuration" sequence="40"/>
 
 </odoo>
