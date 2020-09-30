@@ -9,10 +9,3 @@ class WebThankYouPages(models.Model):
     name = fields.Char('Name')
     text = fields.Html('Text')
     active = fields.Boolean('Active')
-
-
-class ResCompany(models.Model):
-
-    _inherit = "res.company"
-
-    typ_id = fields.Many2one('web.thankyou.pages', 'Thank You Pages')
