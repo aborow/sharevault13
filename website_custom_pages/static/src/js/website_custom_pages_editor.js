@@ -144,6 +144,7 @@ var FormEditorDialog = Dialog.extend({
                 self._renderParameterFields($content);
                 $content.find("[for='success_page']").css('display','none')
                 $content.find("[name='success_page']").css('display','none')
+                $content.find("[name='model_selection']").attr('disabled',true)
                 $content.find("[name='model_selection']").on('change', function () {
                     self._renderParameterFields($content);
                 });
