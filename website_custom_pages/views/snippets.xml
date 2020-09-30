@@ -411,7 +411,6 @@
                                                                                        name="typ_id"
                                                                                        type="hidden"
                                                                                        class="form-control o_website_form_input"
-                                                                                       t-att-value="res_company.typ_id"
                                                                                        />
                                                                                 <input id="sources"
                                                                                        class="form-control o_website_form_input"
