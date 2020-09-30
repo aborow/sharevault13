@@ -130,8 +130,10 @@ var FormEditorDialog = Dialog.extend({
                 dialog.on('save', this, ev => {
                     var source = document.getElementById('sources');
                     var typ = document.getElementById('thankyou_pages');
+                    var user_id = document.getElementById('user_id');
                     typ.value = ev.target.$el.find("[name='typ_id']").val();
-                    source.value = ev.target.$el.find("[name='source_id']").val();
+                    source.value = ev.target.$el.find("[name='source']").val();
+                    user_id.value = ev.target.$el.find("[name='user_id']").val();
                     ev.stopPropagation();
                     save.call(dialog);
                 });
@@ -140,7 +142,8 @@ var FormEditorDialog = Dialog.extend({
                 self.originSuccessPage = $content.find("input[name='success_page']").val();
                 self.originFormID = $content.find("[name='model_selection']").val();
                 self._renderParameterFields($content);
-
+                $content.find("[for='success_page']").css('display','none')
+                $content.find("[name='success_page']").css('display','none')
                 $content.find("[name='model_selection']").on('change', function () {
                     self._renderParameterFields($content);
                 });
@@ -173,6 +176,9 @@ $(document).ready(function(){
 
 });
 
+FormEditorRegistry.map.create_lead.fields.shift();
+
+
 FormEditorRegistry.map.create_lead.fields.push(
     {
         name: 'typ_id',
@@ -182,11 +188,12 @@ FormEditorRegistry.map.create_lead.fields.push(
         title: _t('Select Respective Thank You Message'),
     },
     {
-        name: 'source_id',
-        type: 'many2one',
-        relation: 'utm.source',
-        string: _t('Type'),
-        title: _t('Select Type of Form'),
+        name: 'source',
+        type: 'char',
+        relation: 'crm.lead',
+        string: _t('Source'),
+        title: _t('Select Source of Form'),
+
     },
 
 );

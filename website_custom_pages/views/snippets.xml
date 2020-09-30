@@ -87,6 +87,7 @@
                                                                           enctype="multipart/form-data"
                                                                           data-name="Form Builder"
                                                                           data-model_name="crm.lead"
+                                                                          data-source="WEB_webinar"
                                                                           >
                                                                         <fieldset class="form-columns-1"
                                                                                   data-reactid=".hbspt-forms-0.1:$0">
@@ -151,8 +152,9 @@
                                                                                            autocomplete="given-name"
                                                                                            data-reactid=".hbspt-forms-0.1:$1.1:$firstname.$firstname.0"/>-->
                                                                                     <input type="text"
-                                                                                           class="form-control o_website_form_input"
-                                                                                           name="contact_name"
+                                                                                           id="firstname-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
+                                                                                           class="hs-input"
+                                                                                           name="name"
                                                                                            placeholder="First Name"
                                                                                            t-att-value="request.params.get('contact_name', '')"
                                                                                            required=""/>
@@ -192,7 +194,7 @@
                                                                                      data-reactid=".hbspt-forms-0.1:$1.1:$lastname.$lastname">
                                                                                     <input id="lastname-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
                                                                                            class="hs-input" type="text"
-                                                                                           name="name" required=""
+                                                                                           name="contact_name" required=""
                                                                                            value=""
                                                                                            placeholder="Last Name"
                                                                                            autocomplete="family-name"
@@ -331,9 +333,7 @@
                                                                                         <option value="" disabled=""
                                                                                                 selected=""
                                                                                                 data-reactid=".hbspt-forms-0.1:$4.1:$when_will_you_be_sharing_confidential_information_with_a_third_party_.$when_will_you_be_sharing_confidential_information_with_a_third_party_.0.0">
-                                                                                            When will you be sharing
-                                                                                            confidential information
-                                                                                            with a third party?
+                                                                                            Third party sharing
                                                                                         </option>
                                                                                         <option value="1_m"
                                                                                                 data-reactid=".hbspt-forms-0.1:$4.1:$when_will_you_be_sharing_confidential_information_with_a_third_party_.$when_will_you_be_sharing_confidential_information_with_a_third_party_.0.1:$1 Month">
@@ -416,8 +416,13 @@
                                                                                 <input id="sources"
                                                                                        class="form-control o_website_form_input"
                                                                                        type="hidden"
-                                                                                       name="source_id"
-                                                                                       t-att-value="res_company.source_id"
+                                                                                       name="source"
+                                                                                       data-source="WEB_webinar"
+                                                                                       />
+                                                                                <input id="user_id"
+                                                                                       class="form-control o_website_form_input"
+                                                                                       type="hidden"
+                                                                                       name="user_id"
                                                                                        />
                                                                             </div>
                                                                         </div>

@@ -16,5 +16,3 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     typ_id = fields.Many2one('web.thankyou.pages', 'Thank You Pages')
-    source_id = fields.Many2one('utm.source', 'Source',
-                                help="This is the source of the link, e.g. Search Engine, another domain, or name of email list")

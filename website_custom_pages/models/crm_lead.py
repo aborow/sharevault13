@@ -17,5 +17,5 @@ class Lead(models.Model):
                                             ('dont_sharevault',
                                              'We dont use ShareVault, but we are currently sharing confidential documentation with third parties.'),
                                             ], 'Information Sharing', store=True)
-    typ_id = fields.Many2one('web.thankyou.pages', 'Thank You Pages')
+    source = fields.Char('Source of Snippet')
 

@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='type']" position="after">
                     <field name="information_sharing"/>
-                    <field name="typ_id"/>
+                    <field name="source"/>
                 </xpath>
             </field>
         </record>
@@ -24,8 +24,7 @@
                 'team_id',
                 'user_id',
                 'information_sharing',
-                'typ_id',
-                'source_id',
+                'source',
                 'function',
             ]"/>
         </function>

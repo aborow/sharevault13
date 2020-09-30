@@ -11,3 +11,7 @@ Landing page migration POC
 13.0.1.0.1
 ==========
 SV-128: Issue with saving HTML changes
+
+13.0.1.0.2 & 3
+==============
+SV-130: Dynamic solution for thank you pages and white paper downloads
