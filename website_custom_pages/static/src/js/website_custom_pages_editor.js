@@ -45,11 +45,19 @@ var FormEditorDialog = Dialog.extend({
                 var source = document.getElementById('sources');
                 var user_id = document.getElementById('user_id');
                 var share_link_id = document.getElementById('share_link_id');
-                typ.value = this.$el.find("[name='typ_id']").val();
-                source.value = this.$el.find("[name='source']").val();
-                user_id.value = this.$el.find("[name='user_id']").val();
-                share_link_id.value = this.$el.find("[name='share_link_id']").val();
-                console.log('\n typ',typ)
+                var type_val = this.$el.find("[name='typ_id']").val();
+                var source_val =  this.$el.find("[name='source']").val();
+                var user_val = this.$el.find("[name='user_id']").val();
+                var share_link_val = this.$el.find("[name='share_link_id']").val();
+//                typ.value = this.$el.find("[name='typ_id']").val();
+//                source.value = this.$el.find("[name='source']").val();
+//                user_id.value = this.$el.find("[name='user_id']").val();
+//                share_link_id.value = this.$el.find("[name='share_link_id']").val();
+                typ.setAttribute("value", type_val);
+                source.setAttribute("value", source_val);
+                user_id.setAttribute("value", user_val);
+                share_link_id.setAttribute("value", share_link_val);
+
                 this.trigger_up('save');
             } else {
                 console.log('\n in else');
