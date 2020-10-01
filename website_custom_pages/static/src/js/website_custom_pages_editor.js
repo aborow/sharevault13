@@ -52,10 +52,10 @@ var FormEditorDialog = Dialog.extend({
                 source.value = this.$el.find("[name='source']").val();
                 user_id.value = this.$el.find("[name='user_id']").val();
                 share_link_id.value = this.$el.find("[name='share_link_id']").val();
-                console.log('\n typ v',typ)
-                console.log('\n source v',source)
-                console.log('\n user_id v',user_id)
-                console.log('\n share_link_id v',share_link_id)
+                console.log('\n typ v',this.$el.find("[name='typ_id']").val();)
+                console.log('\n source v',this.$el.find("[name='source']").val();)
+                console.log('\n user_id v',this.$el.find("[name='user_id']").val();)
+                console.log('\n share_link_id v',this.$el.find("[name='share_link_id']").val();)
                 this.trigger_up('save');
             } else {
                 _.each(this.$el.find('.o_website_form_input'), function (input) {
