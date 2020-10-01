@@ -52,7 +52,7 @@ var FormEditorDialog = Dialog.extend({
                 source.value = this.$el.find("[name='source']").val();
                 user_id.value = this.$el.find("[name='user_id']").val();
                 share_link_id.value = this.$el.find("[name='share_link_id']").val();
-                tp = this.$el.find("[name='typ_id']").val();
+                var tp = this.$el.find("[name='typ_id']").val();
                 console.log('\n typ v',tp)
                 this.trigger_up('save');
             } else {
