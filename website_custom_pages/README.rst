@@ -15,3 +15,7 @@ SV-128: Issue with saving HTML changes
 13.0.1.0.2 & 3
 ==============
 SV-130: Dynamic solution for thank you pages and white paper downloads
+
+13.0.1.0.6
+==========
+Modified changes as per comments on JIRA of SV-130

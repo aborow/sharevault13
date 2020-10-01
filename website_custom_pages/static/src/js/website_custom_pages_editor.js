@@ -40,6 +40,14 @@ var FormEditorDialog = Dialog.extend({
          */
         _onSaveModal: function () {
             if (this.$el[0].checkValidity()) {
+                var typ = document.getElementById('thankyou_pages');
+                var source = document.getElementById('sources');
+                var user_id = document.getElementById('user_id');
+                var share_link_id = document.getElementById('share_link_id');
+                typ.value = this.$el.find("[name='typ_id']").val();
+                source.value = this.$el.find("[name='source']").val();
+                user_id.value = this.$el.find("[name='user_id']").val();
+                share_link_id.value = this.$el.find("[name='share_link_id']").val();
                 this.trigger_up('save');
             } else {
                 _.each(this.$el.find('.o_website_form_input'), function (input) {
@@ -128,12 +136,14 @@ var FormEditorDialog = Dialog.extend({
                 }).open();
                 dialog.on('closed', this, cancel);
                 dialog.on('save', this, ev => {
-                    var source = document.getElementById('sources');
-                    var typ = document.getElementById('thankyou_pages');
-                    var user_id = document.getElementById('user_id');
-                    typ.value = ev.target.$el.find("[name='typ_id']").val();
-                    source.value = ev.target.$el.find("[name='source']").val();
-                    user_id.value = ev.target.$el.find("[name='user_id']").val();
+//                    var source = document.getElementById('sources');
+//                    var typ = document.getElementById('thankyou_pages');
+//                    var user_id = document.getElementById('user_id');
+//                    var share_link_id = document.getElementById('share_link_id');
+//                    typ.value = ev.target.$el.find("[name='typ_id']").val();
+//                    source.value = ev.target.$el.find("[name='source']").val();
+//                    user_id.value = ev.target.$el.find("[name='user_id']").val();
+//                    share_link_id.value = ev.target.$el.find("[name='share_link_id']").val();
                     ev.stopPropagation();
                     save.call(dialog);
                 });
@@ -170,7 +180,6 @@ $(document).ready(function(){
                     $('#thankyou').append(result[0].text)
                 })
 
-//            e.preventDefault();
          $('#thankyou').css('display','block')
 
     })
@@ -194,6 +203,14 @@ FormEditorRegistry.map.create_lead.fields.push(
         relation: 'crm.lead',
         string: _t('Source'),
         title: _t('Select Source of Form'),
+
+    },
+    {
+        name: 'share_link_id',
+        type: 'many2one',
+        relation: 'documents.share',
+        string: _t('Share Link'),
+        title: _t('Select Document Share Link'),
 
     },
 

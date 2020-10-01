@@ -9,6 +9,7 @@
                 <xpath expr="//form/sheet/group/group/field[@name='type']" position="after">
                     <field name="information_sharing"/>
                     <field name="source"/>
+                    <field name="share_link_id"/>
                 </xpath>
             </field>
         </record>
@@ -26,6 +27,7 @@
                 'information_sharing',
                 'source',
                 'function',
+                'share_link_id',
             ]"/>
         </function>
     </data>

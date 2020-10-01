@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="snippet_testimonial" name="Page 1-1">
+        <template id="snippet_testimonial" name="Header">
             <section class="snippet_testimonial" style="margin-top: -100px;">
             <div class="row-fluid-wrapper row-depth-1 row-number-1 ">
                 <div class="row-fluid ">
@@ -23,11 +23,11 @@
             </section>
         </template>
 
-        <template id="snippet_wb2" name="Page 1-2">
+        <!--<template id="snippet_wb2" name="Page 1-2">
             <section class="snippet_wb2" style="background: white;">
                 <div class="row-fluid-wrapper row-depth-1 row-number-2 ">
                     <div class="row-fluid ">
-                        <!-- <hr class="hr-landing"> -->
+                        &lt;!&ndash; <hr class="hr-landing"> &ndash;&gt;
                         <div class="container-header main-content">
 
                             <div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell"
@@ -54,10 +54,10 @@
                                                                 </div>
                                                                 <hr class="hr-date-box"/>
                                                             </span>
-                                                        </div><!--end layout-widget-wrapper -->
-                                                    </div><!--end widget-span -->
-                                                </div><!--end row-->
-                                            </div><!--end row-wrapper -->
+                                                        </div>&lt;!&ndash;end layout-widget-wrapper &ndash;&gt;
+                                                    </div>&lt;!&ndash;end widget-span &ndash;&gt;
+                                                </div>&lt;!&ndash;end row&ndash;&gt;
+                                            </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
 
                                             <div class="row-fluid-wrapper row-depth-1 row-number-5 ">
                                                 <div class="row-fluid ">
@@ -111,12 +111,12 @@
                                                                                         data-reactid=".hbspt-forms-0.1:$0.1:$email.1"></legend>
                                                                                 <div class="input"
                                                                                      data-reactid=".hbspt-forms-0.1:$0.1:$email.$email">
-                                                                                    <!--<input id="email-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
+                                                                                    &lt;!&ndash;<input id="email-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
                                                                                            class="hs-input" type="email"
                                                                                            name="email_from" required=""
                                                                                            placeholder="Business Email"
                                                                                            value="" autocomplete="email"
-                                                                                           data-reactid=".hbspt-forms-0.1:$0.1:$email.$email.0" t-att-value="request.params.get('email_from', '')"/>-->
+                                                                                           data-reactid=".hbspt-forms-0.1:$0.1:$email.$email.0" t-att-value="request.params.get('email_from', '')"/>&ndash;&gt;
                                                                                     <input type="email" class="hs-input" placeholder="Business Email" name="email_from" required="" t-att-value="request.params.get('email_from', '')" />
 
                                                                                 </div>
@@ -144,13 +144,13 @@
                                                                                         data-reactid=".hbspt-forms-0.1:$1.1:$firstname.1"></legend>
                                                                                 <div class="input"
                                                                                      data-reactid=".hbspt-forms-0.1:$1.1:$firstname.$firstname">
-                                                                                    <!--<input id="firstname-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
+                                                                                    &lt;!&ndash;<input id="firstname-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
                                                                                            t-att-value="request.params.get('contact_name', '')"
                                                                                            type="text" name="contact_name"
                                                                                            required="" value=""
                                                                                            placeholder="First Name"
                                                                                            autocomplete="given-name"
-                                                                                           data-reactid=".hbspt-forms-0.1:$1.1:$firstname.$firstname.0"/>-->
+                                                                                           data-reactid=".hbspt-forms-0.1:$1.1:$firstname.$firstname.0"/>&ndash;&gt;
                                                                                     <input type="text"
                                                                                            id="firstname-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
                                                                                            class="hs-input"
@@ -160,7 +160,7 @@
                                                                                            required=""/>
 
                                                                                 </div>
-                                                                                <!--<ul class="no-list hs-error-msgs inputs-list"
+                                                                                &lt;!&ndash;<ul class="no-list hs-error-msgs inputs-list"
                                                                                     style="display:block;" role="alert"
                                                                                     data-reactid=".hbspt-forms-0.1:$1.1:$firstname.3">
                                                                                     <li data-reactid=".hbspt-forms-0.1:$1.1:$firstname.3.$0">
@@ -170,7 +170,7 @@
                                                                                             required field.
                                                                                         </label>
                                                                                     </li>
-                                                                                </ul>-->
+                                                                                </ul>&ndash;&gt;
                                                                             </div>
                                                                             <div class="hs_lastname hs-lastname hs-fieldtype-text field hs-form-field"
                                                                                  data-reactid=".hbspt-forms-0.1:$1.1:$lastname">
@@ -224,7 +224,7 @@
                                                                                         data-reactid=".hbspt-forms-0.1:$2.1:$company.1"></legend>
                                                                                 <div class="input"
                                                                                      data-reactid=".hbspt-forms-0.1:$2.1:$company.$company">
-                                                                                    <!--<input id="company-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
+                                                                                    &lt;!&ndash;<input id="company-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"
                                                                                            class="hs-input" type="text"
                                                                                            name="company" required=""
                                                                                            value=""
@@ -232,7 +232,7 @@
                                                                                            autocomplete="organization"
                                                                                            data-reactid=".hbspt-forms-0.1:$2.1:$company.$company.0"
                                                                                            t-att-value="request.params.get('partner_name', '')"
-                                                                                    />-->
+                                                                                    />&ndash;&gt;
                                                                                     <input type="text"
                                                                                            class="hs-input"
                                                                                            name="partner_name"
@@ -292,12 +292,12 @@
                                                                                         data-reactid=".hbspt-forms-0.1:$3.1:$phone.1"></legend>
                                                                                 <div class="input"
                                                                                      data-reactid=".hbspt-forms-0.1:$3.1:$phone.$phone">
-<!--                                                                                    <input id="phone-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"-->
-<!--                                                                                           class="hs-input" type="tel"-->
-<!--                                                                                           name="phone" required=""-->
-<!--                                                                                           value="" placeholder="Phone"-->
-<!--                                                                                           autocomplete="tel"-->
-<!--                                                                                           data-reactid=".hbspt-forms-0.1:$3.1:$phone.$phone.0" t-att-value="request.params.get('phone', '')"/>-->
+&lt;!&ndash;                                                                                    <input id="phone-b7db737d-d15f-4206-9062-06b0ae3ca2b7_7731"&ndash;&gt;
+&lt;!&ndash;                                                                                           class="hs-input" type="tel"&ndash;&gt;
+&lt;!&ndash;                                                                                           name="phone" required=""&ndash;&gt;
+&lt;!&ndash;                                                                                           value="" placeholder="Phone"&ndash;&gt;
+&lt;!&ndash;                                                                                           autocomplete="tel"&ndash;&gt;
+&lt;!&ndash;                                                                                           data-reactid=".hbspt-forms-0.1:$3.1:$phone.$phone.0" t-att-value="request.params.get('phone', '')"/>&ndash;&gt;
                                                                                     <input type="tel" placeholder="Phone" class="hs-input" name="phone" t-att-value="request.params.get('phone', '')" />
                                                                                 </div>
                                                                             </div>
@@ -401,11 +401,11 @@
                                                                                  data-reactid=".hbspt-forms-0.5.0"></div>
                                                                             <div class="actions"
                                                                                  data-reactid=".hbspt-forms-0.5.1" style="text-align: center;">
-                                                                                <!--<input type="submit"
+                                                                                &lt;!&ndash;<input type="submit"
                                                                                        value="View the Webinar"
                                                                                        class="hs-button primary large"
-                                                                                       data-reactid=".hbspt-forms-0.5.1.0"/>-->
-<!--                                                                                <a href="#" role="button" class="hs-button primary large">View the Webinar</a>-->
+                                                                                       data-reactid=".hbspt-forms-0.5.1.0"/>&ndash;&gt;
+&lt;!&ndash;                                                                                <a href="#" role="button" class="hs-button primary large">View the Webinar</a>&ndash;&gt;
                                                                                 <button class="btn btn-primary btn-lg o_website_form_send o_default_snippet_text">View the Webinar</button>
                                                                                 <input id="thankyou_pages"
                                                                                        name="typ_id"
@@ -435,12 +435,12 @@
                                                                 </div>
 
                                                             </span>
-                                                        </div><!--end layout-widget-wrapper -->
-                                                    </div><!--end widget-span -->
-                                                </div><!--end row-->
-                                            </div><!--end row-wrapper -->
+                                                        </div>&lt;!&ndash;end layout-widget-wrapper &ndash;&gt;
+                                                    </div>&lt;!&ndash;end widget-span &ndash;&gt;
+                                                </div>&lt;!&ndash;end row&ndash;&gt;
+                                            </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
 
-                                        </div><!--end widget-span -->
+                                        </div>&lt;!&ndash;end widget-span &ndash;&gt;
                                         <div class="span6 widget-span widget-type-cell right-content" style=""
                                              data-widget-type="cell" data-x="6" data-w="6">
 
@@ -521,24 +521,24 @@
                                                                     to watch the recording anytime.
                                                                 </p>
                                                             </span>
-                                                        </div><!--end layout-widget-wrapper -->
-                                                    </div><!--end widget-span -->
-                                                </div><!--end row-->
-                                            </div><!--end row-wrapper -->
+                                                        </div>&lt;!&ndash;end layout-widget-wrapper &ndash;&gt;
+                                                    </div>&lt;!&ndash;end widget-span &ndash;&gt;
+                                                </div>&lt;!&ndash;end row&ndash;&gt;
+                                            </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
 
-                                        </div><!--end widget-span -->
-                                    </div><!--end row-->
-                                </div><!--end row-wrapper -->
+                                        </div>&lt;!&ndash;end widget-span &ndash;&gt;
+                                    </div>&lt;!&ndash;end row&ndash;&gt;
+                                </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
 
-                            </div><!--end widget-span -->
+                            </div>&lt;!&ndash;end widget-span &ndash;&gt;
 
                         </div>
-                    </div><!--end row-->
-                </div><!--end row-wrapper -->
+                    </div>&lt;!&ndash;end row&ndash;&gt;
+                </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
             </section>
-        </template>
+        </template>-->
 
-        <template id="snippet_wb3" name="Page 1-3">
+        <template id="snippet_wb3" name="Speaker">
             <section class="snippet_wb3">
                 <div class="row-fluid-wrapper row-depth-1 row-number-7 ">
                     <div class="row-fluid ">
@@ -593,9 +593,10 @@
 
 
                                                                         <div class="avatar-single"
-                                                                             style="background-image: url('https://resources.sharevault.com/hubfs/David-Stastny_headshot.png');"></div>
-                                                                        <!-- <img src="https://f.hubspotusercontent40.net/hubfs/421291/David-Stastny_headshot.png" width="158" height="159" alt="David-Stastny_headshot"> -->
-
+                                                                             >
+                                                                        <!--style="background-image: url('https://resources.sharevault.com/hubfs/David-Stastny_headshot.png');"-->
+                                                                         <img src="https://f.hubspotusercontent40.net/hubfs/421291/David-Stastny_headshot.png" width="158" height="159" alt="David-Stastny_headshot"/>
+                                                                        </div>
                                                                         <div class="description">
                                                                             <small>David Stastny</small>
                                                                             <h3>Managing Director, Architect Partners
@@ -659,7 +660,7 @@
             </section>
         </template>
 
-        <template id="snippet_wb4" name="Page 1-4">
+        <template id="snippet_wb4" name="In collaboration with">
             <section class="snippet_wb4" style="background: white;">
                 <div class="row-fluid-wrapper row-depth-1 row-number-11 ">
                     <div class="row-fluid ">
@@ -750,7 +751,7 @@
             </section>
         </template>
 
-        <template id="snippet_wb5" name="Page 1-5">
+        <template id="snippet_wb5" name="About ShareVault">
             <section class="snippet_wb5" style="background: white;">
                 <div class="footer-container-wrapper">
                     <div class="footer-container container-fluid">
@@ -898,7 +899,7 @@
 
 
         <!-- Second Page snippets-->
-        <template id="snippet_page2_1" name="Page 2-1">
+        <template id="snippet_page2_1" name="Form">
             <section class="snippet_page2_1">
                 <div class="row-fluid-wrapper row-depth-1 row-number-1 ">
                     <div class="row-fluid ">
@@ -1029,17 +1030,21 @@
                                                                         <font color="4e4e4e">
 
                                                                             <div id="hs_form_target_module_1519088669021170">
-                                                                                <form novalidate=""
-                                                                                      accept-charset="UTF-8"
-                                                                                      action="https://forms.hsforms.com/submissions/v3/public/submit/formsnext/multipart/421291/674fe465-5618-4f85-9c76-51eeb868196b"
+                                                                                <div id="thankyou" style="display:none;">
+                                                                                    <span>
+
+                                                                                    </span>
+                                                                                </div>
+                                                                                <form
+                                                                                      action="/website_form/"
                                                                                       enctype="multipart/form-data"
                                                                                       id="hsForm_674fe465-5618-4f85-9c76-51eeb868196b_9346"
-                                                                                      method="POST"
-                                                                                      class="hs-form stacked hs-custom-form hs-form-private hsForm_674fe465-5618-4f85-9c76-51eeb868196b hs-form-674fe465-5618-4f85-9c76-51eeb868196b hs-form-674fe465-5618-4f85-9c76-51eeb868196b_d025ee04-8be6-40b7-a95e-1e7cd6e01648"
-                                                                                      data-form-id="674fe465-5618-4f85-9c76-51eeb868196b"
-                                                                                      data-portal-id="421291"
-                                                                                      target="target_iframe_674fe465-5618-4f85-9c76-51eeb868196b_9346"
-                                                                                      data-reactid=".hbspt-forms-0">
+                                                                                      method="post"
+                                                                                      class="s_website_form hs-form stacked hs-custom-form hs-form-private hsForm_674fe465-5618-4f85-9c76-51eeb868196b hs-form-674fe465-5618-4f85-9c76-51eeb868196b hs-form-674fe465-5618-4f85-9c76-51eeb868196b_d025ee04-8be6-40b7-a95e-1e7cd6e01648"
+                                                                                      data-name="Form Builder"
+                                                                                      data-model_name="crm.lead"
+                                                                                      data-source="WEB_contact"
+                                                                                >
                                                                                     <div class="hs_firstname hs-firstname hs-fieldtype-text field hs-form-field"
                                                                                          data-reactid=".hbspt-forms-0.1:$0">
                                                                                         <label id="label-firstname-674fe465-5618-4f85-9c76-51eeb868196b_9346"
@@ -1061,13 +1066,13 @@
                                                                                             <input id="firstname-674fe465-5618-4f85-9c76-51eeb868196b_9346"
                                                                                                    class="hs-input invalid error"
                                                                                                    type="text"
-                                                                                                   name="firstname"
+                                                                                                   name="name"
                                                                                                    required="" value=""
                                                                                                    placeholder="First Name"
                                                                                                    autocomplete="given-name"
-                                                                                                   data-reactid=".hbspt-forms-0.1:$0.$firstname.0"/>
+                                                                                                   t-att-value="request.params.get('name', '')"/>
                                                                                         </div>
-                                                                                        <ul class="no-list hs-error-msgs inputs-list"
+                                                                                        <!--<ul class="no-list hs-error-msgs inputs-list"
                                                                                             style="display:block;"
                                                                                             role="alert"
                                                                                             data-reactid=".hbspt-forms-0.1:$0.3">
@@ -1078,7 +1083,7 @@
                                                                                                     required field.
                                                                                                 </label>
                                                                                             </li>
-                                                                                        </ul>
+                                                                                        </ul>-->
                                                                                     </div>
                                                                                     <div class="hs_lastname hs-lastname hs-fieldtype-text field hs-form-field"
                                                                                          data-reactid=".hbspt-forms-0.1:$1">
@@ -1101,7 +1106,7 @@
                                                                                             <input id="lastname-674fe465-5618-4f85-9c76-51eeb868196b_9346"
                                                                                                    class="hs-input"
                                                                                                    type="text"
-                                                                                                   name="lastname"
+                                                                                                   name="contact_name"
                                                                                                    required="" value=""
                                                                                                    placeholder="Last Name"
                                                                                                    autocomplete="family-name"
@@ -1129,12 +1134,12 @@
                                                                                             <input id="email-674fe465-5618-4f85-9c76-51eeb868196b_9346"
                                                                                                    class="hs-input"
                                                                                                    type="email"
-                                                                                                   name="email"
+                                                                                                   name="email_from"
                                                                                                    required=""
                                                                                                    placeholder="Work Email"
                                                                                                    value=""
                                                                                                    autocomplete="email"
-                                                                                                   data-reactid=".hbspt-forms-0.1:$2.$email.0"/>
+                                                                                                   t-att-value="request.params.get('email_from', '')"/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="hs_phone hs-phone hs-fieldtype-text field hs-form-field"
@@ -1162,7 +1167,7 @@
                                                                                                    required="" value=""
                                                                                                    placeholder="Phone Number"
                                                                                                    autocomplete="tel"
-                                                                                                   data-reactid=".hbspt-forms-0.1:$3.$phone.0"/>
+                                                                                                   t-att-value="request.params.get('phone', '')"/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="hs_company hs-company hs-fieldtype-text field hs-form-field"
@@ -1186,11 +1191,11 @@
                                                                                             <input id="company-674fe465-5618-4f85-9c76-51eeb868196b_9346"
                                                                                                    class="hs-input"
                                                                                                    type="text"
-                                                                                                   name="company"
+                                                                                                   name="partner_name"
                                                                                                    required="" value=""
                                                                                                    placeholder="Company Name"
                                                                                                    autocomplete="organization"
-                                                                                                   data-reactid=".hbspt-forms-0.1:$4.$company.0"/>
+                                                                                                   t-att-value="request.params.get('partner_name', '')"/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div data-reactid=".hbspt-forms-0.1:$5">
@@ -1220,10 +1225,33 @@
                                                                                              data-reactid=".hbspt-forms-0.5.0"></div>
                                                                                         <div class="actions"
                                                                                              data-reactid=".hbspt-forms-0.5.1">
-                                                                                            <input type="submit"
-                                                                                                   value="SCHEDULE A CALL"
-                                                                                                   class="hs-button-n primary large"
-                                                                                                   data-reactid=".hbspt-forms-0.5.1.0"/>
+                                                                                            <button value="SCHEDULE A CALL"
+                                                                                                   class="hs-button-n primary large o_website_form_send"
+                                                                                                   data-reactid=".hbspt-forms-0.5.1.0">SCHEDULE A CALL </button>
+                                                                                           <!-- <button class="btn btn-primary btn-lg o_website_form_send o_default_snippet_text">
+                                                                                                View the Webinar
+                                                                                            </button>-->
+                                                                                            <input id="thankyou_pages"
+                                                                                                   name="typ_id"
+                                                                                                   type="hidden"
+                                                                                                   class="form-control o_website_form_input"
+                                                                                                   />
+                                                                                            <input id="sources"
+                                                                                                   class="form-control o_website_form_input"
+                                                                                                   type="hidden"
+                                                                                                   name="source"
+                                                                                                   data-source="WEB_webinar"
+                                                                                                   />
+                                                                                            <input id="user_id"
+                                                                                                   class="form-control o_website_form_input"
+                                                                                                   type="hidden"
+                                                                                                   name="user_id"
+                                                                                                   />
+                                                                                            <input id="share_link_id"
+                                                                                                   class="form-control o_website_form_input"
+                                                                                                   type="hidden"
+                                                                                                   name="share_link_id"
+                                                                                                   />
                                                                                         </div>
                                                                                     </div>
                                                                                     <noscript
@@ -1285,7 +1313,7 @@
             </section>
         </template>
 
-        <template id="snippet_page2_2" name="Page 2-2">
+        <template id="snippet_page2_2" name="Secure Business File Sharing">
             <section class="snippet_page2_2">
                 <font color="4e4e4e">
                 <div class="row-fluid-wrapper row-depth-1 row-number-7 ">
@@ -1321,7 +1349,7 @@
             </section>
         </template>
 
-        <template id="snippet_page2_3" name="Page 2-3">
+        <template id="snippet_page2_3" name="Four benefits">
             <section class="snippet_page2_3">
                 <div class="row-fluid-wrapper row-depth-1 row-number-8 ">
                     <div class="row-fluid ">
@@ -1354,7 +1382,6 @@
                                                                              width="150"
                                                                              alt="Easy-as-1-2-3_test_500x500"
                                                                              title="Easy-as-1-2-3_test_500x500"
-                                                                             srcset="https://f.hubspotusercontent40.net/hub/421291/hubfs/Easy-as-1-2-3_test_500x500.png?quality=high&amp;width=75&amp;name=Easy-as-1-2-3_test_500x500.png 75w, https://f.hubspotusercontent40.net/hub/421291/hubfs/Easy-as-1-2-3_test_500x500.png?quality=high&amp;width=150&amp;name=Easy-as-1-2-3_test_500x500.png 150w, https://f.hubspotusercontent40.net/hub/421291/hubfs/Easy-as-1-2-3_test_500x500.png?quality=high&amp;width=225&amp;name=Easy-as-1-2-3_test_500x500.png 225w, https://f.hubspotusercontent40.net/hub/421291/hubfs/Easy-as-1-2-3_test_500x500.png?quality=high&amp;width=300&amp;name=Easy-as-1-2-3_test_500x500.png 300w, https://f.hubspotusercontent40.net/hub/421291/hubfs/Easy-as-1-2-3_test_500x500.png?quality=high&amp;width=375&amp;name=Easy-as-1-2-3_test_500x500.png 375w, https://f.hubspotusercontent40.net/hub/421291/hubfs/Easy-as-1-2-3_test_500x500.png?quality=high&amp;width=450&amp;name=Easy-as-1-2-3_test_500x500.png 450w"
                                                                              sizes="(max-width: 150px) 100vw, 150px"/>
                                                                     </span>
                                                                 </div><!--end layout-widget-wrapper -->
@@ -1531,7 +1558,7 @@
             </section>
         </template>
 
-        <template id="snippet_page2_4" name="Page 2-4">
+        <template id="snippet_page2_4" name="Leading brands">
             <section class="snippet_page2_4">
                 <div class="row-fluid-wrapper row-depth-1 row-number-19 ">
                     <div class="row-fluid ">
@@ -1598,7 +1625,7 @@
             </section>
         </template>
 
-        <template id="snippet_page2_5" name="Page 2-5">
+        <template id="snippet_page2_5" name="Statistics">
             <section class="snippet_page2_5">
                 <div class="row-fluid-wrapper row-depth-1 row-number-20 ">
                     <div class="row-fluid ">
@@ -1769,7 +1796,7 @@
             </section>
         </template>
 
-        <template id="snippet_page2_6" name="Page 2-6">
+        <template id="snippet_page2_6" name="Most connected">
             <section class="snippet_page2_6">
                 <div class="row-fluid-wrapper row-depth-1 row-number-29 ">
                     <div class="row-fluid ">
@@ -1812,7 +1839,7 @@
             </section>
         </template>
 
-        <template id="snippet_page2_7" name="Page 2-7">
+        <template id="snippet_page2_7" name="Ultimate data room">
             <section class="snippet_page2_7">
                 <div class="row-fluid-wrapper row-depth-1 row-number-30 ">
                     <div class="row-fluid ">
@@ -1898,7 +1925,7 @@
             </section>
         </template>
 
-        <template id="snippet_page2_8" name="Page 2-8">
+        <template id="snippet_page2_8" name="Get started today">
             <section class="snippet_page2_8">
                 <div class="row-fluid-wrapper row-depth-1 row-number-33 ">
                     <div class="row-fluid ">
@@ -1992,7 +2019,7 @@
             </section>
         </template>
 
-        <template id="snippet_page2_footer" name="Page 2 footer">
+        <template id="snippet_page2_footer" name="Footer">
             <section class="snippet_page2_footer">
                 <div class="footer-container-wrapper">
                     <div class="footer-container container-fluid">
@@ -2066,8 +2093,8 @@
                 <div class="o_panel_body">
                     <t t-snippet="website_custom_pages.snippet_testimonial"
                        t-thumbnail="/website_custom_pages/static/description/icon.png"/>
-                    <t t-snippet="website_custom_pages.snippet_wb2"
-                       t-thumbnail="/website_custom_pages/static/description/icon.png"/>
+                    <!--<t t-snippet="website_custom_pages.snippet_wb2"
+                       t-thumbnail="/website_custom_pages/static/description/icon.png"/>-->
                     <t t-snippet="website_custom_pages.snippet_wb3"
                        t-thumbnail="/website_custom_pages/static/description/icon.png"/>
                     <t t-snippet="website_custom_pages.snippet_wb4"

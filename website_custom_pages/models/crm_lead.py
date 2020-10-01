@@ -18,4 +18,5 @@ class Lead(models.Model):
                                              'We dont use ShareVault, but we are currently sharing confidential documentation with third parties.'),
                                             ], 'Information Sharing', store=True)
     source = fields.Char('Source of Snippet')
+    share_link_id = fields.Many2one('documents.share', string='Share Links')
 
