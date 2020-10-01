@@ -40,22 +40,19 @@ var FormEditorDialog = Dialog.extend({
          */
         _onSaveModal: function () {
             if (this.$el[0].checkValidity()) {
+                console.log('\n in IFFFFF 1111');
                 var typ = document.getElementById('thankyou_pages');
                 var source = document.getElementById('sources');
                 var user_id = document.getElementById('user_id');
                 var share_link_id = document.getElementById('share_link_id');
-                console.log('\n typ',typ)
-                console.log('\n source',source)
-                console.log('\n user_id',user_id)
-                console.log('\n share_link_id',share_link_id)
                 typ.value = this.$el.find("[name='typ_id']").val();
                 source.value = this.$el.find("[name='source']").val();
                 user_id.value = this.$el.find("[name='user_id']").val();
                 share_link_id.value = this.$el.find("[name='share_link_id']").val();
-                var tp = this.$el.find("[name='typ_id']").val();
-                console.log('\n typ v',tp)
+                console.log('\n typ',typ)
                 this.trigger_up('save');
             } else {
+                console.log('\n in else');
                 _.each(this.$el.find('.o_website_form_input'), function (input) {
                     var $field = $(input).closest('.form-field');
                     $field.removeClass('o_has_error').find('.form-control, .custom-select').removeClass('is-invalid');
@@ -142,6 +139,7 @@ var FormEditorDialog = Dialog.extend({
                 }).open();
                 dialog.on('closed', this, cancel);
                 dialog.on('save', this, ev => {
+                      console.log('on saved called');
 //                    var source = document.getElementById('sources');
 //                    var typ = document.getElementById('thankyou_pages');
 //                    var user_id = document.getElementById('user_id');
