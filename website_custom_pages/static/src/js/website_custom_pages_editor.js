@@ -40,7 +40,6 @@ var FormEditorDialog = Dialog.extend({
          */
         _onSaveModal: function () {
             if (this.$el[0].checkValidity()) {
-                console.log('\n in IFFFFF 1111');
                 var typ = document.getElementById('thankyou_pages');
                 var source = document.getElementById('sources');
                 var user_id = document.getElementById('user_id');
@@ -60,7 +59,6 @@ var FormEditorDialog = Dialog.extend({
 
                 this.trigger_up('save');
             } else {
-                console.log('\n in else');
                 _.each(this.$el.find('.o_website_form_input'), function (input) {
                     var $field = $(input).closest('.form-field');
                     $field.removeClass('o_has_error').find('.form-control, .custom-select').removeClass('is-invalid');
@@ -147,15 +145,14 @@ var FormEditorDialog = Dialog.extend({
                 }).open();
                 dialog.on('closed', this, cancel);
                 dialog.on('save', this, ev => {
-                      console.log('on saved called');
-//                    var source = document.getElementById('sources');
-//                    var typ = document.getElementById('thankyou_pages');
-//                    var user_id = document.getElementById('user_id');
-//                    var share_link_id = document.getElementById('share_link_id');
-//                    typ.value = ev.target.$el.find("[name='typ_id']").val();
-//                    source.value = ev.target.$el.find("[name='source']").val();
-//                    user_id.value = ev.target.$el.find("[name='user_id']").val();
-//                    share_link_id.value = ev.target.$el.find("[name='share_link_id']").val();
+                    var source = document.getElementById('sources');
+                    var typ = document.getElementById('thankyou_pages');
+                    var user_id = document.getElementById('user_id');
+                    var share_link_id = document.getElementById('share_link_id');
+                    typ.value = ev.target.$el.find("[name='typ_id']").val();
+                    source.value = ev.target.$el.find("[name='source']").val();
+                    user_id.value = ev.target.$el.find("[name='user_id']").val();
+                    share_link_id.value = ev.target.$el.find("[name='share_link_id']").val();
                     ev.stopPropagation();
                     save.call(dialog);
                 });
