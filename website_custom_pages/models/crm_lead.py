@@ -18,4 +18,4 @@ class Lead(models.Model):
                                              'We dont use ShareVault, but we are currently sharing confidential documentation with third parties.'),
                                             ], 'Information Sharing', store=True)
     share_link_id = fields.Many2one('documents.share', string='Share Links')
-
+    tracked_link_id = fields.Many2one('link.tracker', 'Tracked link')
