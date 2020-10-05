@@ -2101,8 +2101,8 @@
                        t-thumbnail="/website_custom_pages/static/description/icon.png"/>
                     <t t-snippet="website_custom_pages.snippet_wb5"
                        t-thumbnail="/website_custom_pages/static/description/icon.png"/>
-                    <t t-snippet="website_custom_pages.snippet_page2_1"
-                       t-thumbnail="/website_custom_pages/static/description/icon.png"/>
+<!--                    <t t-snippet="website_custom_pages.snippet_page2_1"-->
+<!--                       t-thumbnail="/website_custom_pages/static/description/icon.png"/>-->
                     <t t-snippet="website_custom_pages.snippet_page2_2"
                        t-thumbnail="/website_custom_pages/static/description/icon.png"/>
                     <t t-snippet="website_custom_pages.snippet_page2_3"

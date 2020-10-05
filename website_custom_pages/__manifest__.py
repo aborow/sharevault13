@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Website Custom Pages",
-    'version': '13.0.1.0.14',
+    'version': '13.0.1.0.15',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Website',
