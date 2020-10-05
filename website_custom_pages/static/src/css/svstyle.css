@@ -18,6 +18,11 @@
 /* This responsive framework is required for all styles. */
 /* Responsive Grid */
 
+#thankmsg{
+    font-size: 20px;
+    text-align: center;
+}
+
 .row-fluid {
     width: 100%;
     *zoom: 1;

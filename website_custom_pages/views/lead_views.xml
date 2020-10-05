@@ -8,11 +8,18 @@
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='type']" position="after">
                     <field name="information_sharing"/>
-                    <field name="source"/>
                     <field name="share_link_id"/>
                 </xpath>
             </field>
         </record>
+
+        <record id="crm.model_crm_lead" model="ir.model">
+            <field name="website_form_key">create_svlead</field>
+            <field name="website_form_default_field_id" ref="crm.field_crm_lead__description" />
+            <field name="website_form_access">True</field>
+            <field name="website_form_label">Create a Lead</field>
+        </record>
+
         <function model="ir.model.fields" name="formbuilder_whitelist">
             <value>crm.lead</value>
             <value eval="[
@@ -25,7 +32,7 @@
                 'team_id',
                 'user_id',
                 'information_sharing',
-                'source',
+                'source_id',
                 'function',
                 'share_link_id',
             ]"/>

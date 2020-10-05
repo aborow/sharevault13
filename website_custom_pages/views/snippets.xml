@@ -899,7 +899,7 @@
 
 
         <!-- Second Page snippets-->
-        <template id="snippet_page2_1" name="Form">
+        <!--<template id="snippet_page2_1" name="Form">
             <section class="snippet_page2_1">
                 <div class="row-fluid-wrapper row-depth-1 row-number-1 ">
                     <div class="row-fluid ">
@@ -932,10 +932,10 @@
                                                                      title="ShareVault | Secure Document Sharing"/>
                                                             </a>
                                                         </span>
-                                                    </div><!--end layout-widget-wrapper -->
-                                                </div><!--end widget-span -->
-                                            </div><!--end row-->
-                                        </div><!--end row-wrapper -->
+                                                    </div>&lt;!&ndash;end layout-widget-wrapper &ndash;&gt;
+                                                </div>&lt;!&ndash;end widget-span &ndash;&gt;
+                                            </div>&lt;!&ndash;end row&ndash;&gt;
+                                        </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
 
                                         <div class="row-fluid-wrapper row-depth-1 row-number-4 ">
                                             <div class="row-fluid ">
@@ -966,8 +966,8 @@
                                                                 </span>
                                                             </p>
                                                         </span>
-                                                    </div><!--end layout-widget-wrapper -->
-                                                </div><!--end widget-span -->
+                                                    </div>&lt;!&ndash;end layout-widget-wrapper &ndash;&gt;
+                                                </div>&lt;!&ndash;end widget-span &ndash;&gt;
                                                 <div class="span1 widget-span widget-type-space middle" style=""
                                                      data-widget-type="space" data-x="6" data-w="1">
                                                     <div class="cell-wrapper layout-widget-wrapper">
@@ -975,8 +975,8 @@
                                                               class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space"
                                                               style="" data-hs-cos-general-type="widget"
                                                               data-hs-cos-type="space"></span>
-                                                    </div><!--end layout-widget-wrapper -->
-                                                </div><!--end widget-span -->
+                                                    </div>&lt;!&ndash;end layout-widget-wrapper &ndash;&gt;
+                                                </div>&lt;!&ndash;end widget-span &ndash;&gt;
                                                 <div class="span5 widget-span widget-type-cell form-wrapper" style=""
                                                      data-widget-type="cell" data-x="7" data-w="5">
 
@@ -1001,10 +1001,10 @@
                                                                             </strong>
                                                                         </h3>
                                                                     </span>
-                                                                </div><!--end layout-widget-wrapper -->
-                                                            </div><!--end widget-span -->
-                                                        </div><!--end row-->
-                                                    </div><!--end row-wrapper -->
+                                                                </div>&lt;!&ndash;end layout-widget-wrapper &ndash;&gt;
+                                                            </div>&lt;!&ndash;end widget-span &ndash;&gt;
+                                                        </div>&lt;!&ndash;end row&ndash;&gt;
+                                                    </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
 
                                                     <div class="row-fluid-wrapper row-depth-1 row-number-6 ">
                                                         <div class="row-fluid ">
@@ -1072,7 +1072,7 @@
                                                                                                    autocomplete="given-name"
                                                                                                    t-att-value="request.params.get('name', '')"/>
                                                                                         </div>
-                                                                                        <!--<ul class="no-list hs-error-msgs inputs-list"
+                                                                                        &lt;!&ndash;<ul class="no-list hs-error-msgs inputs-list"
                                                                                             style="display:block;"
                                                                                             role="alert"
                                                                                             data-reactid=".hbspt-forms-0.1:$0.3">
@@ -1083,7 +1083,7 @@
                                                                                                     required field.
                                                                                                 </label>
                                                                                             </li>
-                                                                                        </ul>-->
+                                                                                        </ul>&ndash;&gt;
                                                                                     </div>
                                                                                     <div class="hs_lastname hs-lastname hs-fieldtype-text field hs-form-field"
                                                                                          data-reactid=".hbspt-forms-0.1:$1">
@@ -1228,9 +1228,9 @@
                                                                                             <button value="SCHEDULE A CALL"
                                                                                                    class="hs-button-n primary large o_website_form_send"
                                                                                                    data-reactid=".hbspt-forms-0.5.1.0">SCHEDULE A CALL </button>
-                                                                                           <!-- <button class="btn btn-primary btn-lg o_website_form_send o_default_snippet_text">
+                                                                                           &lt;!&ndash; <button class="btn btn-primary btn-lg o_website_form_send o_default_snippet_text">
                                                                                                 View the Webinar
-                                                                                            </button>-->
+                                                                                            </button>&ndash;&gt;
                                                                                             <input id="thankyou_pages"
                                                                                                    name="typ_id"
                                                                                                    type="hidden"
@@ -1254,12 +1254,12 @@
                                                                                                    />
                                                                                         </div>
                                                                                     </div>
-                                                                                    <noscript
-                                                                                            data-reactid=".hbspt-forms-0.6"></noscript>
+&lt;!&ndash;                                                                                    <noscript&ndash;&gt;
+&lt;!&ndash;                                                                                            data-reactid=".hbspt-forms-0.6"></noscript>&ndash;&gt;
 
-                                                                                    <iframe name="target_iframe_674fe465-5618-4f85-9c76-51eeb868196b_9346"
-                                                                                            style="display:none;"
-                                                                                            data-reactid=".hbspt-forms-0.8"></iframe>
+&lt;!&ndash;                                                                                    <iframe name="target_iframe_674fe465-5618-4f85-9c76-51eeb868196b_9346"&ndash;&gt;
+&lt;!&ndash;                                                                                            style="display:none;"&ndash;&gt;
+&lt;!&ndash;                                                                                            data-reactid=".hbspt-forms-0.8"></iframe>&ndash;&gt;
                                                                                 </form>
 
                                                                             </div>
@@ -1269,49 +1269,49 @@
                                                                     </span>
                                                                     <font color="4e4e4e">
                                                                     </font>
-                                                                </div><!--end layout-widget-wrapper -->
+                                                                </div>&lt;!&ndash;end layout-widget-wrapper &ndash;&gt;
                                                                 <font color="4e4e4e">
                                                                 </font>
-                                                            </div><!--end widget-span -->
+                                                            </div>&lt;!&ndash;end widget-span &ndash;&gt;
                                                             <font color="4e4e4e">
                                                             </font>
-                                                        </div><!--end row-->
+                                                        </div>&lt;!&ndash;end row&ndash;&gt;
                                                         <font color="4e4e4e">
                                                         </font>
-                                                    </div><!--end row-wrapper -->
+                                                    </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
                                                     <font color="4e4e4e">
 
                                                     </font>
-                                                </div><!--end widget-span -->
+                                                </div>&lt;!&ndash;end widget-span &ndash;&gt;
                                                 <font color="4e4e4e">
                                                 </font>
-                                            </div><!--end row-->
+                                            </div>&lt;!&ndash;end row&ndash;&gt;
                                             <font color="4e4e4e">
                                             </font>
-                                        </div><!--end row-wrapper -->
+                                        </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
                                         <font color="4e4e4e">
 
                                         </font>
-                                    </div><!--end widget-span -->
+                                    </div>&lt;!&ndash;end widget-span &ndash;&gt;
                                     <font color="4e4e4e">
                                     </font>
-                                </div><!--end row-->
+                                </div>&lt;!&ndash;end row&ndash;&gt;
                                 <font color="4e4e4e">
                                 </font>
-                            </div><!--end row-wrapper -->
+                            </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
                             <font color="4e4e4e">
 
                             </font>
-                        </div><!--end widget-span -->
+                        </div>&lt;!&ndash;end widget-span &ndash;&gt;
                         <font color="4e4e4e">
                         </font>
-                    </div><!--end row-->
+                    </div>&lt;!&ndash;end row&ndash;&gt;
                     <font color="4e4e4e">
                     </font>
-                </div><!--end row-wrapper -->
+                </div>&lt;!&ndash;end row-wrapper &ndash;&gt;
 
             </section>
-        </template>
+        </template>-->
 
         <template id="snippet_page2_2" name="Secure Business File Sharing">
             <section class="snippet_page2_2">
