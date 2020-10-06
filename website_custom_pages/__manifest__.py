@@ -8,7 +8,16 @@
     'summary': 'Custom pages snippets as per hubspot',
     'description': """SV-120: Landing page migration POC
     """,
-    'depends': ['website', 'crm', 'website_form', 'website_crm', 'web_editor', 'documents', 'utm'],
+    'depends': [
+                'website',
+                'crm',
+                'website_form',
+                'website_crm',
+                'web_editor',
+                'documents',
+                'utm',
+                'website_blog'
+                ],
     'data': [
             'security/ir.model.access.csv',
             'views/snippets.xml',
