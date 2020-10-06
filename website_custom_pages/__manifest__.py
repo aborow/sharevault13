@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Website Custom Pages",
-    'version': '13.0.1.0.16',
+    'version': '13.0.1.0.15',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Website',
@@ -14,6 +14,8 @@
             'views/snippets.xml',
             'views/web_thankyou_pages_view.xml',
             'views/lead_views.xml',
+            'views/blog_view.xml',
+            'views/website_blog.xml',
             ],
     'qweb': ['static/src/xml/*.xml'],
     'installable': True,
