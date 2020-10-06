@@ -101,6 +101,7 @@ var FormEditorDialog = Dialog.extend({
                     self.init_form();
                     self.$target.attr('data-success_page', successPage);
     //                    self.$target.removeAttr("data-success_page")
+                    this.$el.find('.s_website_form').removeClass('container-fluid mt32');
                     this.$el.find('.o_form_parameter_custom').each(function () {
                         var $field = $(this).find('.o_website_form_input');
                         var value = $field.val();
