@@ -99,3 +99,7 @@ Version - 13.0.1.0.25
 Version - 13.0.1.0.25
 =====================
 -SV-108: (partner_id field added in sharevault.sharevault for resolve error in dashboard.)
+
+Version - 13.0.1.0.27
+=====================
+SV-140: Migrate Vendors

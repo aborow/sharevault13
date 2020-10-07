@@ -205,6 +205,7 @@ class Partner(models.Model):
     zoom_company_id = fields.Char('Zoom Company ID')
     sharevault_company_count = fields.Integer(
         'Sharevault Company Count', compute='get_sharevault_company_count', copy=False, store=True)
+    staging_id = fields.Integer('Staging ID')
 
     def get_sharevault_company_count(self):
         for rec in self:
