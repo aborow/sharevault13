@@ -502,7 +502,21 @@ FormEditorRegistry.add('create_svlead', {
         string: _t('Share Link'),
         title: _t('Select Document Share Link'),
 
-    },],
+    },
+    {
+        name: 'team_id',
+        type: 'many2one',
+        relation: 'crm.team',
+        domain: [['use_opportunities', '=', true]],
+        string: _t('Sales Channel'),
+        title: _t('Assign leads/opportunities to a sales channel.'),
+    }, {
+        name: 'user_id',
+        type: 'many2one',
+        relation: 'res.users',
+        string: _t('Salesperson'),
+        title: _t('Assign leads/opportunities to a salesperson.'),
+    }],
 //    successPage: '/job-thank-you',
 });
 
