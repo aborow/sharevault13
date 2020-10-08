@@ -5,9 +5,10 @@ from odoo.exceptions import ValidationError
 class BlogPost(models.Model):
     _inherit = 'blog.post'
 
-    custom_url = fields.Char('Custom URL',
+    webpage_id = fields.Many2one('website.page', 'Page',
                             help="Set your own URL to override Odoo's default")
 
+    """
     @api.onchange('custom_url')
     @api.depends('custom_url')
     def build_custom_url(self):
@@ -23,14 +24,15 @@ class BlogPost(models.Model):
             #    aux.insert(0, 'o')
             #aux = '/'.join(aux)
             self.custom_url = aux
-
-    @api.constrains('custom_url')
-    def check_custom_url(self):
+    """
+    @api.constrains('webpage_id')
+    def check_webpage_id(self):
         for s in self:
-            if s.custom_url:
+            if s.webpage_id:
                 if self.env['blog.post']\
                         .search_count([
-                                        ('custom_url','=',s.custom_url),
+                                        ('webpage_id','=',s.webpage_id.id),
+                                        ('blog_id','=',s.blog_id.id),
                                         ('id','!=',s.id)
                                         ]):
-                    raise ValidationError('Custom URL must be unique')
+                    raise ValidationError('The association between a blog post and a page should be unique')

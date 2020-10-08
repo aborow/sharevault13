@@ -3,16 +3,16 @@
 
 
     <template id="website_blog.post_heading">
-        <t t-if="not blog_post.custom_url">
-            <a t-attf-href="/blog/#{slug(blog_post.blog_id)}/post/#{slug(blog_post)}"
+        <t t-if="not blog_post.webpage_id">
+            <a t-attf-href="/resources/#{slug(blog_post.blog_id)}/post/#{slug(blog_post)}"
                t-field="blog_post.name"
                t-attf-class="d-block text-reset text-decoration-none o_blog_post_title my-0 #{'h3' if opt_blog_list_view else ('h5' if opt_blog_readable else 'h6')}">
                Untitled Post
            </a>
         </t>
 
-        <t t-if="blog_post.custom_url">
-           <a t-attf-href="#{blog_post.custom_url}"
+        <t t-if="blog_post.webpage_id">
+           <a t-attf-href="#{blog_post.webpage_id.url}"
               t-field="blog_post.name"
               t-attf-class="d-block text-reset text-decoration-none o_blog_post_title my-0 #{'h3' if opt_blog_list_view else ('h5' if opt_blog_readable else 'h6')}">
               Untitled Post
@@ -27,8 +27,8 @@
 
     <!-- ======   Sub-Template: Posts list : Posts Teaser + Tags  ============= -->
     <template id="website_blog.post_teaser">
-        <t t-if="not blog_post.custom_url">
-            <a t-attf-href="/blog/#{slug(blog_post.blog_id)}/post/#{slug(blog_post)}" class="text-reset text-decoration-none">
+        <t t-if="not blog_post.webpage_id">
+            <a t-attf-href="/resources/#{slug(blog_post.blog_id)}/post/#{slug(blog_post)}" class="text-reset text-decoration-none">
                 <div t-if="opt_blog_list_view" t-field="blog_post.teaser" class="mt-2 o_wblog_read_text"/>
                 <div t-else="" t-field="blog_post.teaser" t-attf-class="mt-2 #{opt_blog_readable and 'o_wblog_normalize_font'}"/>
             </a>
@@ -43,8 +43,8 @@
             </div>
         </t>
 
-        <t t-if="blog_post.custom_url">
-            <a t-attf-href="#{blog_post.custom_url}" class="text-reset text-decoration-none">
+        <t t-if="blog_post.webpage_id">
+            <a t-attf-href="#{blog_post.webpage_id.url}" class="text-reset text-decoration-none">
                 <div t-if="opt_blog_list_view" t-field="blog_post.teaser" class="mt-2 o_wblog_read_text"/>
                 <div t-else="" t-field="blog_post.teaser" t-attf-class="mt-2 #{opt_blog_readable and 'o_wblog_normalize_font'}"/>
             </a>
@@ -68,8 +68,8 @@
         <t t-if="not opt_blog_cards_design and opt_blog_list_view" t-set="classes" t-value="'o_wblog_post_cover_nocard'"/>
 
 
-        <t t-if="not blog_post.custom_url">
-            <a t-attf-href="/blog/#{slug(blog_post.blog_id)}/post/#{slug(blog_post)}"
+        <t t-if="not blog_post.webpage_id">
+            <a t-attf-href="/resources/#{slug(blog_post.blog_id)}/post/#{slug(blog_post)}"
                t-attf-class="text-decoration-none d-block #{classes or 'mb-2'}"
                t-att-style="not blog_post.website_published and 'opacity:0.6;'">
 
@@ -85,8 +85,8 @@
             </a>
         </t>
 
-        <t t-if="blog_post.custom_url">
-            <a t-attf-href="#{blog_post.custom_url}"
+        <t t-if="blog_post.webpage_id">
+            <a t-attf-href="#{blog_post.webpage_id.url}"
                t-attf-class="text-decoration-none d-block #{classes or 'mb-2'}"
                t-att-style="not blog_post.website_published and 'opacity:0.6;'">
 
