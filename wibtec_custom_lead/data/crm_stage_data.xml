@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record model="crm.stage" id="stage_lead100">
+        <field name="name">Open</field>
+        <field name="is_lead_stage">True</field>
+        <field name="sequence">100</field>
+    </record>
+    <record model="crm.stage" id="stage_lead101">
+        <field name="name">Attempting to Contact</field>
+        <field name="is_lead_stage">True</field>
+        <field name="sequence">101</field>
+    </record>
+    <record model="crm.stage" id="stage_lead102">
+        <field name="name">Contacted</field>
+        <field name="is_lead_stage">True</field>
+        <field name="sequence">102</field>
+    </record>
+    <record model="crm.stage" id="stage_lead103">
+        <field name="name">Qualified</field>
+        <field name="is_lead_stage">True</field>
+        <field name="sequence">103</field>
+    </record>
+    <record model="crm.stage" id="stage_lead104">
+        <field name="name">Unqualified</field>
+        <field name="is_lead_stage">True</field>
+        <field name="sequence">104</field>
+    </record>
+    <record model="crm.stage" id="stage_lead105">
+        <field name="name">Sales Nurture</field>
+        <field name="is_lead_stage">True</field>
+        <field name="sequence">105</field>
+    </record>
+    <record model="crm.stage" id="stage_lead106">
+        <field name="name">Support</field>
+        <field name="is_lead_stage">True</field>
+        <field name="sequence">106</field>
+    </record>
+    <record model="crm.stage" id="stage_lead107">
+        <field name="name">Recycle Marketing</field>
+        <field name="is_lead_stage">True</field>
+        <field name="sequence">107</field>
+    </record>
+    <record model="crm.stage" id="stage_lead108">
+        <field name="name">No longer there</field>
+        <field name="is_lead_stage">True</field>
+        <field name="sequence">108</field>
+    </record>
+</odoo>
