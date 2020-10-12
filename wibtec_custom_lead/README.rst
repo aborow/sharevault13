@@ -7,3 +7,7 @@ Install the Application => Apps -> Wibtec Lead Customization (Technical Name: wi
 SV-141
 =================
 Lead Customization
+
+13.0.1.0.1
+==========
+SV-141: Modified the stages in form view for lead and opportunities

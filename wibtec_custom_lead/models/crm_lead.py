@@ -17,11 +17,19 @@ class CrmLead(models.Model):
     lead_type = fields.Selection([('new', 'New Lead'),
                                   ('sales_ql', 'Sales Qualified Lead'),
                                   ('marketing_ql', 'Marketing Qualified Lead')], string="Lead Type", default="new")
-
-    is_lead_stage = fields.Boolean(related='stage_id.is_lead_stage', string='Lead Stages')
     stage_id = fields.Many2one('crm.stage', string='Stage', ondelete='restrict', tracking=True, index=True, copy=False,
                                domain="['|', ('team_id', '=', False), ('team_id', '=', team_id)]",
                                group_expand='_read_group_stage_ids', default=lambda self: self._default_stage_id())
+    is_lead_stage = fields.Boolean(related='stage_id.is_lead_stage', string='Lead Stages')
+    stage_ids = fields.Many2many('crm.stage', compute="_compute_stage_ids")
+
+    @api.depends('type', 'is_lead_stage')
+    def _compute_stage_ids(self):
+        for rec in self:
+            if rec.type == 'lead':
+                rec.stage_ids = self.env['crm.stage'].search([('is_lead_stage', '=', True)]).ids
+            if rec.type == "opportunity":
+                rec.stage_ids = self.env['crm.stage'].search([('is_lead_stage', '=', False)]).ids
 
     @api.model
     def _read_group_stage_ids(self, stages, domain, order):
@@ -74,6 +82,9 @@ class CrmLead(models.Model):
             search_domain += list(domain)
         # perform search, return the first found
         if self._context.get('default_type') == 'lead':
+            all_lead_stages = self.env['crm.stage'].search([('is_lead_stage', '=', True)])
+            search_domain += [('id', 'in', all_lead_stages.ids)]
+        if self._context.get('website_id'):
             all_lead_stages = self.env['crm.stage'].search([('is_lead_stage', '=', True)])
             search_domain += [('id', 'in', all_lead_stages.ids)]
         return self.env['crm.stage'].search(search_domain, order=order, limit=1)
