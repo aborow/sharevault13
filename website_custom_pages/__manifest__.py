@@ -6,7 +6,7 @@
     'website': 'http://www.wibtec.com',
     'category': 'Website',
     'summary': 'Custom pages snippets as per hubspot',
-    'description': """SV-120: Landing page migration POC
+    'description': """SV-120 / SV-130
     """,
     'depends': [
                 'website',
