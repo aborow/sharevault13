@@ -29,8 +29,8 @@
                 </xpath>
                 <xpath expr="//form/header/button[@name='%(crm.action_crm_lead2opportunity_partner)d']"
                        position="attributes">
-                    <attribute name="attrs">{'invisible': ['|',('type', '=',
-                        'opportunity'),('active', '=', False),'&amp;',('lead_type','in',['new',''])]}
+                    <attribute name="attrs">{'invisible': ['|','|',('lead_type','in',['new',False]),('active', '=', False),('type', '=',
+                        'opportunity')]}
                     </attribute>
                 </xpath>
                 <xpath expr="//form/header/field[@name='stage_id']" position="attributes">
