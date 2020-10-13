@@ -13,7 +13,7 @@ if record.team_id:
     for tm in record.team_id.member_ids:
         if tm.mobile:
             base_url = request.env['ir.config_parameter'].get_param('web.base.url')
-            base_url += '/web#id=%d&view_type=form&model=%s' % (record.id, record._name)
+            base_url += '/web#id=%d&amp;view_type=form&amp;model=%s' % (record.id, record._name)
             env['sms.sms'].create({
                                     'number': tm.mobile,
                                     'body': 'New lead! %s' % base_url
