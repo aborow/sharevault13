@@ -8,4 +8,5 @@ class WebThankYouPages(models.Model):
 
     name = fields.Char('Name')
     text = fields.Html('Text')
-    active = fields.Boolean('Active')
+    mail_template_id = fields.Many2one('mail.template','Confirmation Email')
+    active = fields.Boolean('Active', default=True)

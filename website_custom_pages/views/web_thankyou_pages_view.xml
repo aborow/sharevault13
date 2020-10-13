@@ -6,9 +6,19 @@
         <field name="arch" type="xml">
             <form string="Thank You Messages">
                 <group>
-                    <field name="name"/>
-                    <field name="text"/>
-                    <field name="active"/>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="mail_template_id"
+                                domain="[('name','ilike','ShareVault')]"/>
+                        <field name="active"/>
+                    </group>
+                </group>
+                <group>
+                    <group colspan="4">
+                        <field name="text"/>
+                    </group>
                 </group>
             </form>
         </field>
@@ -20,6 +30,7 @@
         <field name="arch" type="xml">
             <tree string="Thank You Messages">
                 <field name="name"/>
+                <field name="mail_template_id"/>
                 <field name="active"/>
             </tree>
         </field>
