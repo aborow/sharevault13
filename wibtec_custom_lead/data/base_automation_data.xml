@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="send_lead_sms" model="base.automation">
+            <field name="name">ShareVault: send SMS to team</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.team_id:
+    for tm in record.team_id.member_ids:
+        if tm.mobile:
+            base_url = request.env['ir.config_parameter'].get_param('web.base.url')
+            base_url += '/web#id=%d&view_type=form&model=%s' % (record.id, record._name)
+            env['sms.sms'].create({
+                                    'number': tm.mobile,
+                                    'body': 'New lead! %s' % base_url
+                                    })
+            </field>
+        </record>
+
+    </data>
+</odoo>
