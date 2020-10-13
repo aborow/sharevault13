@@ -29,6 +29,7 @@
             'views/web_thankyou_pages_view.xml',
             'views/lead_views.xml',
             'views/blog_view.xml',
+            'views/source.xml',
             'views/website_blog.xml',
             'views/website_page.xml',
             ],
