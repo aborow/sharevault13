@@ -21,7 +21,7 @@ class CrmLead(models.Model):
                                domain="['|', ('team_id', '=', False), ('team_id', '=', team_id)]",
                                group_expand='_read_group_stage_ids', default=lambda self: self._default_stage_id())
     is_lead_stage = fields.Boolean(related='stage_id.is_lead_stage', string='Lead Stages')
-    stage_ids = fields.Many2many('crm.stage', compute="_compute_stage_ids")
+    stage_ids = fields.Many2many('crm.stage', compute="_compute_stage_ids", string='Stages')
 
     @api.depends('type', 'is_lead_stage')
     def _compute_stage_ids(self):
