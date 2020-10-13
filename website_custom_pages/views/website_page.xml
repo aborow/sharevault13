@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="website_pages_form_view" model="ir.ui.view">
+        <field name="name">ShareVault: add fields</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_published']" position="before">
+                <field name="is_template"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="website_pages_tree_view" model="ir.ui.view">
+        <field name="name">ShareVault: add field</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_published']" position="before">
+                <field name="is_template"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <record id="website_pages_view_search" model="ir.ui.view">
+        <field name="name">ShareVault: add filter</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='not_published']" position="after">
+                <separator/>
+                <filter string="Template" name="is_template" domain="[('is_template', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <record id="action_template_pages" model="ir.actions.act_window">
+            <field name="name">Page Templates</field>
+            <field name="res_model">website.page</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_template','=',True)]</field>
+        </record>
+
+    <menuitem id="menu_template_pages"
+                name="Page Templates"
+                action="action_template_pages"
+                parent="website.menu_website_global_configuration"
+                sequence="31"/>
+
+</odoo>

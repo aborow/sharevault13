@@ -30,6 +30,7 @@
             'views/lead_views.xml',
             'views/blog_view.xml',
             'views/website_blog.xml',
+            'views/website_page.xml',
             ],
     'qweb': ['static/src/xml/*.xml'],
     'installable': True,
