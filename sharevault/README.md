@@ -103,3 +103,7 @@ Version - 13.0.1.0.25
 Version - 13.0.1.0.27
 =====================
 SV-140: Migrate Vendors
+
+Version - 13.0.1.0.28
+=====================
+SV-132: Persona Rules Engine

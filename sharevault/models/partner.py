@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import ValidationError
+from odoo.tools.safe_eval import safe_eval
+import datetime
+import logging
+import json
+_logger = logging.getLogger(__name__)
+evaluation_context = {
+    'datetime': datetime,
+    'context_today': datetime.datetime.now,
+}
 
 
 class AccountStatus(models.Model):
@@ -55,8 +64,30 @@ class Persona(models.Model):
     _name = 'res.partner.persona'
     _description = "Partner Persona"
 
+    @api.constrains('domain')
+    def _assert_valid_domain(self):
+        for rec in self:
+            try:
+                domain = safe_eval(rec.domain or '[]', evaluation_context)
+                self.env['res.partner'].search(domain, limit=1)
+            except Exception as e:
+                _logger.warning('Exception: %s' % (e,))
+                raise Warning('The domain is incorrectly formatted')
+
+    @api.model
+    def update_persona(self):
+        for rec in self.search([]):
+            domain = rec.domain
+            res = json.loads(domain)
+            partner = self.env['res.partner'].search(res)
+            if partner:
+                for p in partner:
+                    p.write({'persona_id': rec.id})
+        return True
+
     name = fields.Char('Name')
     active = fields.Boolean('Active', default=True)
+    domain = fields.Char('Domain', tracking=True, required=True)
 
 
 class Status(models.Model):
