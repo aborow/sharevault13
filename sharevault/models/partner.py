@@ -87,7 +87,7 @@ class Persona(models.Model):
 
     name = fields.Char('Name')
     active = fields.Boolean('Active', default=True)
-    domain = fields.Char('Domain', tracking=True, required=True)
+    domain = fields.Char('Domain', tracking=True)
 
 
 class Status(models.Model):
