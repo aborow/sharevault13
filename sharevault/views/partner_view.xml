@@ -397,7 +397,7 @@
                             <group>
                                 <group>
                                     <!-- SV-102 : Account Status field invisible for Individual Contact -->
-                                    <field name="account_status_id" 
+                                    <field name="account_status_id"
                                         attrs="{'invisible': [('is_company', '=', False)]}"/>
                                     <field name="data_source_id"/>
                                     <field name="data_update_request_id"/>
@@ -440,9 +440,11 @@
                 <form string="Persona">
                     <sheet>
                         <group>
+                            <field name="sequence" invisible="1"/>
                             <field name="name"/>
                             <field name="active"/>
-                            <field name="domain" widget="domain" options="{'model': 'res.partner'}"/>
+                            <field name="domain" widget="domain"
+                                    options="{'model': 'res.partner'}"/>
                         </group>
                     </sheet>
                 </form>
@@ -454,6 +456,7 @@
             <field name="model">res.partner.persona</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="sequence" widget="handle"/>
                     <field name="name"/>
                     <field name="active"/>
                 </tree>

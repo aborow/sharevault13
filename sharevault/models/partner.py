@@ -63,6 +63,7 @@ class OrganizationType(models.Model):
 class Persona(models.Model):
     _name = 'res.partner.persona'
     _description = "Partner Persona"
+    _order = 'sequence, id'
 
     @api.constrains('domain')
     def _assert_valid_domain(self):
@@ -86,6 +87,7 @@ class Persona(models.Model):
         return True
 
     name = fields.Char('Name')
+    sequence = fields.Integer(string='Sequence', default=10)
     active = fields.Boolean('Active', default=True)
     domain = fields.Char('Domain', tracking=True)
 
