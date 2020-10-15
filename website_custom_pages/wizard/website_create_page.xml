@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="website_page_create_wizard" model="ir.ui.view">
+        <field name="name">ShareVault: create page wizard</field>
+        <field name="model">website.page.create_wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="website_id"/>
+                    <field name="page_template_id" readonly="1"/>
+                    <field name="name"/>
+                    <field name="url"/>
+                    <field name="blog_id"
+                                domain="['|',('website_id','=',False),('website_id','=',website_id)]"/>
+                    <field name="blog_post_id" domain="[('id','=',blog_id)]"/>
+                </group>
+                <footer>
+                    <button name="action_create_page" string="Confirm"
+                            type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

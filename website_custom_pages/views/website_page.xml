@@ -20,6 +20,14 @@
             <xpath expr="//field[@name='is_published']" position="before">
                 <field name="is_template"/>
             </xpath>
+
+            <xpath expr="//field[last()]" position="after">
+                <button name="call_create_page_wizard"
+                        string="Create"
+                        type="object"
+                        attrs="{'invisible':[('is_template','=',False)]}"/>
+            </xpath>
+
         </field>
     </record>
 
@@ -51,5 +59,6 @@
                 action="action_template_pages"
                 parent="website.menu_website_global_configuration"
                 sequence="31"/>
+
 
 </odoo>
