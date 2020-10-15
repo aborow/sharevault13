@@ -52,7 +52,7 @@
             <field name="res_model">website.page</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('is_template','=',True)]</field>
-            <field name="context">[('default_is_template':True)]</field>
+            <field name="context">{'default_is_template':True}</field>
         </record>
 
     <menuitem id="menu_template_pages"
