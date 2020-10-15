@@ -14,3 +14,8 @@ Added Representative in SO and Invoice.
 Version - 13.0.1.0.2
 =====================
 -Added domain that only customer invoice can see the field representative.
+
+Version - 13.0.1.0.3
+=====================
+SV-144: Accounting - ShareVault Invoicing changes
+SV-147: Accounting - Sales Types changes

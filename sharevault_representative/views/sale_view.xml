@@ -8,7 +8,8 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='client_order_ref']" position="after">
-                    <field name="rep_id"/>
+                    <!-- SV-147 -->
+                    <field name="rep_id" invisible="1"/>
                 </xpath>
             </field>
         </record>

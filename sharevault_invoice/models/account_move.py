@@ -21,10 +21,21 @@ class AccountMove(models.Model):
                                 and self.sharevault_id.sv_expiration_dt or False
 
 
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        res = super(AccountMove, self)._onchange_partner_id()
+        if self.partner_id.company_type == 'company':
+            return {'domain': {'sharevault_id': [('partner_id', '=', self.partner_id.id)]}}
+        if self.partner_id.company_type == 'person':
+            return {'domain': {'sharevault_id': [('sharevault_owner', '=', self.partner_id.id)]}}
+        return res
+
     sharevault_id = fields.Many2one('sharevault.sharevault', 'ShareVault',
                                         readonly=True,
-                                        states={'draft': [('readonly', False)]}
-                                        )
+                                        states={'draft': [('readonly', False)]})
+    sales_type = fields.Selection([('new', 'New Customer'),
+                                   ('cs', 'Customer Success'),
+                                   ('renewal', 'Renewal')], string="Sales Type")
     date_creation = fields.Date('Creation')
     date_expiration = fields.Date('Expiration')
     customer_contact_id = fields.Many2one('res.partner',string="Customer Contact")

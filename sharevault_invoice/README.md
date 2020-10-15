@@ -34,3 +34,8 @@ Version - 13.0.1.0.10
 Version - 13.0.1.0.11
 ======================
 -SV-97 : Update Check Format
+
+13.0.1.0.12
+===========
+SV-144: Accounting - ShareVault Invoicing changes
+SV-147: Accounting - Sales Types changes

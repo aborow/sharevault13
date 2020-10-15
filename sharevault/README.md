@@ -107,3 +107,7 @@ SV-140: Migrate Vendors
 Version - 13.0.1.0.28
 =====================
 SV-132: Persona Rules Engine
+
+13.0.1.0.31
+===========
+Modify the company and owner domain in sharevault view
