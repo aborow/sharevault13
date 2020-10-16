@@ -510,12 +510,20 @@ FormEditorRegistry.add('create_svlead', {
         domain: [['use_opportunities', '=', true]],
         string: _t('Sales Channel'),
         title: _t('Assign leads/opportunities to a sales channel.'),
-    }, {
+    },
+    {
         name: 'user_id',
         type: 'many2one',
         relation: 'res.users',
         string: _t('Salesperson'),
         title: _t('Assign leads/opportunities to a salesperson.'),
+    },
+    {
+        name: 'campaign_id',
+        type: 'many2one',
+        relation: 'utm.campaign',
+        string: _t('Campaign'),
+        title: _t('Select related Campaign'),
     }],
 //    successPage: '/job-thank-you',
 });

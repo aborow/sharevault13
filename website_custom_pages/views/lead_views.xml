@@ -37,6 +37,7 @@
                 'function',
                 'share_link_id',
                 'typ_id',
+                'campaign_id',
             ]"/>
         </function>
     </data>

@@ -108,6 +108,10 @@ Version - 13.0.1.0.28
 =====================
 SV-132: Persona Rules Engine
 
-13.0.1.0.31
-===========
+Version - 13.0.1.0.31
+=====================
 Modify the company and owner domain in sharevault view
+
+Version - 13.0.1.0.32
+====================
+SV-148: Accounting - Accounting Industry Changes

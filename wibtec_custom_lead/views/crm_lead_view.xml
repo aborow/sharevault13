@@ -200,6 +200,30 @@
             <field name="act_window_id" ref="crm.crm_lead_all_leads"/>
         </record>
 
+        <record id="view_crm_lead_inherited_score" model="ir.ui.view">
+            <field name="name">crm lead inherit for score</field>
+            <field name="model">crm.lead</field>
+            <field name="priority">16</field>
+            <field name="inherit_id" ref="website_crm_score.lead_score_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='lead']/group[1]/group[not(@name)][4]" position="replace"/>
+            </field>
+        </record>
+
+        <record id="view_crm_lead_inherited_score_move" model="ir.ui.view">
+            <field name="name">crm lead inherit for score</field>
+            <field name="model">crm.lead</field>
+            <field name="priority">16</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group[7]/field[@name='company_id']" position="after">
+                        <separator string="Scoring"/>
+                        <field name="score"/>
+                        <field name="score_ids" widget="many2many_tags" domain="[('object_id.model','=','crm.lead')]"
+                               context="{'object_name': 'crm.lead'}" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
 
     </data>
 </odoo>

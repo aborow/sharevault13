@@ -23,3 +23,7 @@ Modified changes as per comments on JIRA of SV-130
 13.0.1.0.7 to 16
 ================
 Modified default form builder
+
+13.0.1.0.23
+===========
+SV-130: added Campaign in form builder

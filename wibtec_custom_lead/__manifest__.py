@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Wibtec Lead Customization",
-    'version': '13.0.1.0.3',
+    'version': '13.0.1.0.4',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Leads',
@@ -10,7 +10,8 @@
                 'base',
                 'crm',
                 'sms',
-                'base_automation'
+                'base_automation',
+                'website_crm_score'
                 ],
     'data': [
             'data/crm_stage_data.xml',
