@@ -10,11 +10,14 @@
                     <field name="sharevault_name"/>
                     <field name="sv_type"/>
                     <field name="sharevault_owner"/>
+                    <!--<field name="parent_id"/>-->
                     <group expand="0" name="group_by" string="Group By">
                         <filter name="groupby_sv_type" string="Type"
                                 context="{'group_by' : 'sv_type'}"/>
                         <filter name="groupby_sharevault_owner" string="Owner"
                                 context="{'group_by': 'sharevault_owner'}"/>
+                        <!--<filter name="groupby_parent_id" string="Platform"
+                                context="{'group_by': 'parent_id'}"/>-->
                     </group>
                 </search>
             </field>
@@ -105,6 +108,7 @@
                             <group>
                                 <field name="sv_type"/>
                                 <field name="lead_id"/>
+<!--                                <field name="parent_id" attrs="{'invisible': [('sv_type', '=', 'svp')]}"/>-->
                                 <field name="sharevault_id"/>
                                 <field name="company_id" invisible="0" domain="[('is_company','=',True)]"/>
                             </group>
