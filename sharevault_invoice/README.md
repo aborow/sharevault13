@@ -39,3 +39,7 @@ Version - 13.0.1.0.11
 ===========
 SV-144: Accounting - ShareVault Invoicing changes
 SV-147: Accounting - Sales Types changes
+
+13.0.1.0.13
+===========
+SV-14: Try to resolve error
