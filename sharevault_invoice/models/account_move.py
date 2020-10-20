@@ -44,8 +44,11 @@ class AccountMove(models.Model):
     @api.depends('amount_residual','amount_total')
     def get_amount_paid(self):
         for move in self:
-            if self.amount_residual:
-                self.amount_paid = self.amount_total - self.amount_residual
+            if move.amount_residual:
+                move.amount_paid = move.amount_total - move.amount_residual
+            if move.invoice_payment_state == 'paid':
+                if move.amount_residual == 0.0:
+                    move.amount_paid = move.amount_total
 
 class AccountMoveLine(models.Model):
 
