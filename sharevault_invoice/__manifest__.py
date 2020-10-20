@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "ShareVault invoice",
-    'version': '13.0.1.0.13',
+    'version': '13.0.1.0.14',
     'author' : 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Extra tools',

@@ -14,7 +14,7 @@
                                 <span t-field="o.partner_id.email"/>
                             </div> -->
                         </div>
-                        <div class="col-xs-6" style="margin-left:650px;margin-top:55px;">
+                        <div class="col-xs-6" style="margin-left:650px;">
                             <div id="div_customer_address_shipping">
                                 <t t-if="o.sharevault_id.term_start_date">
                                     <b>Term Start Date&#160;:&#160;</b><span t-field="o.sharevault_id.term_start_date" t-options='{"format": "MM/dd/yyyy"}'/><br/>
