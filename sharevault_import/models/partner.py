@@ -144,6 +144,12 @@ class Partner(models.Model):
             if 'import_file' in self._context:
                 mind_parent_query = True
 
+            """
+            2020/10/21 - after "display_name", it was added the comparison to "name" as a matching
+            problem suddenly came up on this date. I don't know the underlying reason for the problem
+            but there is a chance that some field might not have been populated (display_name?)
+            """
+
             if mind_parent_query:
                 #_logger.info("CASE 1")
                 query = """SELECT res_partner.id
@@ -151,6 +157,7 @@ class Partner(models.Model):
 		                           LEFT JOIN res_partner AS partner_company ON res_partner.parent_id=partner_company.id
                           {where} ({email} {operator} {percent}
                                OR {display_name} {operator2} {percent}
+                               OR {name} {operator2} {percent}
                                OR {reference} {operator} {percent}
                                OR {vat} {operator} {percent}
                                OR (
@@ -167,6 +174,7 @@ class Partner(models.Model):
                                    operator2='ILIKE',
                                    email=unaccent('res_partner.email'),
                                    display_name=unaccent('res_partner.display_name'),
+                                   name=unaccent('res_partner.name'),
                                    reference=unaccent('res_partner.ref'),
                                    percent=unaccent('%s'),
                                    vat=unaccent('res_partner.vat'),
@@ -177,6 +185,7 @@ class Partner(models.Model):
                              FROM {from_str}
                           {where} ({email} {operator} {percent}
                                OR {display_name} {operator2} {percent}
+                               OR {name} {operator2} {percent}
                                OR {reference} {operator} {percent}
                                OR {vat} {operator} {percent}
                                )
@@ -190,6 +199,7 @@ class Partner(models.Model):
                                    operator2='ILIKE',
                                    email=unaccent('res_partner.email'),
                                    display_name=unaccent('res_partner.display_name'),
+                                   name=unaccent('res_partner.name'),
                                    reference=unaccent('res_partner.ref'),
                                    percent=unaccent('%s'),
                                    vat=unaccent('res_partner.vat'),)
