@@ -39,6 +39,10 @@
                 <xpath expr="//form/header/field[@name='stage_id']" position="attributes">
                     <attribute name="domain">['&amp;',('id','in',stage_ids),'|',('team_id', '=', team_id), ('team_id', '=', False)]</attribute>
                 </xpath>
+
+                <xpath expr="//field[@name='mobile']" position="after">
+                    <field name="european_union"/>
+                </xpath>
             </field>
         </record>
 

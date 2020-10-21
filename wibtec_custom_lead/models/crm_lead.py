@@ -23,6 +23,8 @@ class CrmLead(models.Model):
     is_lead_stage = fields.Boolean(related='stage_id.is_lead_stage', string='Lead Stages')
     stage_ids = fields.Many2many('crm.stage', compute="_compute_stage_ids", string='Stages')
 
+    european_union = fields.Boolean('Are you a citizen or resident of the European Union (EU)?')
+
     @api.depends('type', 'is_lead_stage')
     def _compute_stage_ids(self):
         for rec in self:
