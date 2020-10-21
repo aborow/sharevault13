@@ -16,7 +16,7 @@
                     <tr>
                         <td rowspan="8" id="div_company_address">
                             <!-- <div id="div_company_address"> -->
-                            <span t-field="o.company_id.display_name" id="company_name"/>
+<!--                            <span t-field="o.company_id.display_name" id="company_name"/>-->
                             <t t-if="o.company_id.partner_id.street">
                                <br/><span t-field="o.company_id.partner_id.street"/>&#160;,&#160;<span t-field="o.company_id.partner_id.street2"/>
                             </t>
@@ -84,14 +84,15 @@
                     </t>
                 </div>
                 <div class="col-xs-6" style="margin-left:150px;">
-                    <t t-if="o.customer_contact_id">
+                    <t t-if="o.sharevault_id.sharevault_owner">
                         <div id="div_customer_address_shipping">
                             <span class="customer_small_title">Customer Contact:</span>
                             <br/>
-                            <span t-field="o.customer_contact_id.name"/><br/>
-                            <t t-if="o.customer_contact_id.email"><span t-field="o.customer_contact_id.email"/><br/></t>
-                            <t t-if="o.customer_contact_id.phone"><span t-field="o.customer_contact_id.phone"/><br/></t>
-                            <t t-if="o.customer_contact_id.mobile"><span t-field="o.customer_contact_id.mobile"/><br/></t>
+                            <t t-if="o.sharevault_id.sharevault_owner"><span t-field="o.sharevault_id.sharevault_owner.name"/><br/></t>
+                            <t t-if="o.sharevault_id.sharevault_owner.phone"><span t-field="o.sharevault_id.sharevault_owner.phone"/><br/></t>
+                            <t t-if="o.sharevault_id.sharevault_owner.email"><span t-field="o.sharevault_id.sharevault_owner.email"/><br/></t>
+<!--                            <t t-if="o.customer_contact_id.phone"><span t-field="o.customer_contact_id.phone"/><br/></t>-->
+<!--                            <t t-if="o.customer_contact_id.mobile"><span t-field="o.customer_contact_id.mobile"/><br/></t>-->
                             <!-- <address t-field="o.customer_contact_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: True}" id="customer_address"/> -->
                         </div>
                     </t>

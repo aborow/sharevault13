@@ -115,3 +115,11 @@ Modify the company and owner domain in sharevault view
 Version - 13.0.1.0.32
 ====================
 SV-148: Accounting - Accounting Industry Changes
+
+Version - 13.0.1.0.33
+=====================
+SV-151: Add (domain) next to Company
+
+Version - 13.0.1.0.34 &35
+=========================
+SV-152: Add new sharevault Type and Parent field

@@ -5,6 +5,7 @@ from odoo.tools.safe_eval import safe_eval
 import datetime
 import logging
 import json
+from odoo.osv import expression
 _logger = logging.getLogger(__name__)
 evaluation_context = {
     'datetime': datetime,
@@ -376,7 +377,8 @@ class Partner(models.Model):
 
         if partner.first_name and partner.last_name:
             name = partner.first_name + ' ' + partner.last_name
-
+        if partner.domain:
+            name = self.name + ' (' + self.domain + ')'
         if partner.company_name or partner.parent_id:
             if not name and partner.type in ['invoice', 'delivery', 'other']:
                 name = dict(self.fields_get(['type'])['type']['selection'])[partner.type]
