@@ -47,3 +47,7 @@ SV-14: Try to resolve error
 13.0.1.0.14
 ===========
 SV-14: Invoice Template
+
+13.0.1.0.15
+===========
+SV-14: Storage field added and remove code from description

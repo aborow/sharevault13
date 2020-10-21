@@ -13,6 +13,11 @@
                                 <b>Accounts Payable Email Address:</b>
                                 <span t-field="o.partner_id.email"/>
                             </div> -->
+                            <div id="div_customer_address_shipping">
+                                <t t-if="o.sharevault_id.quota_mb">
+                                    <b>Storage:&#160;</b><span t-field="o.sharevault_id.quota_mb"/>
+                                </t>
+                            </div>
                         </div>
                         <div class="col-xs-6" style="margin-left:650px;">
                             <div id="div_customer_address_shipping">
@@ -46,7 +51,7 @@
                                 <t t-if="l_odd">
                                     <tr style="background-color: white;">
                                         <td class="inoice_data" width="15%"><span t-field="l.product_id.default_code"/></td>
-                                        <td class="inoice_data"><span t-field="l.name"/></td>
+                                        <td class="inoice_data"><span t-field="l.product_id.name"/></td>
                                         <td class="text-right inoice_data">
                                             <span t-field="l.quantity"/>
                                         </td>
@@ -61,7 +66,7 @@
                                 <t t-if="l_even">
                                     <tr style="background-color: #EBF5FB;">
                                         <td class="inoice_data" width="15%"><span t-field="l.product_id.default_code"/></td>
-                                        <td class="inoice_data"><span t-field="l.name"/></td>
+                                        <td class="inoice_data"><span t-field="l.product_id.name"/></td>
                                         <td class="text-right inoice_data">
                                             <span t-field="l.quantity"/>
                                         </td>
