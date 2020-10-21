@@ -190,7 +190,7 @@ class Partner(models.Model):
                                OR {vat} {operator} {percent}
                                )
 
-                         ORDER BY {fields} {display_name} {operator} {percent} desc,
+                         ORDER BY {fields} {display_name} {name} {operator} {percent} desc,
                                   {display_name}
                         """.format(from_str=from_str,
                                    fields=fields,
@@ -204,7 +204,7 @@ class Partner(models.Model):
                                    percent=unaccent('%s'),
                                    vat=unaccent('res_partner.vat'),)
 
-            where_clause_params += [search_name]*3  # for email / display_name, reference
+            where_clause_params += [search_name]*4  # for email / display_name, name, reference
             where_clause_params += [re.sub('[^a-zA-Z0-9]+', '', search_name) or None]  # for vat
 
             if mind_parent_query:
