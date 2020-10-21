@@ -145,7 +145,7 @@ class Partner(models.Model):
                 mind_parent_query = True
 
             if mind_parent_query:
-                _logger.info("CASE 1")
+                #_logger.info("CASE 1")
                 query = """SELECT res_partner.id
                              FROM {from_str}
 		                           LEFT JOIN res_partner AS partner_company ON res_partner.parent_id=partner_company.id
@@ -172,7 +172,7 @@ class Partner(models.Model):
                                    vat=unaccent('res_partner.vat'),
                                    partner_company_name=unaccent('partner_company.name'),)
             else:
-                _logger.info("CASE 2")
+                #_logger.info("CASE 2")
                 query = """SELECT res_partner.id
                              FROM {from_str}
                           {where} ({email} {operator} {percent}
@@ -208,9 +208,9 @@ class Partner(models.Model):
             self.env.cr.execute(query, where_clause_params)
 
             # SV - Check the query that was executed
-            _logger.info(str(self.env.cr.query).replace('\\n', ' ').replace('\\t', ' ').replace('\\', ""))
-            _logger.info("ARGS: %s" % args)
-            _logger.info("mind_parent_query: %s" % mind_parent_query)
+            #_logger.info(str(self.env.cr.query).replace('\\n', ' ').replace('\\t', ' ').replace('\\', ""))
+            #_logger.info("ARGS: %s" % args)
+            #_logger.info("mind_parent_query: %s" % mind_parent_query)
 
             partner_ids = [row[0] for row in self.env.cr.fetchall()]
             if partner_ids:
