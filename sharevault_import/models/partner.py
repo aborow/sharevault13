@@ -146,8 +146,7 @@ class Partner(models.Model):
 
             """
             2020/10/21 - after "display_name", it was added the comparison to "name" as a matching
-            problem suddenly came up on this date. I don't know the underlying reason for the problem
-            but there is a chance that some field might not have been populated (display_name?)
+            problem suddenly came up on this date. This happened because of adding domain to the display name
             """
 
             if mind_parent_query:
