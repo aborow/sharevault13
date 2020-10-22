@@ -8,6 +8,7 @@ class SaleOrder(models.Model):
     @api.onchange('partner_id')
     def onchange_partner_id(self):
         super(SaleOrder, self).onchange_partner_id()
+        self.sharevault_id = False
         if self.partner_id.company_type == 'company':
             return {'domain': {'sharevault_id': [('partner_id', '=', self.partner_id.id)]}}
         if self.partner_id.company_type == 'person':
@@ -20,6 +21,21 @@ class SaleOrder(models.Model):
     sales_type = fields.Selection([('new', 'New Customer'),
                                    ('cs', 'Customer Success'),
                                    ('renewal', 'Renewal')], string="Sales Type")
+    term_start_date = fields.Date('Term Start Date',
+                                  readonly=True,
+                                  states={'draft': [('readonly', False)]})
+    term_end_date = fields.Date('Term End Date',
+                                readonly=True,
+                                states={'draft': [('readonly', False)]})
+
+    @api.onchange('partner_id', 'sharevault_id')
+    def onchange_sharevault_id(self):
+        if self.sharevault_id:
+            self.term_start_date = self.sharevault_id.term_start_date
+            self.term_end_date = self.sharevault_id.term_end_date
+        else:
+            self.term_start_date = False
+            self.term_end_date = False
 
     def _prepare_invoice(self):
         result = super(SaleOrder, self)._prepare_invoice()
@@ -27,4 +43,9 @@ class SaleOrder(models.Model):
             result.update({'sales_type': self.sales_type})
         if self.sharevault_id:
             result.update({'sharevault_id': self.sharevault_id.id})
+        if self.term_start_date:
+            result.update({'term_start_date': self.term_start_date})
+        if self.term_end_date:
+            result.update({'term_end_date': self.term_end_date})
+
         return result

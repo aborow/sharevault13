@@ -21,11 +21,11 @@
                         </div>
                         <div class="col-xs-6" style="margin-left:650px;">
                             <div id="div_customer_address_shipping">
-                                <t t-if="o.sharevault_id.term_start_date">
-                                    <b>Term Start Date&#160;:&#160;</b><span t-field="o.sharevault_id.term_start_date" t-options='{"format": "MM/dd/yyyy"}'/><br/>
+                                <t t-if="o.term_start_date">
+                                    <b>Term Start Date&#160;:&#160;</b><span t-field="o.term_start_date" t-options='{"format": "MM/dd/yyyy"}'/><br/>
                                 </t>
-                                <t t-if="o.sharevault_id.term_end_date">
-                                    <b>Term End Date&#160;:</b>&#160;<span t-field="o.sharevault_id.term_end_date" t-options='{"format": "MM/dd/yyyy"}'/>
+                                <t t-if="o.term_end_date">
+                                    <b>Term End Date&#160;:</b>&#160;<span t-field="o.term_end_date" t-options='{"format": "MM/dd/yyyy"}'/>
                                 </t>
                             </div>
                         </div>
