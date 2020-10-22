@@ -189,7 +189,7 @@ class Partner(models.Model):
                                OR {vat} {operator} {percent}
                                )
 
-                         ORDER BY {fields} {display_name} {name} {operator} {percent} desc,
+                         ORDER BY {fields} {display_name} {operator} {percent} desc,
                                   {display_name}
                         """.format(from_str=from_str,
                                    fields=fields,
