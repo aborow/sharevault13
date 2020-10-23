@@ -123,3 +123,7 @@ SV-151: Add (domain) next to Company
 Version - 13.0.1.0.34 &35
 =========================
 SV-152: Add new sharevault Type and Parent field
+
+Version - 13.0.1.0.36
+=====================
+SV-156: invoice changes and contact record change

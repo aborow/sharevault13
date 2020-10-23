@@ -20,6 +20,7 @@ class AccountMove(models.Model):
         self.date_expiration = self.sharevault_id \
                                 and self.sharevault_id.sv_expiration_dt or False
         if self.sharevault_id:
+            self.customer_contact_id = self.sharevault_id and self.sharevault_id.sharevault_owner.id or False
             self.term_start_date = self.sharevault_id \
                                    and self.sharevault_id.term_start_date or False
             self.term_end_date = self.sharevault_id \
@@ -27,6 +28,7 @@ class AccountMove(models.Model):
         else:
             self.term_start_date = False
             self.term_end_date = False
+            self.customer_contact_id = False
 
 
     @api.onchange('partner_id')
@@ -55,6 +57,8 @@ class AccountMove(models.Model):
     term_end_date = fields.Date('Term End Date',
                                 readonly=True,
                                 states={'draft': [('readonly', False)]})
+    # message_follower_ids = fields.One2many(
+    #     'mail.followers', 'res_id', string='Followers', copy=True)
 
     @api.depends('amount_residual','amount_total')
     def get_amount_paid(self):

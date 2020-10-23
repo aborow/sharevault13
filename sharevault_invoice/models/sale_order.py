@@ -27,13 +27,17 @@ class SaleOrder(models.Model):
     term_end_date = fields.Date('Term End Date',
                                 readonly=True,
                                 states={'draft': [('readonly', False)]})
+    customer_contact_id = fields.Many2one('res.partner', string="Customer Contact")
+
 
     @api.onchange('partner_id', 'sharevault_id')
     def onchange_sharevault_id(self):
         if self.sharevault_id:
+            self.customer_contact_id = self.sharevault_id and self.sharevault_id.sharevault_owner.id or False
             self.term_start_date = self.sharevault_id.term_start_date
             self.term_end_date = self.sharevault_id.term_end_date
         else:
+            self.customer_contact_id = False
             self.term_start_date = False
             self.term_end_date = False
 
@@ -47,5 +51,6 @@ class SaleOrder(models.Model):
             result.update({'term_start_date': self.term_start_date})
         if self.term_end_date:
             result.update({'term_end_date': self.term_end_date})
-
+        if self.customer_contact_id:
+            result.update({'customer_contact_id': self.customer_contact_id.id})
         return result

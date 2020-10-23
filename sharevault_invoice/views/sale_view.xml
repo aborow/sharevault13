@@ -15,6 +15,7 @@
                        position="after">
                     <!-- SV-147 -->
                     <field name="sharevault_id"/>
+                    <field name="customer_contact_id" invisible="1"/>
                     <field name="term_start_date"/>
                     <field name="term_end_date"/>
                 </xpath>
