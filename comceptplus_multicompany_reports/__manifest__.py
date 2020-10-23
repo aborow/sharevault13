@@ -2,6 +2,7 @@
 {
     'name': 'comceptPLUS: multicompany report setup',
     'version': '1.0',
+    'license': 'LGPL-3',
     'author': 'comceptPLUS',
     'summary': 'Base setup to allow multiple layouts for reports',
     'website': 'https://comceptplus.com',
@@ -16,4 +17,3 @@
     'data': ['views/res_company_view.xml'],
     'installable': True,
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
