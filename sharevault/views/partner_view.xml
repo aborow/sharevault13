@@ -134,6 +134,8 @@
                 </xpath>
                 <field name="category_id" position="after">
                     <field name="source"/>
+                    <field name="is_domain_updated" invisible="1"/>
+                    <button name="update_domain" string="Update Domain" type="object" class="oe_highlight" invisible="1"/>
                 </field>
                 <!--SV-53: Hided for individual company type-->
                 <field name="website" position="attributes">

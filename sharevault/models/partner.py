@@ -240,6 +240,13 @@ class Partner(models.Model):
     sharevault_company_count = fields.Integer(
         'Sharevault Company Count', compute='get_sharevault_company_count', copy=False, store=True)
     staging_id = fields.Integer('Staging ID')
+    is_domain_updated = fields.Boolean('Domain Updated')
+
+    def update_domain(self):
+        partners = self.search([('is_domain_updated', '=', False)], limit=1000)
+        for partner in partners:
+            partner._compute_display_name()
+            partner.is_domain_updated = True
 
     def get_sharevault_company_count(self):
         for rec in self:
