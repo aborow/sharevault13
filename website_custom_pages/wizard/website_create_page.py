@@ -19,6 +19,9 @@ class WebPageCreateWizard(models.TransientModel):
         # Step 1 - we create a page
         new_page_id = self.page_template_id.copy()
         if new_page_id:
+            # we must change the 'key' of the view, otherwise, any changes will
+            # be made into the original view
+            new_page_id.view_id.key = 'website.%s' %  new_page_id.view_id.id
             new_page_id.write({
                                 'name': self.name,
                                 'url': self.url,
