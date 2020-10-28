@@ -20,7 +20,6 @@ class Custom_Zoom_controller(http.Controller):
 
     @http.route('/get_auth_code', type="http", auth="public", website=True)
     def get_auth_code(self, **kwarg):
-        # print("kwrg         = ",kwarg)
         if kwarg.get('code'):
             '''Get access Token and store in object'''
             zoom_id = http.request.env['res.users'].sudo().search([('id', '=', http.request.uid)], limit=1).company_id

@@ -76,7 +76,6 @@ class ResCompany(models.Model):
 
         combine = zoom_client_id + ':' + zoom_client_secret
         userAndPass = base64.b64encode(combine.encode()).decode("ascii")
-        #print('\n commfd ', userAndPass)
 
         headers = {'Authorization': 'Basic {}'.format(userAndPass)}
 
@@ -85,7 +84,6 @@ class ResCompany(models.Model):
             'refresh_token': zoom_refresh_token,
         }
         refresh_token_response = requests.request("POST", zoom_access_token_url, headers=headers, data=payload)
-        #print(refresh_token_response.text.encode('utf8'))
         if refresh_token_response.status_code == 200:
             try:
                 # try getting JSON repr of it
