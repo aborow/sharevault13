@@ -27,6 +27,11 @@ from odoo.tools.misc import get_lang
 
 class WebsiteForm(WebsiteForm):
 
+    @http.route('/thankyou', type='json', auth='public')
+    def thankyou_pages(self, typ_id=None):
+        thankyou_pages = request.env['web.thankyou.pages'].sudo().search([('id', '=', typ_id)], limit=1)
+        return thankyou_pages.text
+
     def _get_country(self):
         country_code = request.session.geoip and request.session.geoip.get('country_code') or False
         if country_code:

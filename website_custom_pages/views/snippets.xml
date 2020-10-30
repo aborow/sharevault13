@@ -2080,6 +2080,8 @@
                 <link rel="stylesheet" href="/website_custom_pages/static/src/css/invest.min.css" t-ignore="true"/>
                 <link rel="stylesheet" href="/website_custom_pages/static/src/css/snack.context.css" t-ignore="true"/>
                 <link rel="stylesheet" href="/website_custom_pages/static/src/css/tsls.css" t-ignore="true"/>
+                <script type="text/javascript" src="/website_custom_pages/static/src/js/website_sv.js"/>
+                <script type="text/javascript" src="/website_custom_pages/static/src/js/website_custom_pages_editor.js"/>
                 <!--<script type="text/javascript" href="/website_custom_pages/static/src/js/slick.min.js"/>-->
             </xpath>
         </template>
@@ -2132,10 +2134,5 @@
             </xpath>
         </template>
 -->
-        <template id="assets_editor" name="Website Custom Pages Assets Editor" inherit_id="website.assets_editor">
-            <xpath expr="." position="inside">
-                <script type="text/javascript" src="/website_custom_pages/static/src/js/website_custom_pages_editor.js"></script>
-            </xpath>
-        </template>
     </data>
 </odoo>
