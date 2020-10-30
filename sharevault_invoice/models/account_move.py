@@ -46,7 +46,8 @@ class AccountMove(models.Model):
                                         states={'draft': [('readonly', False)]})
     sales_type = fields.Selection([('new', 'New Customer'),
                                    ('cs', 'Customer Success'),
-                                   ('renewal', 'Renewal')], string="Sales Type")
+                                   ('renewal', 'Renewal'),
+                                   ('mtm', 'Month-to-Month')], string="Sales Type")
     date_creation = fields.Date('Creation')
     date_expiration = fields.Date('Expiration')
     customer_contact_id = fields.Many2one('res.partner',string="Customer Contact")
@@ -73,7 +74,23 @@ class AccountMoveLine(models.Model):
 
     _inherit = 'account.move.line'
 
+    is_expense = fields.Boolean('Is Expensed', default=False, compute='_get_expense_account')
 
+    @api.depends('account_id','move_id.partner_id','product_id')
+    def _get_expense_account(self):
+        for line in self:
+            if line.move_id.type == 'in_invoice':
+                if line.account_id.user_type_id.name == 'Expenses':
+                    line.is_expense = True
+                else:
+                    line.is_expense = False
+            else:
+                line.is_expense = False
+                if self._context.get('default_type') == 'entry':
+                    if line.account_id.user_type_id.name == 'Expenses':
+                        line.is_expense = True
+                    else:
+                        line.is_expense = False
     # @api.constrains('analytic_account_id')
     # def _constraint_analytic_account_id(self):
     #     if self.move_id.type == 'in_invoice' and not self.analytic_account_id:

@@ -26,6 +26,21 @@
                 <xpath expr="//field[@name='invoice_incoterm_id']" position="attributes">
                     <attribute name="attrs">{'invisible':[('type', '=', 'in_invoice')]}</attribute>
                 </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="after">
+                    <field name="is_expense" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='quantity']" position="after">
+                    <field name="is_expense" invisible="1" context="{'default_expense': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="attrs">{'required':[('is_expense', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='analytic_account_id']" position="replace">
+                    <field name="analytic_account_id"
+                           domain="['|', ('company_id', '=', parent.company_id), ('company_id', '=', False)]"
+                           groups="analytic.group_analytic_accounting"
+                           attrs="{'required':[('is_expense', '=', True)],'invisible': [('display_type', 'in', ('line_section', 'line_note'))]}"/>
+                </xpath>
             </field>
         </record>
 

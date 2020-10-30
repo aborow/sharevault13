@@ -59,3 +59,9 @@ SV-14: Term Start Date and Term End Date added in sale and invoice also.
 13.0.1.0.17
 ===========
 SV-156: invoice changes and contact record change
+
+13.0.1.0.18
+===========
+SV-158: add Sales Description information to the sales order and invoice PDF and saless order and invoice preview
+SV-161: Make Analytic Account field required for Expense type accounts
+SV-159: Add new value to Sales Type dropdown

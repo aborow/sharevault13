@@ -20,7 +20,8 @@ class SaleOrder(models.Model):
                                         states={'draft': [('readonly', False)]})
     sales_type = fields.Selection([('new', 'New Customer'),
                                    ('cs', 'Customer Success'),
-                                   ('renewal', 'Renewal')], string="Sales Type")
+                                   ('renewal', 'Renewal'),
+                                   ('mtm', 'Month-to-Month')], string="Sales Type")
     term_start_date = fields.Date('Term Start Date',
                                   readonly=True,
                                   states={'draft': [('readonly', False)]})

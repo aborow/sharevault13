@@ -19,3 +19,8 @@ Version - 13.0.1.0.3
 =====================
 SV-144: Accounting - ShareVault Invoicing changes
 SV-147: Accounting - Sales Types changes
+
+13.0.1.0.4
+==========
+SV-157: Hide Representative Field in INvoice
+
