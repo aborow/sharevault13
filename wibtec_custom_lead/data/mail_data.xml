@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+	<!-- Inherit Discuss utility templates for notifications -->
+	<template id="inherit_message_user_assigned" inherit_id="mail.message_user_assigned">
+		<xpath expr="//p[1]" position="inside">
+			<t t-if="object._name == 'crm.lead'">
+				<br/>
+				<span style="margin-top: 8px;"><b>Page submitted on:</b> </span><br/>
+				<span style="margin-top: 8px;"><b>Business Email:</b> <t t-esc="object.email_from"/></span><br/>
+				<span style="margin-top: 8px;"><b>First Name:</b> <t t-esc="object.contact_name"/></span><br/>
+				<span style="margin-top: 8px;"><b>Last Name:</b> </span><br/>
+				<span style="margin-top: 8px;"><b>Job Title:</b> <t t-esc="object.function"/></span><br/>
+				<span style="margin-top: 8px;"><b>Company:</b> <t t-esc="object.partner_name"/></span><br/>
+				<span style="margin-top: 8px;"><b>Phone:</b> <t t-esc="object.phone"/></span><br/>
+				<span style="margin-top: 8px;"><b>Industry:</b> </span>
+			</t>
+		</xpath>
+	</template>
+</odoo>

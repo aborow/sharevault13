@@ -19,3 +19,7 @@ SV-141: Modified code for Lead Type (managing the Convert to opportunities butto
 13.0.1.0.4
 ==========
 SV-139: Move Lead Scoring section
+
+13.0.1.0.6
+==========
+SV-162: Internal Email when lead is created
