@@ -65,3 +65,7 @@ SV-156: invoice changes and contact record change
 SV-158: add Sales Description information to the sales order and invoice PDF and saless order and invoice preview
 SV-161: Make Analytic Account field required for Expense type accounts
 SV-159: Add new value to Sales Type dropdown
+
+13.0.1.0.19
+===========
+SV-160: remove sales type from purchase orders
