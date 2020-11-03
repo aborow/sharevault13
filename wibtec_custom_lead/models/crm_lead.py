@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _, SUPERUSER_ID
+from odoo.exceptions import ValidationError
 
 
 class CrmLead(models.Model):
@@ -24,6 +25,16 @@ class CrmLead(models.Model):
     stage_ids = fields.Many2many('crm.stage', compute="_compute_stage_ids", string='Stages')
 
     european_union = fields.Boolean('Are you a citizen or resident of the European Union (EU)?')
+
+    def update_lead_score(self):
+        stage = self.env['crm.stage'].search([('is_recycle_stage', '=', True)], limit=1)
+        if not stage:
+            raise ValidationError(_('Contact to Administrator for set Recycle stage'))
+        if stage:
+            self.stage_id = stage.id
+            self.score = 0.0
+            msg = _('Score is Recycled and set to zero')
+            self.message_post(body=msg)
 
     @api.depends('type', 'is_lead_stage')
     def _compute_stage_ids(self):
@@ -96,3 +107,10 @@ class CrmStage(models.Model):
     _inherit = "crm.stage"
 
     is_lead_stage = fields.Boolean('Is Lead Stage?', default=False)
+    is_recycle_stage = fields.Boolean('Is Recycle Stage', default=False)
+
+    @api.constrains('is_recycle_stage')
+    def _check_boolean(self):
+        checked_bool = self.search([('id', '!=', self.id), ('is_recycle_stage', '=', True)], limit=1)
+        if self.is_recycle_stage and checked_bool:
+            raise ValidationError(_("There's already one checked boolean in record '%s'") % checked_bool.name)

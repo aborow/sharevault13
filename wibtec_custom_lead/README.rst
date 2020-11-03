@@ -23,3 +23,7 @@ SV-139: Move Lead Scoring section
 13.0.1.0.6
 ==========
 SV-162: Internal Email when lead is created
+
+13.0.1.0.7
+==========
+SV-137: Recycling Lead Score to ZERO
