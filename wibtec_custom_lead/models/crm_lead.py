@@ -36,6 +36,17 @@ class CrmLead(models.Model):
             msg = _('Score is Recycled and set to zero')
             self.message_post(body=msg)
 
+    def update_recycle_lead_score(self):
+        for rec in self:
+            stage = rec.env['crm.stage'].search([('is_recycle_stage', '=', True)], limit=1)
+            if not stage:
+                raise ValidationError(_('Contact to Administrator for set Recycle stage'))
+            if stage:
+                rec.stage_id = stage.id
+                rec.score = 0.0
+                msg = _('Score is Recycled and set to zero')
+                rec.message_post(body=msg)
+
     @api.depends('type', 'is_lead_stage')
     def _compute_stage_ids(self):
         for rec in self:

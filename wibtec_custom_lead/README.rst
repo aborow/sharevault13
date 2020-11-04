@@ -27,3 +27,7 @@ SV-162: Internal Email when lead is created
 13.0.1.0.7
 ==========
 SV-137: Recycling Lead Score to ZERO
+
+13.0.1.0.8
+==========
+SV-137: Added action for manage the multiple records
