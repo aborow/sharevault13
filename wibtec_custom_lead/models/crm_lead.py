@@ -16,6 +16,7 @@ class CrmLead(models.Model):
         return self._stage_find(team_id=team.id, domain=[('fold', '=', False)]).id
 
     lead_type = fields.Selection([('new', 'New Lead'),
+                                  ('sub', 'Subscriber'),
                                   ('sales_ql', 'Sales Qualified Lead'),
                                   ('marketing_ql', 'Marketing Qualified Lead')], string="Lead Type", default="new")
     stage_id = fields.Many2one('crm.stage', string='Stage', ondelete='restrict', tracking=True, index=True, copy=False,
@@ -25,6 +26,16 @@ class CrmLead(models.Model):
     stage_ids = fields.Many2many('crm.stage', compute="_compute_stage_ids", string='Stages')
 
     european_union = fields.Boolean('Are you a citizen or resident of the European Union (EU)?')
+
+    @api.model
+    def update_lead_stages(self):
+        for rec in self.search([]):
+            if rec.type == 'lead':
+                if rec.lead_type == 'new' and rec.score >= 40:
+                    stage = self.env['crm.stage'].search([('name', '=', 'Open')], limit=1)
+                    rec.write({'stage_id': stage.id,
+                               'lead_type': 'marketing_ql'})
+        return True
 
     def update_lead_score(self):
         stage = self.env['crm.stage'].search([('is_recycle_stage', '=', True)], limit=1)
