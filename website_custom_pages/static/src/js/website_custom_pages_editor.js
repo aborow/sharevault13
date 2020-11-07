@@ -176,6 +176,7 @@ FormEditorRegistry.add('create_svlead', {
         title: _t('Select Source of Form'),
 
     },
+    /*
     {
         name: 'share_link_id',
         type: 'many2one',
@@ -184,6 +185,7 @@ FormEditorRegistry.add('create_svlead', {
         title: _t('Select Document Share Link'),
 
     },
+    */
     {
         name: 'team_id',
         type: 'many2one',

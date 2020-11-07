@@ -8,16 +8,24 @@
                 <group>
                     <group>
                         <field name="name"/>
+                        <field name="active"/>
                     </group>
                     <group>
                         <field name="mail_template_id"
                                 domain="[('name','ilike','ShareVault')]"/>
-                        <field name="active"/>
+                        <field name="shared_link_id"/>
                     </group>
                 </group>
                 <group>
-                    <group colspan="4">
-                        <field name="text"/>
+                    <group>
+                        <field name="text" nolabel="1"/>
+                    </group>
+                    <group>
+                        <help>
+                            If you want to put a link for a whitepaper just make sure you have a <i>PLACEHOLDER_WHITEPAPER</i> placeholder in your text.<br/><br/>
+                            When selecting a shared link, the placeholder will be replaced by the right link.<br/><br/>
+                            If you want to replace the link, you'll need to start over (delete, create placeholder, select link).<br/>
+                        </help>
                     </group>
                 </group>
             </form>

@@ -5,7 +5,7 @@
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Website',
-    'summary': 'Custom pages snippets as per hubspot',
+    'summary': 'Changes to website mode',
     'description': """SV-120 / SV-130
     """,
     'depends': [
@@ -30,6 +30,7 @@
             'views/web_thankyou_pages_view.xml',
             'views/lead_views.xml',
             'views/blog_view.xml',
+            'views/document_view.xml',
             'views/source.xml',
             'views/website_blog.xml',
             'views/website_page.xml',
