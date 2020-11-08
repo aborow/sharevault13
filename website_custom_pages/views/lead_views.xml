@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
+        <record id="view_crm_case_opportunities_filter" model="ir.ui.view">
+            <field name="name">ShareVault: add fields to search</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[last()]" position="after">
+                    <field name="industry"/>
+                    <field name="sharevault_name"/>
+                </xpath>
+                <xpath expr="//group/filter[last()]" position="after">
+                    <filter string="Industry" name="group_by_industry"
+                            context="{'group_by':'industry'}"/>
+                </xpath>
+            </field>
+        </record>
+
         <record id="crm_lead_view_form_inherit" model="ir.ui.view">
-            <field name="name">crm.lead.view.form.inherit.custom</field>
+            <field name="name">ShareVault: new fields</field>
             <field name="model">crm.lead</field>
             <field name="inherit_id" ref="crm.crm_lead_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form/sheet/group/group/field[@name='type']" position="after">
                     <field name="information_sharing"/>
                     <field name="share_link_id" readonly="1"/>
-
                     <field name="typ_id" readonly="1" invisible="1"/>
+                    <field name="industry"/>
+                    <field name="sharevault_name"/>
+                    <field name="accept_msa"/>
+                </xpath>
+                <xpath expr="//page[last()]" position="after">
+                    <page id="questions_comments" string="Questions / Comments">
+                        <field name="questions_comments" nolabel="1"/>
+                    </page>
                 </xpath>
             </field>
         </record>

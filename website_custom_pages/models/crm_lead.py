@@ -24,3 +24,30 @@ class Lead(models.Model):
     share_link_id = fields.Many2one('documents.share', 'Shared Link')
 
     #tracked_link_id = fields.Many2one('link.tracker', 'Tracked link')
+
+
+    questions_comments = fields.Text('Questions/Comments')
+    sharevault_name = fields.Char('Name of ShareVault')
+    accept_msa = fields.Boolean("I have read and agree to the ShareVault MSA.")
+    industry = fields.Selection([
+                    ('advertising_marketing','Advertising & Marketing'),
+                    ('agriculture','Agriculture'),
+                    ('consulting_advisory','Consulting & Advisory'),
+                    ('education','Education'),
+                    ('energy / Resources','Energy / Resources'),
+                    ('entertainment','Entertainment'),
+                    ('finance','Finance'),
+                    ('government','Government'),
+                    ('hospitality','Hospitality'),
+                    ('legal','Legal'),
+                    ('life Sciences','Life Sciences'),
+                    ('manufacturing' ,'Manufacturing'),
+                    ('not for Profit' ,'Not for Profit'),
+                    ('other' ,'Other'),
+                    ('real Estate / Construction', 'Real Estate / Construction'),
+                    ('technology', 'Technology'),
+                    ('retail', 'Retail'),
+                    ('transportation', 'Transportation'),
+                    ('unable-To-Locate', 'Unable-To-Locate'),
+                    ('cannabis', 'Cannabis')
+                    ], string='Industry')
