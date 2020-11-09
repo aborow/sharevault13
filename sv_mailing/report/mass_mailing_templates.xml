@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="m_external_layout">
+
+            <t t-call="sv_mailing.m_header"/>
+            <t t-raw="0"/>
+        </template>
+        <template id="report_mailing_template">
+            <div class="header" style="height:5px; width:100%">
+            </div>
+            <div class="page">
+                <h2>Email details</h2>
+                <div class="row">
+                    <div class="col-6 mt-2 text-left">
+                        <b>Campaign name</b>
+                        <br/>
+                        <span t-field="o.campaign_id.name"/>
+                    </div>
+                    <div class="col-6 mt-2 text-left">
+                        <b>Name</b>
+                        <br/>
+                        <span t-field="o.name"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 mt-2 text-left">
+                        <b>Subject</b>
+                        <br/>
+                        <span t-field="o.subject"/>
+                    </div>
+                    <div class="col-6 mt-2 text-left">
+                        <b>Responsible</b>
+                        <br/>
+                        <span t-field="o.user_id.name"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 mt-2 text-left">
+                        <b>Sent from</b>
+                        <br/>
+                        <span t-field="o.email_from"/>
+                    </div>
+                    <div class="col-6 mt-2 text-left">
+                        <b>Reply to</b>
+                        <br/>
+                        <span t-field="o.reply_to"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table">
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <th class="text-left" style="width: 100%" scope="col">Lists</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.contact_list_ids" t-as="g">
+                                    <tr>
+                                        <td class="text-left">
+                                            <span style="color:#3498DB;" t-field="g.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-6" style="border: 1px solid grey;">
+                        <b>Open rate &amp;nbsp;</b>
+                        <span t-field="o.opened_ratio" style="color:#3498DB"/>
+                        <span style="color:#3498DB;">%</span>
+                        <br/>
+                        <div style="width:100%;height: 30px;margin-top:10px; border: 1px solid black; ">
+                            <div t-att-style="'width: ' + str(o.opened_ratio) + '%; background-color: #E59866; height: 28px;'">
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                    <div class="col-6" style="border: 1px solid grey;">
+                        <b>Click rate &amp;nbsp;</b>
+                        <span t-field="o.clicks_ratio" style="color:#3498DB"/>
+                        <span style="color:#3498DB">%</span>
+                        <br/>
+                        <div style="width:100%;height: 30px;margin-top:10px; border: 1px solid black; ">
+                            <div t-att-style="'width: ' + str(o.clicks_ratio) + '%; background-color: #E59866; height: 28px;'">
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row" style="border: 1px solid grey;">
+                    <div class="col-4">
+                        <b>Successful deliveries</b>
+                        <br/>
+                        <span class="text-center" t-field="o.received_ratio"/>
+                    </div>
+                    <div class="col-4">
+                        <b>Bounces</b>
+                        <br/>
+                        <span class="text-center" t-field="o.bounced_ratio"/>
+                    </div>
+                    <div class="col-4">
+                        <b>Unsubscribes</b>
+                        <br/>
+                        <span class="text-center" t-esc="o.get_unsubscribers()"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="row" style="border: 1px solid grey;">
+                    <div class="col-12">
+                        <b>Time spent viewing email</b>
+                    </div>
+                </div>
+                <br/>
+                <div class="row" style="border: 1px solid grey;">
+                    <div class="col-12">
+                        <b>Engagement over time</b>
+                        <img t-if="o.get_chart_image()" t-att-src="image_data_uri(o.get_chart_image())"
+                             style="height: 300px;width: 583px;"/>
+                    </div>
+                </div>
+            </div>
+            <t>
+                <p style="page-break-before:always;"/>
+            </t>
+            <div>
+                <t t-raw="o.body_html"></t>
+            </div>
+            <t>
+                <p style="page-break-before:always;"/>
+            </t>
+            <div>
+
+                <br/>
+                <br/>
+
+                Link reports
+                <div class="row">
+
+                    <div class="col-12" id="hash_data_consistency_table">
+                        <table class="table table-bordered" style="table-layout: fixed">
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <th class="text-left" style="width: 88%" scope="col">LINK</th>
+                                    <th class="text-right" style="width: 12%" scope="col">CLICKS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.get_link_report()" t-as="g">
+                                    <tr>
+                                        <td class="text-left">
+                                            <span style="color:#3498DB; font-size:14px;" t-esc="g.url"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span style="color:#3498DB; font-size:14px;" t-esc="g.count"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <t>
+                <p style="page-break-before:always;"/>
+            </t>
+            <div>
+                <br/>
+                Top engaged contacts
+                <div class="row">
+
+                    <div class="col-12" id="hash_data_consistency_table">
+                        <table class="table table-bordered" style="table-layout: fixed">
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <th class="text-left" style="width: 88%" scope="col">CONTACT</th>
+                                    <th class="text-right" style="width: 12%" scope="col">OPENS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.get_contacts()" t-as="c">
+                                    <tr>
+                                        <td class="text-left">
+                                            <span style="color:#3498DB; font-size:14px;" t-esc="c.get('partner_id')"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span style="color:#3498DB; font-size:14px;" t-esc="c.get('opened')"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <t>
+                <p style="page-break-before:always;"/>
+            </t>
+            <div>
+                <br/>
+                Top engaged contacts
+                <div class="row">
+
+                    <div class="col-12" id="hash_data_consistency_table">
+                        <table class="table table-bordered" style="table-layout: fixed">
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <th class="text-left" style="width: 88%" scope="col">CONTACT</th>
+                                    <th class="text-right" style="width: 12%" scope="col">CLICKS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.get_contacts_c()" t-as="c">
+                                    <tr>
+                                        <td class="text-left">
+                                            <span style="color:#3498DB; font-size:14px;" t-esc="c.get('partner_id')"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span style="color:#3498DB; font-size:14px;" t-esc="c.get('clicked')"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+        <template id="report_mailing">
+            <t t-call="web.basic_layout">
+                <t t-as="o" t-foreach="docs">
+                    <t t-call="sv_mailing.report_mailing_template"/>
+                </t>
+            </t>
+        </template>
+
+        <record id="paperformat_epr" model="report.paperformat">
+            <field name="name">Email Performance Report</field>
+            <field name="format">Letter</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">00</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">80</field>
+        </record>
+
+        <report
+                id="report_mailing_mailing_sv"
+                string="Email Performance Report"
+                model="mailing.mailing"
+                report_type="qweb-pdf"
+                file="sv_mailing.report_mailing"
+                name="sv_mailing.report_mailing"
+                paperformat="paperformat_epr"
+        />
+
+    </data>
+</odoo>
