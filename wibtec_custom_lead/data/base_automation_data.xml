@@ -20,8 +20,23 @@ if record.team_id:
                                     })
             </field>
         </record>
+        <!-- Automated Action for Update Lead stages based on the score and lead type -->
+        <record id="update_lead_stages" model="base.automation">
+            <field name="name">ShareVault: Update Lead Stages</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="trigger">on_write</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.type == 'lead':
+    if record.lead_type == 'new' and record.score >= 40:
+        stage = env['crm.stage'].search([('name', '=', 'Open')], limit=1)
+        record.write({'stage_id': stage.id,
+                       'lead_type': 'marketing_ql'})
+            </field>
+        </record>
 
-        <record id="ir_cron_lead_stage_update" model="ir.cron">
+        <!--<record id="ir_cron_lead_stage_update" model="ir.cron">
             <field name='name'>CRM: Update Lead Stages</field>
             <field name='interval_number'>1</field>
             <field name='interval_type'>days</field>
@@ -31,7 +46,7 @@ if record.team_id:
             <field name="code">model.update_lead_stages()</field>
             <field name="state">code</field>
             <field name="model_id" ref="model_crm_lead"/>
-        </record>
+        </record>-->
 
     </data>
 </odoo>
