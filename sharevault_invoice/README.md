@@ -69,3 +69,7 @@ SV-159: Add new value to Sales Type dropdown
 13.0.1.0.19
 ===========
 SV-160: remove sales type from purchase orders
+
+13.0.1.0.20
+===========
+SV-176: Invoice Changes

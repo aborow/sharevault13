@@ -14,8 +14,8 @@
                                 <span t-field="o.partner_id.email"/>
                             </div> -->
                             <div id="div_customer_address_shipping">
-                                <t t-if="o.sharevault_id.quota_mb">
-                                    <b>Storage:&#160;</b><span t-field="o.sharevault_id.quota_mb"/>
+                                <t t-if="o.quota_mb">
+                                    <b>Storage:&#160;</b><span t-field="o.quota_mb"/>GB
                                 </t>
                             </div>
                         </div>
@@ -53,7 +53,8 @@
                                         <td class="inoice_data" width="15%"><span t-field="l.product_id.default_code"/></td>
                                         <td class="inoice_data">
                                             <t t-set="name" t-value="l.name"/>
-                                            <span t-esc="name.split(']')[1]"/>
+                                            <span t-if="']' in name" t-esc="name.split(']')[1]"/>
+                                            <span t-else="" t-esc="name"/>
                                         </td>
                                         <td class="text-right inoice_data">
                                             <span t-field="l.quantity"/>
@@ -71,7 +72,8 @@
                                         <td class="inoice_data" width="15%"><span t-field="l.product_id.default_code"/></td>
                                         <td class="inoice_data">
                                             <t t-set="name" t-value="l.name"/>
-                                            <span t-esc="name.split(']')[1]"/>
+                                            <span t-if="']' in name" t-esc="name.split(']')[1]"/>
+                                            <span t-else="" t-esc="name"/>
                                         </td>
                                         <td class="text-right inoice_data">
                                             <span t-field="l.quantity"/>
@@ -181,6 +183,16 @@
             name="sharevault_invoice.report_invoice"
             file="sharevault_invoice.report_invoice"
             attachment="(object.state in ('open','paid')) and ('SHAREVAULT_INV'+(object.number or '').replace('/','')+'.pdf')"/>
+
+        <record id="paperformat_invoice" model="report.paperformat">
+            <field name="name">Invoice (ShareVault)</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">80</field>
+            <field name="margin_bottom">10</field>
+            <field name="header_spacing">75</field>
+        </record>
 
         <record id="report_invoice_call" model="ir.actions.report">
             <field name="paperformat_id" ref="sharevault_invoice.paperformat_invoice"/>

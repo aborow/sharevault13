@@ -58,6 +58,18 @@ class AccountMove(models.Model):
     term_end_date = fields.Date('Term End Date',
                                 readonly=True,
                                 states={'draft': [('readonly', False)]})
+    quota_mb = fields.Char('Quota: MB', compute='get_quota_mb')
+
+    @api.depends('sharevault_id','partner_id')
+    def get_quota_mb(self):
+        for move in self:
+            if move.sharevault_id:
+                if move.sharevault_id.quota_mb >= 1000:
+                    move.quota_mb = int(move.sharevault_id.quota_mb/1000)
+                else:
+                    move.quota_mb = move.sharevault_id.quota_mb/1000
+            else:
+                move.quota_mb = ''
     # message_follower_ids = fields.One2many(
     #     'mail.followers', 'res_id', string='Followers', copy=True)
 
@@ -66,6 +78,9 @@ class AccountMove(models.Model):
         for move in self:
             if move.amount_residual:
                 move.amount_paid = move.amount_total - move.amount_residual
+            else:
+                if move.amount_residual == 0.0:
+                    move.amount_paid = move.amount_total
             if move.invoice_payment_state == 'paid':
                 if move.amount_residual == 0.0:
                     move.amount_paid = move.amount_total

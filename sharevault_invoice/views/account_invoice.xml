@@ -35,6 +35,9 @@
                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_account_id']" position="attributes">
                     <attribute name="attrs">{'required':[('is_expense', '=', True)]}</attribute>
                 </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="attributes">
+                    <attribute name="optional">show</attribute>
+                </xpath>
                 <xpath expr="//field[@name='line_ids']/tree/field[@name='analytic_account_id']" position="replace">
                     <field name="analytic_account_id"
                            domain="['|', ('company_id', '=', parent.company_id), ('company_id', '=', False)]"
