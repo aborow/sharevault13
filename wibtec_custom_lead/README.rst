@@ -35,3 +35,7 @@ SV-137: Added action for manage the multiple records
 13.0.1.0.9
 ==========
 SV-172: Lifecycle Stages
+
+13.0.1.0.10
+==========
+SV-172: Added automated action
