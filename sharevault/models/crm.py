@@ -19,7 +19,6 @@ class Lead(models.Model):
     original_source = fields.Char('Original Source')
     recycled = fields.Boolean('Recycled')
 
-    accept_conditions = fields.Boolean('SV Conditions accepted')
 
     """
     lead_id
