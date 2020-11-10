@@ -39,3 +39,11 @@ SV-172: Lifecycle Stages
 13.0.1.0.10
 ==========
 SV-172: Added automated action
+
+13.0.1.0.11
+==========
+---
+
+13.0.1.0.12
+==========
+SV-175: Added accept_conditions field
