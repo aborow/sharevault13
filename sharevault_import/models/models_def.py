@@ -188,7 +188,6 @@ class Base(models.AbstractModel):
     _inherit = 'base'
 
     def _load_records(self, data_list, update=False):
-        """
         if DEBUG_MODE:
             _logger.info("_load_records SUPER")
         # We prepare the data according to SV's rules
@@ -214,4 +213,3 @@ class Base(models.AbstractModel):
                         _logger.error("ERROR: %s" % e)
                         pass
         return super(Base, self)._load_records(data_list, update=update)
-        """
