@@ -26,6 +26,8 @@ class CrmLead(models.Model):
     stage_ids = fields.Many2many('crm.stage', compute="_compute_stage_ids", string='Stages')
 
     european_union = fields.Boolean('Are you a citizen or resident of the European Union (EU)?')
+    accept_conditions = fields.Boolean('SV Conditions Accepted', default=False)
+
 
     @api.model
     def update_lead_stages(self):
