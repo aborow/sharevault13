@@ -5,10 +5,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='child_ids']/kanban/field[@name='color']" position="after">
-                <field name="id"/>
-            </xpath>
-            <xpath expr="//field[@name='child_ids']/kanban//field[@name='name']" position="before">
+            <xpath expr="//field[@name='child_ids']/kanban//div[@class='oe_kanban_details']//field[@name='name']" position="before">
                 <div style="float: right;font-size: 18px;">
                      <field name="id" widget="open_tab"/>
                 </div>
