@@ -1,0 +1,18 @@
+.o_docs_share_page {
+    background-color:white !important;
+    background: none;
+}
+
+.o_docs_share_page .text-white {
+    color: black !important;
+}
+body.o_docs_share_page #wrap.o_share_multiple .o_docs_share_multible_bar {
+     color: black !important;
+
+}
+
+.o_docs_btn {
+    color: #FFFFFF !important;
+    background-color: #00A09D !important;
+    border-color: #00A09D !important;
+}
