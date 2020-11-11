@@ -24,3 +24,6 @@ SV-147: Accounting - Sales Types changes
 ==========
 SV-157: Hide Representative Field in INvoice
 
+13.0.1.0.5
+==========
+SV-177: Add Due Date field in the Vendor Bill Form View
