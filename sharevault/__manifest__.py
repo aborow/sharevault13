@@ -44,8 +44,7 @@ Version(1.2) - Added constraint on the email field for partner.
             'views/crm_view.xml',
 
             'views/templates.xml',
-            'wizard/base_partner_merge_views.xml',
-
+            'wizard/base_partner_merge_views.xml'
             ],
     'installable': True,
     'auto_install': False,

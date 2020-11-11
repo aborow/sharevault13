@@ -9,13 +9,6 @@ odoo.define('web_widget_open_tab.FieldOpenTab', function(require) {
     var qweb = core.qweb;
     var _t = core._t;
 
-     $(document).ready(function() {
-         console.log("ffffffffffffffffffffffffff",window.location.href, window.location.href.indexOf("/document/share"))
-        if (window.location.href.indexOf("/document/share") > -1) {
-            alert("your url contains the name franky");
-        }
-  });
-
     var FieldOpenTab = AbstractField.extend({
         description: "",
         supportedFieldTypes: ['integer'],
@@ -41,6 +34,7 @@ odoo.define('web_widget_open_tab.FieldOpenTab', function(require) {
                 }
             return replaceUrlParam(window.location.href,'id', this.res_id)
         },
+
         _renderReadonly: function () {
             var $content = $(
                 '<a href="'+ this._getReference() + '">'
