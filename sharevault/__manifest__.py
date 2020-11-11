@@ -45,8 +45,6 @@ Version(1.2) - Added constraint on the email field for partner.
 
             'views/templates.xml',
             'wizard/base_partner_merge_views.xml',
-            'report/report_action.xml',
-            # 'report/sale_order_report_template.xml',
 
             ],
     'installable': True,
