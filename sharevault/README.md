@@ -131,3 +131,7 @@ SV-156: invoice changes and contact record change
 Version - 13.0.1.0.37
 =====================
 SV-151: Add (domain) next to Company
+
+Version - 13.0.1.0.38
+=====================
+SV-170: Change in Odoo Forms

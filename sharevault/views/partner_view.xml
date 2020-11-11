@@ -152,6 +152,10 @@
                 <field name="type" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </field>
+                <!--SV-170-->
+                <field name="type" position="after">
+                    <field name="domain"/>
+                </field>
             </field>
         </record>
 
@@ -386,7 +390,6 @@
                                     <field name="annual_revenue" attrs="{'invisible': [('is_company', '=', False)]}"/>
                                     <field name="european_union" attrs="{'invisible': [('is_company', '!=', False)]}"/>
                                     <field name="data_source_details"/>
-                                    <field name="domain"/>
                                     <!--<field name="imported_phone"/>-->
                                     <!--Hided for individual company type-->
                                     <field name="number_employees" attrs="{'invisible': [('is_company', '=', False)]}"/>

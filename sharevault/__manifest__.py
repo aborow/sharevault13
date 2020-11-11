@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'ShareVault',
-    'version': '13.0.1.0.37',
+    'version': '13.0.1.0.38',
     'category': 'Tools',
     'author': 'Wibtec',
     'website': 'www.wibtec.com',
@@ -44,6 +44,10 @@ Version(1.2) - Added constraint on the email field for partner.
             'views/crm_view.xml',
 
             'views/templates.xml',
+            'wizard/base_partner_merge_views.xml',
+            'report/report_action.xml',
+            # 'report/sale_order_report_template.xml',
+
             ],
     'installable': True,
     'auto_install': False,

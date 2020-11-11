@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- SV-170 -->
+    <record id="inherit_base_partner_merge_automatic_wizard_form" model="ir.ui.view">
+        <field name='name'>inherit.base.partner.merge.automatic.wizard.form</field>
+        <field name='model'>base.partner.merge.automatic.wizard</field>
+        <field name='inherit_id' ref="base.base_partner_merge_automatic_wizard_form"/>
+        <field name='arch' type='xml'>
+            <field name='group_by_parent_id' position="after">
+                <field name='group_by_domain'/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
