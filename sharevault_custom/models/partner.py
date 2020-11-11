@@ -100,3 +100,4 @@ class Partner(models.Model):
     hs_associated_company = fields.Char(string='HS Associated Company')
     hs_associated_contacts = fields.Char(string='HS Associated Contacts')
     data_last_updated = fields.Date(string='Data Last Updated')
+    hs_account_status = fields.Char(string='HS Account Status')

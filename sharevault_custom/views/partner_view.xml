@@ -64,6 +64,7 @@
                                 <field name='assettype' attrs="{'invisible':[('company_type','!=','company')]}"/>
                                 <field name='linkedin_company_page' attrs="{'invisible':[('company_type','!=','company')]}"/>
                                 <field name='facebook_company_page' attrs="{'invisible':[('company_type','!=','company')]}"/>
+                                <field name="hs_account_status"/>
                             </group>
                             <group>
                                 <field name='hs_number_of_blockers' attrs="{'invisible':[('company_type','!=','company')]}"/>
