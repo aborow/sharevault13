@@ -28,6 +28,14 @@ class CrmLead(models.Model):
     european_union = fields.Boolean('Are you a citizen or resident of the European Union (EU)?')
     accept_conditions = fields.Boolean('SV Conditions Accepted', default=False)
 
+    request_type = fields.Selection([
+                                    ('sales_inquiry','Sales Inquiry'),
+                                    ('support_inquiry','Support Inquiry'),
+                                    ('partnership_inquiry','Partnership Inquiry'),
+                                    ('other','Other'),
+                                    ], string='Request Type')
+
+
 
     @api.model
     def update_lead_stages(self):

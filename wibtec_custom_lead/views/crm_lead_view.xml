@@ -18,6 +18,25 @@
             </field>
         </record>
 
+
+        <record id="view_crm_case_leads_filter" model="ir.ui.view">
+            <field name="name">ShareVault: add fields to search</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[last()]" position="after">
+                    <field name="request_type"/>
+                </xpath>
+                <xpath expr="//group/filter[last()]" position="after">
+                    <filter string="Request Type" name="group_by_request_type"
+                            context="{'group_by':'request_type'}"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+
         <record id="view_crm_lead_form_inherited" model="ir.ui.view">
             <field name="name">crm.lead.form.inherit</field>
             <field name="model">crm.lead</field>
@@ -44,6 +63,7 @@
                 <xpath expr="//field[@name='mobile']" position="after">
                     <field name="european_union"/>
                     <field name="accept_conditions"/>
+                    <field name="request_type"/>
                 </xpath>
             </field>
         </record>
