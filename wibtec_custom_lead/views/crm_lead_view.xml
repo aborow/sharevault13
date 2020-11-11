@@ -286,19 +286,19 @@
             action="utm_campaign_action_in_lead"
             parent="crm.crm_menu_config"
             sequence="10"
-            groups="base.group_no_one"/>
+            />
 
         <menuitem id="menu_utm_medium_in_lead"
             action="utm.utm_medium_action"
             parent="crm.crm_menu_config"
             sequence="11"
-            groups="base.group_no_one"/>
+            />
 
         <menuitem id="menu_utm_source_in_lead"
             action="utm.utm_source_action"
             parent="crm.crm_menu_config"
             sequence="12"
-            groups="base.group_no_one"/>
+            />
 
 
     </data>

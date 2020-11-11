@@ -47,6 +47,6 @@ SV-172: Added automated action
 ===========
 SV-175: Added accept_conditions field
 
-13.0.1.0.13
-===========
+13.0.1.0.13 & 14
+================
 SV-179: Add fields to CRM configuration menu
