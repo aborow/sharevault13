@@ -270,5 +270,36 @@
                   action="crm.crm_lead_action_pipeline"
                   sequence="1"
                   groups="sales_team.group_sale_manager"/>
+
+        <record id="utm_campaign_action_in_lead" model="ir.actions.act_window">
+            <field name="name">Campaigns</field>
+            <field name="res_model">utm.campaign</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Define a new UTM campaign
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_utm_campaign_act_in_lead"
+            action="utm_campaign_action_in_lead"
+            parent="crm.crm_menu_config"
+            sequence="10"
+            groups="base.group_no_one"/>
+
+        <menuitem id="menu_utm_medium_in_lead"
+            action="utm.utm_medium_action"
+            parent="crm.crm_menu_config"
+            sequence="11"
+            groups="base.group_no_one"/>
+
+        <menuitem id="menu_utm_source_in_lead"
+            action="utm.utm_source_action"
+            parent="crm.crm_menu_config"
+            sequence="12"
+            groups="base.group_no_one"/>
+
+
     </data>
 </odoo>

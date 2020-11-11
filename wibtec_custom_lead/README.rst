@@ -37,13 +37,16 @@ SV-137: Added action for manage the multiple records
 SV-172: Lifecycle Stages
 
 13.0.1.0.10
-==========
+===========
 SV-172: Added automated action
 
 13.0.1.0.11
-==========
----
+===========
 
 13.0.1.0.12
-==========
+===========
 SV-175: Added accept_conditions field
+
+13.0.1.0.13
+===========
+SV-179: Add fields to CRM configuration menu
