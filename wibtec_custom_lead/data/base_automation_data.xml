@@ -36,6 +36,18 @@ if record.type == 'lead':
             </field>
         </record>
 
+        <record id="assign_contact_from_lead" model="base.automation">
+            <field name="name">ShareVault: Assign Contact in Lead</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+if record:
+    record.assign_contact_lead()
+            </field>
+        </record>
+
         <!--<record id="ir_cron_lead_stage_update" model="ir.cron">
             <field name='name'>CRM: Update Lead Stages</field>
             <field name='interval_number'>1</field>

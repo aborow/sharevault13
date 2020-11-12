@@ -35,7 +35,31 @@ class CrmLead(models.Model):
                                     ('other','Other'),
                                     ], string='Request Type')
 
-
+    @api.model
+    def assign_contact_lead(self):
+        for rec in self:
+            if rec.type == 'lead' and rec.email_from and not rec.partner_id:
+                contact_id = rec.env['res.partner'].search([('email', '=', rec.email_from)], limit=1)
+                if contact_id:
+                    rec.write({'partner_id': contact_id.id})
+                else:
+                    vals_contact = {
+                        'name': rec.name if rec.name else False,
+                        'email': rec.email_from if rec.email_from else False,
+                        'website': rec.website if rec.website else False,
+                        'street': rec.street if rec.street else False,
+                        'street2': rec.street2 if rec.street2 else False,
+                        'city': rec.city if rec.city else False,
+                        'state_id': rec.state_id.id if rec.state_id else False,
+                        'zip': rec.zip if rec.zip else False,
+                        'phone': rec.phone if rec.phone else False,
+                        'mobile': rec.mobile if rec.mobile else False,
+                        'european_union': rec.european_union if rec.european_union else False,
+                        'type': 'contact',
+                    }
+                    partner = rec.env['res.partner']
+                    partner_id = partner.create(vals_contact)
+                    rec.write({'partner_id': partner_id.id})
 
     @api.model
     def update_lead_stages(self):

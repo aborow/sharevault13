@@ -50,3 +50,7 @@ SV-175: Added accept_conditions field
 13.0.1.0.13 & 14
 ================
 SV-179: Add fields to CRM configuration menu
+
+13.0.1.0.16
+===========
+SV-181: Each lead should have an associated contact
