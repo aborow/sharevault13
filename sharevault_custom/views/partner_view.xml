@@ -84,7 +84,7 @@
                                 <field name="hs_last_modified_date"/>
                                 <field name="hs_lastupdated"/>
                                 <field name="hscontact_region"/>
-                                <field name="hs_account_status"/>
+                                
                                 <field name="hs_number_of_times_contacted"/>
                                 <field name="hs_number_of_pageviews"/>
                                 <field name="hs_number_of_sessions"/>
