@@ -22,5 +22,25 @@
                 </xpath>
             </field>
         </record>
+
+
+        <template id="website_blog.blogs_nav" name="Blogs Bar Template">
+            <nav t-attf-class="navbar navbar-expand-sm navbar-light #{additionnal_classes}" t-if="len(blogs) > 1">
+                <div class="container">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="/resources" t-attf-class="nav-link font-weight-bold #{(not blog) and 'active'}">All</a>
+                        </li>
+                        <li class="nav-item" t-foreach="blogs" t-as="nav_blog">
+                            <a t-attf-href="/resources/#{slug(nav_blog)}"
+                               t-attf-class="nav-link #{(blog and nav_blog.id == blog.id) and 'active' or ''}">
+                                <b t-field="nav_blog.name"/>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </template>
+
     </data>
 </odoo>
