@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _, SUPERUSER_ID
 from odoo.exceptions import ValidationError
+import json
+import logging
+from datetime import datetime
+import requests
+_logger = logging.getLogger(__name__)
 
 
 class CrmLead(models.Model):
@@ -34,6 +39,92 @@ class CrmLead(models.Model):
                                     ('partnership_inquiry','Partnership Inquiry'),
                                     ('other','Other'),
                                     ], string='Request Type')
+    x_salesforce_id = fields.Char('SalesForce ID', copy=False)
+    x_salesforce_exported = fields.Boolean('Exported To Salesforce', default=False, copy=False)
+    x_is_updated = fields.Boolean('x_is_updated', default=False, copy=False)
+    x_last_modified_on = fields.Datetime("SF last Modified.", copy=False)
+
+    def write(self, vals):
+        if vals:
+            if 'x_last_modified_on' in vals.keys():
+                if vals['x_last_modified_on']:
+                    vals['x_is_updated'] = True
+                else:
+                    vals['x_is_updated'] = False
+            else:
+                vals['x_is_updated'] = False
+
+        res = super(CrmLead, self).write(vals)
+        return res
+
+    def create_lead_sf_dict(self):
+        sf_lead_dict = {}
+        # sf_lead_dict["LastName"] = str(self.name)
+        # sf_lead_dict["FirstName"] = str(self.name)
+        name_split = self.name.split()
+        sf_lead_dict["FirstName"] = name_split[0]
+        if len(name_split) > 1:
+            lastname = name_split[1::]
+            sf_lead_dict["LastName"] = ' '.join(lastname)
+        else:
+            sf_lead_dict["LastName"] = "."
+        if self.email_from:
+            sf_lead_dict["Email"] = str(self.email_from)
+        if self.company_id:
+            sf_lead_dict["Company"] = str(self.company_id.name)
+        if self.city:
+            sf_lead_dict["City"] = str(self.city)
+        if self.street:
+            sf_lead_dict["Street"] = str(self.street)
+        if self.state_id:
+            sf_lead_dict["State"] = str(self.state_id.name)
+        if self.phone:
+            sf_lead_dict["Phone"] = str(self.phone)
+        if self.mobile:
+            sf_lead_dict["MobilePhone"] = str(self.mobile)
+        if self.zip:
+            sf_lead_dict["PostalCode"] = str(self.zip)
+        if self.country_id:
+            sf_lead_dict["Country"] = str(self.country_id.name)
+        if self.website:
+            sf_lead_dict["Website"] = str(self.website)
+
+        return sf_lead_dict
+
+    def create_lead_in_sf(self, sf_partner_dict):
+        create_in_sf = True
+        sf_config = self.env.user.company_id
+        if not sf_config.sf_access_token:
+            return False
+        headers = sf_config.get_headers(True)
+
+        endpoint = '/services/data/v40.0/sobjects/Lead'
+        parsed_dict = json.dumps(sf_partner_dict)
+        result = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=parsed_dict)
+        if result.status_code in [200, 201]:
+            parsed_result = result.json()
+            if parsed_result.get('id'):
+                self.x_is_updated = True
+                self.x_salesforce_exported = True
+                self.x_last_modified_on = datetime.now()
+                self.x_salesforce_id = parsed_result.get('id')
+                return parsed_result.get('id')
+            else:
+                return False
+        elif result.status_code == 401:
+            sf_config.refresh_token_from_access_token()
+            _logger.info("ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...")
+            return False
+        else:
+            parsed_json = result.json()
+            _logger.error('response Of Partner creation in salesforce  (%s)', str(parsed_json[0].get('message')))
+            return False
+
+    def create_lead_sf(self):
+        for lead in self.browse(self.id):
+            if not lead.x_salesforce_exported:
+                sf_lead_dict = lead.create_lead_sf_dict()
+                lead.create_lead_in_sf(sf_lead_dict)
 
     @api.model
     def assign_contact_lead(self):

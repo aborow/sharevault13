@@ -33,6 +33,7 @@ if record.type == 'lead':
         stage = env['crm.stage'].search([('name', '=', 'Open')], limit=1)
         record.write({'stage_id': stage.id,
                        'lead_type': 'marketing_ql'})
+        record.create_lead_sf()
             </field>
         </record>
 
