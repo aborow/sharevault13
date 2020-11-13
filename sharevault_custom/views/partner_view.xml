@@ -42,6 +42,7 @@
                                 <field name="ownership" attrs="{'invisible':[('company_type','=','company')]}"/>
                             </group>
                             <group>
+                                <field name="salesforce_account_id" attrs="{'invisible':[('company_type','=','company')]}"/>
                                 <field name="ticker" attrs="{'invisible':[('company_type','=','company')]}"/>
                                 <field name="market_capitalization_millions" attrs="{'invisible':[('company_type','=','company')]}"/>
                                 <field name="total_money_raised" attrs="{'invisible':[('company_type','=','company')]}"/>
@@ -179,6 +180,7 @@
                                 <field name="hs_associated_company_id" attrs="{'invisible':[('company_type','=','company')]}"/>
                                 <field name="hs_associated_company" attrs="{'invisible':[('company_type','=','company')]}"/>
                                 <field name="hubspot_score" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_company_region" attrs="{'invisible':[('company_type','=','company')]}"/>
                             </group>
                         </group>
                     </page>
