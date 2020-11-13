@@ -8,75 +8,76 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[last()]" position="after">
-                    <page is="additional_info2" string="Additional Info 2">
+                    <page id="additional_info2" string="Additional Info 2">
                         <group>
                             <group>
-                                <field name="salesforce_campaign_ids" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="department" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="zoomcontactid" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="sv_role" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="linkedin_source" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="linkedin_bio" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="linkedin_connections" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="twitter_username" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="twitter_bio" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="twitter_profile_photo" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="follower_count" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="klout_score" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="interested_learning" attrs="{'invisible':[('company_type','!=','company')]}"/>
+                                <field name="salesforce_campaign_ids" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="department" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="zoomcontactid" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="sv_role" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="linkedin_source" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="linkedin_bio" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="linkedin_connections" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="twitter_username" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="twitter_bio" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="twitter_profile_photo" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="follower_count" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="klout_score" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="interested_learning" attrs="{'invisible':[('company_type','=','company')]}"/>
                                 <field name="company_email_domain_name"/>
-                                <field name="company_news" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="sub_sub_industry" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="sic_description" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="naics_description" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="duns_number" attrs="{'invisible':[('company_type','!=','company')]}"/>
+                                <field name="company_news" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="sub_sub_industry" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="sic_description" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="naics_description" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="duns_number" attrs="{'invisible':[('company_type','=','company')]}"/>
                                 <field name="ip_address"/>
                                 <field name="ip_city"/>
                                 <field name="ip_state_region"/>
                                 <field name="ip_country"/>
                                 <field name="ip_timezone"/>
-                                <field name="year_founded" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="employees" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="annual_revenue" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="total_revenue" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="ownership" attrs="{'invisible':[('company_type','!=','company')]}"/>
+                                <field name="year_founded" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="employees" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="annual_revenue" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="total_revenue" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="ownership" attrs="{'invisible':[('company_type','=','company')]}"/>
                             </group>
                             <group>
-                                <field name="ticker" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="market_capitalization_millions" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="total_money_raised" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="last_funding_round" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="using_sharepoint" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="sharepoint_version" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="currently_with_competitor" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="competitor_expiration_date" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="indications" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="primary_therapy_areas" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="secondary_therapy_areas" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="sub_sector" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="product_area" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="products_managed" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="primary_product" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="dev_phase" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="products_in_dev" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="number_of_products_in_development" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="products_on_market" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="number_of_products_on_the_market" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="licensing_status" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="assetname" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="assettype" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="linkedin_company_page" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="facebook_company_page" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="use_technology_share_documents" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="how_many_deals" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="msa_agreement" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="sharevault_usage_begin_date" attrs="{'invisible':[('company_type','!=','company')]}"/>
+                                <field name="salesforce_account_id" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="ticker" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="market_capitalization_millions" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="total_money_raised" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="last_funding_round" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="using_sharepoint" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="sharepoint_version" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="currently_with_competitor" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="competitor_expiration_date" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="indications" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="primary_therapy_areas" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="secondary_therapy_areas" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="sub_sector" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="product_area" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="products_managed" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="primary_product" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="dev_phase" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="products_in_dev" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="number_of_products_in_development" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="products_on_market" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="number_of_products_on_the_market" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="licensing_status" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="assetname" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="assettype" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="linkedin_company_page" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="facebook_company_page" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="use_technology_share_documents" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="how_many_deals" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="msa_agreement" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="sharevault_usage_begin_date" attrs="{'invisible':[('company_type','=','company')]}"/>
                                 <field name="data_last_updated"/>
                             </group>
                         </group>
                     </page>
 
-                    <page is="hubspot" string="Hubspot">
+                    <page id="hubspot" string="Hubspot">
                         <group>
                             <group>
                                 <field name="hs_company_id"/>
@@ -114,70 +115,72 @@
                                 <field name="hs_first_deal_created_date"/>
                             </group>
                             <group>
-                                <field name="hs_number_of_blockers" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_number_of_contacts_with_a_buying_role" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_number_of_decision_makers" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_number_of_open_deals" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_first_contact_create_date" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_first_deal_created_date" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_lead_status" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_subscription_status" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_bio_convention_status" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_company_owner" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_owner_assigned_date" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_opportunity_stage" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_associated_contacts" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_associated_deals" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_total_open_deal_value" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_associated_company_id" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_associated_company" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_associated_contacts" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_contact_id" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_marketing_emails_bounced" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_marketing_emails_delivered" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_marketing_emails_opened" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_marketing_emails_clicked" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_email_hard_bounce_reason" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_forced_sync_to_sfdc" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_contact_owner" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_original_source" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_original_source_drill_down_1" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_original_source_drill_down_2" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_recycled_flag_marketing" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_unqualified_reason" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_no_sales_calls" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_affiliations" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_affiliate_contact" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_regional_affiliate" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_predictive_lead_score" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_lifecycle_stage" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_mql_type" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_mql_type_date" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_mql_date" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_lead_rating" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_i_agree_to_the_msa" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_recent_conversion" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_recent_conversion_date" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_time_first_seen" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_sends_since_last_engagement" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_time_of_last_session" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_average_pageviews" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_first_page_seen" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_last_page_seen" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_number_of_event_completions" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_number_of_unique_forms_submitted" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_total_number_of_zoom_webinar_registrations" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_total_number_of_zoom_webinars_attended" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_last_registered_zoom_webinar" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_average_zoom_webinar_attendance_duration" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_linkedin_clicks" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_twitter_clicks" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_facebook_clicks" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_google_plus_clicks" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_broadcast_clicks" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_number_of_sales_activities" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_associated_company_id" attrs="{'invisible':[('company_type','!=','company')]}"/>
-                                <field name="hs_associated_company" attrs="{'invisible':[('company_type','!=','company')]}"/>
+                                <field name="hs_number_of_blockers" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_number_of_contacts_with_a_buying_role" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_number_of_decision_makers" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_number_of_open_deals" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_first_contact_create_date" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_first_deal_created_date" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_lead_status" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_subscription_status" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_bio_convention_status" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_company_owner" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_owner_assigned_date" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_opportunity_stage" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_associated_contacts" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_associated_deals" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_total_open_deal_value" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_associated_company_id" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_associated_company" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_associated_contacts" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_contact_id" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_marketing_emails_bounced" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_marketing_emails_delivered" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_marketing_emails_opened" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_marketing_emails_clicked" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_email_hard_bounce_reason" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_forced_sync_to_sfdc" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_contact_owner" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_original_source" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_original_source_drill_down_1" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_original_source_drill_down_2" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_recycled_flag_marketing" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_unqualified_reason" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_no_sales_calls" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_affiliations" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_affiliate_contact" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_regional_affiliate" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_predictive_lead_score" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_lifecycle_stage" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_mql_type" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_mql_type_date" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_mql_date" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_lead_rating" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_i_agree_to_the_msa" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_recent_conversion" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_recent_conversion_date" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_time_first_seen" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_sends_since_last_engagement" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_time_of_last_session" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_average_pageviews" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_first_page_seen" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_last_page_seen" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_number_of_event_completions" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_number_of_unique_forms_submitted" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_total_number_of_zoom_webinar_registrations" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_total_number_of_zoom_webinars_attended" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_last_registered_zoom_webinar" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_average_zoom_webinar_attendance_duration" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_linkedin_clicks" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_twitter_clicks" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_facebook_clicks" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_google_plus_clicks" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_broadcast_clicks" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_number_of_sales_activities" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_associated_company_id" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_associated_company" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hubspot_score" attrs="{'invisible':[('company_type','=','company')]}"/>
+                                <field name="hs_company_region" attrs="{'invisible':[('company_type','=','company')]}"/>
                             </group>
                         </group>
                     </page>
