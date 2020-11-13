@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'ShareVault Custom',
-    'version': '13.4',
+    'version': '13.5',
     'category': 'Tools',
     'author': 'Wibtec',
     'website': 'www.wibtec.com',
@@ -13,7 +13,7 @@
                 'contacts',
                 ],
     'data': [
-            'views/partner_view.xml',
+            #'views/partner_view.xml',
             ],
     'installable': True,
     'auto_install': False,
