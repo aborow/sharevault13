@@ -178,6 +178,7 @@
                                 <field name="hs_number_of_sales_activities" attrs="{'invisible':[('company_type','!=','company')]}"/>
                                 <field name="hs_associated_company_id" attrs="{'invisible':[('company_type','!=','company')]}"/>
                                 <field name="hs_associated_company" attrs="{'invisible':[('company_type','!=','company')]}"/>
+                                <field name="hubSpot_score" attrs="{'invisible':[('company_type','!=','company')]}"/>
                             </group>
                         </group>
                     </page>
