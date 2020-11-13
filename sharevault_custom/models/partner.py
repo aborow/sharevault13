@@ -101,7 +101,7 @@ class Partner(models.Model):
     hs_number_of_sales_activities = fields.Integer(string='HS Number of Sales Activities')
     hs_associated_company_id = fields.Integer(string='HS Associated Company ID')
     hs_associated_company = fields.Char(string='HS Associated Company')
-    hubSpot_score = fields.Integer(string='HubSpot Score')
+    hubspot_score = fields.Integer(string='HubSpot Score')
 
     sv_role = fields.Char(string='SV Role')
     zoomcontactid = fields.Char(string='ZoomContactID')
