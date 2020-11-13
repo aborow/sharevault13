@@ -21,6 +21,25 @@ if record.typ_id and record.typ_id.mail_template_id:
         </record>
 
 
+
+        <record id="send_confirmation_email" model="base.automation">
+            <field name="name">ShareVault: send confirmation email</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.typ_id and record.typ_id.mail_template_id:
+    template = record.typ_id.mail_template_id
+    values = template.generate_email(record.id, fields=None)
+    mail_mail_obj = env['mail.mail']
+    msg_id = mail_mail_obj.create(values)
+    if msg_id:
+        mail_mail_obj.send(msg_id)
+            </field>
+        </record>
+
+
         <record id="create_tracked_link" model="base.automation">
             <field name="name">ShareVault: create tracked link for shared link</field>
             <field name="model_id" ref="documents.model_documents_share"/>
