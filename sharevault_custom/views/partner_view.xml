@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//page[last()]" position="after">
-                    <page is="additional_info2" string="Additional Info 2">
+                    <page id="additional_info2" string="Additional Info 2">
                         <group>
                             <group>
                                 <field name="salesforce_campaign_ids" attrs="{'invisible':[('company_type','=','company')]}"/>
@@ -77,7 +77,7 @@
                         </group>
                     </page>
 
-                    <page is="hubspot" string="Hubspot">
+                    <page id="hubspot" string="Hubspot">
                         <group>
                             <group>
                                 <field name="hs_company_id"/>
