@@ -70,9 +70,14 @@ if record:
             <field name="active" eval="True"/>
             <field name="state">code</field>
             <field name="code">
-if record.type == 'lead' and not record.user_id:
-  if record.team_id and record.team_id.alias_user_id:
-    user_id = record.team_id.alias_user_id
+if record.type == 'lead':
+  user_id = False
+  if not record.user_id:
+    if record.team_id and record.team_id.alias_user_id:
+      user_id = record.team_id.alias_user_id
+  else:
+    user_id = record.user_id
+  if user_id:
     record.write({'user_id':user_id})
     notify_data = dict()
     new_partners = dict()
