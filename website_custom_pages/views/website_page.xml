@@ -4,7 +4,6 @@
 
     <record id="website_change_footer" model="ir.ui.view">
         <field name="name">ShareVault: change footer</field>
-        <field name="model">ir.ui.view</field>
         <field name="inherit_id" search="[('key','=','web.frontend_layout')]"/>
         <field name="arch" type="xml">
             <xpath expr="//footer[@id='bottom']" position="replace">
