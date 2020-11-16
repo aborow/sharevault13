@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-
+    <!--
     <record id="website_change_footer" model="ir.ui.view">
         <field name="name">ShareVault: change footer</field>
         <field name="inherit_id" search="[('key','=','web.frontend_layout')]"/>
@@ -21,6 +21,46 @@
                         </div>
                     </div>
                   </div>
+              </footer>
+            </xpath>
+        </field>
+    </record>
+    -->
+    <record id="website_change_footer" model="ir.ui.view">
+        <field name="name">ShareVault: change footer</field>
+        <field name="inherit_id" search="[('key','=','web.frontend_layout')]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//footer[@id='bottom']" position="replace">
+              <footer t-if="not no_footer" id="bottom" data-anchor="true" class="bg-light o_footer" style="background-color:#fff;">
+                <div class="o_footer_copyright" style="background-color:#fff;color:#000;">
+                  <div class="py-3" style="margin-left:50px;margin-right:50px;">
+
+                    <div class="row" style="margin-bottom:15px;">
+                      <div class="col-sm text-left text-sm-left text-muted">
+                        <img src="/web/image/website/1/logo/My%20Website?unique=c0813bd" class="img img-fluid" width="180px;"/>
+                      </div>
+                      <div class="col-sm text-right text-sm-right" style="font-size:30px;">
+                        <a href="https://facebook.com/sharevault" class="fa fa-facebook-square" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="http://www.youtube.com/sharevault" class="fa fa-youtube-play" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="http://www.twitter.com/sharevault" class="fa fa-twitter" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="https://www.linkedin.com/company/sharevault" class="fa fa-linkedin-square" style="color:#666666;" target="_blank"></a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm text-çeft text-sm-left text-muted" style="padding-left:30px;">
+                        <a href="" class="text-muted">Privacy Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="" class="text-muted">Security Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="" class="text-muted">Legal Notices</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="" class="text-muted">Glossary</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="" class="text-muted">Site Map</a>
+                      </div>
+                      <div class="col-sm text-right text-sm-right text-muted" style="padding-right:30px;">
+                        Copyright © 2020 <span t-field="res_company.name" itemprop="name">Company name</span>. All rights reserved.
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
               </footer>
             </xpath>
         </field>
