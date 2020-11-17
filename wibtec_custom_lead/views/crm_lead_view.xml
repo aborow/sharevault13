@@ -2,6 +2,18 @@
 <odoo>
     <data>
 
+        <record id="crm_case_tree_view_leads_2" model="ir.ui.view">
+            <field name="name">Show source</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[last()]" position="after">
+                    <field name="source_id" optional="false"/>
+                </xpath>
+            </field>
+        </record>
+
+
         <record id="view_crm_stage_inherited" model="ir.ui.view">
             <field name="name">Crm Stage inherit</field>
             <field name="model">crm.stage</field>
@@ -26,10 +38,13 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[last()]" position="after">
                     <field name="request_type"/>
+                    <field name="source_id"/>
                 </xpath>
                 <xpath expr="//group/filter[last()]" position="after">
                     <filter string="Request Type" name="group_by_request_type"
                             context="{'group_by':'request_type'}"/>
+                    <filter string="Source" name="group_by_source"
+                            context="{'group_by':'source_id'}"/>
                 </xpath>
             </field>
         </record>
