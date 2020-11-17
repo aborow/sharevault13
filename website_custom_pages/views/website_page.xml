@@ -48,17 +48,16 @@
                     </div>
                     <div class="row">
                       <div class="col-sm text-çeft text-sm-left text-muted" style="padding-left:30px;">
-                        <a href="" class="text-muted">Privacy Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
-                        <a href="" class="text-muted">Security Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
-                        <a href="" class="text-muted">Legal Notices</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
-                        <a href="" class="text-muted">Glossary</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
-                        <a href="" class="text-muted">Site Map</a>
+                        <a href="https://www.sharevault.com/privacy-policy" class="text-muted" target="_blank">Privacy Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/security-policy" class="text-muted" target="_blank">Security Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/legal-notices" class="text-muted" target="_blank">Legal Notices</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/resources/glossary" class="text-muted" target="_blank">Glossary</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/site-map" class="text-muted" target="_blank">Site Map</a>
                       </div>
                       <div class="col-sm text-right text-sm-right text-muted" style="padding-right:30px;">
                         Copyright © 2020 <span t-field="res_company.name" itemprop="name">Company name</span>. All rights reserved.
                       </div>
                     </div>
-
                   </div>
                 </div>
               </footer>
