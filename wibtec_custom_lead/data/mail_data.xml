@@ -5,14 +5,17 @@
 		<xpath expr="//p[1]" position="inside">
 			<t t-if="object._name == 'crm.lead'">
 				<br/>
-				<span style="margin-top: 8px;"><b>Page submitted on:</b> </span><br/>
+				<span style="margin-top: 8px;"><b>Page submitted on:</b> <t t-esc="object.create_date"/></span><br/>
 				<span style="margin-top: 8px;"><b>Business Email:</b> <t t-esc="object.email_from"/></span><br/>
+				<span style="margin-top: 8px;"><b>Name:</b> <t t-esc="object.contact_name"/></span><br/>
+				<!--
 				<span style="margin-top: 8px;"><b>First Name:</b> <t t-esc="object.contact_name"/></span><br/>
 				<span style="margin-top: 8px;"><b>Last Name:</b> </span><br/>
+				-->
 				<span style="margin-top: 8px;"><b>Job Title:</b> <t t-esc="object.function"/></span><br/>
 				<span style="margin-top: 8px;"><b>Company:</b> <t t-esc="object.partner_name"/></span><br/>
 				<span style="margin-top: 8px;"><b>Phone:</b> <t t-esc="object.phone"/></span><br/>
-				<span style="margin-top: 8px;"><b>Industry:</b> </span>
+				<span style="margin-top: 8px;"><b>Industry:</b> <t t-esc="object.industry"/></span>
 			</t>
 		</xpath>
 	</template>
