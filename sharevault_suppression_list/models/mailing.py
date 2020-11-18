@@ -13,6 +13,8 @@ class MailSuppressionList(models.Model):
     _description = 'Domain Supression List for Emailing'
 
     name = fields.Char('Domain')
+    use_in_webform = fields.Boolean('Use in webforms', default=True)
+    use_in_mailing = fields.Boolean('Use in mailing', default=True)
 
     contact_ids = fields.One2many(
                                 'mail.blacklist',

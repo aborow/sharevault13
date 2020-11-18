@@ -10,7 +10,7 @@
 
 """,
     'depends': [
-                'sharevault',
+                #'sharevault',
                 'mass_mailing',
                 ],
     'data': [
