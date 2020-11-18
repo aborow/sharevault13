@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "ShareVault invoice",
-    'version': '13.0.1.0.20',
+    'version': '13.0.1.0.21',
     'author' : 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Extra tools',
@@ -11,7 +11,7 @@
                 'sharevault',
                 'account',
                 'l10n_us_check_printing',
-                'sale'
+                'sale',
                 ],
     'data': [
                 'data/paper_format.xml',
