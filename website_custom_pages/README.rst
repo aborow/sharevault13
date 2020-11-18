@@ -31,3 +31,7 @@ SV-130: added Campaign in form builder
 13.0.1.0.24
 ===========
 SV-130: modify changes for not logged in user.
+
+13.0.1.0.26
+===========
+SV-195: Footer in document area

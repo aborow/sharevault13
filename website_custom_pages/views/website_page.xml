@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!--
-    <record id="website_change_footer" model="ir.ui.view">
-        <field name="name">ShareVault: change footer</field>
-        <field name="inherit_id" search="[('key','=','web.frontend_layout')]"/>
+    <record id="document_change_footer" model="ir.ui.view">
+        <field name="name">ShareVault Documnent: change footer</field>
+        <field name="inherit_id" search="[('key','=','documents.public_page_layout')]"/>
         <field name="arch" type="xml">
-            <xpath expr="//footer[@id='bottom']" position="replace">
-                <footer t-if="not no_footer" id="bottom" data-anchor="true" class="bg-light o_footer" style="background-color:#fff;">
-                  <div class="o_footer_copyright" style="background-color:#fff;color:#000;">
-                    <div class="container py-3">
-                        <div class="row">
-                            <div class="col-sm text-center text-sm-center text-muted">
-                              <img src="/web/image/6160/footer_logo.png" width="250px;"/>
-                              <h2 style="font-weight:bold;color:#000;">
-                              Copyright © 2020 <span t-field="res_company.name" itemprop="name">Company name</span>. All rights reserved. |
-                              <a href="" style="color:#169ded;">Privacy Policy</a>
-                              </h2>
-                            </div>
-                        </div>
+            <xpath expr="//footer[hasclass('flex-grow-0')]" position="replace">
+                <footer class="bg-light o_footer" style="background-color:#fff; margin-top:130px">
+                <div class="o_footer_copyright" style="background-color:#fff;color:#000;">
+                  <div class="py-3">
+
+                    <div class="row" style="margin-bottom:15px;">
+                      <div class="col-sm text-left text-sm-left text-muted">
+                        <img src="/web/image/website/1/logo/My%20Website?unique=c0813bd" class="img img-fluid" width="180px;"/>
+                      </div>
+                      <div class="col-sm text-right text-sm-right" style="font-size:30px;">
+                        <a href="https://facebook.com/sharevault" class="fa fa-facebook-square" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="http://www.youtube.com/sharevault" class="fa fa-youtube-play" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="http://www.twitter.com/sharevault" class="fa fa-twitter" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="https://www.linkedin.com/company/sharevault" class="fa fa-linkedin-square" style="color:#666666;" target="_blank"></a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm text-çeft text-sm-left text-muted" style="padding-left:30px;">
+                        <a href="https://www.sharevault.com/privacy-policy" class="text-muted" target="_blank">Privacy Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/security-policy" class="text-muted" target="_blank">Security Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/legal-notices" class="text-muted" target="_blank">Legal Notices</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/resources/glossary" class="text-muted" target="_blank">Glossary</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/site-map" class="text-muted" target="_blank">Site Map</a>
+                      </div>
+                      <div class="col-sm text-right text-sm-right text-muted" style="padding-right:30px;">
+                        Copyright © 2020 <span t-field="res_company.name" itemprop="name">Company name</span>. All rights reserved.
+                      </div>
                     </div>
                   </div>
+                </div>
               </footer>
             </xpath>
         </field>
     </record>
-    -->
+
     <record id="website_change_footer" model="ir.ui.view">
         <field name="name">ShareVault: change footer</field>
         <field name="inherit_id" search="[('key','=','web.frontend_layout')]"/>
