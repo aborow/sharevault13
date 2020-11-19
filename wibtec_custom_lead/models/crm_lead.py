@@ -80,8 +80,8 @@ class CrmLead(models.Model):
             sf_lead_dict["State"] = str(self.state_id.name)
         if self.phone:
             sf_lead_dict["Phone"] = str(self.phone)
-        if self.mobile:
-            sf_lead_dict["MobilePhone"] = str(self.mobile)
+        # if self.mobile:
+        #     sf_lead_dict["MobilePhone"] = str(self.mobile)
         if self.zip:
             sf_lead_dict["PostalCode"] = str(self.zip)
         if self.country_id:
