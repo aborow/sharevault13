@@ -197,7 +197,7 @@ class Partner(models.Model):
     status_id = fields.Many2one('res.partner.status', 'Partner Status')
     subindustry_id = fields.Many2one('res.partner.subindustry', 'Sub Industry')
     accindustry_id = fields.Many2one('res.partner.accindustry', 'Accounting Industry')
-    contact_type_id = fields.Many2one('res.partner.contact_type', 'Company Type: ')
+    contact_type_id = fields.Many2one('res.partner.contact_type', 'Business Type')
     matter_id = fields.Many2one('res.partner.matter', 'Subject matter most interested in?')
     tecnology_id = fields.Many2one('res.partner.tecnology', 'Technology solution used to share documents with 3rd parties?')
     confidential_id = fields.Many2one('res.partner.confidential', 'When will be sharing confidential information with a third party?')
