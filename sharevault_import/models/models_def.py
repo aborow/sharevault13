@@ -184,7 +184,7 @@ class BaseModelExtend(models.AbstractModel):
         return super(BaseModelExtend, self)._register_hook()
 
 
-class Base(models.AbstractModel):
+class BaseModelExtend(models.AbstractModel):
     _inherit = 'base'
 
     def _load_records(self, data_list, update=False):
@@ -212,4 +212,4 @@ class Base(models.AbstractModel):
                     except Exception as e:
                         _logger.error("ERROR: %s" % e)
                         pass
-        return super(Base, self)._load_records(data_list, update=update)
+        return super(BaseModelExtend, self)._load_records(data_list, update=update)
