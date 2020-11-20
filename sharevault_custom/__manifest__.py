@@ -13,6 +13,7 @@
                 'contacts',
                 ],
     'data': [
+            'data/country_data.xml',
             'views/partner_view.xml',
             ],
     'installable': True,

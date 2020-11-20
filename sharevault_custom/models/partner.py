@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
+import uuid
+
 from odoo import api, fields, models, tools, _
 
 class Partner(models.Model):
     _inherit = 'res.partner'
+
+    company_type =  fields.Selection(string='Contact Type')
 
     hs_company_id = fields.Integer("HS Company ID")
     hs_create_date = fields.Date("HS Create Date")
@@ -163,3 +167,29 @@ class Partner(models.Model):
     data_last_updated = fields.Date("Data Last Updated")
     salesforce_account_id = fields.Char("Salesforce Account ID")
     hs_company_region = fields.Char("HS Company Region")
+
+
+# These changes are made in order to allow importing any value into the contacts.
+# Whatever the state, it will always be saved.
+class CountryState(models.Model):
+    _inherit = 'res.country.state'
+
+    country_id = fields.Many2one('res.country', required=False)
+    code = fields.Char(required=False)
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name'):
+            if not vals.get('country_id'):
+                aux_country = '[unknown]'
+                Country = self.env['res.country']
+                country_id = Country.search([('name','=',aux_country)])
+                if not country_id:
+                    country_id = Country.create({
+                                                'name': aux_country,
+                                                'code': 'ZZ'
+                                                })
+                vals['country_id'] = country_id.id
+            if not vals.get('code'):
+                vals['code'] = uuid.uuid1()
+        return super(CountryState, self).create(vals)
