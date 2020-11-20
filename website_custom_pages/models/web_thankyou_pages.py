@@ -33,9 +33,10 @@ class MailSuppressionList(models.Model):
     @api.model
     def check_email_domain(self,email):
         result = ''
-        domain = email.split('@')[1]
-        if domain:
-            msl = self.search([('name', '=', domain), ('use_in_webform', '=', True)])
-            if msl:
-                result = 'Please Enter new mail'
+        if '@' in email:
+            domain = email.split('@')[1]
+            if domain:
+                msl = self.search([('name', '=', domain), ('use_in_webform', '=', True)])
+                if msl:
+                    result = 'Please Enter new mail'
         return result
