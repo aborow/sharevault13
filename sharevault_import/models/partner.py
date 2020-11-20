@@ -317,3 +317,15 @@ class Partner(models.Model):
                 aux = msg
             r.write({'check_message': aux.strip()})
         """
+
+
+class ResCountryState(models.Model):
+    _inherit = 'res.country.state'
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name'):
+            state = self.search([('name','=',vals.get('name'))])
+            if not state:
+                del vals['name']
+        return super(ResCountryState, self).create()

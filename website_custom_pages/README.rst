@@ -35,3 +35,7 @@ SV-130: modify changes for not logged in user.
 13.0.1.0.26
 ===========
 SV-195: Footer in document area
+
+13.0.1.0.27
+===========
+SV-193: Check email domain against suppression list

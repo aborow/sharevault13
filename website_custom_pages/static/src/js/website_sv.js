@@ -12,6 +12,25 @@ var qweb = core.qweb;
 
 $(document).ready(function(){
     $('.s_website_form').removeAttr("data-success_page")
+    $("[name='email_from']").change(function(){
+        var email = $("[name='email_from']").val();
+        rpc.query({
+            model: 'mail.suppression_list',
+            method: 'check_email_domain',
+            args: [email],
+        })
+        .then(function(res){
+            if (res != ''){
+                $("[name='email_from']").after('<div id="email_validation" style="color:red"></div>')
+                $('#email_validation').append(res)
+                $("[name='email_from']").val('');
+            }else{
+                $('#email_validation').css('display','none')
+            }
+
+        })
+    }
+    );
 });
 
 publicWidget.registry.form_builder_send.include({
