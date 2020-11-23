@@ -39,3 +39,7 @@ SV-195: Footer in document area
 13.0.1.0.27
 ===========
 SV-193: Check email domain against suppression list
+
+13.0.1.0.28
+===========
+SV-193: Fixed the issue of multiple validation message on mail.

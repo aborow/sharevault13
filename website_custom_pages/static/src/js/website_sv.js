@@ -21,6 +21,9 @@ $(document).ready(function(){
         })
         .then(function(res){
             if (res != ''){
+                if ($('#email_validation')){
+                    $('#email_validation').empty()
+                }
                 $("[name='email_from']").after('<div id="email_validation" style="color:red"></div>')
                 $('#email_validation').append(res)
                 $("[name='email_from']").val('');
