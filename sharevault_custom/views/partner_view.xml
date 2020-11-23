@@ -33,7 +33,9 @@
                                 <field name="ip_address"/>
                                 <field name="ip_city"/>
                                 <field name="ip_state_region"/>
+                                <field name="ip_state_region_code"/>
                                 <field name="ip_country"/>
+                                <field name="ip_country_code"/>
                                 <field name="ip_timezone"/>
                                 <field name="year_founded" attrs="{'invisible':[('company_type','=','company')]}"/>
                                 <field name="employees" attrs="{'invisible':[('company_type','=','company')]}"/>

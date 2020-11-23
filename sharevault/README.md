@@ -135,3 +135,7 @@ SV-151: Add (domain) next to Company
 Version - 13.0.1.0.38
 =====================
 SV-170: Change in Odoo Forms
+
+Version - 13.0.1.0.39
+=====================
+SV-198: Modified ShareVault Selection fields as per value.

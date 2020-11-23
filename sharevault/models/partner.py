@@ -212,11 +212,11 @@ class Partner(models.Model):
                                 ('VP+','VP+')
                                 ], 'Job Level')
 
-    sharevault_activated_user = fields.Selection([('null','null')], 'ShareVault Activated User')
-    sharevault_admin = fields.Selection([('null','null')], 'ShareVault Admin')
+    sharevault_activated_user = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Activated User')
+    sharevault_admin = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Admin')
     sharevault_domain = fields.Selection([('null','null')], 'ShareVault Domain')
     sharevault_email_subscription = fields.Selection([('null','null')], 'ShareVault Email Subscription')
-    sharevault_publisher = fields.Selection([('null','null')], 'ShareVault Publisher')
+    sharevault_publisher = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Publisher')
 
     fax = fields.Char('Fax')
     fax_opt_out = fields.Boolean('Fax Opt Out')
