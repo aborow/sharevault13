@@ -8,13 +8,16 @@
     'summary': 'Custom changes in ShareVault',
     'description': """
 - Hubspt fields
+- Keep website header fixed
 """,
     'depends': [
                 'contacts',
+                'website'
                 ],
     'data': [
             'data/country_data.xml',
             'views/partner_view.xml',
+            'views/website_templates.xml',
             ],
     'installable': True,
     'auto_install': False,

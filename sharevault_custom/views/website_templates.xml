@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_frontend" inherit_id="portal.assets_frontend" name="Website Assets">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/sharevault_custom/static/src/js/content/menu.js"/>
+        </xpath>
+    </template>
+
+</odoo>
