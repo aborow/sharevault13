@@ -187,29 +187,29 @@ class BaseModelExtend(models.AbstractModel):
 class BaseModelExtend(models.AbstractModel):
     _inherit = 'base'
 
-    # def _load_records(self, data_list, update=False):
-    #     if DEBUG_MODE:
-    #         _logger.info("_load_records SUPER")
-    #     # We prepare the data according to SV's rules
-    #     # This way, the rest of the code remains unchanged
-    #     BaseObj = self.env['base']
-    #     for data in data_list:
-    #         if 'xml_id' in data and data.get('xml_id'):
-    #             if 'sharevault' in data.get('xml_id').lower():
-    #                 if DEBUG_MODE:
-    #                     _logger.info("ShareVault import")
-    #                 try:
-    #                     data = BaseObj._sharevault_sharevault_check(data)
-    #                 except Exception as e:
-    #                     _logger.error("ERROR: %s" % e)
-    #                     pass
-    #
-    #             if 'partner' in data.get('xml_id').lower():
-    #                 if DEBUG_MODE:
-    #                     _logger.info("Contact import")
-    #                 try:
-    #                     data = BaseObj._sharevault_contact_check(data)
-    #                 except Exception as e:
-    #                     _logger.error("ERROR: %s" % e)
-    #                     pass
-    #     return super(BaseModelExtend, self)._load_records(data_list, update=update)
+    def _load_records(self, data_list, update=False):
+        if DEBUG_MODE:
+            _logger.info("_load_records SUPER")
+        # We prepare the data according to SV's rules
+        # This way, the rest of the code remains unchanged
+        BaseObj = self.env['base']
+        for data in data_list:
+            if 'xml_id' in data and data.get('xml_id'):
+                if 'sharevault' in data.get('xml_id').lower():
+                    if DEBUG_MODE:
+                        _logger.info("ShareVault import")
+                    try:
+                        data = BaseObj._sharevault_sharevault_check(data)
+                    except Exception as e:
+                        _logger.error("ERROR: %s" % e)
+                        pass
+
+                if 'partner' in data.get('xml_id').lower():
+                    if DEBUG_MODE:
+                        _logger.info("Contact import")
+                    try:
+                        data = BaseObj._sharevault_contact_check(data)
+                    except Exception as e:
+                        _logger.error("ERROR: %s" % e)
+                        pass
+        return super(BaseModelExtend, self)._load_records(data_list, update=update)
