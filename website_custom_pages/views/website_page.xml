@@ -12,7 +12,9 @@
 
                     <div class="row" style="margin-bottom:15px;">
                       <div class="col-sm text-left text-sm-left text-muted">
+                        <a href="https://sharevault.com">
                         <img src="/web/image/website/1/logo/My%20Website?unique=c0813bd" class="img img-fluid" width="180px;"/>
+                        </a>
                       </div>
                       <div class="col-sm text-right text-sm-right" style="font-size:30px;">
                         <a href="https://facebook.com/sharevault" class="fa fa-facebook-square" style="color:#666666;padding-right:15px;" target="_blank"></a>
@@ -37,6 +39,15 @@
                 </div>
               </footer>
             </xpath>
+
+            <xpath expr="//header" position="replace">
+                <header class="mt8">
+                    <a href="https://sharevault.com">
+                        <span class="o_company_logo" t-field="res_company.logo" t-options="{'widget': 'image'}" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+                    </a>
+                </header>
+            </xpath>
+
         </field>
     </record>
 
@@ -51,7 +62,9 @@
 
                     <div class="row" style="margin-bottom:15px;">
                       <div class="col-sm text-left text-sm-left text-muted">
+                          <a href="https://sharevault.com">
                         <img src="/web/image/website/1/logo/My%20Website?unique=c0813bd" class="img img-fluid" width="180px;"/>
+                        </a>
                       </div>
                       <div class="col-sm text-right text-sm-right" style="font-size:30px;">
                         <a href="https://facebook.com/sharevault" class="fa fa-facebook-square" style="color:#666666;padding-right:15px;" target="_blank"></a>
