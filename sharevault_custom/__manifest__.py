@@ -12,7 +12,8 @@
 """,
     'depends': [
                 'contacts',
-                'website'
+                'website',
+                'web',
                 ],
     'data': [
             'data/country_data.xml',

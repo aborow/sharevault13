@@ -1,10 +1,9 @@
-odoo.define('website.content.menu', function (require) {
+odoo.define('sharevault_custom.menu', function (require) {
 'use strict';
 
 var dom = require('web.dom');
 var publicWidget = require('web.public.widget');
 var wUtils = require('website.utils');
-
 publicWidget.registry.affixMenu = publicWidget.Widget.extend({
     selector: 'header.o_affix_enabled',
 
@@ -30,10 +29,11 @@ publicWidget.registry.affixMenu = publicWidget.Widget.extend({
         //this.$headerClone.toggleClass('affixed', wOffset > (hOffset + 300));
 
         // THIS IS HOW IT SHOULD BE
-        this.$headerClone.toggleClass('affixed', wOffset > (hOffset + -50));
+        this.$headerClone.toggleClass('affixed', wOffset > (hOffset - 50));
 
         // Reset opened menus
         this.$dropdowns.add(this.$dropdownMenus).removeClass('show');
         this.$navbarCollapses.removeClass('show').attr('aria-expanded', false);
     },
+    });
 });
