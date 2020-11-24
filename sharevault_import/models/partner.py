@@ -322,10 +322,10 @@ class Partner(models.Model):
 class ResCountryState(models.Model):
     _inherit = 'res.country.state'
 
-    @api.model
-    def create(self, vals):
-        if vals.get('name'):
-            state = self.search([('name','=',vals.get('name'))])
-            if not state:
-                del vals['name']
-        return super(ResCountryState, self).create()
+    # @api.model
+    # def create(self, vals):
+    #     if vals.get('name'):
+    #         state = self.search([('name','=',vals.get('name'))])
+    #         if not state:
+    #             del vals['name']
+    #     return super(ResCountryState, self).create()

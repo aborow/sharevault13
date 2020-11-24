@@ -214,8 +214,8 @@ class Partner(models.Model):
 
     sharevault_activated_user = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Activated User')
     sharevault_admin = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Admin')
-    sharevault_domain = fields.Selection([('null','null')], 'ShareVault Domain')
-    sharevault_email_subscription = fields.Selection([('null','null')], 'ShareVault Email Subscription')
+    sharevault_domain = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Domain')
+    sharevault_email_subscription = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Email Subscription')
     sharevault_publisher = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Publisher')
 
     fax = fields.Char('Fax')
