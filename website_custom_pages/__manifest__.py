@@ -1,12 +1,15 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Website Custom Pages",
-    'version': '13.0.1.0.28',
+    'version': '13.0.1.0.29',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Website',
     'summary': 'Changes to website mode',
-    'description': """SV-120 / SV-130
+    'description': """
+- SV-120
+- SV-130
+- adds live chat
     """,
     'depends': [
                 'website',
