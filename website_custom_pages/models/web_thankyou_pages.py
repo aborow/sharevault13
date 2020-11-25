@@ -38,5 +38,5 @@ class MailSuppressionList(models.Model):
             if domain:
                 msl = self.search([('name', '=', domain), ('use_in_webform', '=', True)])
                 if msl:
-                    result = 'Please Enter new mail'
+                    result = 'Please enter valid business email'
         return result
