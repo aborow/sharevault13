@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="gst_report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="." position="replace">
+<!--            	<template id="sale_order_report_template">-->
+		<t t-call="web.html_container">
+			<!-- <style>-->
+			<!-- div {-->
+			<!-- border-top: 10px solid black;-->
+			<!-- margin-top: 20px;-->
+			<!-- }-->
+			<!-- </style>-->
+			<t t-foreach="docs" t-as="doc">
+				<t t-call="web.external_layout">
+					<style>
+						table {
+						font-family: arial, sans-serif;
+						border-collapse: collapse;
+						width: 100%;
+						border : 1px solid black;
+						}
+						table thead {
+							text-align: center;
+						}
+						td, th {
+						border: 1px solid black;
+						text-align: center;
+						}
+
+						tr:nth-child(even) {
+						background-color: #dddddd;
+						}
+					</style>
+
+					<div class="page">
+						<div class="oe_structure"/>
+						<h2 class="mt16">
+							<t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+								<span t-if="doc.state not in ['draft','sent']">Order Form# </span>
+								<span t-if="doc.state in ['draft','sent']">Quotation # </span>
+							</t>
+							<t t-if="env.context.get('proforma', False) or is_pro_forma">
+								<span>Pro-Forma Invoice # </span>
+							</t>
+							<span t-field="doc.name"/>
+						</h2>
+
+							<div class="row" style="background-color: #b2dadb;padding-top:15px;">
+								<div class="col-4" style="border-top: 3px solid black;margin-right:20px;">
+									<h5 style="text-align:center;"><b>PRIMARY CONTACT</b></h5>
+									<b><span t-esc="doc.partner_id.name"/></b>
+									<span t-field="doc.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;,&quot;email&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+								</div>
+								<div class="col-4" style="border-top: 3px solid black;margin-right:20px;">
+									<h5 style="text-align:center;"><b>EMAIL INVOICE TO</b></h5>
+									<b><span t-esc="doc.partner_invoice_id.name"/></b>
+									<span t-field="doc.partner_invoice_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;,&quot;email&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+								</div>
+								<div class="col-4" style="border-top: 3px solid black;">
+									<h5 style="text-align:center;"><b>SHAREVAULT</b></h5>
+									<b><span t-esc="doc.company_id.name"/></b>
+									<span t-field="doc.company_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;email&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+								</div>
+							</div>
+
+							<div class="row" style="background-color: #b2dadb">
+								<div class="col-4" style="border-top: 3px solid black;margin-bottom:10px;margin-bottom:20px;">
+									<b>Quote Number:</b> <span class="pull-right" t-esc="doc.name"/>
+									<br/>
+								</div>
+							</div>
+
+
+						<div class="row" style="background-color: #b2dadb;">
+							<div class="col-4" style="border-top: 3px solid black;margin-bottom:20px;margin-right:10px;">
+								<b>Subscription Term:</b><span class="pull-right" t-esc="doc.subscription_terms"/>
+								<br/>
+							</div>
+							<div class="col-4" style="border-top: 3px solid black;margin-bottom:20px;margin-right:10px;">
+								<b>Date: </b><span class="pull-right" t-esc="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+								<br/>
+							</div>
+							<div class="col-4" style="border-top: 3px solid black;margin-bottom:20px;margin-bottom:10px;">
+								<b>Expiration:</b><span class="pull-right" t-esc="doc.expiration_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+								<br/>
+							</div>
+						</div>
+						<div class="row " style="background-color: #b2dadb;">
+							<div class="col-4 border-black" style="border-top: 3px solid black;margin-bottom:10px;margin-right:10px;">
+								<b>Payment Frequency:</b> <span class="pull-right" t-esc="doc.payment_frequency"/>
+								<br/>
+							</div>
+							<div class="col-4 border-black" style="border-top: 3px solid black;margin-bottom:10px;margin-right:10px;">
+								<b>Payment Terms:</b> <span class="pull-right" t-esc="doc.payment_term_id.name"/>
+								<br/>
+							</div>
+							<div class="col-4 border-black" style="border-top: 3px solid black;margin-bottom:10px;margin-right:10px;">
+								<b>Payment Methods:</b> <span class="pull-right" t-esc="doc.payment_method.name"/>
+								<br/>
+							</div>
+						</div>
+
+						<br/>
+						<table class="table table-sm o_main_table">
+							<thead style="background-color:black;color:white;text-align:center;">
+								<tr style="text-align:center;">
+									<th name="th_month" class="text-center">MONTHS</th>
+									<th name="th_item" class="text-center">ITEM</th>
+									<th name="th_desc" class="text-center">DESCRIPTION</th>
+									<th name="th_price" class="text-right">ITEM PRICE</th>
+									<th name="th_tot_price" class="text-right">TOTAL PRICE</th>
+								</tr>
+							</thead>
+							<tbody class="sale_tbody">
+								<t t-set="current_subtotal" t-value="0"/>
+								<t t-foreach="doc.order_line" t-as="line">
+									<tr t-att-class="'o_main_table bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+										<td name="td_month">
+											<span t-esc="'{0:,.2f}'.format(int(line.product_uom_qty))" />
+										</td>
+										<td name="td_item" class="text-left">
+											<span t-field="line.product_id.name"/>
+										</td>
+										<td name="td_desc" class="text-left">
+											<span t-field="line.name"/>
+										</td>
+										<td name="td_price" class="text-right">
+											<span t-field="line.price_unit"/>
+										</td>
+										<td name="td_tot_price" class="text-right">
+											 <span t-esc="line.price_subtotal" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+										</td>
+									</tr>
+								</t>
+								<tr class="" style="">
+									<td style="border:none;"/>
+									<td style="border:none;"/>
+									<td name="td_amount_untaxed_label" style="border:none;" class="pull-right"><strong>TOTAL DISCOUNT</strong></td>
+									<td name="td_amount_untaxed" class="text-right border-black">
+										<span t-field="doc.amount_untaxed"/>
+									</td>
+									<td/>
+								</tr>
+								<tr class="">
+									<td style="border:none;"/>
+									<td style="border:none;"/>
+									<td name="td_amount_total_label" style="border:none;" class="pull-right"><strong>MONTHLY TOTAL</strong></td>
+									<td name="td_amount_total" class="text-right">
+										<span t-field="doc.amount_total"/>
+									</td>
+									<td/>
+								</tr>
+								<tr class="">
+									<td style="border:none;"/>
+									<td style="border:none;"/>
+									<td name="td_amount_total_label" style="border:none;" class="pull-right"><strong>DUE UPON RECEIPT</strong></td>
+									<td name="td_amount_total" class="text-right">
+										<span t-field="doc.amount_total"/>
+									</td>
+									<td/>
+								</tr>
+								<tr class="">
+									<td style="border:none;"/>
+									<td style="border:none;"/>
+									<td name="td_amount_total_label" style="border:none;" class="pull-right"><strong>TOTAL SUBSCRIPTION PRICE</strong></td>
+									<td/>
+									<td name="td_amount_total" class="text-right">
+										<strong><span t-field="doc.amount_total"/></strong>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+						<table>
+
+						</table>
+
+						<div class="row">
+							<div><strong>Additional Notes:</strong></div></div>
+						<div class="row">
+							<div style="width: 500px;height: 100px;border: 1px solid black;"/>
+						</div>
+
+					</div>
+					<div class="page" style="page-break-before: always;">
+						<div class="row">
+							<div>
+								<strong>Terms &amp; Conditions</strong><br/>
+								<strong>1. INVOICING &amp; PAYMENT</strong>
+								<p style="padding-left:25px;">
+									Fees for the Purchased Services will be invoiced in advance and otherwise in accordance
+									with the terms set forth in the relevant Order Form. Unless otherwise stated in the Order Form, charges
+									are due upon receipt from the invoice date and all payments made under this Agreement shall be in
+									United States dollars. Prices reflected in the Order Form do not include any taxes, duties, or tariffs
+									and these are the responsibility of the Customer.
+								</p>
+								<p style="padding-left:25px;">
+									Multi-month subscriptions are paid by credit card, wire transfer, or check. Month to month
+									subscriptions must be paid by credit card and are due upon receipt.
+								</p>
+								<strong>2. FINE PRINT - THINGS YOU NEED TO KNOW</strong>
+								<p style="padding-left:25px;">
+									This Order Form incorporates and is subject to the terms and conditions set forth in the current
+									ShareVault Master Subscription Agreement found at <a>https://resources.sharevault.com/sharevault-
+									master-subscription-agreement</a> or a revised Master Subscription Agreement signed by the
+									Customer.
+								</p>
+								<p style="padding-left:25px;">
+									To the extent that the terms and conditions of the Master Subscription Agreement are in conflict with
+									the terms and conditions of this order form, the terms and conditions of this Order Form shall govern.
+								</p>
+								<p style="padding-left:25px;">
+									By signing below, the customer agrees to be bound by the terms and conditions set out in this Order
+									Form and the current Master Subscription Agreement referenced above and on our website or a revised
+									Master Subscription Agreement signed by the customer. The person signing this Order Form has the
+									authority to bind the Customer and agrees that this agreement may be electronically signed. The
+									parties agree the electronic signatures appearing on this Agreement are the same as a hand-written
+									signature for purposes of validity, enforceability, and admissibility.
+								</p>
+								<hr/>
+								<p>
+									<strong style="margin-left:50px;">
+										CUSTOMER APPROVAL: Please sign and return via Docusign, fax (408-228-3308), or email
+										(jnapoli@sharevault.com).
+									</strong>
+								</p>
+								<div class="row col-12" style="padding-top:40px;">
+									<div class="col-4">
+										<span class="margin: 20px 10px;" t-esc="doc.partner_id.parent_id and doc.partner_id.parent_id.name"/>
+										<div style="border-top: 1px solid black;padding-bottom:20px 10px;">
+											<b>Company Name</b>
+											<br/>
+										</div>
+									</div>
+								</div>
+								<div class="row col-12" style="padding-top:40px;">
+									<div class="col-4">
+										<span class="margin: 20px 10px;" t-esc="doc.partner_id.name"/>
+										<div style="border-top: 1px solid black;padding-bottom:20px;">
+											<b>Authorized Contact Name</b>
+											<br/>
+										</div>
+									</div>
+									<div class="col-4">
+										<span class="margin: 20px 10px;" t-esc="doc.partner_id.function"/>
+										<div style="border-top: 1px solid black;padding-bottom:20px;">
+											<b>Authorized Contact Title</b>
+											<br/>
+										</div>
+									</div>
+									<div class="col-4">
+										<br/>
+									</div>
+								</div>
+								<div class="row col-12" style="padding-top:40px;">
+									<div class="col-4">
+										<span class="margin: 20px 10px;"/>
+										<div style="border-top: 1px solid black;padding-bottom:20px;">
+											<b>Authorized Contact Signature:</b>
+											<br/>
+										</div>
+									</div>
+									<div class="col-4">
+										<span class="margin: 20px 10px;" t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y')"/>
+										<div style="border-top: 1px solid black;padding-bottom:20px;">
+											<b>Date</b>
+											<br/>
+										</div>
+									</div>
+									<div class="col-4">
+										<br/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</t>
+			</t>
+		</t>
+<!--	</template>-->
+        </xpath>
+    </template>
+
+</odoo>
