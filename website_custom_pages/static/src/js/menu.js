@@ -1,4 +1,4 @@
-odoo.define('sharevault_custom.menu', function (require) {
+odoo.define('website_custom_pages.menu', function (require) {
 'use strict';
 
 var dom = require('web.dom');

@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Website Custom Pages",
-    'version': '13.0.1.0.29',
+    'version': '13.0.1.0.30',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Website',
@@ -13,6 +13,7 @@
     """,
     'depends': [
                 'website',
+                'web',
                 'crm',
                 'website_form',
                 'website_crm',

@@ -88,6 +88,7 @@
                                 <field name="x_salesforce_exported" readonly="1"/>
                                 <field name="x_is_updated" invisible="1"/>
                                 <field name="x_last_modified_on" readonly="1"/>
+                                <field name="salesforce_response" readonly="1"/>
                             </group>
                         </group>
                     </page>

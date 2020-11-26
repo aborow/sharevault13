@@ -43,3 +43,7 @@ SV-193: Check email domain against suppression list
 13.0.1.0.28
 ===========
 SV-193: Fixed the issue of multiple validation message on mail.
+
+13.0.1.0.30
+===========
+SV-193 and SV-202

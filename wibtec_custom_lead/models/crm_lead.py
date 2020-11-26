@@ -43,6 +43,7 @@ class CrmLead(models.Model):
     x_salesforce_exported = fields.Boolean('Exported To Salesforce', default=False, copy=False)
     x_is_updated = fields.Boolean('x_is_updated', default=False, copy=False)
     x_last_modified_on = fields.Datetime("SF last Modified.", copy=False)
+    salesforce_response = fields.Text('Response')
 
     def write(self, vals):
         if vals:
@@ -88,7 +89,23 @@ class CrmLead(models.Model):
             sf_lead_dict["Country"] = str(self.country_id.name)
         if self.website:
             sf_lead_dict["Website"] = str(self.website)
-
+        if self.lead_type:
+            if self.lead_type == 'marketing_ql':
+                sf_lead_dict["Lead_Type__c"] = 'MQL'
+        sf_lead_dict["LeadSource"] = 'inbound marketing'
+        if self.mql_type:
+            if self.mql_type == 'scorein':
+                sf_lead_dict["FrontSpin_Control__c"] = 'ScoreIn'
+            if self.mql_type == 'pff':
+                sf_lead_dict["FrontSpin_Control__c"] = 'PFF'
+            if self.mql_type == 'contentnibbler':
+                sf_lead_dict["FrontSpin_Control__c"] = 'ContentNibbler'
+            if self.mql_type == 'adhoc':
+                sf_lead_dict["FrontSpin_Control__c"] = 'Adhoc'
+            if self.mql_type == 'chat':
+                sf_lead_dict["FrontSpin_Control__c"] = 'Chat'
+        if self.mql_type_date:
+            sf_lead_dict["MQL_Type_Date__c"] = str(self.mql_type_date)
         return sf_lead_dict
 
     def create_lead_in_sf(self, sf_partner_dict):
@@ -103,6 +120,7 @@ class CrmLead(models.Model):
         result = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=parsed_dict)
         if result.status_code in [200, 201]:
             parsed_result = result.json()
+            self.salesforce_response = 'Successfully Created'
             if parsed_result.get('id'):
                 self.x_is_updated = True
                 self.x_salesforce_exported = True
@@ -113,11 +131,13 @@ class CrmLead(models.Model):
                 return False
         elif result.status_code == 401:
             sf_config.refresh_token_from_access_token()
+            self.salesforce_response = 'ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...'
             _logger.info("ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...")
             return False
         else:
             parsed_json = result.json()
             _logger.error('response Of Partner creation in salesforce  (%s)', str(parsed_json[0].get('message')))
+            self.salesforce_response = str(parsed_json[0].get('message'))
             return False
 
     def create_lead_sf(self):

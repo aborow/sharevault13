@@ -58,3 +58,7 @@ SV-181: Each lead should have an associated contact
 13.0.1.0.17
 ===========
 SV-172: Lifecycle Action - 40+, Subscriber --> marketing qualified lead, add lead to salesforce
+
+13.0.1.0.19
+===========
+SV-172: Lifecycle Action - 40+, Subscriber --> added new fields as per the SF in Odoo

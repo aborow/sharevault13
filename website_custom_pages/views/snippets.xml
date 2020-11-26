@@ -2082,6 +2082,7 @@
                 <link rel="stylesheet" href="/website_custom_pages/static/src/css/tsls.css" t-ignore="true"/>
                 <script type="text/javascript" src="/website_custom_pages/static/src/js/website_sv.js"/>
                 <script type="text/javascript" src="/website_custom_pages/static/src/js/website_custom_pages_editor.js"/>
+                <script type="text/javascript" src="/website_custom_pages/static/src/js/menu.js"/>
                 <!--<script type="text/javascript" href="/website_custom_pages/static/src/js/slick.min.js"/>-->
             </xpath>
         </template>

@@ -35,6 +35,9 @@ $(document).ready(function(){
     }
     );
 });
+$(document).on("keydown", ".s_website_form", function(event) {
+    return event.key != "Enter";
+});
 
 publicWidget.registry.form_builder_send.include({
     send: function (e) {

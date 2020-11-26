@@ -139,3 +139,7 @@ SV-170: Change in Odoo Forms
 Version - 13.0.1.0.39
 =====================
 SV-198: Modified ShareVault Selection fields as per value.
+
+Version - 13.0.1.0.40
+=====================
+SV-172: added values in MQL Type field
