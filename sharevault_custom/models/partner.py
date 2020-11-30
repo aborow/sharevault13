@@ -8,7 +8,7 @@ class Partner(models.Model):
 
     company_type =  fields.Selection(string='Contact Type')
 
-    hs_company_id = fields.Integer("HS Company ID")
+    hs_company_id = fields.Char("HS Company ID")
     hs_create_date = fields.Date("HS Create Date")
     hs_last_modified_date = fields.Date("HS Last Modified Date")
     hs_lastupdated = fields.Date("HS LastUpdated")
@@ -54,7 +54,7 @@ class Partner(models.Model):
     hs_associated_contacts = fields.Char("HS Associated Contacts")
     hs_associated_deals = fields.Char("HS Associated Deals")
     hs_total_open_deal_value = fields.Char("HS Total open deal value")
-    hs_associated_company_id = fields.Integer("HS Associated Company ID")
+    hs_associated_company_id = fields.Char("HS Associated Company ID")
     hs_associated_company = fields.Char("HS Associated Company")
     hs_associated_contacts = fields.Char("HS Associated Contacts")
     hs_account_status = fields.Char("HS Account Status")
