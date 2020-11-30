@@ -103,7 +103,6 @@ class Partner(models.Model):
     hs_google_plus_clicks = fields.Integer("HS Google Plus Clicks")
     hs_broadcast_clicks = fields.Integer("HS Broadcast Clicks")
     hs_number_of_sales_activities = fields.Integer("HS Number of Sales Activities")
-    hs_associated_company_id = fields.Integer("HS Associated Company ID")
     hs_associated_company = fields.Char("HS Associated Company")
     hubspot_score = fields.Integer("HubSpot Score")
     sv_role = fields.Char("SV Role")
