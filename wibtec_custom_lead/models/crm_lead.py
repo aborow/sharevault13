@@ -93,6 +93,9 @@ class CrmLead(models.Model):
             if self.lead_type == 'marketing_ql':
                 sf_lead_dict["Lead_Type__c"] = 'MQL'
         sf_lead_dict["LeadSource"] = 'inbound marketing'
+        sf_lead_dict["Lead_Source_Details__c"] = 'Odoo'
+        if self.source_id:
+            sf_lead_dict['LeadSrcDescr__c'] = self.stage_id.name
         if self.mql_type:
             if self.mql_type == 'scorein':
                 sf_lead_dict["FrontSpin_Control__c"] = 'ScoreIn'
