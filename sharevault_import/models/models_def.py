@@ -33,7 +33,8 @@ def _predict_nextval(self, seq_id):
     return last_value
 
 
-DEBUG_MODE = True
+DEBUG_MODE = False
+DEBUG_MODE_SUMMARY = True
 
 class BaseModelExtend(models.AbstractModel):
     _name = 'basemodel.extend'
@@ -68,10 +69,12 @@ class BaseModelExtend(models.AbstractModel):
 
             if DEBUG_MODE:
                 _logger.info("NEW DATA: %s" % data)
+            if DEBUG_MODE_SUMMARY:
                 if not found_match:
-                    _logger.info("TO CREATE")
+                    _logger.info("TO CREATE (%s)" % data['values']['email'])
                 else:
                     _logger.info("TO UPDATE (%s)" % data['values']['id'])
+            if DEBUG_MODE:
                 _logger.info("---------------------------------------------------")
 
             return data
