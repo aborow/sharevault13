@@ -387,7 +387,9 @@
                                 <group>
                                     <field name="ae_targeted"/>
                                     <!--Hided for individual company type-->
+                                    <!--
                                     <field name="annual_revenue" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                                    -->
                                     <field name="european_union" attrs="{'invisible': [('is_company', '!=', False)]}"/>
                                     <field name="data_source_details"/>
                                     <!--<field name="imported_phone"/>-->
