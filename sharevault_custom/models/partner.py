@@ -175,7 +175,8 @@ class Partner(models.Model):
 class CountryState(models.Model):
     _inherit = 'res.country.state'
 
-    country_id = fields.Many2one('res.country', required=False)
+    country_id = fields.Many2one('res.country', required=False, index=True)
+    name = fields.Char(index=True)
     code = fields.Char(required=False)
 
     @api.model
