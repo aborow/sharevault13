@@ -73,7 +73,10 @@ class BaseModelExtend(models.AbstractModel):
                 if not found_match:
                     _logger.info("TO CREATE (%s)" % data['values']['email'])
                 else:
-                    _logger.info("TO UPDATE (%s)" % data['values']['id'])
+                    _logger.info("TO UPDATE (%s | %s)" % (
+                                                            data['values']['email'],
+                                                            data['values']['id']
+                                                            ))
             if DEBUG_MODE:
                 _logger.info("---------------------------------------------------")
 
