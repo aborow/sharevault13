@@ -77,3 +77,7 @@ SV-176: Invoice Changes
 13.0.1.0.21
 ===============
 SV-191 : Try to Update this App in the Staging2
+
+13.0.1.0.22
+===============
+SV-208: add field for notes on invoice view.

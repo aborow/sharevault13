@@ -137,6 +137,7 @@
                         </thead>
                         <tr>
                             <td>
+                                <span t-field="o.narration"/>
                                 <br/><br/><br/>
                             </td>
                         </tr>
