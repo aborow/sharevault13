@@ -187,7 +187,7 @@
         </record>
 
         <!--Inherit sms view-->
-        <record id="sms_ res_partner_view_form" model="ir.ui.view">
+        <record id="sms_res_partner_view_form" model="ir.ui.view">
             <field name="name">res.partner.view.form.inherit.sms.for.imported.phone</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="sms.res_partner_view_form"/>
