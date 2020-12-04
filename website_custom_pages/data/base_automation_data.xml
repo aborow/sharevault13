@@ -3,10 +3,6 @@
     <data noupdate="1">
 
         <!-- create a lead out of an event attendee -->
-        <!--
-            LACKING STILL, DEALING WITH THE Q&A FIELDS
-            We must know the names/titles of the questions
-        -->
         <record id="create_leads_from_attendees" model="base.automation">
             <field name="name">ShareVault: create leads from attendees</field>
             <field name="model_id" ref="event.model_event_event"/>
@@ -15,6 +11,7 @@
             <field name="active" eval="True"/>
             <field name="state">code</field>
             <field name="code">
+Lead = env['crm.lead']
 for rec in records:
     if rec.state == 'done':
         for at in rec.registration_ids:
@@ -27,7 +24,38 @@ for rec in records:
                         'phone': at.phone,
                         'mobile': at.mobile
                       }
-            env['crm.lead'].create(vals_at)
+            new_lead = Lead.create(vals_at)
+            if new_lead and len(at.answer_ids):
+                # We try to match the questions/answers with values in crm.lead
+                for qa in at.answer_ids:
+                    field = env['ir.model.fields'].search([
+                                                          ('model_id.model','=','crm.lead'),
+                                                          ('field_description','=',qa.question_id.title)
+                                                          ])
+                    if field:
+                        try:
+                            aux = {}
+                            if field.ttype == 'char':
+                                aux[field.name] = qa.name
+                            else:
+                                answer = qa.name.lower().strip()
+                                if field.ttype == 'boolean':
+                                    if answer == 'yes':
+                                        answer = True
+                                    elif answer == 'no':
+                                        answer = False
+                                    aux[field.name] = answer
+                                elif field.ttype == 'integer':
+                                    aux[field.name] = int(answer)
+                                elif field.ttype == 'selection':
+                                    for sel in field.selection_ids:
+                                        if sel.name.lower().strip() == answer:
+                                            aux[field.name] = sel.value
+                                            break
+                                new_lead.write(aux)
+                        except Exception as e:
+                            log(str(e))
+                            pass
             </field>
         </record>
 
