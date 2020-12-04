@@ -18,8 +18,8 @@ class Custom_Zoom_controller(http.Controller):
     # def stringToBase64(s):
     #     return base64.b64encode(bytes(s)).decode('utf-8')
 
-    @http.route('/get_auth_code', type="http", auth="public", website=True)
-    def get_auth_code(self, **kwarg):
+    @http.route('/get_auth_code_zoom', type="http", auth="public", website=True)
+    def get_auth_code_zoom(self, **kwarg):
         if kwarg.get('code'):
             '''Get access Token and store in object'''
             zoom_id = http.request.env['res.users'].sudo().search([('id', '=', http.request.uid)], limit=1).company_id
@@ -30,7 +30,6 @@ class Custom_Zoom_controller(http.Controller):
 
                 combine = client_id + ':' + client_secret
                 userAndPass = base64.b64encode(combine.encode()).decode("ascii")
-                # print('\n commfd ',userAndPass)
 
                 if zoom_id.zoom_request_token_url:
                     redirect_uri = zoom_id.zoom_request_token_url

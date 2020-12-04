@@ -4,7 +4,7 @@
         <field name="name">Zoom Authentication</field>
         <field name="model_id" ref="model_res_company"/>
         <field name="state">code</field>
-        <field name="code">model._scheduler_login_authentication()</field>
+        <field name="code">model._scheduler_login_authentication_zoom()</field>
         <field name="interval_number">2</field>
         <field name="interval_type">hours</field>
         <field name="numbercall">-1</field>

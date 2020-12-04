@@ -1,6 +1,6 @@
 {
     'name': 'Zoom Meetings Odoo Integration',  # 'Odoo Zoom Meetings Connector Integration',
-    'version': '13.0.1.0.1',
+    'version': '13.0.1.0.2',
     'category': 'Other',
     'author': 'Pragmatic TechSoft Pvt Ltd.',
     'website': "www.pragtech.co.in",
@@ -28,6 +28,8 @@ Features
         # 'security/ir.model.access.csv',
         'views/res_company_view.xml',
         'views/meeting_view.xml',
+        'views/meeting_view.xml',
+        'views/schedulers.xml',
         'templates/mail_data.xml',
     ],
     'images': ['static/description/odoo-zoom-integration-gif.gif'],

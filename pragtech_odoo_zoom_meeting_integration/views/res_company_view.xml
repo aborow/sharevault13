@@ -11,11 +11,11 @@
                     <separator name="configuration" string="Zoom Meet Configuration"/>
                     <div class="row">
                         <div class="col-md-4" align="center">
-                            <button string='Authenticate' type="object" name="login" class="oe_highlight"
+                            <button string='Authenticate' type="object" name="zoom_login" class="oe_highlight"
                                     icon="fa-plug"/>
                         </div>
                         <div class="col-md-4" align="center">
-                            <button string='Refresh Token' type="object" name="refresh_token_from_access_token"
+                            <button string='Refresh Token' type="object" name="zoom_refresh_token_from_access_token"
                                     class="oe_highlight" icon="fa-refresh"/>
                         </div>
                     </div>

@@ -27,7 +27,7 @@ class ResCompany(models.Model):
                                    help="User authenticate uri")
     zoom_access_token_url = fields.Char('Authorization Token URL', default="https://zoom.us/oauth/token",
                                       help="Exchange code for refresh and access tokens")
-    zoom_request_token_url = fields.Char('Redirect URL', default="http://localhost:8069/get_auth_code",
+    zoom_request_token_url = fields.Char('Redirect URL', default="http://localhost:8069/get_auth_code_zoom",
                                        help="One of the redirect URIs listed for this project in the developer dashboard.")
     # used for api calling, generated during authorization process.
     zoom_auth_code = fields.Char('Auth Code', help="")
@@ -36,7 +36,7 @@ class ResCompany(models.Model):
     outgoing_server_mail_id = fields.Many2one("ir.mail_server",string="Outgoing mail server")
     
     # @api.multi
-    def sanitize_data(self, field_to_sanitize):
+    def sanitize_data_zoom(self, field_to_sanitize):
         '''
             This method sanitizes the data to remove UPPERCASE and 
             spaces between field chars
@@ -46,7 +46,7 @@ class ResCompany(models.Model):
         return field_to_sanitize.strip()
 
     # @api.multi
-    def get_headers(self, type=False):
+    def get_headers_zoom(self, type=False):
         headers = {}
         headers['Authorization'] = 'Bearer ' + str(self.zoom_access_token)
         headers['accept'] = 'application/json'
@@ -57,7 +57,7 @@ class ResCompany(models.Model):
         return headers
 
     # @api.multi
-    def refresh_token_from_access_token(self):
+    def zoom_refresh_token_from_access_token(self):
         '''
             This method gets access token from refresh token
             and grant type is refresh_token, 
@@ -69,10 +69,10 @@ class ResCompany(models.Model):
         headers = {
             'content-type': "application/x-www-form-urlencoded"
         }
-        zoom_refresh_token = self.sanitize_data(self.zoom_refresh_token)
-        zoom_client_id = self.sanitize_data(self.zoom_client_id)
-        zoom_client_secret = self.sanitize_data(self.zoom_client_secret)
-        zoom_access_token_url = self.sanitize_data(self.zoom_access_token_url)
+        zoom_refresh_token = self.sanitize_data_zoom(self.zoom_refresh_token)
+        zoom_client_id = self.sanitize_data_zoom(self.zoom_client_id)
+        zoom_client_secret = self.sanitize_data_zoom(self.zoom_client_secret)
+        zoom_access_token_url = self.sanitize_data_zoom(self.zoom_access_token_url)
 
         combine = zoom_client_id + ':' + zoom_client_secret
         userAndPass = base64.b64encode(combine.encode()).decode("ascii")
@@ -100,13 +100,13 @@ class ResCompany(models.Model):
             raise Warning("We got a issue !!!! Desc : {}".format(refresh_token_response.text))
 
     @api.model
-    def _scheduler_login_authentication(self):
+    def _scheduler_login_authentication_zoom(self):
         company_id = self.env['res.users'].search([('id', '=', self.env.user.id)], limit=1).company_id
         if self.env.user.company_id:
-            self.env.user.company_id.refresh_token_from_access_token()
+            self.env.user.company_id.zoom_refresh_token_from_access_token()
 
     # @api.multi
-    def login(self):
+    def zoom_login(self):
         url = self.zoom_auth_base_url + '?&response_type=code&client_id=' + self.zoom_client_id + '&redirect_uri=' + self.zoom_request_token_url
         return {
             "type": "ir.actions.act_url",
