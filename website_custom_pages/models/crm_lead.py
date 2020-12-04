@@ -4,6 +4,8 @@ from odoo import api, fields, models
 class Lead(models.Model):
     _inherit = 'crm.lead'
 
+    event_id = fields.Many2one('event.event', 'Event')
+
     information_sharing = fields.Selection([('1_m', '1 Month'),
                                             ('3_m', '3 Months'),
                                             ('6_m', '6 Months'),

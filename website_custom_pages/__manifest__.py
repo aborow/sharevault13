@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Website Custom Pages",
-    'version': '13.0.1.0.30',
+    'version': '13.0.1.0.31',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Website',
@@ -12,9 +12,7 @@
 - adds live chat
     """,
     'depends': [
-                'website',
                 'web',
-                'crm',
                 'website_form',
                 'website_crm',
                 'web_editor',
@@ -24,7 +22,7 @@
                 'base_automation',
                 'website_links',
                 'sharevault_suppression_list',
-                'website_event'
+                'website_event_questions'
                 ],
     'data': [
             'security/ir.model.access.csv',
@@ -35,6 +33,7 @@
             'views/snippets.xml',
             'views/web_thankyou_pages_view.xml',
             'views/lead_views.xml',
+            'views/event_view.xml',
             'views/blog_view.xml',
             'views/document_view.xml',
             'views/source.xml',
