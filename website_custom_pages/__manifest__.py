@@ -23,7 +23,8 @@
                 'website_blog',
                 'base_automation',
                 'website_links',
-                'sharevault_suppression_list'
+                'sharevault_suppression_list',
+                'website_event'
                 ],
     'data': [
             'security/ir.model.access.csv',
