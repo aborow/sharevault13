@@ -6,6 +6,9 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_draft']" position="after">
+                    <button name="get_cancel_invoices" string="Delete Invoices" type="object" invisible="1"/>
+                </xpath>
                 <xpath expr="//field[@name='team_id']" position="after">
                     <field name="sharevault_id"/>
                     <field name="term_start_date"/>

@@ -81,3 +81,7 @@ SV-191 : Try to Update this App in the Staging2
 13.0.1.0.22
 ===============
 SV-208: add field for notes on invoice view.
+
+13.0.1.0.23
+============
+SV-192: Remove invoices and vendor bills

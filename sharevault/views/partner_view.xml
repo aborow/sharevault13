@@ -419,6 +419,7 @@
                                 <group>
                                     <field name="persona_id" attrs="{'invisible': [('is_company', '!=', False)]}"/>
                                     <field name="status_id" string="Status"/>
+                                    <field name="tz"/>
                                     <!-- Sub industry comes based on Industry-->
                                     <field name="subindustry_id" domain="[('industry_id', '=', industry_id)]"/>
                                     <field name="accindustry_id" attrs="{'invisible': [('is_company', '=', False)]}"

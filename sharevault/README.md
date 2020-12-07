@@ -143,3 +143,7 @@ SV-198: Modified ShareVault Selection fields as per value.
 Version - 13.0.1.0.40
 =====================
 SV-172: added values in MQL Type field
+
+Version - 13.0.1.0.41
+=====================
+SV-209: add timezone field to partner record

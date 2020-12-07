@@ -60,6 +60,27 @@ class AccountMove(models.Model):
                                 states={'draft': [('readonly', False)]})
     quota_mb = fields.Char('Quota: MB', compute='get_quota_mb')
 
+    def get_cancel_invoices(self):
+        invoices_list = []
+        move_lines = []
+        payment_list = []
+        move_line = self.env['account.move.line'].search([('parent_state','=','cancel')])
+        for ml in move_line:
+            move_lines.append(str(ml.id))
+        payment = self.env['account.payment'].search([('state','=','cancelled')])
+        for pay in payment:
+            payment_list.append(str(pay.id))
+        invoices = self.search([('state', '=', 'cancel')])
+        for inv in invoices:
+            invoices_list.append(str(inv.id))
+        if move_lines:
+            self.env.cr.execute(""" DELETE FROM  account_move_line WHERE id in %s""", (tuple(move_lines),))
+        if payment_list:
+            self.env.cr.execute(""" DELETE FROM  account_payment WHERE id in %s""", (tuple(payment_list),))
+        if invoices_list:
+            self.env.cr.execute(""" DELETE FROM  account_move WHERE id in %s""", (tuple(invoices_list),))
+
+
     @api.depends('sharevault_id','partner_id')
     def get_quota_mb(self):
         for move in self:
