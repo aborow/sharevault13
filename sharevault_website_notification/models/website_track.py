@@ -42,7 +42,7 @@ class WebsiteTrack(models.Model):
                                         if msg_id:
                                             msg_id.send()
                                             rec.visitor_id.latest_revisit = fields.Date.today()
-            if not rec.page_id.notify:
+            # if not rec.page_id.notify:
                 # if not rec.visitor_id.website_track_ids or rec.visitor_id.create_date >= fields.Date.today() + relativedelta(day=-1) or rec.visitor_id.latest_revisit >= fields.Date.today() + relativedelta(day=-1) or rec.visitor_id.email.split('@')[1] == 'sharevault.com':
                 #     template = self.env['mail.template'].search(
                 #         [('name', '=', 'ShareVault: Website Track Notification')])
