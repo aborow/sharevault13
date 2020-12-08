@@ -43,27 +43,27 @@ class WebsiteTrack(models.Model):
                                             msg_id.send()
                                             rec.visitor_id.latest_revisit = fields.Date.today()
             if not rec.page_id.notify:
-                if not rec.visitor_id.website_track_ids or rec.visitor_id.create_date >= fields.Date.today() + relativedelta(day=-1) or rec.visitor_id.latest_revisit >= fields.Date.today() + relativedelta(day=-1) or rec.visitor_id.email.split('@')[1] == 'sharevault.com':
-                    template = self.env['mail.template'].search(
-                        [('name', '=', 'ShareVault: Website Track Notification')])
-                    if template:
-                        if rec.visitor_id.email:
-                            server = rec.env['ir.mail_server'].search([], order='sequence asc', limit=1)
-                            values = template.generate_email(rec.id, fields=None)
-                            values['mail_server_id'] = server.id
-                            values['email_from'] = rec.env.user.email
-                            values['email_to'] = rec.visitor_id.email
-                            values['recipient_ids'] = False
-                            values['message_type'] = "email"
-                            values['res_id'] = False
-                            values['reply_to'] = False
-                            values['author_id'] = self.env['res.users'].browse(
-                                rec.env.uid).partner_id.id
-                            mail_mail_obj = self.env['mail.mail']
-                            msg_id = mail_mail_obj.sudo().create(values)
-                            if msg_id:
-                                msg_id.send()
-                                rec.visitor_id.latest_revisit = fields.Date.today()
+                # if not rec.visitor_id.website_track_ids or rec.visitor_id.create_date >= fields.Date.today() + relativedelta(day=-1) or rec.visitor_id.latest_revisit >= fields.Date.today() + relativedelta(day=-1) or rec.visitor_id.email.split('@')[1] == 'sharevault.com':
+                #     template = self.env['mail.template'].search(
+                #         [('name', '=', 'ShareVault: Website Track Notification')])
+                #     if template:
+                #         if rec.visitor_id.email:
+                #             server = rec.env['ir.mail_server'].search([], order='sequence asc', limit=1)
+                #             values = template.generate_email(rec.id, fields=None)
+                #             values['mail_server_id'] = server.id
+                #             values['email_from'] = rec.env.user.email
+                #             values['email_to'] = rec.visitor_id.email
+                #             values['recipient_ids'] = False
+                #             values['message_type'] = "email"
+                #             values['res_id'] = False
+                #             values['reply_to'] = False
+                #             values['author_id'] = self.env['res.users'].browse(
+                #                 rec.env.uid).partner_id.id
+                #             mail_mail_obj = self.env['mail.mail']
+                #             msg_id = mail_mail_obj.sudo().create(values)
+                #             if msg_id:
+                #                 msg_id.send()
+                #                 rec.visitor_id.latest_revisit = fields.Date.today()
 
 class WebsitePage(models.Model):
     _inherit = "website.page"
