@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="website_page_form_inherited" model="ir.ui.view">
+            <field name="name">website.page.form.inherited</field>
+            <field name="model">website.page</field>
+            <field name="priority">16</field>
+            <field name="inherit_id" ref="website.website_pages_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='track']" position="after">
+                    <field name="notify"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="website_visitor_form_page_inherited" model="ir.ui.view">
+            <field name="name">website.visitor.view.form.inherit</field>
+            <field name="model">website.visitor</field>
+            <field name="priority">16</field>
+            <field name="inherit_id" ref="website.website_visitor_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='last_connection_datetime']" position="after">
+                    <field name="latest_revisit"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>
