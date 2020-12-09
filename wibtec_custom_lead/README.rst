@@ -62,3 +62,7 @@ SV-172: Lifecycle Action - 40+, Subscriber --> marketing qualified lead, add lea
 13.0.1.0.19
 ===========
 SV-172: Lifecycle Action - 40+, Subscriber --> added new fields as per the SF in Odoo
+
+13.0.1.0.20
+===========
+SV-216: Create a Lead record in Salesforce via Odoo website Form

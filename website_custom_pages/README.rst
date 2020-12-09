@@ -47,3 +47,7 @@ SV-193: Fixed the issue of multiple validation message on mail.
 13.0.1.0.30
 ===========
 SV-193 and SV-202
+
+13.0.1.0.32
+===========
+SV-216: Create a Lead record in Salesforce via Odoo website Form

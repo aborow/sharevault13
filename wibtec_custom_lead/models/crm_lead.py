@@ -95,7 +95,7 @@ class CrmLead(models.Model):
         sf_lead_dict["LeadSource"] = 'inbound marketing'
         sf_lead_dict["Lead_Source_Details__c"] = 'Odoo'
         if self.source_id:
-            sf_lead_dict['LeadSrcDescr__c'] = self.stage_id.name
+            sf_lead_dict['LeadSrcDescr__c'] = self.source_id.name
         if self.mql_type:
             if self.mql_type == 'scorein':
                 sf_lead_dict["FrontSpin_Control__c"] = 'ScoreIn'
@@ -148,6 +148,14 @@ class CrmLead(models.Model):
             if not lead.x_salesforce_exported:
                 sf_lead_dict = lead.create_lead_sf_dict()
                 lead.create_lead_in_sf(sf_lead_dict)
+    @api.model
+    def create_sf_lead(self):
+        if self._context.get('website_id'):
+            for rec in self:
+                rec.create_lead_sf()
+                now = datetime.now()
+                rec.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
+                rec.lead_type = 'marketing_ql'
 
     @api.model
     def assign_contact_lead(self):

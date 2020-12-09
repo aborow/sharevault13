@@ -46,6 +46,8 @@ class WebsiteForm(WebsiteForm):
     def website_form(self, model_name, **kwargs):
         if kwargs.get('name') and kwargs.get('contact_name'):
             kwargs.update({'name': kwargs.get('name') + ' ' + kwargs.get('contact_name') , 'contact_name': kwargs.get('name') + ' ' + kwargs.get('contact_name')})
+        if model_name == 'crm.lead':
+            request.params.update({'mql_type': 'pff', 'mql_type_date': str(fields.Date.today())})
         model_record = request.env['ir.model'].sudo().search([('model', '=', model_name), ('website_form_access', '=', True)])
         if model_record and hasattr(request.env[model_name], 'phone_format'):
             try:

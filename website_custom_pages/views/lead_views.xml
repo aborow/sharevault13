@@ -93,6 +93,8 @@
                 'share_link_id',
                 'typ_id',
                 'campaign_id',
+                'mql_type',
+                'mql_type_date',
             ]"/>
         </function>
     </data>
