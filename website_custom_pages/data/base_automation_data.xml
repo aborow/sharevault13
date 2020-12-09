@@ -25,12 +25,45 @@ for rec in records:
                         'mobile': at.mobile
                       }
             new_lead = Lead.create(vals_at)
-            if new_lead and len(at.answer_ids):
+            if new_lead:
                 # We try to match the questions/answers with values in crm.lead
+
+                for qa in at.free_answer_ids:
+                    field = env['ir.model.fields'].search([
+                                                          ('model_id.model','=','crm.lead'),
+                                                          ('field_description','ilike',qa.question_id.title)
+                                                          ])
+                    if field:
+                        try:
+                            aux = {}
+                            if field.ttype == 'char':
+                                aux[field.name] = qa.answer
+                            else:
+                                answer = qa.answer.lower().strip()
+                                if field.ttype == 'boolean':
+                                    if answer == 'yes':
+                                        answer = True
+                                    elif answer == 'no':
+                                        answer = False
+                                    aux[field.name] = answer
+                                elif field.ttype == 'integer':
+                                    aux[field.name] = int(answer)
+                                elif field.ttype == 'selection':
+                                    for sel in field.selection_ids:
+                                        if sel.name.lower().strip() == answer:
+                                            aux[field.name] = sel.value
+                                            break
+                            if aux:
+                                new_lead.write(aux)
+                        except Exception as e:
+                            log(str(e))
+                            pass
+
+
                 for qa in at.answer_ids:
                     field = env['ir.model.fields'].search([
                                                           ('model_id.model','=','crm.lead'),
-                                                          ('field_description','=',qa.question_id.title)
+                                                          ('field_description','ilike',qa.question_id.title)
                                                           ])
                     if field:
                         try:
@@ -52,6 +85,7 @@ for rec in records:
                                         if sel.name.lower().strip() == answer:
                                             aux[field.name] = sel.value
                                             break
+                            if aux:
                                 new_lead.write(aux)
                         except Exception as e:
                             log(str(e))

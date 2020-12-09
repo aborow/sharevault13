@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Website Custom Pages",
-    'version': '13.0.1.0.32',
+    'version': '13.0.1.0.31',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Website',
@@ -22,7 +22,8 @@
                 'base_automation',
                 'website_links',
                 'sharevault_suppression_list',
-                'website_event_questions'
+                'website_event_questions',
+                'website_event_questions_free_text'
                 ],
     'data': [
             'security/ir.model.access.csv',
