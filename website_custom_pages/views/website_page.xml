@@ -114,6 +114,15 @@ if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
 ;
 </script>
                           <!-- End of LiveChat code -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="1" src="https://www.googletagmanager.com/gtag/js?id=G-EBTMH3JQHW"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EBTMH3JQHW');
+</script>
               </footer>
             </xpath>
         </field>
