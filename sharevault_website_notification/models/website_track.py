@@ -76,5 +76,5 @@ class WebsitePage(models.Model):
 class WebsiteVisitor(models.Model):
     _inherit = "website.visitor"
 
-    latest_revisit = fields.Date('Latest Revisit Date')
+    latest_revisit = fields.Date('Latest Revisit Date', default=lambda self: fields.Date.today())
 

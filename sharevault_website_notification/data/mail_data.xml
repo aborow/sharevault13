@@ -6,21 +6,33 @@
             <field name="model_id" ref="website.model_website_track"/>
             <field name="subject">Website Track Notification</field>
             <field name="body_html" type="html">
-                <div style="text-align: center; margin: 16px 0px 16px 0px;">
-                    ${object.visitor_id.display_name} at ${object.visitor_id.partner_id.company_id.name} visited the page ${object.page_id.name}
-                </div>
-                <br/>
-                <div style="text-align: center; margin: 16px 0px 16px 0px;">
-                    <h3>COMPANY</h3>
-                    <span>${object.visitor_id.partner_id.company_id.name}</span>
-                    <br/>
-                    <h3>CONTACT</h3>
-                    <span>${object.visitor_id.display_name}</span>
-                    <br/>
-                    <span>${object.visitor_id.partner_id.company_id.name}</span>
-                    <br/>
-                    <span>${object.visitor_id.email}</span>
-                </div>
+                <h3><strong>${object.visitor_id.display_name} at ${object.visitor_id.partner_id.company_id.name} visited the page <a style="color: #4097AD;">${object.page_id.name}</a></strong>
+                </h3>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="130px;">
+                            <b>COMPANY</b>
+                            <div style="color: #518A9B;">
+                                ${object.visitor_id.partner_id.company_id.name}
+                            </div>
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="130px;">
+                            <b>CONTACT</b>
+                            <div style="color: #518A9B;">
+                                ${object.visitor_id.display_name}
+                            </div>
+                            <div style="color: #518A9B;">
+                                ${object.visitor_id.partner_id.company_id.name}
+                            </div>
+                            <div style="color: #518A9B;">
+                                ${object.visitor_id.email}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </field>
             <field name="user_signature" eval="False"/>
             <field name="auto_delete" eval="False"/>
