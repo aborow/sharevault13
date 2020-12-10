@@ -22,7 +22,7 @@
                 'base_automation',
                 'website_links',
                 'sharevault_suppression_list',
-                'website_event_questions'
+                'website_event_questions_free_text'
                 ],
     'data': [
             'security/ir.model.access.csv',
