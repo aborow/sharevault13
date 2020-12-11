@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Wibtec Lead Customization",
-    'version': '13.0.1.0.20',
+    'version': '13.0.1.0.21',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Leads',
@@ -14,6 +14,7 @@
                 'website_crm_score',
                 'utm',
                 'odoo_salesforce_connector',
+                'website_custom_pages',
                 ],
     'data': [
             'data/crm_stage_data.xml',

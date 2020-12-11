@@ -66,3 +66,7 @@ SV-172: Lifecycle Action - 40+, Subscriber --> added new fields as per the SF in
 13.0.1.0.20
 ===========
 SV-216: Create a Lead record in Salesforce via Odoo website Form
+
+13.0.1.0.20
+===========
+SV-216: Update company field and added industry in salesforce.

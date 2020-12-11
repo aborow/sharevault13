@@ -24,6 +24,29 @@ from odoo.osv import expression
 from odoo.tools import html2plaintext
 from odoo.tools.misc import get_lang
 
+INDUSTRY = [
+    ('advertising_marketing', 'Advertising & Marketing'),
+    ('agriculture', 'Agriculture'),
+    ('consulting_advisory', 'Consulting & Advisory'),
+    ('education', 'Education'),
+    ('energy / Resources', 'Energy / Resources'),
+    ('entertainment', 'Entertainment'),
+    ('finance', 'Finance'),
+    ('government', 'Government'),
+    ('hospitality', 'Hospitality'),
+    ('legal', 'Legal'),
+    ('life Sciences', 'Life Sciences'),
+    ('manufacturing', 'Manufacturing'),
+    ('not for Profit', 'Not for Profit'),
+    ('other', 'Other'),
+    ('real Estate / Construction', 'Real Estate / Construction'),
+    ('technology', 'Technology'),
+    ('retail', 'Retail'),
+    ('transportation', 'Transportation'),
+    ('unable-To-Locate', 'Unable-To-Locate'),
+    ('cannabis', 'Cannabis')
+]
+
 
 class WebsiteForm(WebsiteForm):
 
@@ -48,6 +71,10 @@ class WebsiteForm(WebsiteForm):
             kwargs.update({'name': kwargs.get('name') + ' ' + kwargs.get('contact_name') , 'contact_name': kwargs.get('name') + ' ' + kwargs.get('contact_name')})
         if model_name == 'crm.lead':
             request.params.update({'mql_type': 'pff', 'mql_type_date': str(fields.Date.today())})
+            if kwargs.get('Industry'):
+                for ind in INDUSTRY:
+                    if ind[1] == kwargs.get('Industry'):
+                        request.params.update({'industry': str(ind[0])})
         model_record = request.env['ir.model'].sudo().search([('model', '=', model_name), ('website_form_access', '=', True)])
         if model_record and hasattr(request.env[model_name], 'phone_format'):
             try:
