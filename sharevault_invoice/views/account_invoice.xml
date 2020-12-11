@@ -47,6 +47,9 @@
                            groups="analytic.group_analytic_accounting"
                            attrs="{'required':[('is_expense', '=', True)],'invisible': [('display_type', 'in', ('line_section', 'line_note'))]}"/>
                 </xpath>
+                <xpath expr="//page[1]/field[@name='narration']" position="attributes">
+                    <attribute name="placeholder">Add a customer note...</attribute>
+                </xpath>
             </field>
         </record>
 

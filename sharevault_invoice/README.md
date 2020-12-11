@@ -85,3 +85,7 @@ SV-208: add field for notes on invoice view.
 13.0.1.0.23
 ============
 SV-192: Remove invoices and vendor bills
+
+13.0.1.0.24
+===========
+SV-220 and SV-197
