@@ -21,13 +21,13 @@ class Board(models.AbstractModel):
         we add the domain right here
         """
         for node in doc.iter(tag="action"):
-            # Get the domain defined in the action and pass it to the action,
-            # added with the partner_id
-            aux_id = int(node.attrib['id'].replace(',',''))
-            action = self.env['ir.actions.act_window'].sudo().browse(aux_id)
-            domain = action.domain
-
             try:
+                # Get the domain defined in the action and pass it to the action,
+                # added with the partner_id
+                aux_id = int(node.attrib['id'].replace(',',''))
+                action = self.env['ir.actions.act_window'].sudo().browse(aux_id)
+                domain = action.domain
+
                 model_id = self.env['ir.model'].sudo().search([
                                             ('model','=',action.res_model)])
                 if self.env['ir.model.fields'].sudo().search([
@@ -44,9 +44,10 @@ class Board(models.AbstractModel):
                     domain = domain.replace('[', '[' + domain_partner + ',')
                 else:
                     domain = "[" + domain_partner + "]"
+
+                node.attrib.update({'domain': domain})
             except Exception as e:
                 _logger.error(e)
                 pass
-            node.attrib.update({'domain': domain})
         res['arch'] = etree.tostring(doc)
         return res
