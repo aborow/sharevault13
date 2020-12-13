@@ -2,6 +2,11 @@
 <odoo>
 
 
+    <template id="website_blog.post_info">
+        <div class="d-flex small flex-wrap mb-1 w-100"></div>
+    </template>
+
+
     <template id="website_blog.post_heading">
         <t t-if="not blog_post.webpage_id">
             <a t-attf-href="/resources/#{slug(blog_post.blog_id)}/post/#{slug(blog_post)}"
