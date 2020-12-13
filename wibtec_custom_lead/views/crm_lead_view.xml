@@ -2,6 +2,28 @@
 <odoo>
     <data>
 
+        <record id=">utm_source_tree_view_inherit" model="ir.ui.view">
+            <field name="name">utm.source.view.tree.inherit</field>
+            <field name="model">utm.source</field>
+            <field name="inherit_id" ref="utm.utm_source_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="source_type"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id=">utm_source_form_view_inherit" model="ir.ui.view">
+            <field name="name">utm.source.view.form.inherit</field>
+            <field name="model">utm.source</field>
+            <field name="inherit_id" ref="utm.utm_source_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="source_type"/>
+                </xpath>
+            </field>
+        </record>
+
         <record id="crm_case_tree_view_leads_2" model="ir.ui.view">
             <field name="name">Show source</field>
             <field name="model">crm.lead</field>
@@ -89,6 +111,11 @@
                                 <field name="x_is_updated" invisible="1"/>
                                 <field name="x_last_modified_on" readonly="1"/>
                                 <field name="salesforce_response" readonly="1"/>
+                            </group>
+                            <group>
+                                <button name="sync_manual" string="Sync Manually to Salesforce" type="object"
+                                        class="oe_highlight"
+                                        attrs="{'invisible': [('x_salesforce_exported', '=', True)]}" invisible="1"/>
                             </group>
                         </group>
                     </page>

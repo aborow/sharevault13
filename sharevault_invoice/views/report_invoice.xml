@@ -57,13 +57,28 @@
                                             <span t-else="" t-esc="name"/>
                                         </td>
                                         <td class="text-right inoice_data">
-                                            <span t-field="l.quantity"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-field="l.quantity"/>
+                                            </t>
                                         </td>
                                         <td class="text-right inoice_data" width="15%">
-                                            <span t-field="l.price_unit"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-field="l.price_unit"/>
+                                            </t>
                                         </td>
                                         <td class="text-right inoice_data" width="10%">
-                                            <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                            </t>
                                         </td>
                                     </tr>
                                 </t>
@@ -76,13 +91,28 @@
                                             <span t-else="" t-esc="name"/>
                                         </td>
                                         <td class="text-right inoice_data">
-                                            <span t-field="l.quantity"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-field="l.quantity"/>
+                                            </t>
                                         </td>
                                         <td class="text-right inoice_data" width="15%">
-                                            <span t-field="l.price_unit"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-field="l.price_unit"/>
+                                            </t>
                                         </td>
                                         <td class="text-right inoice_data" width="10%">
-                                            <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                            </t>
                                         </td>
                                     </tr>
                                 </t>

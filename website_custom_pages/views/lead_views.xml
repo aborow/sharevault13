@@ -95,6 +95,7 @@
                 'campaign_id',
                 'mql_type',
                 'mql_type_date',
+                'industry',
             ]"/>
         </function>
     </data>

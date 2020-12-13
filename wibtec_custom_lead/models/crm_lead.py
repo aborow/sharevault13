@@ -7,6 +7,32 @@ from datetime import datetime
 import requests
 _logger = logging.getLogger(__name__)
 
+# Product- should create salesforce lead, Content - does not create a lead in salesforce
+SOURCE_TYPE = [('product', 'Product'), ('content', 'Content')]
+
+# Industry
+INDUSTRY = [
+    ('advertising_marketing', 'Advertising & Marketing'),
+    ('agriculture', 'Agriculture'),
+    ('consulting_advisory', 'Consulting & Advisory'),
+    ('education', 'Education'),
+    ('energy / Resources', 'Energy / Resources'),
+    ('entertainment', 'Entertainment'),
+    ('finance', 'Finance'),
+    ('government', 'Government'),
+    ('hospitality', 'Hospitality'),
+    ('legal', 'Legal'),
+    ('life Sciences', 'Life Sciences'),
+    ('manufacturing', 'Manufacturing'),
+    ('not for Profit', 'Not for Profit'),
+    ('other', 'Other'),
+    ('real Estate / Construction', 'Real Estate / Construction'),
+    ('technology', 'Technology'),
+    ('retail', 'Retail'),
+    ('transportation', 'Transportation'),
+    ('unable-To-Locate', 'Unable-To-Locate'),
+    ('cannabis', 'Cannabis')
+]
 
 class CrmLead(models.Model):
     _inherit = "crm.lead"
@@ -71,8 +97,8 @@ class CrmLead(models.Model):
             sf_lead_dict["LastName"] = "."
         if self.email_from:
             sf_lead_dict["Email"] = str(self.email_from)
-        if self.company_id:
-            sf_lead_dict["Company"] = str(self.company_id.name)
+        if self.partner_name:
+            sf_lead_dict["Company"] = str(self.partner_name)
         if self.city:
             sf_lead_dict["City"] = str(self.city)
         if self.street:
@@ -94,6 +120,10 @@ class CrmLead(models.Model):
                 sf_lead_dict["Lead_Type__c"] = 'MQL'
         sf_lead_dict["LeadSource"] = 'inbound marketing'
         sf_lead_dict["Lead_Source_Details__c"] = 'Odoo'
+        if self.industry:
+            for ind in INDUSTRY:
+                if ind[0] == self.industry:
+                    sf_lead_dict["Industry"] = str(ind[1])
         if self.source_id:
             sf_lead_dict['LeadSrcDescr__c'] = self.source_id.name
         if self.mql_type:
@@ -152,10 +182,18 @@ class CrmLead(models.Model):
     def create_sf_lead(self):
         if self._context.get('website_id'):
             for rec in self:
-                rec.create_lead_sf()
-                now = datetime.now()
-                rec.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
-                rec.lead_type = 'marketing_ql'
+                if rec.source_id:
+                    if rec.source_id.source_type == 'product':
+                        rec.create_lead_sf()
+                        now = datetime.now()
+                        rec.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
+                        rec.lead_type = 'marketing_ql'
+
+    def sync_manual(self):
+        self.create_lead_sf()
+        now = datetime.now()
+        self.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
+        self.lead_type = 'marketing_ql'
 
     @api.model
     def assign_contact_lead(self):
@@ -292,3 +330,9 @@ class CrmStage(models.Model):
         checked_bool = self.search([('id', '!=', self.id), ('is_recycle_stage', '=', True)], limit=1)
         if self.is_recycle_stage and checked_bool:
             raise ValidationError(_("There's already one checked boolean in record '%s'") % checked_bool.name)
+
+
+class UtmSource(models.Model):
+    _inherit = "utm.source"
+
+    source_type = fields.Selection(SOURCE_TYPE, string="Source Type")

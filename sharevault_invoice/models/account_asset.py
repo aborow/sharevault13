@@ -8,6 +8,8 @@ _logger = logging.getLogger(__name__)
 class AccountAsset(models.Model):
     _inherit = 'account.asset'
 
+    has_neg_value = fields.Boolean('Has Negative Value')
+
     @api.depends('original_move_line_ids', 'original_move_line_ids.account_id', 'asset_type')
     def _compute_value(self):
         res = super(AccountAsset, self)._compute_value()
@@ -17,5 +19,6 @@ class AccountAsset(models.Model):
             for line in record.original_move_line_ids:
                 if line.account_id and (line.account_id.can_create_asset) and line.account_id.create_asset != 'no':
                         total_debit -= line.debit
-            record.original_value = total_credit + total_debit
+                if record.model_id and total_debit < 0 :
+                    record.has_neg_value = True
         return res
