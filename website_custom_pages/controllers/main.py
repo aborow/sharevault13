@@ -55,6 +55,17 @@ class WebsiteForm(WebsiteForm):
         thankyou_pages = request.env['web.thankyou.pages'].sudo().search([('id', '=', typ_id)], limit=1)
         return thankyou_pages.text
 
+    @http.route('/mail_suppression_list', type='json', auth='public')
+    def check_mail_suppression_list(self, email=None):
+        result = ''
+        if '@' in email:
+            domain = email.split('@')[1]
+            if domain:
+                msl = request.env['mail.suppression_list'].sudo().search([('name', '=', domain), ('use_in_webform', '=', True)])
+                if msl:
+                    result = 'Please enter valid business email'
+        return result
+
     def _get_country(self):
         country_code = request.session.geoip and request.session.geoip.get('country_code') or False
         if country_code:

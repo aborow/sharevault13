@@ -15,24 +15,23 @@ $(document).ready(function(){
     $("[name='email_from']").change(function(){
         var email = $("[name='email_from']").val();
         rpc.query({
-            model: 'mail.suppression_list',
-            method: 'check_email_domain',
-            args: [email],
-        })
-        .then(function(res){
-            if (res != ''){
-                if ($('#email_validation')){
-                    $('#email_validation').empty()
-                }
-                $("[name='email_from']").after('<div id="email_validation" style="color:red"></div>')
-                $('#email_validation').append(res)
-                $("[name='email_from']").val('');
-            }else{
-                $('#email_validation').css('display','none')
-            }
-
-        })
-    }
+                    route: '/mail_suppression_list',
+                    params: {
+                        email: email,
+                    },
+                }).then(function (data) {
+                    if (data != ''){
+                        if ($('#email_validation')){
+                            $('#email_validation').empty()
+                        }
+                            $("[name='email_from']").after('<div id="email_validation" style="color:red"></div>')
+                            $('#email_validation').append(data)
+                            $("[name='email_from']").val('');
+                        }else{
+                            $('#email_validation').css('display','none')
+                        }
+                });
+        }
     );
 });
 $(document).on("keydown", ".s_website_form", function(event) {
