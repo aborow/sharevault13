@@ -25,7 +25,62 @@
             </field>
         </record>
 
+        <record id="website_visitor_track_info_form" model="ir.ui.view">
+            <field name="name">website.visitor.track.info.form</field>
+            <field name="model">website.visitor.track.info</field>
+            <field name="arch" type="xml">
+                <form string="Website Visitor Track Info">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="visitor_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                        <page string="Website Visitor Track Info Line">
+                            <field name="visitor_info_ids">
+                                <form>
+                                    <field name="track_info_id" invisible="1"/>
+                                    <field name="page_id"/>
+                                    <field name="track_id"/>
+                                </form>
+                                <tree string="Website Visitor Track Info Line" editable="bottom">
+                                    <field name="track_info_id" invisible="1"/>
+                                    <field name="page_id"/>
+                                    <field name="track_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
+        <record id="website_visitor_track_tree" model="ir.ui.view">
+            <field name="name">website.visitor.track.info.tree</field>
+            <field name="model">website.visitor.track.info</field>
+            <field name="arch" type="xml">
+                <tree string="Website Visitor Track Info" create="0" edit="0">
+                   <field name="visitor_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="website_visitors_track_info_action" model="ir.actions.act_window">
+            <field name="name">Visitors Track Info</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">website.visitor.track.info</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_visitor_track_info_view_menu"
+                  name="Visitors Tracks"
+                  sequence="3"
+                  parent="website.website_visitor_menu"
+                  action="website_visitors_track_info_action"/>
 
     </data>
 </odoo>

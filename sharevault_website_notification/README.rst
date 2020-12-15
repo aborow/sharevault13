@@ -7,3 +7,7 @@ Install the Application => Apps -> Sharevault Website Notification (Technical Na
 13.0.1.0.1
 ==========
 Updated the company field in mail template
+
+13.0.1.0.2
+==========
+Created new object and mail template for send mail with multiple page details in one mail.

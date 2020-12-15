@@ -14,5 +14,17 @@ if record:
             </field>
         </record>
 
+        <record id="cron_website_track_info_mail_send" model="ir.cron">
+            <field name="name">Sharevault: Send Notify mail for website track</field>
+            <field name="model_id" ref="model_website_visitor_track_info"/>
+            <field name="state">code</field>
+            <field name="code">model.send_track_mail()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="active" eval="True"/>
+        </record>
+
     </data>
 </odoo>

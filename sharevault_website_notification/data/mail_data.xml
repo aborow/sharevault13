@@ -37,5 +37,55 @@
             <field name="user_signature" eval="False"/>
             <field name="auto_delete" eval="False"/>
         </record>
+
+        <record id="email_template_web_notification_from_cron" model="mail.template">
+            <field name="name">ShareVault: Website Track Notification from Scheduler</field>
+            <field name="model_id" ref="sharevault_website_notification.model_website_visitor_track_info"/>
+            <field name="subject">Website Track Notification</field>
+            <field name="body_html" type="html">
+                <h3><strong>${object.visitor_id.display_name} at ${object.visitor_id.partner_id and object.visitor_id.partner_id.parent_id and object.visitor_id.partner_id.parent_id.name or object.visitor_id.partner_id and object.visitor_id.partner_id.name or ''} visited below pages:</strong>
+                </h3>
+                <table border="1" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <th>Page</th>
+                        <th>Visited Date Time</th>
+                    </tr>
+                    % for line in object.visitor_info_ids:
+                    <tr>
+                        <td>${line.page_id.name}</td>
+                        <td>${line.track_id.visit_datetime}</td>
+                    </tr>
+                     % endfor
+                </table>
+                <br/>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="130px;">
+                            <b>COMPANY</b>
+                            <div style="color: #518A9B;">
+                                ${object.visitor_id.partner_id and object.visitor_id.partner_id.parent_id and object.visitor_id.partner_id.parent_id.name or object.visitor_id.partner_id and object.visitor_id.partner_id.name or ''}
+                            </div>
+                            <br/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="130px;">
+                            <b>CONTACT</b>
+                            <div style="color: #518A9B;">
+                                ${object.visitor_id.display_name}
+                            </div>
+                            <div style="color: #518A9B;">
+                                ${object.visitor_id.partner_id and object.visitor_id.partner_id.parent_id and object.visitor_id.partner_id.parent_id.name or object.visitor_id.partner_id and object.visitor_id.partner_id.name or ''}
+                            </div>
+                            <div style="color: #518A9B;">
+                                ${object.visitor_id.email}
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="False"/>
+        </record>
     </data>
 </odoo>
