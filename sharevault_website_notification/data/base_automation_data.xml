@@ -10,7 +10,7 @@
             <field name="state">code</field>
             <field name="code">
 if record:
-<!--    record.send_notify_mail()-->
+    record.send_notify_mail()
             </field>
         </record>
 
