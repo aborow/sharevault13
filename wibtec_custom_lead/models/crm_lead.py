@@ -120,12 +120,20 @@ class CrmLead(models.Model):
                 sf_lead_dict["Lead_Type__c"] = 'MQL'
         sf_lead_dict["LeadSource"] = 'inbound marketing'
         sf_lead_dict["Lead_Source_Details__c"] = 'Odoo'
+        sf_lead_dict["Lead_Type__c"] = 'MQL'
+        sf_lead_dict["Type__c"] = 'Prospect'
+        if self.user_id:
+            sf_lead_dict["Owner"] = {
+                "attributes": {"type": "User"},
+                "Email": str(self.user_id.login)
+            }
         if self.industry:
             for ind in INDUSTRY:
                 if ind[0] == self.industry:
                     sf_lead_dict["Industry"] = str(ind[1])
         if self.source_id:
             sf_lead_dict['LeadSrcDescr__c'] = self.source_id.name
+            sf_lead_dict['Form_Name__c'] = self.source_id.name
         if self.mql_type:
             if self.mql_type == 'scorein':
                 sf_lead_dict["FrontSpin_Control__c"] = 'ScoreIn'
