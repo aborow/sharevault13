@@ -47,7 +47,7 @@
                                     <td><span t-field="o.invoice_date_due"/></td>
                                 </tr>
                                 <tr>
-                                    <td class="invoice_data_title">Approval Reference:</td>
+                                    <td class="invoice_data_title">Reference:</td>
                                     <td><span t-field="o.ref"/></td>
                                 </tr>
                                 <tr>
