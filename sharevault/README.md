@@ -147,3 +147,7 @@ SV-172: added values in MQL Type field
 Version - 13.0.1.0.41
 =====================
 SV-209: add timezone field to partner record
+
+Version - 13.0.1.0.42
+=====================
+SV-230: Add MQL type to lead and lead analysis views
