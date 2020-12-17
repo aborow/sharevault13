@@ -89,3 +89,7 @@ SV-192: Remove invoices and vendor bills
 13.0.1.0.24
 ===========
 SV-220 and SV-197
+
+13.0.1.0.25
+===========
+SV-231
