@@ -192,6 +192,7 @@
                     <field name="company_currency"/>
                     <field name="activity_state"/>
                     <field name="activity_ids"/>
+                    <field name="odoo_score"/>
                     <progressbar field="activity_state"
                                  colors='{"planned": "success", "today": "warning", "overdue": "danger"}'
                                  sum_field="planned_revenue"
@@ -235,7 +236,11 @@
                                             <t t-esc="record.partner_id.value"/>
                                         </span>
                                     </div>
-
+                                    <div class="o_kanban_record_bottom">
+                                        <span t-if="record.odoo_score">
+                                            Odoo Score: <field name="odoo_score"/>
+                                        </span>
+                                    </div>
                                     <div class="o_kanban_record_bottom">
                                         <div class="oe_kanban_bottom_left">
                                             <field name="priority" widget="priority" groups="base.group_user"/>
@@ -300,6 +305,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='lead']/group[1]/group[not(@name)][4]" position="replace"/>
                 <xpath expr="//group[@name='lead_priority']/field[@name='score']" position="after">
+                        <field name="odoo_score"/>
                         <button string="Recycle Lead Score" type="object"
                                 name="update_lead_score"
                                 attrs="{'invisible':['|',('type','=','opportunity'),('score','=',0.0)]}"

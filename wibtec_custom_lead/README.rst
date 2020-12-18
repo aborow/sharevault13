@@ -74,3 +74,7 @@ SV-216: Update company field and added industry in salesforce.
 13.0.1.0.22
 ===========
 SV-229: added new field for store linkedin related data.
+
+13.0.1.0.23
+===========
+SV-227/228: adding Hubspot score from Contact record to LEAD record
