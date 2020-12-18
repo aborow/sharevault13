@@ -71,6 +71,13 @@ class CrmLead(models.Model):
     x_last_modified_on = fields.Datetime("SF last Modified.", copy=False)
     salesforce_response = fields.Text('Response')
 
+    # LinkedIn Related fields
+    ad_id = fields.Char("Advertise Id")
+    campaign = fields.Char("Campaign Id")
+    account = fields.Char("Account Id")
+    form = fields.Char("Form Id")
+    test_lead = fields.Boolean("Test Lead")
+
     def write(self, vals):
         if vals:
             if 'x_last_modified_on' in vals.keys():

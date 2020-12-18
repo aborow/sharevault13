@@ -70,3 +70,7 @@ SV-216: Create a Lead record in Salesforce via Odoo website Form
 13.0.1.0.21
 ===========
 SV-216: Update company field and added industry in salesforce.
+
+13.0.1.0.22
+===========
+SV-229: added new field for store linkedin related data.
