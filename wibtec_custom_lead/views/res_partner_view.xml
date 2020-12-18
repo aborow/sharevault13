@@ -2,7 +2,7 @@
 <odoo>
     <data>
 
-        <record id=">res_partner_form_view_inherit_lead_score" model="ir.ui.view">
+        <record id=">contact_form_view_inherit_lead_score" model="ir.ui.view">
             <field name="name">res.partner.view.form.inherit.lead.score</field>
             <field name="model">res.partner</field>
             <field name="priority">1</field>
@@ -16,7 +16,7 @@
             </field>
         </record>
 
-        <record id=">res_partner_kanban_view_inherit_lead_score" model="ir.ui.view">
+        <record id=">contact_kanban_view_inherit_lead_score" model="ir.ui.view">
             <field name="name">res.partner.view.kanban.inherit.lead.score</field>
             <field name="model">res.partner</field>
             <field name="priority">16</field>
