@@ -16,6 +16,9 @@
                             <div id="div_customer_address_shipping">
                                 <t t-if="o.quota_mb">
                                     <b>Storage:&#160;</b><span t-field="o.quota_mb"/>GB
+                                </t><br/>
+                                <t t-if="o.quota_pages">
+                                    <b>Quota: Pages:&#160;</b><span t-field="o.quota_pages"/>
                                 </t>
                             </div>
                         </div>

@@ -93,3 +93,7 @@ SV-220 and SV-197
 13.0.1.0.25
 ===========
 SV-231
+
+13.0.1.0.26
+===========
+SV-220: Add new fields on invoice and its report.

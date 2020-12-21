@@ -13,6 +13,8 @@
                     <field name="sharevault_id"/>
                     <field name="term_start_date"/>
                     <field name="term_end_date"/>
+                    <field name="quota_mb" readonly="1"/>
+                    <field name="quota_pages" readonly="1" force_save="1"/>
                     <!--domain="[('partner_id','=',partner_id)]"-->
                     <!-- for the time being, let's keep this invisible -->
                     <field name="date_creation" readonly="1" force_save="1"

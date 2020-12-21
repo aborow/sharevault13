@@ -21,10 +21,10 @@ class AccountMove(models.Model):
                                 and self.sharevault_id.sv_expiration_dt or False
         if self.sharevault_id:
             self.customer_contact_id = self.sharevault_id and self.sharevault_id.sharevault_owner.id or False
-            self.term_start_date = self.sharevault_id \
-                                   and self.sharevault_id.term_start_date or False
             self.term_end_date = self.sharevault_id \
-                                 and self.sharevault_id.term_end_date or False
+                                 and self.sharevault_id.sv_expiration_dt or False
+            self.quota_pages = self.sharevault_id \
+                                 and self.sharevault_id.quota_pages or False
         else:
             self.term_start_date = False
             self.term_end_date = False
@@ -58,7 +58,8 @@ class AccountMove(models.Model):
     term_end_date = fields.Date('Term End Date',
                                 readonly=True,
                                 states={'draft': [('readonly', False)]})
-    quota_mb = fields.Char('Quota: MB', compute='get_quota_mb')
+    quota_mb = fields.Char('Quota: MB (Size in GB)', compute='get_quota_mb')
+    quota_pages = fields.Char('Quota: pages')
 
     def get_cancel_invoices(self):
         invoices_list = []
