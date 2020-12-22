@@ -97,3 +97,7 @@ SV-231
 13.0.1.0.26
 ===========
 SV-220: Add new fields on invoice and its report.
+
+13.0.1.0.27
+===========
+SV-220: Make sales_type required field.

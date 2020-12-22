@@ -23,7 +23,8 @@
                             invisible="1"/>
                 </xpath>
                 <xpath expr="//field[@name='ref']" position="after">
-                    <field name="sales_type" attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+                    <field name="sales_type" attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))],
+                    'required': [('type', 'in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
                 </xpath>
                 <xpath expr="//field[@name='invoice_date']" position="after">
                     <field name="customer_contact_id" domain="[('parent_id','=',partner_id)]" attrs="{'invisible':[('type', '=', 'in_invoice')]}"/>
