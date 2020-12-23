@@ -31,8 +31,14 @@ if record.team_id:
 if record.type == 'lead':
     if record.lead_type == 'new' and record.score >= 40:
         stage = env['crm.stage'].search([('name', '=', 'Open')], limit=1)
+        usr = env['res.users'].search([('name', '=', 'Marcia Cornwell')], limit=1)
+        sales_team = env['crm.team'].search([('name', '=', 'Sales')], limit=1)
         record.write({'stage_id': stage.id,
-                       'lead_type': 'marketing_ql'})
+                       'lead_type': 'marketing_ql',
+                        'mql_type': 'scorein',
+                        'mql_type_date': datetime.date.today(),
+                        'user_id': usr.id,
+                        'team_id': sales_team.id,})
         record.create_lead_sf()
             </field>
         </record>
@@ -102,7 +108,7 @@ if record.type == 'lead':
   else:
     user_id = record.user_id
   if user_id:
-    record.write({'user_id':user_id})
+    record.write({'user_id':user_id.id})
     notify_data = dict()
     new_partners = dict()
     new_channels = dict()

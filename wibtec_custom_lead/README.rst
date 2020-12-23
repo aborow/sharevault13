@@ -82,3 +82,7 @@ SV-227/228: adding Hubspot score from Contact record to LEAD record
 13.0.1.0.25
 ===========
 SV-228: Cumulative Score (Contact) and SF to odoo leads
+
+13.0.1.0.26
+===========
+SV-239: Please confirm 40+ Lead Score Rule is configured appropriately
