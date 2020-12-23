@@ -105,3 +105,7 @@ SV-220: Make sales_type required field.
 13.0.1.0.28
 ===========
 SV-220: updated the quantity in invoice report.
+
+13.0.1.0.29
+===========
+SV-231: remove (US) after state in an external layout, add code for display only product internal ref and name in deferred revenue. 
