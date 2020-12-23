@@ -64,7 +64,7 @@
 
                                             </t>
                                             <t t-if="not l.display_type in ['line_note','line_section']">
-                                              <span t-field="l.quantity"/>
+                                              <span t-esc="'{:,.0f}'.format(l.quantity)"/>
                                             </t>
                                         </td>
                                         <td class="text-right inoice_data" width="15%">
@@ -98,7 +98,7 @@
 
                                             </t>
                                             <t t-if="not l.display_type in ['line_note','line_section']">
-                                              <span t-field="l.quantity"/>
+                                              <span t-esc="'{:,.0f}'.format(l.quantity)"/>
                                             </t>
                                         </td>
                                         <td class="text-right inoice_data" width="15%">

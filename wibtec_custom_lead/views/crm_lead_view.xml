@@ -113,6 +113,9 @@
                                 <field name="salesforce_response" readonly="1"/>
                             </group>
                             <group>
+                                <field name="is_sf_lead" readonly="1"/>
+                                <field name="sf_last_sync_date" readonly="1"/>
+                                <field name="sf_last_modified_date" readonly="1"/>
                                 <button name="sync_manual" string="Sync Manually to Salesforce" type="object"
                                         class="oe_highlight"
                                         attrs="{'invisible': [('x_salesforce_exported', '=', True)]}" invisible="1"/>

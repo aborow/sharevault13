@@ -61,17 +61,29 @@ if record:
             </field>
         </record>
 
-        <!--<record id="ir_cron_lead_stage_update" model="ir.cron">
-            <field name='name'>CRM: Update Lead Stages</field>
+        <record id="ir_cron_sf_lead_sync_update_cd" model="ir.cron">
+            <field name='name'>SalesForce: Sync Leads of Last 24 Hours ago(Create Date)</field>
             <field name='interval_number'>1</field>
-            <field name='interval_type'>days</field>
+            <field name='interval_type'>hours</field>
             <field name="numbercall">-1</field>
-            <field name="active" eval="True"/>
+            <field name="active" eval="False"/>
             <field name="doall" eval="False"/>
-            <field name="code">model.update_lead_stages()</field>
+            <field name="code">model.sync_lead_from_sfcd()</field>
             <field name="state">code</field>
-            <field name="model_id" ref="model_crm_lead"/>
-        </record>-->
+            <field name="model_id" ref="model_sync_lead_wizard"/>
+        </record>
+
+        <record id="ir_cron_sf_lead_sync_update_md" model="ir.cron">
+            <field name='name'>SalesForce: Sync Leads of Last 24 Hours ago(Modified Date)</field>
+            <field name='interval_number'>1</field>
+            <field name='interval_type'>hours</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="False"/>
+            <field name="doall" eval="False"/>
+            <field name="code">model.sync_lead_from_sfmd()</field>
+            <field name="state">code</field>
+            <field name="model_id" ref="model_sync_lead_wizard"/>
+        </record>
 
 
 

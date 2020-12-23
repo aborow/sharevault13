@@ -81,7 +81,9 @@ class CrmLead(models.Model):
     x_last_modified_on = fields.Datetime("SF last Modified.", copy=False)
     salesforce_response = fields.Text('Response')
     odoo_score = fields.Float('Odoo Score',compute='_compute_score', store=True)
-
+    is_sf_lead = fields.Boolean('Synced from Salesforce', default=False, copy=False)
+    sf_last_modified_date = fields.Datetime('Salesforce Last Modified Date')
+    sf_last_sync_date = fields.Datetime('Last Synced Date')
     # LinkedIn Related fields
     ad_id = fields.Char("Advertise Id")
     campaign = fields.Char("Campaign Id")
@@ -201,7 +203,7 @@ class CrmLead(models.Model):
 
     def create_lead_sf(self):
         for lead in self.browse(self.id):
-            if not lead.x_salesforce_exported:
+            if not lead.x_salesforce_exported and not lead.is_sf_lead:
                 sf_lead_dict = lead.create_lead_sf_dict()
                 lead.create_lead_in_sf(sf_lead_dict)
     @api.model
