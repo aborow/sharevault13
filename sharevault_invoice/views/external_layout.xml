@@ -20,7 +20,7 @@
                             <t t-if="o.company_id.partner_id.street">
                                <br/><span t-field="o.company_id.partner_id.street"/>&#160;,&#160;<span t-field="o.company_id.partner_id.street2"/>
                             </t>
-                            <br/><span t-field="o.company_id.partner_id.city"/>,&#160;<span t-field="o.company_id.partner_id.state_id.name"/>,&#160;<span t-field="o.company_id.partner_id.zip"/>
+                            <br/><span t-field="o.company_id.partner_id.city"/>,&#160;<span t-field="o.company_id.partner_id.state_id"/>,&#160;<span t-field="o.company_id.partner_id.zip"/>
                             <t t-if="o.company_id.partner_id.country_id">
                                 <br/><span t-field="o.company_id.partner_id.country_id"/>
                             </t>
