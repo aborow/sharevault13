@@ -86,3 +86,7 @@ SV-228: Cumulative Score (Contact) and SF to odoo leads
 13.0.1.0.26
 ===========
 SV-239: Please confirm 40+ Lead Score Rule is configured appropriately
+
+13.0.1.0.27
+===========
+SV-229: Fix the issue related to score calculation.
