@@ -108,4 +108,8 @@ SV-220: updated the quantity in invoice report.
 
 13.0.1.0.29
 ===========
-SV-231: remove (US) after state in an external layout, add code for display only product internal ref and name in deferred revenue. 
+SV-231: remove (US) after state in an external layout, add code for display only product internal ref and name in deferred revenue.
+
+13.0.1.0.30
+===========
+SV-231: Removed extra space from invoice report.

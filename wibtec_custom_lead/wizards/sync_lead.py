@@ -108,8 +108,9 @@ class SyncLeadWizard(models.TransientModel):
                                                      limit=1)
             lead_dict['user_id'] = users_obj.id
         if lead_read.get('Status'):
-            stage_obj = self.env['crm.stage'].search([('name', '=', lead_read.get('Status'))],
-                                                     limit=1)
+            stage_obj = self.env['crm.stage'].search(
+                [('name', '=', lead_read.get('Status')), ('is_lead_stage', '=', True)],
+                limit=1)
             lead_dict['stage_id'] = stage_obj.id
         if lead_read.get('Name'):
             lead_dict['name'] = lead_read.get('Name')
@@ -130,6 +131,10 @@ class SyncLeadWizard(models.TransientModel):
             lead_dict['email_from'] = lead_read.get('Email')
         if lead_read.get('FrontSpin_Control__c'):
             lead_dict['phone'] = lead_read.get('Phone')
+        if lead_read.get('DoNotCall'):
+            lead_dict['do_not_call'] = lead_read.get('DoNotCall')
+        if lead_read.get('HasOptedOutOfEmail'):
+            lead_dict['email_opt_out'] = lead_read.get('HasOptedOutOfEmail')
         if lead_read.get('Industry'):
             for ind in INDUSTRY:
                 if ind[1] == lead_read.get('Industry'):

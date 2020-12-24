@@ -116,6 +116,8 @@
                                 <field name="is_sf_lead" readonly="1"/>
                                 <field name="sf_last_sync_date" readonly="1"/>
                                 <field name="sf_last_modified_date" readonly="1"/>
+                                <field name="do_not_call" readonly="1"/>
+                                <field name="email_opt_out" readonly="1"/>
                                 <button name="sync_manual" string="Sync Manually to Salesforce" type="object"
                                         class="oe_highlight"
                                         attrs="{'invisible': [('x_salesforce_exported', '=', True)]}" invisible="1"/>

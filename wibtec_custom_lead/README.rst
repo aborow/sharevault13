@@ -90,3 +90,7 @@ SV-239: Please confirm 40+ Lead Score Rule is configured appropriately
 13.0.1.0.27
 ===========
 SV-229: Fix the issue related to score calculation.
+
+13.0.1.0.29
+===========
+SV-228 and SV-238: SF to odoo leads sync and Updated Odoo Score based on the scheduler.

@@ -42,24 +42,9 @@ class CrmLead(models.Model):
             ('use_opportunities', '=', True)]
         return self.env['crm.team']._get_default_team_id(user_id=user_id, domain=domain)
 
-    def _calculated(self):
-        leads = self.search([])
-        for lead in leads:
-            lead._compute_score()
-
     def _default_stage_id(self):
         team = self._default_team_id(user_id=self.env.uid)
         return self._stage_find(team_id=team.id, domain=[('fold', '=', False)]).id
-
-    @api.depends('score', 'partner_id.hubspot_score')
-    def _compute_score(self):
-        for lead in self:
-            if lead.partner_id.hubspot_score or lead.score:
-                lead.odoo_score = lead.score + lead.partner_id.hubspot_score
-                lead.partner_id.odoo_score = lead.score + lead.partner_id.hubspot_score
-            if lead.partner_id.hubspot_score == 0 or lead.partner_id.hubspot_score < 0:
-                lead.odoo_score = 0
-                lead.partner_id.odoo_score = 0
 
     lead_type = fields.Selection([('new', 'New Lead'),
                                   ('sub', 'Subscriber'),
@@ -85,10 +70,12 @@ class CrmLead(models.Model):
     x_is_updated = fields.Boolean('x_is_updated', default=False, copy=False)
     x_last_modified_on = fields.Datetime("SF last Modified.", copy=False)
     salesforce_response = fields.Text('Response')
-    odoo_score = fields.Float('Odoo Score',compute='_compute_score', store=True)
+    odoo_score = fields.Float('Odoo Score')
     is_sf_lead = fields.Boolean('Synced from Salesforce', default=False, copy=False)
     sf_last_modified_date = fields.Datetime('Salesforce Last Modified Date')
     sf_last_sync_date = fields.Datetime('Last Synced Date')
+    do_not_call = fields.Boolean('Do Not Call')
+    email_opt_out = fields.Boolean('Email Opt Out')
     # LinkedIn Related fields
     ad_id = fields.Char("Advertise Id")
     campaign = fields.Char("Campaign Id")
@@ -264,6 +251,14 @@ class CrmLead(models.Model):
                     rec.write({'stage_id': stage.id,
                                'lead_type': 'marketing_ql'})
         return True
+
+    @api.model
+    def update_odoo_score_leads(self):
+        for rec in self.search([('type', '=', 'lead')]):
+            if rec.partner_id:
+                lead_score = sum(lead.score for lead in rec.search([('partner_id', '=', rec.partner_id.id)]))
+                rec.odoo_score = lead_score + rec.partner_id.hubspot_score
+                rec.partner_id.odoo_score = lead_score + rec.partner_id.hubspot_score
 
     def update_lead_score(self):
         stage = self.env['crm.stage'].search([('is_recycle_stage', '=', True)], limit=1)
