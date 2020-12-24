@@ -18,7 +18,7 @@
                             <!-- <div id="div_company_address"> -->
 <!--                            <span t-field="o.company_id.display_name" id="company_name"/>-->
                             <t t-if="o.company_id.partner_id.street">
-                               <br/><span t-field="o.company_id.partner_id.street"/>&#160;,&#160;<span t-field="o.company_id.partner_id.street2"/>
+                               <br/><span t-field="o.company_id.partner_id.street"/>,&#160;<span t-field="o.company_id.partner_id.street2"/>
                             </t>
                             <br/><span t-field="o.company_id.partner_id.city"/>,&#160;<span t-field="o.company_id.partner_id.state_id.name"/>,&#160;<span t-field="o.company_id.partner_id.zip"/>
                             <t t-if="o.company_id.partner_id.country_id">
