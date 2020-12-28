@@ -212,7 +212,7 @@ class BaseModelExtend(models.AbstractModel):
                     try:
                         data = BaseObj._sharevault_sharevault_check(data)
                     except Exception as e:
-                        _logger.error("ERROR: %s" % e)
+                        # _logger.error("ERROR: %s" % e)
                         pass
 
                 if 'partner' in data.get('xml_id').lower():
