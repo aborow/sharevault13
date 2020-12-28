@@ -1,0 +1,37 @@
+.full-width-context {
+	text-align: center;
+	padding: 52px 0 82px 0
+}
+
+.full-width-context h3 {
+	color: #56c19f;
+	font-size: 16px;
+	line-height: 1.6em;
+	font-weight: 400;
+	letter-spacing: 1.3px;
+	max-width: 650px;
+	margin: 0 auto 19px auto
+}
+
+.full-width-context p {
+	font-size: 24px;
+	line-height: 1.4em;
+	max-width: 650px;
+	margin: 0 auto;
+	font-weight: 300
+}
+
+.full-width-context ul,
+.full-width-context ol {
+	max-width: 680px;
+	margin: 15px auto;
+	text-align: left !important
+}
+
+@media screen and (max-width:767px) {
+	.full-width-context ul li,
+	.full-width-context ol li {
+		font-size: 16px;
+		line-height: 24px
+	}
+}

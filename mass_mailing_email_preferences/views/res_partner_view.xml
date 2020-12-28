@@ -11,25 +11,44 @@
                     <page id="ep_tab" string="Email Preferences" name="email_pref">
                         <group id="ep_tab_group">
                             <group>
-                                <field name="email_preference_confirmation"/>
-                                <field name="email_preference_customer_updates"/>
-                                <field name="email_preference_hubspot_blog"/>
-                                <field name="email_preference_life_science"/>
-                                <field name="email_preference_merger"/>
                                 <field name="email_preference_marketing"/>
+                                <help for="email_preference_marketing"/>
+
+                                <field name="email_preference_white_papers"/>
+                                <field name="email_preference_events"/>
                             </group>
                             <group>
-                                <field name="email_preference_sv_blog"/>
-                                <field name="email_preference_sv_company_info"/>
-                                <field name="email_preference_sv_product_info"/>
-                                <field name="email_preference_sv_subscription"/>
-                                <field name="email_preference_one"/>
-                                <field name="email_preference_subscription_confirmation"/>
+                                <field name="email_preference_blog"/>
+                                <field name="email_preference_company_news"/>
+                                <field name="email_preference_product_news"/>
                             </group>
                         </group>
                     </page>
                 </xpath>
+                <!--
+                <xpath expr="//form/sheet/group/group/field[@name='title']" position="after">
+                    <field name="email_unsubscribe_url" widget="url" invisible="0"/>
+                </xpath>
+                -->
             </field>
         </record>
+
+        <!--
+        <record id="mail.email_template_partner" model="mail.template">
+            <field name="name">Partner Mass Mail</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="partner_to">${object.id}</field>
+            <field name="user_signature" eval="True"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <a href="${object.email_unsubscribe_url}">
+                        Unsubscribe Mail
+                    </a>
+                </div>
+            </field>
+        </record>
+        -->
     </data>
 </odoo>

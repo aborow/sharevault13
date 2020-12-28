@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id=">contact_form_view_inherit_lead_score" model="ir.ui.view">
+            <field name="name">res.partner.view.form.inherit.lead.score</field>
+            <field name="model">res.partner</field>
+            <field name="priority">1</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                        <button id="lead_odoo_score" class="oe_stat_button o_stat_button_info" icon="fa-star">
+                            <field name="odoo_score" widget="statinfo" string="Odoo Score"/>
+                        </button>
+                </div>
+            </field>
+        </record>
+
+        <record id=">contact_kanban_view_inherit_lead_score" model="ir.ui.view">
+            <field name="name">res.partner.view.kanban.inherit.lead.score</field>
+            <field name="model">res.partner</field>
+            <field name="priority">16</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="odoo_score"/>
+                </field>
+                <xpath expr="//div[hasclass('oe_kanban_partner_links')]" position="inside">
+                    <span t-if="record.odoo_score">
+                        Odoo Score: <field name="odoo_score"/>
+                    </span>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- View record for update customers -->
+    	<record id="view_update_customers" model="ir.ui.view">
+            <field name="name">update.customers.form.wizard</field>
+            <field name="model">update.customers</field>
+            <field name="arch" type="xml">
+                <form string="Update Customers">
+                    <group>
+                        <group>
+                            <field name="file"/>
+                        </group>
+                    </group>
+                    <p>
+                    Are you sure you want to Update Customers?
+                    </p>
+                    <footer>
+                        <button name="update_customer" string="Update Customer" type="object" class="oe_highlight"/>
+                        <button name="Cancel" string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    	<!-- Start Add Action for Menu "update Customers" -->
+        <record id="action_update_customers" model="ir.actions.act_window">
+            <field name="name">Update Customers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">update.customers</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Menuitem for update Customers -->
+        <menuitem id="menu_update_partner_address" 
+            parent="contacts.res_partner_menu_config"
+            action="action_update_customers"
+            string="Update Customers"
+            sequence="5"
+            active="0"
+        />
+
+    </data>
+</odoo>

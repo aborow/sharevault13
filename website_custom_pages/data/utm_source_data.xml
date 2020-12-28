@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="utm_source_web_whitepaper" model="utm.source">
+            <field name="name">WEB_whitepaper</field>
+        </record>
+
+        <record id="utm_source_web_demo" model="utm.source">
+            <field name="name">WEB_demo</field>
+        </record>
+
+        <record id="utm_source_web_contact" model="utm.source">
+            <field name="name">WEB_contact</field>
+        </record>
+
+
+    </data>
+</odoo>

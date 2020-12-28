@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- create a lead out of an event attendee -->
+        <record id="create_leads_from_attendees" model="base.automation">
+            <field name="name">ShareVault: create leads from attendees</field>
+            <field name="model_id" ref="event.model_event_event"/>
+            <field name="trigger">on_write</field>
+            <field name="trigger_field_ids" eval="[(6,0,[ref('event.field_event_event__state')])]"/>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+Lead = env['crm.lead']
+for rec in records:
+    if rec.state == 'done':
+        for at in rec.registration_ids:
+            vals_at = {
+                        'event_id': rec.id,
+                        'name': '%s (%s)' % (rec.name, at.name),
+                        'partner_id': at.partner_id and at.partner_id.id or False,
+                        'contact_name': at.name,
+                        'email_from': at.email,
+                        'phone': at.phone,
+                        'mobile': at.mobile
+                      }
+            new_lead = Lead.create(vals_at)
+            if new_lead:
+                # We try to match the questions/answers with values in crm.lead
+
+                for qa in at.free_answer_ids:
+                    field = env['ir.model.fields'].search([
+                                                          ('model_id.model','=','crm.lead'),
+                                                          ('field_description','ilike',qa.question_id.title)
+                                                          ])
+                    if field:
+                        try:
+                            aux = {}
+                            if field.ttype == 'char':
+                                aux[field.name] = qa.answer
+                            else:
+                                answer = qa.answer.lower().strip()
+                                if field.ttype == 'boolean':
+                                    if answer == 'yes':
+                                        answer = True
+                                    elif answer == 'no':
+                                        answer = False
+                                    aux[field.name] = answer
+                                elif field.ttype == 'integer':
+                                    aux[field.name] = int(answer)
+                                elif field.ttype == 'selection':
+                                    for sel in field.selection_ids:
+                                        if sel.name.lower().strip() == answer:
+                                            aux[field.name] = sel.value
+                                            break
+                            if aux:
+                                new_lead.write(aux)
+                        except Exception as e:
+                            log(str(e))
+                            pass
+
+
+                for qa in at.answer_ids:
+                    field = env['ir.model.fields'].search([
+                                                          ('model_id.model','=','crm.lead'),
+                                                          ('field_description','ilike',qa.question_id.title)
+                                                          ])
+                    if field:
+                        try:
+                            aux = {}
+                            if field.ttype == 'char':
+                                aux[field.name] = qa.name
+                            else:
+                                answer = qa.name.lower().strip()
+                                if field.ttype == 'boolean':
+                                    if answer == 'yes':
+                                        answer = True
+                                    elif answer == 'no':
+                                        answer = False
+                                    aux[field.name] = answer
+                                elif field.ttype == 'integer':
+                                    aux[field.name] = int(answer)
+                                elif field.ttype == 'selection':
+                                    for sel in field.selection_ids:
+                                        if sel.name.lower().strip() == answer:
+                                            aux[field.name] = sel.value
+                                            break
+                            if aux:
+                                new_lead.write(aux)
+                        except Exception as e:
+                            log(str(e))
+                            pass
+            </field>
+        </record>
+
+
+
+        <record id="send_thankyou_email" model="base.automation">
+            <field name="name">ShareVault: send thank you email</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.typ_id and record.typ_id.mail_template_id:
+    template = record.typ_id.mail_template_id
+    values = template.generate_email(record.id, fields=None)
+    values['body_html'] = record.typ_id.text
+    mail_mail_obj = env['mail.mail']
+    msg_id = mail_mail_obj.create(values)
+    if msg_id:
+        mail_mail_obj.send(msg_id)
+            </field>
+        </record>
+
+
+
+        <record id="send_confirmation_email" model="base.automation">
+            <field name="name">ShareVault: send confirmation email</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.typ_id and record.typ_id.mail_template_id:
+    template = record.typ_id.mail_template_id
+    values = template.generate_email(record.id, fields=None)
+    mail_mail_obj = env['mail.mail']
+    msg_id = mail_mail_obj.create(values)
+    if msg_id:
+        mail_mail_obj.send(msg_id)
+            </field>
+        </record>
+
+
+        <record id="create_tracked_link" model="base.automation">
+            <field name="name">ShareVault: create tracked link for shared link</field>
+            <field name="model_id" ref="documents.model_documents_share"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+url = env['link.tracker'].sudo().create({
+                                        'title': record.name,
+                                        'url': record.full_url
+                                        })
+if url:
+    record.write({'tracked_link_id':url.id})
+            </field>
+        </record>
+
+
+        <record id="set_shared_link" model="base.automation">
+            <field name="name">ShareVault: set shared link in lead</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.typ_id and record.typ_id.shared_link_id:
+    record.write({'share_link_id':record.typ_id.shared_link_id.id})
+            </field>
+        </record>
+
+
+
+<!--
+        <record id="send_link_whitepaper" model="base.automation">
+            <field name="name">ShareVault: send link for white paper</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.source_id \
+    and record.source_id.name.strip().startswith('WEB_whitepaper')\
+    and record.share_link_id:
+    # Create a tracked URL
+    url = env['link.tracker'].sudo().create({
+                                            'title': 'White paper for %s (%s)' % (record.contact_name, record.id),
+                                            'url': record.share_link_id.full_url
+                                            })
+    if url:
+        # Save the tracked URL into the lead
+        record.write({'tracked_link_id': url.id})
+
+        # Send the URL using an email template
+        template = env['mail.template'].search([('name','=','ShareVault: send white paper link')])
+        if template:
+            values = template.generate_email(record.id, fields=None)
+            mail_mail_obj = env['mail.mail']
+            msg_id = mail_mail_obj.create(values)
+            if msg_id:
+                mail_mail_obj.send(msg_id)
+            </field>
+        </record>
+-->
+
+    </data>
+</odoo>

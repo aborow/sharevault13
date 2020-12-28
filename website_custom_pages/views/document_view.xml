@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="share_view_form" model="ir.ui.view">
+            <field name="name">ShareVault: add tracked link</field>
+            <field name="model">documents.share</field>
+            <field name="inherit_id" ref="documents.share_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='action']" position="after">
+                    <field name="tracked_link_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="share_view_form_popup" model="ir.ui.view">
+            <field name="name">ShareVault: add tracked link</field>
+            <field name="model">documents.share</field>
+            <field name="inherit_id" ref="documents.share_view_form_popup"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='action']" position="after">
+                    <field name="tracked_link_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

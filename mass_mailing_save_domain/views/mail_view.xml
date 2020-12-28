@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_mail_mass_mailing_form" model="ir.ui.view">
+            <field name="name">Changes to mailing (domain)</field>
+            <field name="model">mailing.mailing</field>
+            <field name="priority" eval="160"/>
+            <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mailing_domain']" position="after">
+                    <div style="text-align:right;">
+                        <button name="call_save_domain"
+                                type="object"
+                                string="SAVE LIST"
+                                attrs="{'invisible':[('mailing_domain','=',False)]}"
+                                class="oe_edit_only"/>
+                    </div>
+                </xpath>
+
+                <xpath expr="//field[@name='mailing_domain']" position="before">
+                    <label for="mailing_domain_id" string="Saved Lists"/>
+                    <field name="mailing_domain_id"/>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record id="mailing_domain_filter" model="ir.ui.view">
+            <field name="name">Mailing Domain</field>
+            <field name="model">mailing.domain</field>
+            <field name="arch" type="xml">
+                <search string="Saved Lists">
+                    <field name="name"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive"
+                            domain="[('active', '=', False)]"/>
+               </search>
+            </field>
+        </record>
+
+        <record id="mailing_domain_form" model="ir.ui.view">
+            <field name="name">Mailing Domains</field>
+            <field name="model">mailing.domain</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="mailing_domain"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="mailing_domain_list_tree" model="ir.ui.view">
+            <field name="name">Saved Lists</field>
+            <field name="model">mailing.domain</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="mailing_domain"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="mailing_domain_list_action" model="ir.actions.act_window">
+            <field name="name">Saved Lists</field>
+            <field name="res_model">mailing.domain</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_mailing_domain"
+                    name="Saved Lists"
+                    parent="mass_mailing.mass_mailing_configuration"
+                    action="mailing_domain_list_action"
+                    sequence="4"/>
+
+    </data>
+</odoo>

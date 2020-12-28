@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--
+        This code replaes the default templates and adds a marker after which
+        we'll be putting the company-specific code
+        -->
+
+        <!-- invoice without payment -->
+        <template id="account.report_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang"
+                        t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+
+                    <!-- look for this when adding code -->
+                    <t t-set="MARKER" t-value="0"/>
+
+                    <t t-if="not o.company_id.default_invoice_template_without_payments">
+                        <t t-call="account.report_invoice_document" t-lang="lang"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <!-- invoice with payments -->
+        <template id="account.report_invoice_with_payments">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang"
+                        t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+
+                    <!-- look for this when adding code -->
+                    <t t-set="MARKER" t-value="0"/>
+
+                    <t t-if="not o.company_id.default_invoice_template_with_payments">
+                        <t t-call="account.report_invoice_document_with_payments" t-lang="lang"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+
+        <!-- This changes the generic call of an invoice so that it will look for
+        a company-specific invoice body
+
+        DYNAMIC TEMPLATE CALL DOES NOT WORK ANY LONGER
+        -->
+        <!--
+        <template id="account.report_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-set="template_to_use" value="account.report_invoice_document"/>
+                    <t t-if="o.company_id.default_invoice_template">
+                        <t t-set="template_to_use" value="o.company_id.default_invoice_template.key"/>
+                    </t>
+                    <t t-call="{template_to_use}" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+        -->
+    </data>
+</odoo>

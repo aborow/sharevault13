@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sales Type and Sharevault added in Form View of Sales-->
+        <record id="sale_order_from_inherit_for_svs" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.for.svs</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group/field[@name='payment_term_id']" position="after">
+                    <!-- SV-147 -->
+                    <field name="sales_type" required="1"/>
+                </xpath>
+                <xpath expr="//field[@name='client_order_ref']"
+                       position="after">
+                    <!-- SV-147 -->
+                    <field name="sharevault_id"/>
+                    <field name="customer_contact_id" invisible="1"/>
+                    <field name="term_start_date"/>
+                    <field name="term_end_date"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

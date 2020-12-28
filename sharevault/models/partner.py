@@ -1,6 +1,16 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, tools, _
 from odoo.exceptions import ValidationError
+from odoo.tools.safe_eval import safe_eval
+import datetime
+import logging
+import json
+from odoo.osv import expression
+_logger = logging.getLogger(__name__)
+evaluation_context = {
+    'datetime': datetime,
+    'context_today': datetime.datetime.now,
+}
 
 
 class AccountStatus(models.Model):
@@ -54,9 +64,33 @@ class OrganizationType(models.Model):
 class Persona(models.Model):
     _name = 'res.partner.persona'
     _description = "Partner Persona"
+    _order = 'sequence, id'
+
+    @api.constrains('domain')
+    def _assert_valid_domain(self):
+        for rec in self:
+            try:
+                domain = safe_eval(rec.domain or '[]', evaluation_context)
+                self.env['res.partner'].search(domain, limit=1)
+            except Exception as e:
+                _logger.warning('Exception: %s' % (e,))
+                raise Warning('The domain is incorrectly formatted')
+
+    @api.model
+    def update_persona(self):
+        for rec in self.search([]):
+            domain = rec.domain
+            res = json.loads(domain)
+            partner = self.env['res.partner'].search(res)
+            if partner:
+                for p in partner:
+                    p.write({'persona_id': rec.id})
+        return True
 
     name = fields.Char('Name')
+    sequence = fields.Integer(string='Sequence', default=10)
     active = fields.Boolean('Active', default=True)
+    domain = fields.Char('Domain', tracking=True)
 
 
 class Status(models.Model):
@@ -138,7 +172,7 @@ class Partner(models.Model):
     first_name = fields.Char('First Name', computed='get_first_last_name', store=True)
     last_name = fields.Char('Last Name', computed='get_first_last_name', store=True)
     ae_targeted = fields.Boolean('AE Targeted')
-    annual_revenue = fields.Monetary('Annual Revenue')
+    # annual_revenue = fields.Monetary('Annual Revenue')
     european_union = fields.Boolean('Are you a citizen or resident of the European Union (EU)?')
     data_source_details = fields.Char('Data Source Details')
     domain = fields.Char('Domain')
@@ -163,7 +197,7 @@ class Partner(models.Model):
     status_id = fields.Many2one('res.partner.status', 'Partner Status')
     subindustry_id = fields.Many2one('res.partner.subindustry', 'Sub Industry')
     accindustry_id = fields.Many2one('res.partner.accindustry', 'Accounting Industry')
-    contact_type_id = fields.Many2one('res.partner.contact_type', 'Company Type: ')
+    contact_type_id = fields.Many2one('res.partner.contact_type', 'Company Type')
     matter_id = fields.Many2one('res.partner.matter', 'Subject matter most interested in?')
     tecnology_id = fields.Many2one('res.partner.tecnology', 'Technology solution used to share documents with 3rd parties?')
     confidential_id = fields.Many2one('res.partner.confidential', 'When will be sharing confidential information with a third party?')
@@ -178,11 +212,11 @@ class Partner(models.Model):
                                 ('VP+','VP+')
                                 ], 'Job Level')
 
-    sharevault_activated_user = fields.Selection([('null','null')], 'ShareVault Activated User')
-    sharevault_admin = fields.Selection([('null','null')], 'ShareVault Admin')
-    sharevault_domain = fields.Selection([('null','null')], 'ShareVault Domain')
-    sharevault_email_subscription = fields.Selection([('null','null')], 'ShareVault Email Subscription')
-    sharevault_publisher = fields.Selection([('null','null')], 'ShareVault Publisher')
+    sharevault_activated_user = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Activated User')
+    sharevault_admin = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Admin')
+    sharevault_domain = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Domain')
+    sharevault_email_subscription = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Email Subscription')
+    sharevault_publisher = fields.Selection([('yes','Yes'),('no','No')], 'ShareVault Publisher')
 
     fax = fields.Char('Fax')
     fax_opt_out = fields.Boolean('Fax Opt Out')
@@ -205,6 +239,14 @@ class Partner(models.Model):
     zoom_company_id = fields.Char('Zoom Company ID')
     sharevault_company_count = fields.Integer(
         'Sharevault Company Count', compute='get_sharevault_company_count', copy=False, store=True)
+    staging_id = fields.Integer('Staging ID')
+    is_domain_updated = fields.Boolean('Domain Updated')
+
+    def update_domain(self):
+        partners = self.search([('is_domain_updated', '=', False)], limit=1000)
+        for partner in partners:
+            partner._compute_display_name()
+            partner.is_domain_updated = True
 
     def get_sharevault_company_count(self):
         for rec in self:
@@ -342,7 +384,8 @@ class Partner(models.Model):
 
         if partner.first_name and partner.last_name:
             name = partner.first_name + ' ' + partner.last_name
-
+        if partner.domain:
+            name = self.name + ' (' + self.domain + ')'
         if partner.company_name or partner.parent_id:
             if not name and partner.type in ['invoice', 'delivery', 'other']:
                 name = dict(self.fields_get(['type'])['type']['selection'])[partner.type]

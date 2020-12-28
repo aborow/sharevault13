@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_event_registration_form_inherit_question" model="ir.ui.view">
+            <field name="name">ShareVault: show questions/answers</field>
+            <field name="model">event.registration</field>
+            <field name="inherit_id"
+                    ref="website_event_questions.view_event_registration_form_inherit_question"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='answer_ids']" position="replace"/>
+
+                <xpath expr="//group[last()]" position="after">
+                    <group>
+                        <field name="answer_ids" readonly="1">
+                            <tree>
+                                <field name="question_id"/>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

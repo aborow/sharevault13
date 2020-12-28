@@ -14,3 +14,16 @@ Added Representative in SO and Invoice.
 Version - 13.0.1.0.2
 =====================
 -Added domain that only customer invoice can see the field representative.
+
+Version - 13.0.1.0.3
+=====================
+SV-144: Accounting - ShareVault Invoicing changes
+SV-147: Accounting - Sales Types changes
+
+13.0.1.0.4
+==========
+SV-157: Hide Representative Field in INvoice
+
+13.0.1.0.5
+==========
+SV-177: Add Due Date field in the Vendor Bill Form View

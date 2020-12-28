@@ -28,5 +28,16 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="crm_crm_lead_view_tree_inherited">
+            <field name="name">Lead Inherited</field>
+            <field name="model">crm.lead</field>
+            <field name="priority">16</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="mql_type" optional="show"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

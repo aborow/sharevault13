@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sync_lead_wizard_form">
+			<field name="name">sync.lead.wizard.form</field>
+			<field name="model">sync.lead.wizard</field>
+			<field name="arch" type="xml">
+				<form string="Sync Lead from Salesforce" >
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+					<footer>
+                        <button string="Import Leads" type="object" name="import_leads" class="oe_highlight"
+                                    icon="fa-arrow-circle-down"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+				</form>
+			</field>
+		</record>
+		<record id="action_sync_lead_sf" model="ir.actions.act_window">
+            <field name="name">sync.lead.wizard.action</field>
+            <field name="res_model">sync.lead.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

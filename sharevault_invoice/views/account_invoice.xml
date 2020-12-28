@@ -1,25 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="account_move_form_inherited_for_sharevault" model="ir.ui.view">
-            <field name="name">account.move.form.inherit</field>
+        <record id="account_move_from" model="ir.ui.view">
+            <field name="name">account.move.form</field>
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_draft']" position="after">
+                    <button name="get_cancel_invoices" string="Delete Invoices" type="object" invisible="1"/>
+                </xpath>
                 <xpath expr="//field[@name='team_id']" position="after">
-                    <field name="sharevault_id"
-                            domain="[('partner_id','=',partner_id)]"/>
+                    <field name="sharevault_id"/>
+                    <field name="term_start_date"/>
+                    <field name="term_end_date"/>
+                    <field name="quota_mb" readonly="1"/>
+                    <field name="quota_pages" readonly="1" force_save="1"/>
+                    <!--domain="[('partner_id','=',partner_id)]"-->
                     <!-- for the time being, let's keep this invisible -->
                     <field name="date_creation" readonly="1" force_save="1"
                             invisible="1"/>
                     <field name="date_expiration" readonly="1" force_save="1"
                             invisible="1"/>
                 </xpath>
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="sales_type" attrs="{'invisible': [('type', 'not in', ('out_invoice', 'out_refund', 'out_receipt'))],
+                    'required': [('type', 'in', ('out_invoice', 'out_refund', 'out_receipt'))]}"/>
+                </xpath>
                 <xpath expr="//field[@name='invoice_date']" position="after">
                     <field name="customer_contact_id" domain="[('parent_id','=',partner_id)]" attrs="{'invisible':[('type', '=', 'in_invoice')]}"/>
                 </xpath>
                 <xpath expr="//field[@name='invoice_incoterm_id']" position="attributes">
                     <attribute name="attrs">{'invisible':[('type', '=', 'in_invoice')]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='quantity']" position="after">
+                    <field name="is_expense" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='quantity']" position="after">
+                    <field name="is_expense" invisible="1" context="{'default_expense': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="attrs">{'required':[('is_expense', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='name']" position="attributes">
+                    <attribute name="optional">show</attribute>
+                </xpath>
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='analytic_account_id']" position="replace">
+                    <field name="analytic_account_id"
+                           domain="['|', ('company_id', '=', parent.company_id), ('company_id', '=', False)]"
+                           groups="analytic.group_analytic_accounting"
+                           attrs="{'required':[('is_expense', '=', True)],'invisible': [('display_type', 'in', ('line_section', 'line_note'))]}"/>
+                </xpath>
+                <xpath expr="//page[1]/field[@name='narration']" position="attributes">
+                    <attribute name="placeholder">Add a customer note...</attribute>
                 </xpath>
             </field>
         </record>

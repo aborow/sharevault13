@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view of Weekly Customer Report -->
+    <record id="view_weekly_customer_report" model="ir.ui.view">
+        <field name="name">weekly.customer.report.form</field>
+        <field name="model">weekly.customer.report</field>
+        <field name="arch" type="xml">
+             <form string="Weekly Customer Report">
+                <group>
+                    <group>
+                        <field name="partner_ids"
+                               attrs="{'invisible': [('select_all', '=', True)],'required': [('select_all','!=',True)]}" widget="many2many_tags"/>
+                        <field name="select_all"  />
+                    </group>
+                    <group>
+                        <field name="from_date" attrs="{'required': [('to_date','!=',False)]}"/>
+                        <field name="to_date" attrs="{'required': [('from_date','!=',False)]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_xls" string='Print' type="object" class="btn-primary"/>
+                    <button string="CANCEL" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action of Weekly Customer Report-->
+    <record id="action_weekly_customer_report" model="ir.actions.act_window">
+        <field name="name">Weekly Customer Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">weekly.customer.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu item for print report -->
+    <menuitem id="menu_weekly_customer_report" name="Weekly Customer Report"
+              action="action_weekly_customer_report" parent="account.account_reports_management_menu" sequence="10"/>
+
+</odoo>

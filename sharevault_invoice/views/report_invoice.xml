@@ -13,21 +13,29 @@
                                 <b>Accounts Payable Email Address:</b>
                                 <span t-field="o.partner_id.email"/>
                             </div> -->
-                        </div>
-                        <div class="col-xs-6" style="margin-left:650px;margin-top:55px;"> 
                             <div id="div_customer_address_shipping">
-                                <t t-if="o.x_studio_term_start_date">
-                                    <b>Term Start Date&#160;:&#160;</b><span t-field="o.x_studio_term_start_date" t-options='{"format": "MM/dd/yyyy"}'/><br/>
+                                <t t-if="o.quota_mb">
+                                    <b>Storage:&#160;</b><span t-field="o.quota_mb"/>GB
+                                </t><br/>
+                                <t t-if="o.quota_pages">
+                                    <b>Quota: Pages:&#160;</b><span t-field="o.quota_pages"/>
                                 </t>
-                                <t t-if="o.x_studio_term_end_date">
-                                    <b>Term End Date&#160;:</b>&#160;<span t-field="o.x_studio_term_end_date" t-options='{"format": "MM/dd/yyyy"}'/>
+                            </div>
+                        </div>
+                        <div class="col-xs-6" style="margin-left:650px;">
+                            <div id="div_customer_address_shipping">
+                                <t t-if="o.term_start_date">
+                                    <b>Term Start Date&#160;:&#160;</b><span t-field="o.term_start_date" t-options='{"format": "MM/dd/yyyy"}'/><br/>
+                                </t>
+                                <t t-if="o.term_end_date">
+                                    <b>Term End Date&#160;:</b>&#160;<span t-field="o.term_end_date" t-options='{"format": "MM/dd/yyyy"}'/>
                                 </t>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div id="project_name" t-if="o.sharevault_id">
-                            <center><b>ShareVault Name: </b><span t-field="o.sharevault_id.name"/></center>
+                            <center><b>ShareVault Name: </b><span t-field="o.sharevault_id.sharevault_name"/></center>
                         </div>
                     </div>
                     <br/>
@@ -46,30 +54,68 @@
                                 <t t-if="l_odd">
                                     <tr style="background-color: white;">
                                         <td class="inoice_data" width="15%"><span t-field="l.product_id.default_code"/></td>
-                                        <td class="inoice_data"><span t-field="l.name"/></td>
+                                        <td class="inoice_data">
+                                            <t t-set="name" t-value="l.name"/>
+                                            <span t-if="']' in name" t-esc="name.split(']')[1]"/>
+                                            <span t-else="" t-esc="name"/>
+                                        </td>
                                         <td class="text-right inoice_data">
-                                            <span t-field="l.quantity"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-esc="'{:,.0f}'.format(l.quantity)"/>
+                                            </t>
                                         </td>
                                         <td class="text-right inoice_data" width="15%">
-                                            <span t-field="l.price_unit"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-field="l.price_unit"/>
+                                            </t>
                                         </td>
                                         <td class="text-right inoice_data" width="10%">
-                                            <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                            </t>
                                         </td>
                                     </tr>
                                 </t>
                                 <t t-if="l_even">
                                     <tr style="background-color: #EBF5FB;">
                                         <td class="inoice_data" width="15%"><span t-field="l.product_id.default_code"/></td>
-                                        <td class="inoice_data"><span t-field="l.name"/></td>
+                                        <td class="inoice_data">
+                                            <t t-set="name" t-value="l.name"/>
+                                            <span t-if="']' in name" t-esc="name.split(']')[1]"/>
+                                            <span t-else="" t-esc="name"/>
+                                        </td>
                                         <td class="text-right inoice_data">
-                                            <span t-field="l.quantity"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-esc="'{:,.0f}'.format(l.quantity)"/>
+                                            </t>
                                         </td>
                                         <td class="text-right inoice_data" width="15%">
-                                            <span t-field="l.price_unit"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-field="l.price_unit"/>
+                                            </t>
                                         </td>
                                         <td class="text-right inoice_data" width="10%">
-                                            <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                            <t t-if="l.display_type in ['line_note','line_section']">
+
+                                            </t>
+                                            <t t-if="not l.display_type in ['line_note','line_section']">
+                                              <span t-esc="'{:,.2f}'.format(l.price_subtotal)"/>
+                                            </t>
                                         </td>
                                     </tr>
                                 </t>
@@ -124,6 +170,7 @@
                         </thead>
                         <tr>
                             <td>
+                                <span t-field="o.narration"/>
                                 <br/><br/><br/>
                             </td>
                         </tr>
@@ -170,6 +217,16 @@
             name="sharevault_invoice.report_invoice"
             file="sharevault_invoice.report_invoice"
             attachment="(object.state in ('open','paid')) and ('SHAREVAULT_INV'+(object.number or '').replace('/','')+'.pdf')"/>
+
+        <record id="paperformat_invoice" model="report.paperformat">
+            <field name="name">Invoice (ShareVault)</field>
+            <field name="default" eval="True"/>
+            <field name="format">Letter</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">80</field>
+            <field name="margin_bottom">10</field>
+            <field name="header_spacing">75</field>
+        </record>
 
         <record id="report_invoice_call" model="ir.actions.report">
             <field name="paperformat_id" ref="sharevault_invoice.paperformat_invoice"/>

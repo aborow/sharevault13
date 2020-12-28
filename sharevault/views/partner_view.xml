@@ -134,6 +134,8 @@
                 </xpath>
                 <field name="category_id" position="after">
                     <field name="source"/>
+                    <field name="is_domain_updated" invisible="1"/>
+                    <button name="update_domain" string="Update Domain" type="object" class="oe_highlight" invisible="1"/>
                 </field>
                 <!--SV-53: Hided for individual company type-->
                 <field name="website" position="attributes">
@@ -145,6 +147,14 @@
                 <!--SV-80-->
                 <field name="vat" position="attributes">
                     <attribute name="attrs">{'invisible': [('company_type','!=','company')]}</attribute>
+                </field>
+                <!--SV-SV-156-->
+                <field name="type" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <!--SV-170-->
+                <field name="type" position="after">
+                    <field name="domain"/>
                 </field>
             </field>
         </record>
@@ -177,7 +187,7 @@
         </record>
 
         <!--Inherit sms view-->
-        <record id="sms_ res_partner_view_form" model="ir.ui.view">
+        <record id="sms_res_partner_view_form" model="ir.ui.view">
             <field name="name">res.partner.view.form.inherit.sms.for.imported.phone</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="sms.res_partner_view_form"/>
@@ -306,12 +316,15 @@
                             <tr>
                                 <td><field name="fax"/></td>
                                 <td> </td>
-                                <td>
-                                    (
-                                    <field name="fax_opt_out"/>
-                                    <label for="fax_opt_out" string="Opt Out"/>
-                                    )
-                                </td>
+                                <!-- SV-102 : Opt Out field invisible for Company Contact -->
+                                <t attrs="{'invisible':[('is_company', '=', True)]}">
+                                    <td >
+                                        (
+                                        <field name="fax_opt_out"/>
+                                        <label for="fax_opt_out" string="Opt Out"/>
+                                        )
+                                    </td>
+                                </t>
                             </tr>
                         </table>
                     </div>
@@ -374,10 +387,11 @@
                                 <group>
                                     <field name="ae_targeted"/>
                                     <!--Hided for individual company type-->
+                                    <!--
                                     <field name="annual_revenue" attrs="{'invisible': [('is_company', '=', False)]}"/>
-                                    <field name="european_union"/>
+                                    -->
+                                    <field name="european_union" attrs="{'invisible': [('is_company', '!=', False)]}"/>
                                     <field name="data_source_details"/>
-                                    <field name="domain"/>
                                     <!--<field name="imported_phone"/>-->
                                     <!--Hided for individual company type-->
                                     <field name="number_employees" attrs="{'invisible': [('is_company', '=', False)]}"/>
@@ -385,27 +399,31 @@
                                 <group>
                                     <field name="marketing_flag"/>
                                     <field name="marketing_note"/>
-                                    <field name="salesforce_contact_id"/>
-                                    <field name="salesforce_lead_id"/>
+                                    <field name="salesforce_contact_id" attrs="{'invisible': [('is_company', '!=', False)]}"/>
+                                    <field name="salesforce_lead_id" attrs="{'invisible': [('is_company', '!=', False)]}"/>
                                     <field name="agree_data_collection"/>
                                 </group>
                             </group>
 
                             <group>
                                 <group>
-                                    <field name="account_status_id"/>
+                                    <!-- SV-102 : Account Status field invisible for Individual Contact -->
+                                    <field name="account_status_id"
+                                        attrs="{'invisible': [('is_company', '=', False)]}"/>
                                     <field name="data_source_id"/>
                                     <field name="data_update_request_id"/>
                                     <field name="lead_type_id"/>
                                     <field name="lifecycle_stage_id"/>
-                                    <field name="organization_type_id"/>
+                                    <field name="organization_type_id" attrs="{'invisible': [('is_company', '=', False)]}"/>
                                 </group>
                                 <group>
-                                    <field name="persona_id" required="1"/>
+                                    <field name="persona_id" attrs="{'invisible': [('is_company', '!=', False)]}"/>
                                     <field name="status_id" string="Status"/>
+                                    <field name="tz"/>
                                     <!-- Sub industry comes based on Industry-->
                                     <field name="subindustry_id" domain="[('industry_id', '=', industry_id)]"/>
-                                    <field name="accindustry_id" />
+                                    <field name="accindustry_id" attrs="{'invisible': [('is_company', '=', False)]}"
+                                           options="{'no_create': True, 'no_create_edit':True}"/>
                                     <!-- SV-68 Create new Fields in Sharevault for Companies -->
                                     <field name="sic_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
                                     <field name="naics_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
@@ -428,13 +446,30 @@
             </field>
         </record>
 
-
+        <record id="sharevault_fields_persona_form" model="ir.ui.view">
+            <field name="name">Persona</field>
+            <field name="model">res.partner.persona</field>
+            <field name="arch" type="xml">
+                <form string="Persona">
+                    <sheet>
+                        <group>
+                            <field name="sequence" invisible="1"/>
+                            <field name="name"/>
+                            <field name="active"/>
+                            <field name="domain" widget="domain"
+                                    options="{'model': 'res.partner'}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
         <record id="sharevault_fields_persona_tree" model="ir.ui.view">
             <field name="name">Persona</field>
             <field name="model">res.partner.persona</field>
             <field name="arch" type="xml">
-                <tree editable="top">
+                <tree>
+                    <field name="sequence" widget="handle"/>
                     <field name="name"/>
                     <field name="active"/>
                 </tree>
@@ -443,7 +478,7 @@
         <record id="sharevault_fields_persona_action" model="ir.actions.act_window">
             <field name="name">Persona</field>
             <field name="res_model">res.partner.persona</field>
-            <field name="view_mode">tree</field>
+            <field name="view_mode">tree,form</field>
             <field name="domain">[('active','in',[True,False])]</field>
         </record>
 

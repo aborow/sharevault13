@@ -26,7 +26,8 @@ class Sharevault(models.Model):
     sharevault_name = fields.Char('Name', required=True)
     key = fields.Integer('Key')
     company_id = fields.Many2one('res.partner', 'Company')
-    sv_type = fields.Selection([('sv','SV'),('sve','SVe')], 'Type')
+    partner_id = fields.Many2one('res.partner',related='company_id', string='Partner')
+    sv_type = fields.Selection([('sv','SV'),('sve','SVe'),('svp','SVp')], 'Type')
     sharevault_owner = fields.Many2one('res.partner', 'Owner')
     partner_id_title = fields.Char('Title', related='sharevault_owner.function')
     partner_id_email = fields.Char('Email', related='sharevault_owner.email')
@@ -59,6 +60,12 @@ class Sharevault(models.Model):
     contact_phone = fields.Char('Contact Phone')
     sharevault_id = fields.Char('Sharevault ID', required=True)
     kanban_name = fields.Char('Kanban Name', compute='get_kanban_name')
+    parent_id = fields.Many2one('sharevault.sharevault', string="Platform")
+
+    @api.onchange('sv_type')
+    def onchange_sv_type(self):
+        if self.sv_type == 'svp':
+            self.parent_id = False
 
     def get_kanban_name(self):
         for rec in self:

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="crm_case_tree_view_leads" model="ir.ui.view">
+            <field name="name">ShareVault: list event</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[last()]" position="after">
+                    <field name="event_id" optional="hidden"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_crm_case_leads_filter" model="ir.ui.view">
+            <field name="name">ShareVault: add fields to search</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[last()]" position="after">
+                    <field name="event_id"/>
+                </xpath>
+                <xpath expr="//group/filter[last()]" position="after">
+                    <filter string="Event" name="group_by_event_id"
+                            context="{'group_by':'event_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_crm_case_opportunities_filter" model="ir.ui.view">
+            <field name="name">ShareVault: add fields to search</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[last()]" position="after">
+                    <field name="industry"/>
+                    <field name="sharevault_name"/>
+                </xpath>
+                <xpath expr="//group/filter[last()]" position="after">
+                    <filter string="Industry" name="group_by_industry"
+                            context="{'group_by':'industry'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+            <field name="name">ShareVault: new fields</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group/field[@name='type']" position="after">
+                    <field name="information_sharing"/>
+                    <field name="share_link_id" readonly="1"/>
+                    <field name="typ_id" readonly="1" invisible="1"/>
+                    <field name="industry"/>
+                    <field name="sharevault_name"/>
+                    <field name="accept_msa"/>
+                </xpath>
+                <xpath expr="//page[last()]" position="after">
+                    <page id="questions_comments" string="Questions / Comments">
+                        <field name="questions_comments" nolabel="1"/>
+                    </page>
+                </xpath>
+
+                <xpath expr="//field[@name='referred']" position="after">
+                    <field name="event_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="crm.model_crm_lead" model="ir.model">
+            <field name="website_form_key">create_svlead</field>
+            <field name="website_form_default_field_id" ref="crm.field_crm_lead__description" />
+            <field name="website_form_access">True</field>
+            <field name="website_form_label">Create a Lead</field>
+        </record>
+
+        <function model="ir.model.fields" name="formbuilder_whitelist">
+            <value>crm.lead</value>
+            <value eval="[
+                'contact_name',
+                'description',
+                'email_from',
+                'name',
+                'partner_name',
+                'phone',
+                'team_id',
+                'user_id',
+                'information_sharing',
+                'source_id',
+                'function',
+                'share_link_id',
+                'typ_id',
+                'campaign_id',
+                'mql_type',
+                'mql_type_date',
+                'industry',
+            ]"/>
+        </function>
+    </data>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <!-- Generic Field Layout -->
+    <!--<t t-name="website_form.field">
+        <div t-att-class="'row form-group form-field' + (field.custom ? ' o_website_form_custom' : '') + (field.required ? ' o_website_form_required' : '')">
+            <div class="col-lg-10 col-md-10">
+                <label class="col-form-label" t-att-for="field.name">
+                    <t t-esc="field.string"/>
+                </label>
+            </div>
+            <div class="col-lg-10 col-md-10">
+                <t t-raw="0"/>
+            </div>
+        </div>
+    </t>-->
+    <t t-name="website_custom_pages.default_sv_form">
+        <div id="thankyou" style="display:none;">
+            <span>
+
+            </span>
+        </div>
+        <div class="form-group row form-field o_website_form_required_custom">
+            <div class="col-lg-3 col-md-4">
+                <label class="col-form-label" for="name">First Name</label>
+            </div>
+            <div class="col-lg-7 col-md-8">
+                <input id="firstname-674fe465-5618-4f85-9c76-51eeb868196b_9346" type="text"
+                       class="form-control o_website_form_input hs-input" name="name" required=""
+                       placeholder="First Name"/>
+            </div>
+        </div>
+        <div class="form-group row form-field o_website_form_required">
+            <div class="col-lg-3 col-md-4">
+                <label class="col-form-label" for="contact_name">Last Name</label>
+            </div>
+            <div class="col-lg-7 col-md-8">
+                <input type="text" class="form-control o_website_form_input" name="contact_name" placeholder="Last Name"/>
+            </div>
+        </div>
+        <div class="form-group row form-field o_website_form_required_custom">
+            <div class="col-lg-3 col-md-4">
+                <label class="col-form-label" for="email_from">Work Email</label>
+            </div>
+            <div class="col-lg-7 col-md-8">
+                <input type="text" class="form-control o_website_form_input" name="email_from" required="" placeholder="Work Email"/>
+            </div>
+        </div>
+        <div class="form-group row form-field">
+            <div class="col-lg-3 col-md-4">
+                <label class="col-form-label" for="phone">Phone Number</label>
+            </div>
+            <div class="col-lg-7 col-md-8">
+                <input type="text" class="form-control o_website_form_input" name="phone" placeholder="Phone Number"/>
+            </div>
+        </div>
+        <div class="form-group row form-field o_website_form_required_custom">
+            <div class="col-lg-3 col-md-4">
+                <label class="col-form-label" for="partner_name">Company Name</label>
+            </div>
+            <div class="col-lg-7 col-md-8">
+                <input type="text" class="form-control o_website_form_input" name="partner_name" placeholder="Company Name"/>
+            </div>
+        </div>
+        <div class="form-group row form-field" style="display: none;">
+            <div class="col-lg-3 col-md-4">
+                <label class="col-form-label" for="svform"></label>
+            </div>
+            <div class="col-lg-7 col-md-8">
+                <input type="checkbox" class="o_website_form_input" name="svform" value="Yes"
+                   checked="checked"/>
+            </div>
+        </div>
+    </t>
+</templates>

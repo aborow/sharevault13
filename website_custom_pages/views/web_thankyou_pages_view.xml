@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_web_thankyou_pages_form" model="ir.ui.view">
+        <field name="name">web.thankyou.pages.form</field>
+        <field name="model">web.thankyou.pages</field>
+        <field name="arch" type="xml">
+            <form string="Thank You Messages">
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                    <group>
+                        <field name="mail_template_id"
+                                domain="[('name','ilike','ShareVault')]"/>
+                        <field name="shared_link_id"/>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="text" nolabel="1"/>
+                    </group>
+                    <group>
+                        <help>
+                            If you want to put a link for a whitepaper just make sure you have a <i>PLACEHOLDER_WHITEPAPER</i> placeholder in your text.<br/><br/>
+                            When selecting a shared link, the placeholder will be replaced by the right link.<br/><br/>
+                            If you want to replace the link, you'll need to start over (delete, create placeholder, select link).<br/>
+                        </help>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_web_thankyou_pages_tree">
+        <field name="name">web.thankyou.pages.tree</field>
+        <field name="model">web.thankyou.pages</field>
+        <field name="arch" type="xml">
+            <tree string="Thank You Messages">
+                <field name="name"/>
+                <field name="mail_template_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_web_thankyou_pages" model="ir.actions.act_window">
+            <field name="name">Thank You Messages</field>
+            <field name="res_model">web.thankyou.pages</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_web_thankyou_pages_tree"/>
+            <field name="target">current</field>
+        </record>
+
+    <menuitem id="menu_web_thankyou_pages" name="Thank You Messages"
+              action="action_web_thankyou_pages" parent="website.menu_website_global_configuration" sequence="40"/>
+
+</odoo>

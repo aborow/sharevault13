@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sharevault_partner_check_action" model="ir.actions.server">
+            <field name="name">Partner Data Check</field>
+            <field name="model_id" ref="model_res_partner"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">action = model.call_post_import_check()</field>
+        </record>
+
+    </data>
+</odoo>

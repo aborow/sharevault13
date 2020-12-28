@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="document_change_footer" model="ir.ui.view">
+        <field name="name">ShareVault Document: change footer</field>
+        <field name="inherit_id" search="[('key','=','documents.public_page_layout')]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//footer[hasclass('flex-grow-0')]" position="replace">
+                <footer class="bg-light o_footer" style="background-color:#fff; margin-top:130px">
+                <div class="o_footer_copyright" style="background-color:#fff;color:#000;">
+                  <div class="py-3">
+
+                    <div class="row" style="margin-bottom:15px;">
+                      <div class="col-sm text-left text-sm-left text-muted">
+                        <a href="https://sharevault.com">
+                        <img src="/web/image/website/1/logo/My%20Website?unique=c0813bd" class="img img-fluid" width="180px;"/>
+                        </a>
+                      </div>
+                      <div class="col-sm text-right text-sm-right" style="font-size:30px;">
+                        <a href="https://facebook.com/sharevault" class="fa fa-facebook-square" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="http://www.youtube.com/sharevault" class="fa fa-youtube-play" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="http://www.twitter.com/sharevault" class="fa fa-twitter" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="https://www.linkedin.com/company/sharevault" class="fa fa-linkedin-square" style="color:#666666;" target="_blank"></a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm text-çeft text-sm-left text-muted" style="padding-left:30px;">
+                        <a href="https://www.sharevault.com/privacy-policy" class="text-muted" target="_blank">Privacy Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/security-policy" class="text-muted" target="_blank">Security Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/legal-notices" class="text-muted" target="_blank">Legal Notices</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/resources/glossary" class="text-muted" target="_blank">Glossary</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/site-map" class="text-muted" target="_blank">Site Map</a>
+                      </div>
+                      <div class="col-sm text-right text-sm-right text-muted" style="padding-right:30px;">
+                        Copyright © 2020 <span t-field="res_company.name" itemprop="name">Company name</span>. All rights reserved.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+            </xpath>
+
+            <xpath expr="//header" position="replace">
+                <header class="mt8">
+                    <a href="https://sharevault.com">
+                        <span class="o_company_logo" t-field="res_company.logo" t-options="{'widget': 'image'}" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+                    </a>
+                </header>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="website_change_footer" model="ir.ui.view">
+        <field name="name">ShareVault: change footer</field>
+        <field name="inherit_id" search="[('key','=','web.frontend_layout')]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//footer[@id='bottom']" position="replace">
+              <footer t-if="not no_footer" id="bottom" data-anchor="true" class="bg-light o_footer" style="background-color:#fff;">
+                <div class="o_footer_copyright" style="background-color:#fff;color:#000;">
+                  <div class="py-3" style="margin-left:50px;margin-right:50px;">
+
+                    <div class="row" style="margin-bottom:15px;">
+                      <div class="col-sm text-left text-sm-left text-muted">
+                          <a href="https://sharevault.com">
+                        <img src="/web/image/website/1/logo/My%20Website?unique=c0813bd" class="img img-fluid" width="180px;"/>
+                        </a>
+                      </div>
+                      <div class="col-sm text-right text-sm-right" style="font-size:30px;">
+                        <a href="https://facebook.com/sharevault" class="fa fa-facebook-square" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="http://www.youtube.com/sharevault" class="fa fa-youtube-play" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="http://www.twitter.com/sharevault" class="fa fa-twitter" style="color:#666666;padding-right:15px;" target="_blank"></a>
+                        <a href="https://www.linkedin.com/company/sharevault" class="fa fa-linkedin-square" style="color:#666666;" target="_blank"></a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm text-çeft text-sm-left text-muted" style="padding-left:30px;">
+                        <a href="https://www.sharevault.com/privacy-policy" class="text-muted" target="_blank">Privacy Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/security-policy" class="text-muted" target="_blank">Security Policy</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/legal-notices" class="text-muted" target="_blank">Legal Notices</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/resources/glossary" class="text-muted" target="_blank">Glossary</a>&amp;nbsp;&amp;nbsp;&amp;nbsp;|&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        <a href="https://www.sharevault.com/site-map" class="text-muted" target="_blank">Site Map</a>
+                      </div>
+                      <div class="col-sm text-right text-sm-right text-muted" style="padding-right:30px;">
+                        Copyright © 2020 <span t-field="res_company.name" itemprop="name">Company name</span>. All rights reserved.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Start of LiveChat (www.livechatinc.com) code -->
+<script type="text/javascript">
+window.__lc = window.__lc || {};
+window.__lc.license = 5766241;
+window.__lc.chat_between_groups = false;
+
+(function () {
+    var lc = document.createElement('script');
+    lc.type = 'text/javascript';
+    lc.async = true;
+    lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(lc, s);
+})();
+
+if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    var LC_API = LC_API || {};
+    LC_API.on_message = function (data) {
+        if (data.user_type == "agent") {
+            LC_API.open_chat_window();
+        }
+    }
+}
+;
+</script>
+                          <!-- End of LiveChat code -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="1" src="https://www.googletagmanager.com/gtag/js?id=G-EBTMH3JQHW"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EBTMH3JQHW');
+</script>
+              </footer>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="website_pages_form_view" model="ir.ui.view">
+        <field name="name">ShareVault: add fields</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_published']" position="before">
+                <field name="is_template"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="website_pages_tree_view" model="ir.ui.view">
+        <field name="name">ShareVault: add field</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_published']" position="before">
+                <field name="is_template"/>
+            </xpath>
+
+            <xpath expr="//field[last()]" position="after">
+                <button name="call_create_page_wizard"
+                        string="Create"
+                        type="object"
+                        attrs="{'invisible':[('is_template','=',False)]}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+
+    <record id="website_pages_view_search" model="ir.ui.view">
+        <field name="name">ShareVault: add filter</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='not_published']" position="after">
+                <separator/>
+                <filter string="Template" name="is_template" domain="[('is_template', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+    <record id="action_template_pages" model="ir.actions.act_window">
+            <field name="name">Page Templates</field>
+            <field name="res_model">website.page</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_template','=',True)]</field>
+            <field name="context">{'default_is_template':True}</field>
+        </record>
+
+    <menuitem id="menu_template_pages"
+                name="Page Templates"
+                action="action_template_pages"
+                parent="website.menu_website_global_configuration"
+                sequence="31"/>
+
+
+</odoo>
