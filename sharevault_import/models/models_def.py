@@ -221,6 +221,6 @@ class BaseModelExtend(models.AbstractModel):
                     try:
                         data = BaseObj._sharevault_contact_check(data)
                     except Exception as e:
-                        _logger.error("ERROR: %s" % e)
+                        # _logger.error("ERROR: %s" % e)
                         pass
         return super(BaseModelExtend, self)._load_records(data_list, update=update)
