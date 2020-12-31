@@ -230,7 +230,7 @@ class CrmLead(models.Model):
                     rec.write({'partner_id': contact_id.id})
                 else:
                     vals_contact = {
-                        'name': rec.name if rec.name else False,
+                        'name': rec.contact_name if rec.contact_name else rec.name,
                         'email': rec.email_from if rec.email_from else False,
                         'website': rec.website if rec.website else False,
                         'street': rec.street if rec.street else False,
