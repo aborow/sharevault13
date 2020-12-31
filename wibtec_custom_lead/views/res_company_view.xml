@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="salesforce_view_company_form_inherited_for_lead">
+            <field name="name">salesforce.view.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="odoo_salesforce_connector.salesforce_view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[last()]" position="inside">
+                    <separator name='sync' string='Initial Sync'/>
+
+                    <div class="row">
+                        <div class="col-2 text-center">
+                            <button string="Import Leads" type="object" name="open_sync_wz" class="oe_highlight"
+                                    icon="fa-arrow-circle-down"/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

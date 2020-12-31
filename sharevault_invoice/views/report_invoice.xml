@@ -16,6 +16,9 @@
                             <div id="div_customer_address_shipping">
                                 <t t-if="o.quota_mb">
                                     <b>Storage:&#160;</b><span t-field="o.quota_mb"/>GB
+                                </t><br/>
+                                <t t-if="o.quota_pages">
+                                    <b>Quota: Pages:&#160;</b><span t-field="o.quota_pages"/>
                                 </t>
                             </div>
                         </div>
@@ -61,7 +64,7 @@
 
                                             </t>
                                             <t t-if="not l.display_type in ['line_note','line_section']">
-                                              <span t-field="l.quantity"/>
+                                              <span t-esc="'{:,.0f}'.format(l.quantity)"/>
                                             </t>
                                         </td>
                                         <td class="text-right inoice_data" width="15%">
@@ -95,7 +98,7 @@
 
                                             </t>
                                             <t t-if="not l.display_type in ['line_note','line_section']">
-                                              <span t-field="l.quantity"/>
+                                              <span t-esc="'{:,.0f}'.format(l.quantity)"/>
                                             </t>
                                         </td>
                                         <td class="text-right inoice_data" width="15%">

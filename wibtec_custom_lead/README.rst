@@ -78,3 +78,19 @@ SV-229: added new field for store linkedin related data.
 13.0.1.0.23
 ===========
 SV-227/228: adding Hubspot score from Contact record to LEAD record
+
+13.0.1.0.25
+===========
+SV-228: Cumulative Score (Contact) and SF to odoo leads
+
+13.0.1.0.26
+===========
+SV-239: Please confirm 40+ Lead Score Rule is configured appropriately
+
+13.0.1.0.27
+===========
+SV-229: Fix the issue related to score calculation.
+
+13.0.1.0.29
+===========
+SV-228 and SV-238: SF to odoo leads sync and Updated Odoo Score based on the scheduler.
