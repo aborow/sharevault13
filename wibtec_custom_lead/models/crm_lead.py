@@ -83,7 +83,7 @@ class CrmLead(models.Model):
     account = fields.Char("Account Id")
     form = fields.Char("Form Id")
     test_lead = fields.Boolean("Test Lead")
-    # wibtec_crm_score = fields.Float(string="Import Score")
+    wibtec_crm_score = fields.Float(string="Import Score")
 
     def write(self, vals):
         if vals:
