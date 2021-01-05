@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
 
         <record id="postpone_remails" model="base.automation">
             <field name="name">ShareVault: postpone mail</field>
@@ -16,12 +16,10 @@ for w in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 's
         no_days.append(counter)
     counter += 1
 
-log("NO WEEKDAYS: %s" % str(no_days))
 no_days_count = len(no_days)
 # If all days were set, this would cause an impossible situation, so
 # if all days are set, we don't run the code
 if no_days_count and no_days_count &lt; 7:
-    log("GO!")
     for rec in records:
         if rec.message_type == 'email' and not rec.notification:
             # If the email is to be sent on a no_day, we try to find the
@@ -39,7 +37,6 @@ if no_days_count and no_days_count &lt; 7:
                 # Target day already happened this week
                 days_ahead += 7
             rec.write({'scheduled_date': rec.date + datetime.timedelta(days_ahead)})
-
             </field>
         </record>
 
