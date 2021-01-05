@@ -30,7 +30,9 @@
             <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[last()]" position="after">
-                    <field name="source_id" optional="false"/>
+                    <field name="source_id" optional="hide"/>
+                    <field name="hubspot_score" optional="hide"/>
+                    <field name="odoo_score" optional="hide"/>
                 </xpath>
             </field>
         </record>
@@ -60,6 +62,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[last()]" position="after">
                     <field name="request_type"/>
+                    <field name="hubspot_score"/>
+                    <field name="odoo_score"/>
                     <field name="source_id"/>
                 </xpath>
                 <xpath expr="//group/filter[last()]" position="after">
@@ -67,6 +71,8 @@
                             context="{'group_by':'request_type'}"/>
                     <filter string="Source" name="group_by_source"
                             context="{'group_by':'source_id'}"/>
+                    <filter string="Odoo Score" name="group_by_os"
+                            context="{'group_by':'odoo_score'}"/>
                 </xpath>
             </field>
         </record>

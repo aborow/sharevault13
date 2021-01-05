@@ -137,6 +137,17 @@ if record.type == 'lead':
             </field>
         </record>
 
+        <record id="recycle_lead_score_from_lead" model="base.automation">
+            <field name="name">ShareVault: Recycle score in Lead</field>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="trigger">on_write</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+if record.type == 'lead':
+    record.recycle_lead_score()
+            </field>
+        </record>
 
 
     </data>

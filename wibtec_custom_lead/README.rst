@@ -94,3 +94,7 @@ SV-229: Fix the issue related to score calculation.
 13.0.1.0.29
 ===========
 SV-228 and SV-238: SF to odoo leads sync and Updated Odoo Score based on the scheduler.
+
+13.0.1.0.31
+===========
+SV-242: Record Recycle Process
