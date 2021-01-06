@@ -151,3 +151,7 @@ SV-209: add timezone field to partner record
 Version - 13.0.1.0.42
 =====================
 SV-230: Add MQL type to lead and lead analysis views
+
+Version - 13.0.1.0.43
+=====================
+SV-246: Account Status (Individual and Company)
