@@ -108,6 +108,9 @@
                     <field name="accept_conditions"/>
                     <field name="request_type"/>
                 </xpath>
+                <xpath expr="//field[@name='mobile']" position="before">
+                    <field name="imported_phone" widget="phone" options="{'enable_sms': True}"/>
+                </xpath>
                 <xpath expr="//form/sheet/notebook/page[@name='extra']" position="after">
                     <page name="sales_force" string="Salesforce" attrs="{'invisible': [('type', '=', 'opportunity')]}">
                         <group>

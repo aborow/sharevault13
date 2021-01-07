@@ -84,6 +84,7 @@ class CrmLead(models.Model):
     form = fields.Char("Form Id")
     test_lead = fields.Boolean("Test Lead")
     # wibtec_crm_score = fields.Float(string="Import Score")
+    imported_phone = fields.Char('Imported Phone')
 
     def write(self, vals):
         if vals:
@@ -235,6 +236,9 @@ class CrmLead(models.Model):
                 contact_id = rec.env['res.partner'].search([('email', '=', rec.email_from)], limit=1)
                 if contact_id:
                     rec.write({'partner_id': contact_id.id})
+                    contact_id.write({'imported_phone': rec.imported_phone,
+                                      'phone': rec.phone if rec.phone else False,
+                                      'mobile': rec.mobile if rec.mobile else False})
                 else:
                     vals_contact = {
                         'name': rec.contact_name if rec.contact_name else rec.name,
@@ -249,6 +253,7 @@ class CrmLead(models.Model):
                         'mobile': rec.mobile if rec.mobile else False,
                         'european_union': rec.european_union if rec.european_union else False,
                         'type': 'contact',
+                        'imported_phone': rec.imported_phone if rec.imported_phone else False,
                     }
                     partner = rec.env['res.partner']
                     partner_id = partner.create(vals_contact)
