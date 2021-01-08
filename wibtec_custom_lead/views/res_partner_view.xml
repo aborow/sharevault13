@@ -10,7 +10,7 @@
             <field name="arch" type="xml">
                 <div name="button_box" position="inside">
                         <button id="lead_odoo_score" class="oe_stat_button o_stat_button_info" icon="fa-star">
-                            <field name="odoo_score" widget="statinfo" string="Odoo Score"/>
+                            <field name="odoo_score" widget="statinfo" string="Total Score"/>
                         </button>
                 </div>
             </field>
@@ -27,7 +27,7 @@
                 </field>
                 <xpath expr="//div[hasclass('oe_kanban_partner_links')]" position="inside">
                     <span t-if="record.odoo_score">
-                        Odoo Score: <field name="odoo_score"/>
+                        Total Score: <field name="odoo_score"/>
                     </span>
                 </xpath>
             </field>

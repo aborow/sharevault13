@@ -70,7 +70,7 @@ class CrmLead(models.Model):
     x_is_updated = fields.Boolean('x_is_updated', default=False, copy=False)
     x_last_modified_on = fields.Datetime("SF last Modified.", copy=False)
     salesforce_response = fields.Text('Response')
-    odoo_score = fields.Float('Odoo Score')
+    odoo_score = fields.Float('Total Score')
     hubspot_score = fields.Integer(related='partner_id.hubspot_score', string="Hubspot Score")
     is_sf_lead = fields.Boolean('Synced from Salesforce', default=False, copy=False)
     sf_last_modified_date = fields.Datetime('Salesforce Last Modified Date')

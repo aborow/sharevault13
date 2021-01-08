@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Wibtec Lead Customization",
-    'version': '13.0.1.0.34',
+    'version': '13.0.1.0.35',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Leads',

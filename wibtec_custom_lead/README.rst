@@ -101,3 +101,7 @@ SV-242: Record Recycle Process
 
 13.0.1.0.32 to 34
 =================
+
+13.0.1.0.35
+===========
+SV-250: Change label odoo score to Total Score

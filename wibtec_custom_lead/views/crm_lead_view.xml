@@ -71,7 +71,7 @@
                             context="{'group_by':'request_type'}"/>
                     <filter string="Source" name="group_by_source"
                             context="{'group_by':'source_id'}"/>
-                    <filter string="Odoo Score" name="group_by_os"
+                    <filter string="Total Score" name="group_by_os"
                             context="{'group_by':'odoo_score'}"/>
                 </xpath>
             </field>
@@ -252,7 +252,7 @@
                                     </div>
                                     <div class="o_kanban_record_bottom">
                                         <span t-if="record.odoo_score">
-                                            Odoo Score: <field name="odoo_score"/>
+                                            Total Score: <field name="odoo_score"/>
                                         </span>
                                     </div>
                                     <div class="o_kanban_record_bottom">
