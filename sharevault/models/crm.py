@@ -19,7 +19,7 @@ class Lead(models.Model):
                                  ('adhoc','Adhoc'),
                                  ('chat','Chat'),], 'MQL Type')
     mql_type_date = fields.Date('MQL Type Date')
-
+    marketing_note = fields.Char('Marketing note')
     original_source = fields.Char('Original Source')
     recycled = fields.Boolean('Recycled')
 

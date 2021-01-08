@@ -21,6 +21,7 @@
                                 <field name="mql_recycle_store"/>
                                 <field name="mql_type"/>
                                 <field name="mql_type_date"/>
+                                <field name="marketing_note"/>
                             </group>
                         </group>
                     </page>

@@ -155,3 +155,7 @@ SV-230: Add MQL type to lead and lead analysis views
 Version - 13.0.1.0.43
 =====================
 SV-246: Account Status (Individual and Company)
+
+Version - 13.0.1.0.44
+=====================
+SV-254: Add Marketing Note Field in LEAD

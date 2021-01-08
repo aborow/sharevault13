@@ -254,6 +254,7 @@ class CrmLead(models.Model):
                         'european_union': rec.european_union if rec.european_union else False,
                         'type': 'contact',
                         'imported_phone': rec.imported_phone if rec.imported_phone else False,
+                        'marketing_note': rec.marketing_note if rec.marketing_note else False,
                     }
                     partner = rec.env['res.partner']
                     partner_id = partner.create(vals_contact)
