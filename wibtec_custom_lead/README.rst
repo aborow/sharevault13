@@ -105,3 +105,7 @@ SV-242: Record Recycle Process
 13.0.1.0.35
 ===========
 SV-250: Change label odoo score to Total Score
+
+13.0.1.0.36
+===========
+SV-250: Update Lead Creation Notification Email and Notify entire Sales Team.

@@ -5,17 +5,36 @@
 		<xpath expr="//p[1]" position="inside">
 			<t t-if="object._name == 'crm.lead'">
 				<br/>
-				<span style="margin-top: 8px;"><b>Page submitted on:</b> <t t-esc="object.create_date"/></span><br/>
-				<span style="margin-top: 8px;"><b>Business Email:</b> <t t-esc="object.email_from"/></span><br/>
-				<span style="margin-top: 8px;"><b>Name:</b> <t t-esc="object.contact_name"/></span><br/>
-				<!--
-				<span style="margin-top: 8px;"><b>First Name:</b> <t t-esc="object.contact_name"/></span><br/>
-				<span style="margin-top: 8px;"><b>Last Name:</b> </span><br/>
-				-->
-				<span style="margin-top: 8px;"><b>Job Title:</b> <t t-esc="object.function"/></span><br/>
-				<span style="margin-top: 8px;"><b>Company:</b> <t t-esc="object.partner_name"/></span><br/>
-				<span style="margin-top: 8px;"><b>Phone:</b> <t t-esc="object.phone"/></span><br/>
-				<span style="margin-top: 8px;"><b>Industry:</b> <t t-esc="object.industry"/></span>
+				<t t-if="object.create_date">
+					<span style="margin-top: 8px;"><b>Page submitted on:</b><t t-esc="object.create_date"/></span><br/>
+				</t>
+				<t t-if="object.email_from">
+					<span style="margin-top: 8px;"><b>Business Email:</b> <t t-esc="object.email_from"/></span><br/>
+				</t>
+				<t t-if="object.contact_name">
+					<span style="margin-top: 8px;"><b>Name:</b> <t t-esc="object.contact_name"/></span><br/>
+				</t>
+				<t t-if="object.function">
+					<span style="margin-top: 8px;"><b>Job Title:</b> <t t-esc="object.function"/></span><br/>
+				</t>
+				<t t-if="object.partner_name">
+					<span style="margin-top: 8px;"><b>Company:</b> <t t-esc="object.partner_name"/></span><br/>
+				</t>
+				<t t-if="object.phone">
+					<span style="margin-top: 8px;"><b>Phone:</b> <t t-esc="object.phone"/></span><br/>
+				</t>
+				<t t-if="object.industry">
+					<span style="margin-top: 8px;"><b>Industry:</b> <t t-esc="object.industry"/></span><br/>
+				</t>
+				<t t-if="object.campaign_id">
+					<span style="margin-top: 8px;"><b>Source:</b> <t t-esc="object.campaign_id.name"/></span><br/>
+				</t>
+				<t t-if="object.medium_id">
+					<span style="margin-top: 8px;"><b>Campaign:</b> <t t-esc="object.medium_id.name"/></span><br/>
+				</t>
+				<t t-if="object.source_id">
+					<span style="margin-top: 8px;"><b>Medium:</b> <t t-esc="object.source_id.name"/></span>
+				</t>
 			</t>
 		</xpath>
 	</template>
