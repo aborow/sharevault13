@@ -36,6 +36,13 @@ class Partner(models.Model):
     # Constraint needs to be created in create() and write()
     def check_uniqueness(self, vals):
         Partner = self.env['res.partner']
+
+        try:
+            if len(self)>1:
+                return True
+        except:
+            pass
+
         if self.id:
             operation = 'write'
             if 'is_company' in vals:
