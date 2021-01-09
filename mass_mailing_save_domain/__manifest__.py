@@ -6,13 +6,19 @@
     'website': 'http://www.wibtec.com',
     'category': 'Extra tools',
     'summary': 'Save domains for mass mailing',
-    'description': 'Save domains for mass mailing',
+    'description': """
+- Save domains for mass mailing
+- Create favourite searches for contacts out of the saved lists
+""",
     'depends': [
                 'web',
-                'mass_mailing'
+                'mass_mailing',
+                'contacts',
+                'base_automation'
                 ],
     'data': [
                 'security/ir.model.access.csv',
+                'data/base_automation_data.xml',
                 'wizard/mail_view.xml',
                 'views/mail_view.xml'
                 ],

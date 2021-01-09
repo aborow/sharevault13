@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="create_search_favourite" model="base.automation">
+            <field name="name">ShareVault: create a search favourite</field>
+            <field name="model_id" ref="mass_mailing_save_domain.model_mailing_domain"/>
+            <field name="trigger">on_create</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+new_filter = env['ir.filters'].create({
+    'name': record.name,
+    'model_id': 'res.partner',
+    'domain': record.mailing_domain,
+    'mailing_domain_id': record.id
+})
+            </field>
+        </record>
+
+        <record id="edit_search_favourite" model="base.automation">
+            <field name="name">ShareVault: edit a search favourite</field>
+            <field name="model_id" ref="mass_mailing_save_domain.model_mailing_domain"/>
+            <field name="trigger">on_write</field>
+            <field name="active" eval="True"/>
+            <field name="state">code</field>
+            <field name="code">
+Filters = env['ir.filters']
+for rec in records:
+    filter_id = Filters.search([('mailing_domain_id','=',rec.id)])
+    if filter_id:
+        filter_id.write({
+            'name': rec.name,
+            'domain': rec.mailing_domain,
+            'active': rec.active
+        })
+            </field>
+        </record>
+
+    </data>
+</odoo>
