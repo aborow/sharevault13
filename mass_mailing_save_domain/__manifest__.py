@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Mass mailing - save domain",
-    'version': '13.0.1.0.10',
+    'version': '13.0.1.0.11',
     'author' : 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Extra tools',
