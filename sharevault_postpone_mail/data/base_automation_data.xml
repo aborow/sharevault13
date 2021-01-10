@@ -2,10 +2,13 @@
 <odoo>
     <data noupdate="1">
 
+        <!-- this shuld run when someone clicks on the send button in mass mailing -->
+
         <record id="postpone_remails" model="base.automation">
             <field name="name">ShareVault: postpone mail (for mailings)</field>
-            <field name="model_id" ref="mail.model_mail_mail"/>
-            <field name="trigger">on_create</field>
+            <field name="model_id" ref="mass_mailing.model_mailing_mailing"/>
+            <field name="trigger">on_write</field>
+            <field name="trigger_field_ids" eval="[(6,0,[ref('mass_mailing.field_mailing_mailing__state')])]"/>
             <field name="active" eval="True"/>
             <field name="state">code</field>
             <field name="code">
@@ -15,16 +18,17 @@ for w in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 's
     if env['ir.config_parameter'].sudo().get_param('postpone_email_'+w):
         no_days.append(counter)
     counter += 1
-
 no_days_count = len(no_days)
+
 # If all days were set, this would cause an impossible situation, so
 # if all days are set, we don't run the code
-if no_days_count and no_days_count &lt; 7:
+if no_days_count and no_days_count < 7:
     for rec in records:
-        if rec.mailing_id:
-            # If the email is to be sent on a no_day, we try to find the
-            # next yes date
-            next_try = rec.date.weekday()
+        if rec.state == 'in_queue':
+            date_today = datetime.datetime.today()
+
+            # If the mailing is to be sent on a no_day, we try to find the next yes date
+            next_try = date_today.weekday()
             while next_try in no_days:
                 if next_try == 6:
                     next_try = 0
@@ -32,11 +36,11 @@ if no_days_count and no_days_count &lt; 7:
                     next_try += 1
 
             # Calculate the date, based on the next_try
-            days_ahead = next_try - rec.date.weekday()
-            if days_ahead &lt; 0 or days_ahead == 0:
+            days_ahead = next_try - date_today.weekday()
+            if days_ahead < 0 or days_ahead == 0:
                 # Target day already happened this week
                 days_ahead += 7
-            rec.write({'scheduled_date': rec.date + datetime.timedelta(days_ahead)})
+            rec.write({'schedule_date': date_today + datetime.timedelta(days_ahead)})
             </field>
         </record>
 
