@@ -22,7 +22,7 @@ no_days_count = len(no_days)
 
 # If all days were set, this would cause an impossible situation, so
 # if all days are set, we don't run the code
-if no_days_count and no_days_count < 7:
+if no_days_count and no_days_count &lt; 7:
     for rec in records:
         if rec.state == 'in_queue':
             date_today = datetime.datetime.today()
@@ -37,7 +37,7 @@ if no_days_count and no_days_count < 7:
 
             # Calculate the date, based on the next_try
             days_ahead = next_try - date_today.weekday()
-            if days_ahead < 0 or days_ahead == 0:
+            if days_ahead &lt; 0 or days_ahead == 0:
                 # Target day already happened this week
                 days_ahead += 7
             rec.write({'schedule_date': date_today + datetime.timedelta(days_ahead)})
