@@ -5,7 +5,7 @@
     'category': 'Tools',
     'author': 'Wibtec',
     'website': 'www.wibtec.com',
-    'summary': 'Postpone mail sending',
+    'summary': 'Postpone mail sending (for mailings)',
     'description': """
 On certain weekdays, emails should not be sent
 """,

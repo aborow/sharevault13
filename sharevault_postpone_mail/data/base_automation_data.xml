@@ -3,7 +3,7 @@
     <data noupdate="1">
 
         <record id="postpone_remails" model="base.automation">
-            <field name="name">ShareVault: postpone mail</field>
+            <field name="name">ShareVault: postpone mail (for mailings)</field>
             <field name="model_id" ref="mail.model_mail_mail"/>
             <field name="trigger">on_create</field>
             <field name="active" eval="True"/>
@@ -21,7 +21,7 @@ no_days_count = len(no_days)
 # if all days are set, we don't run the code
 if no_days_count and no_days_count &lt; 7:
     for rec in records:
-        if rec.message_type == 'email' and not rec.notification:
+        if rec.mailing_id:
             # If the email is to be sent on a no_day, we try to find the
             # next yes date
             next_try = rec.date.weekday()
