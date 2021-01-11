@@ -159,3 +159,7 @@ SV-246: Account Status (Individual and Company)
 Version - 13.0.1.0.44
 =====================
 SV-254: Add Marketing Note Field in LEAD
+
+Version - 13.0.1.0.45
+=====================
+SV-246: Modified Label for Company View
