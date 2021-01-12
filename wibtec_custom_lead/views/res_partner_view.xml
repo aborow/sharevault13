@@ -32,5 +32,17 @@
                 </xpath>
             </field>
         </record>
+
+        <record id=">contact_tree_view_inherit_lead_score" model="ir.ui.view">
+            <field name="name">res.partner.view.tree.inherit.lead.score</field>
+            <field name="model">res.partner</field>
+            <field name="priority">8</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='phone']" position="after">
+                    <field name="odoo_score" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

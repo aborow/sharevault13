@@ -109,3 +109,7 @@ SV-250: Change label odoo score to Total Score
 13.0.1.0.36
 ===========
 SV-250: Update Lead Creation Notification Email and Notify entire Sales Team.
+
+13.0.1.0.37
+===========
+SV-242: Added Total Score in contact list view
