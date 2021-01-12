@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--Added MQL Types-->
+        <record model="mql.type" id="mt_scorein">
+            <field name="name">ScoreIn</field>
+        </record>
+        <record model="mql.type" id="mt_pff">
+            <field name="name">PFF</field>
+        </record>
+        <record model="mql.type" id="mt_contentnibbler">
+            <field name="name">ContentNibbler</field>
+        </record>
+        <record model="mql.type" id="mt_adhoc">
+            <field name="name">Adhoc</field>
+        </record>
+        <record model="mql.type" id="mt_chat">
+            <field name="name">Chat</field>
+        </record>
+
+    </data>
+</odoo>

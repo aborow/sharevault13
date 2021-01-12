@@ -1,7 +1,7 @@
 #! -*- encoding: utf-8 -*-
 {
     'name': "Website Custom Pages",
-    'version': '13.0.1.0.34',
+    'version': '13.0.1.0.35',
     'author': 'Wibtec',
     'website': 'http://www.wibtec.com',
     'category': 'Website',
@@ -28,6 +28,7 @@
             'security/ir.model.access.csv',
             'data/mail_template_data.xml',
             'data/utm_source_data.xml',
+            'data/mql_type_data.xml',
             'data/base_automation_data.xml',
             'wizard/website_create_page.xml',
             'views/snippets.xml',

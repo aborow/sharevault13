@@ -47,6 +47,12 @@ INDUSTRY = [
     ('cannabis', 'Cannabis')
 ]
 
+MQLTYPE = [('scorein', 'ScoreIn'),
+           ('pff', 'PFF'),
+           ('contentnibbler', 'ContentNibbler'),
+           ('adhoc', 'Adhoc'),
+           ('chat', 'Chat')]
+
 
 class WebsiteForm(WebsiteForm):
 
@@ -81,7 +87,12 @@ class WebsiteForm(WebsiteForm):
         if kwargs.get('name') and kwargs.get('contact_name'):
             kwargs.update({'name': kwargs.get('name') + ' ' + kwargs.get('contact_name') , 'contact_name': kwargs.get('name') + ' ' + kwargs.get('contact_name')})
         if model_name == 'crm.lead':
-            request.params.update({'mql_type': 'pff', 'mql_type_date': str(fields.Date.today())})
+            request.params.update({'mql_type_date': str(fields.Date.today())})#'mql_type': 'pff',
+            if kwargs.get('mql_id'):
+                mql_type = request.env['mql.type'].sudo().search([('id', '=', kwargs.get('mql_id'))])
+                for mql in MQLTYPE:
+                    if mql[1] == mql_type.name:
+                        request.params.update({'mql_type': str(mql[0])})
             if kwargs.get('Industry'):
                 for ind in INDUSTRY:
                     if ind[1] == kwargs.get('Industry'):

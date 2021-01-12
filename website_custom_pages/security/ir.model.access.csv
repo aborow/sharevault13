@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_web_thankyou_pages,Web Thank You Pages,model_web_thankyou_pages,,1,1,1,1
+access_mql_type,MQL Type,model_mql_type,,1,1,1,1

@@ -207,7 +207,15 @@ FormEditorRegistry.add('create_svlead', {
         relation: 'utm.campaign',
         string: _t('Campaign'),
         title: _t('Select related Campaign'),
-    }],
+    },
+    {
+        name: 'mql_id',
+        type: 'many2one',
+        relation: 'mql.type',
+        string: _t('MQL Type'),
+        title: _t('Select related MQL Type'),
+    },],
+
 });
 
 });

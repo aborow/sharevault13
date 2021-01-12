@@ -59,3 +59,7 @@ SV-216: Passed Industry field value in Lead from Website.
 13.0.1.0.34
 ===========
 SV-224: Production Issue - odoo expiration message and documents URL.
+
+13.0.1.0.35
+===========
+SV-253: Add MQL Type as Form Input Parameter

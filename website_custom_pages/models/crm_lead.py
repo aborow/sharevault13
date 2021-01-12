@@ -53,3 +53,10 @@ class Lead(models.Model):
                     ('unable-To-Locate', 'Unable-To-Locate'),
                     ('cannabis', 'Cannabis')
                     ], string='Industry')
+
+
+class MqlType(models.Model):
+    _name = 'mql.type'
+    _description = 'MQL Type for website form'
+
+    name = fields.Char('MQL Type')
