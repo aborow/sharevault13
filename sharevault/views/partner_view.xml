@@ -2,6 +2,24 @@
 <odoo>
     <data>
 
+        <!--SV-256-->
+        <record model="ir.ui.view" id="inherit_view_partner_property_form">
+            <field name="name">inherit.view.partner.property.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='accounting_entries']" position="inside">
+                    <field name="vat" attrs="{'invisible': [('company_type','!=','company')]}"/>
+                    <field name="print_on_check_as"
+                            attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
+                    <field name="eligible_1099"
+                            attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
+                    <field name="vendor_type"
+                            attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
+                </xpath>
+            </field>
+        </record>
+        
         <!-- SV-98 -->
         <record id="base_partner_merge_automatic_wizard_form" model="ir.ui.view">
             <field name="name">Merge wizard</field>
@@ -144,9 +162,9 @@
                 <field name="industry_id" position="attributes">
                     <attribute name="attrs">{'invisible': [('is_company', '=', False)]}</attribute>
                 </field>
-                <!--SV-80-->
+                <!--SV-256-->
                 <field name="vat" position="attributes">
-                    <attribute name="attrs">{'invisible': [('company_type','!=','company')]}</attribute>
+                    <attribute name="invisible">1</attribute>
                 </field>
                 <!--SV-SV-156-->
                 <field name="type" position="attributes">
@@ -337,12 +355,6 @@
                     <field name="job_function" attrs="{'invisible':[('company_type','=','company')]}"/>
                     <field name="job_level" attrs="{'invisible':[('company_type','=','company')]}"/>
 
-                    <field name="print_on_check_as"
-                            attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
-                    <field name="eligible_1099"
-                            attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
-                    <field name="vendor_type"
-                            attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
                 </xpath>
 
                 <xpath expr="//page[last()]" position="after">
