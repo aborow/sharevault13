@@ -113,3 +113,7 @@ SV-250: Update Lead Creation Notification Email and Notify entire Sales Team.
 13.0.1.0.37
 ===========
 SV-242: Added Total Score in contact list view
+
+13.0.1.0.38
+===========
+SV-259: New lead types to sync to Salesforce

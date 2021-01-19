@@ -86,18 +86,18 @@ class CrmLead(models.Model):
     # wibtec_crm_score = fields.Float(string="Import Score")
     imported_phone = fields.Char('Imported Phone')
 
-    def write(self, vals):
-        if vals:
-            if 'x_last_modified_on' in vals.keys():
-                if vals['x_last_modified_on']:
-                    vals['x_is_updated'] = True
-                else:
-                    vals['x_is_updated'] = False
-            else:
-                vals['x_is_updated'] = False
-
-        res = super(CrmLead, self).write(vals)
-        return res
+    # def write(self, vals):
+    #     if vals:
+    #         if 'x_last_modified_on' in vals.keys():
+    #             if vals['x_last_modified_on']:
+    #                 vals['x_is_updated'] = True
+    #             else:
+    #                 vals['x_is_updated'] = False
+    #         else:
+    #             vals['x_is_updated'] = False
+    #
+    #     res = super(CrmLead, self).write(vals)
+    #     return res
 
     def create_lead_sf_dict(self):
         sf_lead_dict = {}
@@ -178,7 +178,7 @@ class CrmLead(models.Model):
             parsed_result = result.json()
             self.salesforce_response = 'Successfully Created'
             if parsed_result.get('id'):
-                self.x_is_updated = True
+                # self.x_is_updated = True
                 self.x_salesforce_exported = True
                 self.x_last_modified_on = datetime.now()
                 self.x_salesforce_id = parsed_result.get('id')
@@ -196,11 +196,47 @@ class CrmLead(models.Model):
             self.salesforce_response = str(parsed_json[0].get('message'))
             return False
 
+    def update_lead_in_sf(self, sf_lead_dict):
+        if not self.x_is_updated:
+            sf_config = self.env.user.company_id
+
+            ''' GET ACCESS TOKEN '''
+            sf_access_token = None
+            if sf_config.sf_access_token:
+                sf_access_token = sf_config.sf_access_token
+            if sf_access_token:
+                headers = {}
+                headers['Authorization'] = 'Bearer ' + str(sf_access_token)
+                headers['Content-Type'] = 'application/json'
+                headers['Accept'] = 'application/json'
+
+                endpoint = '/services/data/v40.0/sobjects/Lead'
+
+                payload = json.dumps(sf_lead_dict)
+                if self.x_salesforce_id:
+                    ''' Try Updating it if already exported '''
+                    res = requests.request('PATCH', sf_config.sf_url + endpoint + '/' + self.x_salesforce_id, headers=headers, data=payload)
+                    if res.status_code == 204:
+                        self.x_last_modified_on = datetime.now()
+                        self.x_is_updated = True
+                else:
+                    res = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=payload)
+                    if res.status_code in [200, 201]:
+                        parsed_resp = json.loads(str(res.text))
+                        self.x_salesforce_exported = True
+                        self.x_salesforce_id = parsed_resp.get('id')
+                        return parsed_resp.get('id')
+                    else:
+                        return False
+
     def create_lead_sf(self):
         for lead in self.browse(self.id):
             if not lead.x_salesforce_exported and not lead.is_sf_lead:
                 sf_lead_dict = lead.create_lead_sf_dict()
                 lead.create_lead_in_sf(sf_lead_dict)
+            else:
+                sf_lead_dict = lead.create_lead_sf_dict()
+                lead.update_lead_in_sf(sf_lead_dict)
 
     @api.model
     def recycle_lead_score(self):
@@ -218,10 +254,30 @@ class CrmLead(models.Model):
             for rec in self:
                 if rec.source_id:
                     if rec.source_id.source_type == 'product':
-                        rec.create_lead_sf()
-                        now = datetime.now()
-                        rec.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
-                        rec.lead_type = 'marketing_ql'
+                        if rec.mql_type == 'pff':
+                            stage = self.env['crm.stage'].search([('name', '=', 'Open')], limit=1)
+                            usr = self.env['res.users'].search([('name', '=', 'Marcia Cornwell')], limit=1)
+                            sales_team = self.env['crm.team'].search([('name', '=', 'Sales')], limit=1)
+                            rec.user_id = usr.id
+                            rec.team_id = sales_team.id
+                            rec.state_id = stage.id
+                            rec.create_lead_sf()
+                            now = datetime.now()
+                            rec.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
+                            rec.lead_type = 'marketing_ql'
+        else:
+            for rec in self:
+                if rec.mql_type == 'pff':
+                    stage = self.env['crm.stage'].search([('name', '=', 'Open')], limit=1)
+                    usr = self.env['res.users'].search([('name', '=', 'Marcia Cornwell')], limit=1)
+                    sales_team = self.env['crm.team'].search([('name', '=', 'Sales')], limit=1)
+                    rec.user_id = usr.id
+                    rec.team_id = sales_team.id
+                    rec.state_id = stage.id
+                    rec.create_lead_sf()
+                    now = datetime.now()
+                    rec.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
+                    rec.lead_type = 'marketing_ql'
 
     def sync_manual(self):
         self.create_lead_sf()
