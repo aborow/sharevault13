@@ -4,7 +4,7 @@
 
         <!-- this shuld run when someone clicks on the send button in mass mailing -->
 
-        <record id="postpone_remails" model="base.automation">
+        <record id="postpone_emails" model="base.automation">
             <field name="name">ShareVault: postpone mail (for mailings)</field>
             <field name="model_id" ref="mass_mailing.model_mailing_mailing"/>
             <field name="trigger">on_write</field>
@@ -26,21 +26,26 @@ if no_days_count and no_days_count &lt; 7:
     for rec in records:
         if rec.state == 'in_queue':
             date_today = datetime.datetime.today()
+            today_day = date_today.weekday()
+            next_try_day = today_day
 
             # If the mailing is to be sent on a no_day, we try to find the next yes date
-            next_try = date_today.weekday()
-            while next_try in no_days:
-                if next_try == 6:
-                    next_try = 0
+            while next_try_day in no_days:
+                if next_try_day == 6:
+                    next_try_day = 0
                 else:
-                    next_try += 1
+                    next_try_day += 1
 
-            # Calculate the date, based on the next_try
-            days_ahead = next_try - date_today.weekday()
-            if days_ahead &lt; 0 or days_ahead == 0:
-                # Target day already happened this week
-                days_ahead += 7
-            rec.write({'schedule_date': date_today + datetime.timedelta(days_ahead)})
+            days_ahead = 0
+            if next_try_day &gt; today_day:
+                days_ahead = next_try_day - today_day
+            if next_try_day &lt; today_day:
+                days_ahead = 7 - (today_day - next_try_day)
+
+            log("TODAY: %s | NEXT: %s | DAYS: %s" % (today_day, next_try_day, days_ahead))
+
+            if next_try_day != today_day:
+              rec.write({'schedule_date': date_today + datetime.timedelta(days=days_ahead)})
             </field>
         </record>
 
