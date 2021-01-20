@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'ShareVault Custom',
-    'version': '13.0.1.0.5',
+    'version': '13.0.1.0.6',
     'category': 'Tools',
     'author': 'Wibtec',
     'website': 'www.wibtec.com',
@@ -9,7 +9,10 @@
     'description': """
 - Hubspt fields
 """,
-    'depends': ['contacts'],
+    'depends': [
+                'contacts',
+                'mass_mailing'
+                ],
     'data': [
             'data/country_data.xml',
             'views/partner_view.xml',
