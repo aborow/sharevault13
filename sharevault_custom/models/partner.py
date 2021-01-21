@@ -170,6 +170,29 @@ class Partner(models.Model):
     hs_company_region = fields.Char("HS Company Region")
 
 
+    def _get_mailing_counter(self):
+        self.ensure_one()
+        self.mailing_counter = self.env['mailing.trace'].search_count([
+                        ('model','=','res.partner'),
+                        ('res_id','=',self.id)
+                        ])
+    mailing_counter = fields.Integer('Mailings', compute='_get_mailing_counter')
+
+    def call_contact_mailings(self):
+        self.ensure_one()
+        return {
+		        'name':_("Mailings"),
+                'type': 'ir.actions.act_window',
+		        'view_type': 'form',
+                'view_mode': 'tree,form',
+		        'res_model': 'mailing.trace',
+		        'target': 'current',
+                'domain': [('model', '=', 'res.partner'),('res_id','=',self.id)]
+                }
+
+
+
+
 # These changes are made in order to allow importing any value into the contacts.
 # Whatever the state, it will always be saved.
 class CountryState(models.Model):
