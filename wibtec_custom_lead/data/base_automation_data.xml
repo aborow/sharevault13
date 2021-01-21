@@ -62,7 +62,7 @@ if record.type == 'lead':
             <field name="state">code</field>
             <field name="code">
 if record:
-    record.assign_contact_lead()
+    record.sudo().assign_contact_lead()
             </field>
         </record>
 
