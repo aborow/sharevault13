@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view of Page Performance Report -->
+    <record id="view_page_performance_report" model="ir.ui.view">
+        <field name="name">webpage.performance.report.form</field>
+        <field name="model">webpage.performance</field>
+        <field name="arch" type="xml">
+            <form string="Page Performance Report">
+                <group>
+                    <group>
+                        <field name="from_date" required="1"/>
+                    </group>
+                    <group>
+                        <field name="to_date" required="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_pdf" string='Print' type="object" class="btn-primary"/>
+                    <button string="CANCEL" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action of Page Performance Report-->
+    <record id="action_page_performance_report" model="ir.actions.act_window">
+        <field name="name">Page Performance Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">webpage.performance</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

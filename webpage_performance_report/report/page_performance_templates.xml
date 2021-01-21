@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="invoice_commission_report_template">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="page">
+                            <center>
+                                <h4 class="text-center">
+                                    <strong>Page Performance Report From&#160;<span t-field="o.from_date"/>&#160;To
+                                        &#160;<span
+                                                t-field="o.to_date"/>
+                                    </strong>
+                                </h4>
+                            </center>
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr style="background-color: #eee;">
+                                        <th width="71%">Page Name</th>
+                                        <th width="5%">Page Views</th>
+                                        <th width="7%">Submission Rate</th>
+                                        <th width="7%">Conversion Rate</th>
+                                        <th width="10%">First Visit</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.get_page_name()" t-as="page">
+                                        <tr>
+                                            <td width="71%">
+                                                <span t-esc="page.name"/>
+                                            </td>
+                                            <td width="5%">
+                                                <span t-esc="o.get_view(page.id)"/>
+                                            </td>
+                                            <td width="7%">
+                                                <span t-esc="o.get_submission(page.id)"/>
+                                            </td>
+                                            <td width="7%">
+                                                <t t-if="o.get_submission(page.id)">
+                                                    <span t-esc="'{:,.2f}'.format((o.get_view(page.id))/(o.get_submission(page.id)))"/>
+                                                </t>
+                                            </td>
+                                            <td width="10%">
+                                                <span t-esc="o.get_first_visit(page.id)"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <record id="paperformat_wppr" model="report.paperformat">
+            <field name="name">Page Performance Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">210</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <report
+                id="report_page_performance_report"
+                string="Page Performance Report"
+                model="webpage.performance"
+                report_type="qweb-pdf"
+                name="webpage_performance_report.invoice_commission_report_template"
+                file="webpage_performance_report.invoice_commission_report_template"
+                menu="False"/>
+
+        <record id="report_page_performance_report" model="ir.actions.report">
+            <field name="paperformat_id" ref="webpage_performance_report.paperformat_wppr"/>
+        </record>
+
+    </data>
+</odoo>

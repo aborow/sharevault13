@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add action entry in the Action Menu for Website Page -->
+    <act_window id="website_page_act_window_multi"
+        name="Page Performance Report"
+        binding_model="website.page"
+        res_model="webpage.performance"
+        binding_views="list"
+        view_mode="form"
+        target="new"
+        context="{
+            'default_composition_mode': 'mass',
+            'default_mass_keep_log': True,
+            'default_res_ids': active_ids
+        }"
+    />
+    <act_window id="website_page_act_window_single"
+        name="Page Performance Report"
+        binding_model="website.page"
+        res_model="webpage.performance"
+        binding_views="form"
+        view_mode="form"
+        target="new"
+        context="{
+            'default_composition_mode': 'comment',
+            'default_res_id': active_id,
+        }"
+    />
+
+</odoo>
