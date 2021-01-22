@@ -174,7 +174,7 @@ class Partner(models.Model):
     def _get_mailing_counter(self):
         self.ensure_one()
         self.mailing_counter = len(self.mailing_ids)
-    mailing_counter = fields.Integer('Mailings', compute='_get_mailing_counter')
+    mailing_counter = fields.Integer('Mailing Counter', compute='_get_mailing_counter')
     mailing_ids = fields.One2many('mailing.trace', 'partner_id', 'Mailings')
 
     def call_contact_mailings(self):
