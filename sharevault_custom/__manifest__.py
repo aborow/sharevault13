@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'ShareVault Custom',
-    'version': '13.0.1.0.9',
+    'version': '13.0.1.0.10',
     'category': 'Tools',
     'author': 'Wibtec',
     'website': 'www.wibtec.com',
