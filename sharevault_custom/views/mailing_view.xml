@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- we add a search parameter sho that it can be used in the following view -->
+        <record id="mailing_trace_view_search" model="ir.ui.view">
+            <field name="name">ShareVault: add search parameter</field>
+            <field name="model">mailing.trace</field>
+            <field name="inherit_id" ref="mass_mailing.mailing_trace_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[last()]" position="after">
+                    <field name="res_id"/>
+                    <field name="model"/>
+                    <field name="partner_id"/>
+                </xpath>
+
+                <xpath expr="//group" position="inside">
+                    <filter string="Partner" name="group_partner_id" context="{'group_by': 'partner_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="mailing_trace_view_form" model="ir.ui.view">
+            <field name="name">ShareVault: show partner</field>
+            <field name="model">mailing.trace</field>
+            <field name="inherit_id" ref="mass_mailing.mailing_trace_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='email']" position="after">
+                    <field name="partner_id"
+                            attrs="{'invisible':[('model','!=','res.partner')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

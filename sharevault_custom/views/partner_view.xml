@@ -2,20 +2,6 @@
 <odoo>
     <data>
 
-        <!-- we add a search parameter sho that it can be used in the following view -->
-        <record id="mailing_trace_view_search" model="ir.ui.view">
-            <field name="name">ShareVault: add search parameter</field>
-            <field name="model">mailing.trace</field>
-            <field name="inherit_id" ref="mass_mailing.mailing_trace_view_search"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[last()]" position="after">
-                    <field name="res_id"/>
-                    <field name="model"/>
-                </xpath>
-            </field>
-        </record>
-
-
         <record id="view_partner_form" model="ir.ui.view">
             <field name="name">ShareVault: Hubspot fields</field>
             <field name="model">res.partner</field>
@@ -33,6 +19,10 @@
                         <field string="Mailings" name="mailing_counter" widget="statinfo"/>
                     </button>
                 </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="mailing_ids" invisible="1"/>
+                </xpath>
+
 
                 <xpath expr="//page[last()]" position="after">
                     <page id="additional_info2" string="Additional Info 2">
