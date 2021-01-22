@@ -19,9 +19,11 @@
                         <field string="Mailings" name="mailing_counter" widget="statinfo"/>
                     </button>
                 </xpath>
+                <!--
                 <xpath expr="//field[@name='vat']" position="after">
                     <field name="mailing_ids" invisible="1"/>
                 </xpath>
+                -->
 
 
                 <xpath expr="//page[last()]" position="after">

@@ -170,12 +170,17 @@ class Partner(models.Model):
     hs_company_region = fields.Char("HS Company Region")
 
 
+
     # Making mailings available in Contacts - START
     def _get_mailing_counter(self):
         self.ensure_one()
-        self.mailing_counter = len(self.mailing_ids)
+        #self.mailing_counter = len(self.mailing_ids)
+        selg.mailing_counter = self.env['mailing.trace'].search_count([
+            ('model','=','res.partner'),
+            ('res_id','=',self.id)
+        ])
     mailing_counter = fields.Integer('Mailing Counter', compute='_get_mailing_counter')
-    mailing_ids = fields.One2many('mailing.trace', 'partner_id', 'Mailings')
+    #mailing_ids = fields.One2many('mailing.trace', 'partner_id', 'Mailings')
 
     def call_contact_mailings(self):
         self.ensure_one()
@@ -189,6 +194,7 @@ class Partner(models.Model):
                 'domain': [('model', '=', 'res.partner'),('res_id','=',self.id)]
                 }
 
+    """
     # A field to get the names of all the mailings the parter is associated to
     @api.depends('mailing_ids')
     def _get_mailing_titles(self):
@@ -200,9 +206,8 @@ class Partner(models.Model):
 
     mailing_titles = fields.Char('Mailing titles',
                                     compute='_get_mailing_titles', store=True)
-
+    """
     # Making mailings available in Contacts - END
-
 
 
 # These changes are made in order to allow importing any value into the contacts.
