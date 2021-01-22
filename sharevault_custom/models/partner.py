@@ -175,7 +175,7 @@ class Partner(models.Model):
     def _get_mailing_counter(self):
         self.ensure_one()
         #self.mailing_counter = len(self.mailing_ids)
-        selg.mailing_counter = self.env['mailing.trace'].search_count([
+        self.mailing_counter = self.env['mailing.trace'].search_count([
             ('model','=','res.partner'),
             ('res_id','=',self.id)
         ])
