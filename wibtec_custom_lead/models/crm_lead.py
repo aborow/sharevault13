@@ -170,31 +170,36 @@ class CrmLead(models.Model):
         if not sf_config.sf_access_token:
             return False
         headers = sf_config.get_headers(True)
-
-        endpoint = '/services/data/v40.0/sobjects/Lead'
-        parsed_dict = json.dumps(sf_partner_dict)
-        result = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=parsed_dict)
-        if result.status_code in [200, 201]:
-            parsed_result = result.json()
-            self.salesforce_response = 'Successfully Created'
-            if parsed_result.get('id'):
-                # self.x_is_updated = True
-                self.x_salesforce_exported = True
-                self.x_last_modified_on = datetime.now()
-                self.x_salesforce_id = parsed_result.get('id')
-                return parsed_result.get('id')
-            else:
-                return False
-        elif result.status_code == 401:
-            sf_config.refresh_token_from_access_token()
-            self.salesforce_response = 'ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...'
-            _logger.info("ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...")
-            return False
+        endpoint_get = "/services/data/v40.0/query/?q=select Id from Lead where Email = '{}'".format(
+            sf_partner_dict['Email'])
+        res = requests.request('GET', sf_config.sf_url + endpoint_get, headers=headers)
+        if res.status_code == 200:
+            self.salesforce_response = 'Lead is already exists in Salesforce with this Email.'
         else:
-            parsed_json = result.json()
-            _logger.error('response Of Partner creation in salesforce  (%s)', str(parsed_json[0].get('message')))
-            self.salesforce_response = str(parsed_json[0].get('message'))
-            return False
+            endpoint = '/services/data/v40.0/sobjects/Lead'
+            parsed_dict = json.dumps(sf_partner_dict)
+            result = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=parsed_dict)
+            if result.status_code in [200, 201]:
+                parsed_result = result.json()
+                self.salesforce_response = 'Successfully Created'
+                if parsed_result.get('id'):
+                    # self.x_is_updated = True
+                    self.x_salesforce_exported = True
+                    self.x_last_modified_on = datetime.now()
+                    self.x_salesforce_id = parsed_result.get('id')
+                    return parsed_result.get('id')
+                else:
+                    return False
+            elif result.status_code == 401:
+                sf_config.refresh_token_from_access_token()
+                self.salesforce_response = 'ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...'
+                _logger.info("ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...")
+                return False
+            else:
+                parsed_json = result.json()
+                _logger.error('response Of Partner creation in salesforce  (%s)', str(parsed_json[0].get('message')))
+                self.salesforce_response = str(parsed_json[0].get('message'))
+                return False
 
     def update_lead_in_sf(self, sf_lead_dict):
         if not self.x_is_updated:
@@ -220,14 +225,20 @@ class CrmLead(models.Model):
                         self.x_last_modified_on = datetime.now()
                         self.x_is_updated = True
                 else:
-                    res = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=payload)
-                    if res.status_code in [200, 201]:
-                        parsed_resp = json.loads(str(res.text))
-                        self.x_salesforce_exported = True
-                        self.x_salesforce_id = parsed_resp.get('id')
-                        return parsed_resp.get('id')
+                    endpoint_get = "/services/data/v40.0/query/?q=select Id from Lead where Email = '{}'".format(
+                        sf_lead_dict['Email'])
+                    res = requests.request('GET', sf_config.sf_url + endpoint_get, headers=headers)
+                    if res.status_code == 200:
+                        self.salesforce_response = 'Lead is already exists in Salesforce with this Email.'
                     else:
-                        return False
+                        res = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=payload)
+                        if res.status_code in [200, 201]:
+                            parsed_resp = json.loads(str(res.text))
+                            self.x_salesforce_exported = True
+                            self.x_salesforce_id = parsed_resp.get('id')
+                            return parsed_resp.get('id')
+                        else:
+                            return False
 
     def create_lead_sf(self):
         for lead in self.browse(self.id):
