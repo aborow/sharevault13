@@ -173,8 +173,12 @@ class CrmLead(models.Model):
         endpoint_get = "/services/data/v40.0/query/?q=select Id from Lead where Email = '{}'".format(
             sf_partner_dict['Email'])
         res = requests.request('GET', sf_config.sf_url + endpoint_get, headers=headers)
+
+        _logger.info(endpoint_get)
+        _logger.info(res)
+
         if res.status_code == 200:
-            self.salesforce_response = 'Lead is already exists in Salesforce with this Email.'
+            self.salesforce_response = 'A lead already exists in Salesforce with this email.'
         else:
             endpoint = '/services/data/v40.0/sobjects/Lead'
             parsed_dict = json.dumps(sf_partner_dict)
@@ -228,8 +232,12 @@ class CrmLead(models.Model):
                     endpoint_get = "/services/data/v40.0/query/?q=select Id from Lead where Email = '{}'".format(
                         sf_lead_dict['Email'])
                     res = requests.request('GET', sf_config.sf_url + endpoint_get, headers=headers)
+
+                    _logger.info(endpoint_get)
+                    _logger.info(res)
+
                     if res.status_code == 200:
-                        self.salesforce_response = 'Lead is already exists in Salesforce with this Email.'
+                        self.salesforce_response = 'A lead already exists in Salesforce with this email.'
                     else:
                         res = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=payload)
                         if res.status_code in [200, 201]:

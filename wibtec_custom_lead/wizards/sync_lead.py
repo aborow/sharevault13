@@ -235,7 +235,7 @@ class SyncLeadWizard(models.TransientModel):
                 headers['accept'] = 'application/json'
                 headers['Content-Type'] = 'text/plain'
                 data = requests.request('GET',
-                                        res_company_obj.sf_url + "/services/data/v40.0/query/?q=select Id,Owner.Name from Lead where LastModifiedDate >= %sT00:00:00Z AND CreatedDate <= %sT23:59:59Z" % (
+                                        res_company_obj.sf_url + "/services/data/v40.0/query/?q=select Id,Owner.Name from Lead where LastModifiedDate >= %sT00:00:00Z AND LastModifiedDate <= %sT23:59:59Z" % (
                                             str(end_date), str(start_date)),
                                         headers=headers)
                 if data:
