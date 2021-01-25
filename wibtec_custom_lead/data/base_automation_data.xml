@@ -31,15 +31,15 @@ if record.team_id:
             <field name="code">
 if record.type == 'lead':
     if record.odoo_score >= 40 and record.mql_type != 'scorein' and not record.st_sp_updated:
-        usr = env['res.users'].search([('name', '=', 'Marcia Cornwell')], limit=1)
         sales_team = env['crm.team'].search([('name', 'ilike', 'Sales')], limit=1)
         record.write({
                         'lead_type': 'marketing_ql',
                         'mql_type': 'scorein',
                         'mql_type_date': datetime.date.today(),
-                        'user_id': usr.id,
+                        'user_id': sales_team.alias_user_id and sales_team.alias_user_id.id or False
                         'st_sp_updated': True,
-                        'team_id': sales_team.id,})
+                        'team_id': sales_team.id
+                        })
         record.create_lead_sf()
             </field>
         </record>
