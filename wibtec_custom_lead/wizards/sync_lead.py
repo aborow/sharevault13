@@ -80,6 +80,7 @@ class SyncLeadWizard(models.TransientModel):
         if not lead_exists:
 
             if lead_dict:
+                lead_dict['salesforce_response'] = ''
                 res = lead_obj.create(lead_dict)
                 if res:
                     ''' Write x_salesforce_id '''
@@ -95,6 +96,7 @@ class SyncLeadWizard(models.TransientModel):
                 lead_dict['x_salesforce_id'] = sf_id
                 lead_dict['is_sf_lead'] = True
                 lead_dict['sf_last_sync_date'] = fields.Datetime.now()
+                lead_dict['salesforce_response'] = ''
                 lead_exists.write(lead_dict)
                 return lead_obj.id
             else:
@@ -167,78 +169,46 @@ class SyncLeadWizard(models.TransientModel):
 
     def import_leads(self):
         try:
-            if self._context.get('active_id'):
-                res_company_obj = self.env['res.company'].search([('id', '=', self._context.get('active_id'))])
-                if res_company_obj.sf_access_token:
-                    headers = {}
-                    headers['Authorization'] = 'Bearer ' + str(res_company_obj.sf_access_token)
-                    headers['accept'] = 'application/json'
-                    headers['Content-Type'] = 'text/plain'
+            sync_by = "manual"
+            self.sync_lead_from_sfcd(sync_by)
+        except Exception as e:
+            raise Warning("Oops Some error Occured" + str(e))
+
+    @api.model
+    def sync_lead_from_sfcd(self, sync_by):
+        start_date = date.today()
+        end_date = start_date - timedelta(days=1)
+        try:
+            res_company_obj = self.env['res.company'].search([('id', '=', 1)])
+            if res_company_obj.sf_access_token:
+                headers = {}
+                headers['Authorization'] = 'Bearer ' + str(res_company_obj.sf_access_token)
+                headers['accept'] = 'application/json'
+                headers['Content-Type'] = 'text/plain'
+                data = ''
+                if sync_by == "create_date":
                     data = requests.request('GET',
-                                            res_company_obj.sf_url + "/services/data/v40.0/query/?q=select Id,Owner.Name from Lead where CreatedDate >= %sT00:00:00Z AND CreatedDate <= %sT23:59:59Z" % (
+                                            res_company_obj.sf_url + "/services/data/v40.0/query/?q=select Id,"
+                                                                     "Owner.Name from Lead where CreatedDate >= "
+                                                                     "%sT00:00:00Z AND CreatedDate <= %sT23:59:59Z" % (
+                                                str(end_date), str(start_date)),
+                                            headers=headers)
+                if sync_by == "modified_date":
+                    data = requests.request('GET',
+                                            res_company_obj.sf_url + "/services/data/v40.0/query/?q=select Id,"
+                                                                     "Owner.Name from Lead where LastModifiedDate >= "
+                                                                     "%sT00:00:00Z AND LastModifiedDate <= "
+                                                                     "%sT23:59:59Z" % (
+                                                str(end_date), str(start_date)),
+                                            headers=headers)
+                if sync_by == "manual":
+                    data = requests.request('GET',
+                                            res_company_obj.sf_url + "/services/data/v40.0/query/?q=select Id,"
+                                                                     "Owner.Name from Lead where CreatedDate >= "
+                                                                     "%sT00:00:00Z AND CreatedDate <= %sT23:59:59Z" % (
                                                 str(self.start_date), str(self.end_date)),
                                             headers=headers)
-                    if data.status_code == 200:
-                        recs = []
-                        parsed_data = json.loads(str(data.text))
-                        if parsed_data:
-                            for p in parsed_data.get('records'):
-                                recs.append([p.get('Id'), p.get('Owner').get('Name')])
-                        for rec in recs:
-                            lead_read = self.fetch_sf_lead_details(rec[0])
-                            self.prepare_dict(rec, lead_read)
-                    else:
-                        return False
-
-
-
-        except Exception as e:
-            raise Warning("Oops Some error Occured" + str(e))
-
-    @api.model
-    def sync_lead_from_sfcd(self):
-        start_date = date.today()
-        end_date = start_date - timedelta(days=1)
-        try:
-            res_company_obj = self.env['res.company'].search([('id', '=', 1)])
-            if res_company_obj.sf_access_token:
-                headers = {}
-                headers['Authorization'] = 'Bearer ' + str(res_company_obj.sf_access_token)
-                headers['accept'] = 'application/json'
-                headers['Content-Type'] = 'text/plain'
-                data = requests.request('GET',
-                                        res_company_obj.sf_url + "/services/data/v40.0/query/?q=select Id,Owner.Name from Lead where CreatedDate >= %sT00:00:00Z AND CreatedDate <= %sT23:59:59Z" % (
-                                            str(end_date), str(start_date)),
-                                        headers=headers)
-                if data:
-                    recs = []
-                    parsed_data = json.loads(str(data.text))
-                    if parsed_data:
-                        for p in parsed_data.get('records'):
-                            recs.append([p.get('Id'), p.get('Owner').get('Name')])
-                    for rec in recs:
-                        lead_read = self.fetch_sf_lead_details(rec[0])
-                        self.prepare_dict(rec, lead_read)
-
-        except Exception as e:
-            raise Warning("Oops Some error Occured" + str(e))
-
-    @api.model
-    def sync_lead_from_sfmd(self):
-        start_date = date.today()
-        end_date = start_date - timedelta(days=1)
-        try:
-            res_company_obj = self.env['res.company'].search([('id', '=', 1)])
-            if res_company_obj.sf_access_token:
-                headers = {}
-                headers['Authorization'] = 'Bearer ' + str(res_company_obj.sf_access_token)
-                headers['accept'] = 'application/json'
-                headers['Content-Type'] = 'text/plain'
-                data = requests.request('GET',
-                                        res_company_obj.sf_url + "/services/data/v40.0/query/?q=select Id,Owner.Name from Lead where LastModifiedDate >= %sT00:00:00Z AND LastModifiedDate <= %sT23:59:59Z" % (
-                                            str(end_date), str(start_date)),
-                                        headers=headers)
-                if data:
+                if data != '':
                     recs = []
                     parsed_data = json.loads(str(data.text))
                     if parsed_data:

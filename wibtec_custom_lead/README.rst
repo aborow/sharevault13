@@ -117,3 +117,7 @@ SV-242: Added Total Score in contact list view
 13.0.1.0.38
 ===========
 SV-259: New lead types to sync to Salesforce
+
+13.0.1.0.40
+===========
+SV-228: SF to odoo leads sync and SV-259.

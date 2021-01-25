@@ -85,7 +85,7 @@ class CrmLead(models.Model):
     test_lead = fields.Boolean("Test Lead")
     # wibtec_crm_score = fields.Float(string="Import Score")
     imported_phone = fields.Char('Imported Phone')
-
+    st_sp_updated = fields.Boolean('Sales Team and Sales Person Updated', default=False)
     # def write(self, vals):
     #     if vals:
     #         if 'x_last_modified_on' in vals.keys():
@@ -284,25 +284,25 @@ class CrmLead(models.Model):
                             now = datetime.now()
                             rec.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
                             rec.lead_type = 'marketing_ql'
-        else:
-            for rec in self:
-                if rec.mql_type == 'pff':
-                    stage = self.env['crm.stage'].search([('name', '=', 'Open')], limit=1)
-                    usr = self.env['res.users'].search([('name', '=', 'Marcia Cornwell')], limit=1)
-                    sales_team = self.env['crm.team'].search([('name', '=', 'Sales')], limit=1)
-                    rec.user_id = usr.id
-                    rec.team_id = sales_team.id
-                    rec.state_id = stage.id
-                    rec.create_lead_sf()
-                    now = datetime.now()
-                    rec.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
-                    rec.lead_type = 'marketing_ql'
+        # else:
+        #     for rec in self:
+        #         if rec.mql_type == 'pff':
+        #             stage = self.env['crm.stage'].search([('name', '=', 'Open')], limit=1)
+        #             usr = self.env['res.users'].search([('name', '=', 'Marcia Cornwell')], limit=1)
+        #             sales_team = self.env['crm.team'].search([('name', '=', 'Sales')], limit=1)
+        #             rec.user_id = usr.id
+        #             rec.team_id = sales_team.id
+        #             rec.state_id = stage.id
+        #             rec.create_lead_sf()
+        #             now = datetime.now()
+        #             rec.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
+        #             rec.lead_type = 'marketing_ql'
 
-    def sync_manual(self):
-        self.create_lead_sf()
-        now = datetime.now()
-        self.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
-        self.lead_type = 'marketing_ql'
+    # def sync_manual(self):
+    #     self.create_lead_sf()
+    #     now = datetime.now()
+    #     self.mql_date = now.strftime("%m/%d/%Y %H:%M:%S")
+    #     self.lead_type = 'marketing_ql'
 
     @api.model
     def assign_contact_lead(self):

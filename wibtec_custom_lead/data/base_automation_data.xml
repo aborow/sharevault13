@@ -25,30 +25,19 @@ if record.team_id:
             <field name="name">ShareVault: Update Lead Stages</field>
             <field name="model_id" ref="crm.model_crm_lead"/>
             <field name="trigger">on_write</field>
+            <field name="trigger_field_ids" eval="[(6,0,[ref('wibtec_custom_lead.field_crm_lead__odoo_score')])]"/>
             <field name="active" eval="True"/>
             <field name="state">code</field>
             <field name="code">
 if record.type == 'lead':
-    if record.lead_type == 'new' and record.score >= 40:
-        stage = env['crm.stage'].search([('name', '=', 'Open')], limit=1)
+    if record.odoo_score >= 40 and record.mql_type != 'scorein' and not record.st_sp_updated:
         usr = env['res.users'].search([('name', '=', 'Marcia Cornwell')], limit=1)
         sales_team = env['crm.team'].search([('name', '=', 'Sales')], limit=1)
-        record.write({'stage_id': stage.id,
-                       'lead_type': 'marketing_ql',
+        record.write({'lead_type': 'marketing_ql',
                         'mql_type': 'scorein',
                         'mql_type_date': datetime.date.today(),
                         'user_id': usr.id,
-                        'team_id': sales_team.id,})
-        record.create_lead_sf()
-    if record.odoo_score >= 40:
-        stage = env['crm.stage'].search([('name', '=', 'Open')], limit=1)
-        usr = env['res.users'].search([('name', '=', 'Marcia Cornwell')], limit=1)
-        sales_team = env['crm.team'].search([('name', '=', 'Sales')], limit=1)
-        record.write({'stage_id': stage.id,
-                       'lead_type': 'marketing_ql',
-                        'mql_type': 'scorein',
-                        'mql_type_date': datetime.date.today(),
-                        'user_id': usr.id,
+                        'st_sp_updated': True,
                         'team_id': sales_team.id,})
         record.create_lead_sf()
             </field>
@@ -97,7 +86,7 @@ if record:
             <field name="numbercall">-1</field>
             <field name="active" eval="False"/>
             <field name="doall" eval="False"/>
-            <field name="code">model.sync_lead_from_sfcd()</field>
+            <field name="code">model.sync_lead_from_sfcd(sync_by='create_date')</field>
             <field name="state">code</field>
             <field name="model_id" ref="model_sync_lead_wizard"/>
         </record>
@@ -109,7 +98,7 @@ if record:
             <field name="numbercall">-1</field>
             <field name="active" eval="False"/>
             <field name="doall" eval="False"/>
-            <field name="code">model.sync_lead_from_sfmd()</field>
+            <field name="code">model.sync_lead_from_sfcd(sync_by='modified_date')</field>
             <field name="state">code</field>
             <field name="model_id" ref="model_sync_lead_wizard"/>
         </record>
