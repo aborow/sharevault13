@@ -32,8 +32,9 @@ if record.team_id:
 if record.type == 'lead':
     if record.odoo_score >= 40 and record.mql_type != 'scorein' and not record.st_sp_updated:
         usr = env['res.users'].search([('name', '=', 'Marcia Cornwell')], limit=1)
-        sales_team = env['crm.team'].search([('name', '=', 'Sales')], limit=1)
-        record.write({'lead_type': 'marketing_ql',
+        sales_team = env['crm.team'].search([('name', 'ilike', 'Sales')], limit=1)
+        record.write({
+                        'lead_type': 'marketing_ql',
                         'mql_type': 'scorein',
                         'mql_type_date': datetime.date.today(),
                         'user_id': usr.id,
