@@ -9,6 +9,7 @@
             <field name="inherit_id" ref="account.view_partner_property_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='accounting_entries']" position="inside">
+                    <field name="supplier_rank" invisible="1"/>
                     <field name="vat" attrs="{'invisible': [('company_type','!=','company')]}"/>
                     <field name="print_on_check_as"
                             attrs="{'invisible':['|',('supplier_rank','=',False),('company_type','!=','company')]}"/>
@@ -19,7 +20,7 @@
                 </xpath>
             </field>
         </record>
-        
+
         <!-- SV-98 -->
         <record id="base_partner_merge_automatic_wizard_form" model="ir.ui.view">
             <field name="name">Merge wizard</field>
