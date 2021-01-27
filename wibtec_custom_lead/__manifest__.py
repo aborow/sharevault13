@@ -9,12 +9,14 @@
     'depends': [
                 'base',
                 'crm',
-                'sms', 'mail',
+                'sms',
+                'mail',
                 'base_automation',
                 'website_crm_score',
                 'utm',
                 'odoo_salesforce_connector',
                 'website_custom_pages',
+                'sharevault_custom'
                 ],
     'data': [
             'data/crm_stage_data.xml',
