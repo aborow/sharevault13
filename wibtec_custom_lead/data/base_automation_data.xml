@@ -60,7 +60,7 @@ if record:
             <field name="name">ShareVault: Create SF Lead</field>
             <field name="model_id" ref="crm.model_crm_lead"/>
             <field name="trigger">on_create</field>
-            <field name="active" eval="True"/>
+            <field name="active" eval="False"/>
             <field name="state">code</field>
             <field name="code">
 if record:
@@ -114,27 +114,76 @@ if record:
             <field name="state">code</field>
             <field name="code">
 if record.type == 'lead':
-  user_id = False
-  if not record.user_id:
-    if record.team_id and record.team_id.alias_user_id:
-      user_id = record.team_id.alias_user_id
-  else:
-    user_id = record.user_id
-  if user_id:
-    record.write({'user_id':user_id.id})
-    notify_data = dict()
-    new_partners = dict()
-    new_channels = dict()
-    res = record._message_auto_subscribe_followers({'user_id':user_id.id}, False)
-    for pid, sids, template in res:
-        new_partners.setdefault(pid, sids)
-        if template:
-            partner = env['res.partner'].browse(pid)
-            lang = partner.lang if partner else None
-            notify_data.setdefault((template, lang), list()).append(pid)
-        record.message_subscribe([pid])
-    for (template, lang), pids in notify_data.items():
-        record._message_auto_subscribe_notify(pids, template)
+
+    lead_vals = {}
+
+    team_id = record.team_id
+    source_id = record.source_id
+    stage_id = record.stage_id
+
+    try:
+      user_id = record.user_id.id
+    except:
+      user_id = record.user_id
+
+
+    if not user_id:
+        user_id = team_id and team_id.alias_user_id and team_id.alias_user_id.id or False
+
+    log('FIRST [%s] - USER_ID: %s / TEAM_ID: %s / SOURCE_ID: %s / STAGE_ID: %s' % (record.name, user_id, team_id, source_id, stage_id))
+
+    if record.source_id and record.source_id.source_type == 'product':
+        log("IT's a product")
+        if record.mql_type == 'pff':
+            log("IT's a PFF")
+            stage = env['crm.stage'].search([('name', '=', 'Open')], limit=1)
+            if stage:
+                stage_id = stage
+
+            sales_team = env['crm.team'].search([('name', 'ilike', 'Sales')], limit=1)
+            if sales_team:
+                team_id = sales_team
+                user_id = sales_team.alias_user_id and sales_team.alias_user_id.id or user_id
+
+            lead_vals['lead_type'] = 'marketing_ql'
+            lead_vals['mql_date'] = datetime.date.today()
+
+
+    log('SECOND [%s] - USER_ID: %s / TEAM_ID: %s / SOURCE_ID: %s / STAGE_ID: %s' % (record.name, user_id, team_id, source_id, stage_id))
+
+
+    if team_id:
+      lead_vals['team_id'] = team_id.id
+    if stage_id:
+      lead_vals['stage_id'] = stage_id.id
+    lead_vals['user_id'] = user_id
+
+
+    log("VALS: %s" % str(lead_vals))
+
+
+    if lead_vals:
+        record.with_context(tracking_disable=True).write(lead_vals)
+
+    if user_id:
+        notify_data = dict()
+        new_partners = dict()
+        new_channels = dict()
+        res = record._message_auto_subscribe_followers({}, False)
+        for pid, sids, template in res:
+            new_partners.setdefault(pid, sids)
+            if template:
+                partner = env['res.partner'].browse(pid)
+                lang = partner.lang if partner else None
+                notify_data.setdefault((template, lang), list()).append(pid)
+            record.message_subscribe([pid])
+        for (template, lang), pids in notify_data.items():
+            record._message_auto_subscribe_notify(pids, template)
+
+    log('THIRD [%s] - USER_ID: %s / TEAM_ID: %s / SOURCE_ID: %s / STAGE_ID: %s' % (record.name, user_id, team_id, source_id, stage_id))
+
+
+    record.create_lead_sf()
             </field>
         </record>
 

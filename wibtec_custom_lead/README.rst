@@ -121,3 +121,7 @@ SV-259: New lead types to sync to Salesforce
 13.0.1.0.40
 ===========
 SV-228: SF to odoo leads sync and SV-259.
+
+13.0.1.0.41
+===========
+SV-269: SalesForce Lead Sync Issues
