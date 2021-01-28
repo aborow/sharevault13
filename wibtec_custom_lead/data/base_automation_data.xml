@@ -130,12 +130,9 @@ if record.type == 'lead':
     if not user_id:
         user_id = team_id and team_id.alias_user_id and team_id.alias_user_id.id or False
 
-    log('FIRST [%s] - USER_ID: %s / TEAM_ID: %s / SOURCE_ID: %s / STAGE_ID: %s' % (record.name, user_id, team_id, source_id, stage_id))
 
     if record.source_id and record.source_id.source_type == 'product':
-        log("IT's a product")
         if record.mql_type == 'pff':
-            log("IT's a PFF")
             stage = env['crm.stage'].search([('name', '=', 'Open')], limit=1)
             if stage:
                 stage_id = stage
@@ -149,7 +146,6 @@ if record.type == 'lead':
             lead_vals['mql_date'] = datetime.date.today()
 
 
-    log('SECOND [%s] - USER_ID: %s / TEAM_ID: %s / SOURCE_ID: %s / STAGE_ID: %s' % (record.name, user_id, team_id, source_id, stage_id))
 
 
     if team_id:
@@ -159,7 +155,6 @@ if record.type == 'lead':
     lead_vals['user_id'] = user_id
 
 
-    log("VALS: %s" % str(lead_vals))
 
 
     if lead_vals:
@@ -180,7 +175,6 @@ if record.type == 'lead':
         for (template, lang), pids in notify_data.items():
             record._message_auto_subscribe_notify(pids, template)
 
-    log('THIRD [%s] - USER_ID: %s / TEAM_ID: %s / SOURCE_ID: %s / STAGE_ID: %s' % (record.name, user_id, team_id, source_id, stage_id))
 
 
     record.create_lead_sf()
