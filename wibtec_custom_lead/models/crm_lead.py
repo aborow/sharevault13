@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models, _, SUPERUSER_ID
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError, Warning
 import json
 import logging
 from datetime import datetime
@@ -33,6 +33,18 @@ INDUSTRY = [
     ('unable-To-Locate', 'Unable-To-Locate'),
     ('cannabis', 'Cannabis')
 ]
+
+def _log_logging(env, message, function_name, path):
+    env['ir.logging'].sudo().create({
+        'name': 'Salesforce Lead Sync',
+        'type': 'server',
+        'level': 'info',
+        'dbname': env.cr.dbname,
+        'message': message,
+        'func': function_name,
+        'path': path,
+        'line': '0',
+    })
 
 class CrmLead(models.Model):
     _inherit = "crm.lead"
@@ -170,40 +182,64 @@ class CrmLead(models.Model):
         if not sf_config.sf_access_token:
             return False
         headers = sf_config.get_headers(True)
-        endpoint_get = "/services/data/v40.0/query/?q=select Id from Lead where Email = '{}'".format(
+        endpoint_get = "/services/data/v40.0/query/?q=select Id, Name from Lead where Email = '{}'".format(
             sf_partner_dict['Email'])
         res = requests.request('GET', sf_config.sf_url + endpoint_get, headers=headers)
 
         _logger.info(endpoint_get)
         _logger.info(res)
-
         if res.status_code == 200:
-            self.salesforce_response = 'A lead already exists in Salesforce with this email.'
-        else:
-            endpoint = '/services/data/v40.0/sobjects/Lead'
-            parsed_dict = json.dumps(sf_partner_dict)
-            result = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=parsed_dict)
-            if result.status_code in [200, 201]:
-                parsed_result = result.json()
-                self.salesforce_response = 'Successfully Created'
-                if parsed_result.get('id'):
-                    # self.x_is_updated = True
-                    self.x_salesforce_exported = True
-                    self.x_last_modified_on = datetime.now()
-                    self.x_salesforce_id = parsed_result.get('id')
-                    return parsed_result.get('id')
-                else:
+            parsed_result = res.json()
+            if parsed_result.get('records') and parsed_result.get('records')[0].get('Id'):
+                self.salesforce_response = 'A lead already exists in Salesforce with this email \nSF Raw Response (' \
+                                           '%s). ' % \
+                                           (parsed_result)
+                _log_logging(self.env, "ID: %s Email: %s Response from SF: %s" % (
+                    str(self.id), str(self.email_from), str(parsed_result)),
+                             "create_lead_in_sf", self)
+            if not parsed_result.get('records'):
+                endpoint = '/services/data/v40.0/sobjects/Lead'
+                parsed_dict = json.dumps(sf_partner_dict)
+                result = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=parsed_dict)
+                if result.status_code in [200, 201]:
+                    parsed_result = result.json()
+                    self.salesforce_response = 'Successfully Created \nSF Raw Response (' \
+                                           '%s). ' % \
+                                           (parsed_result)
+                    if parsed_result.get('id'):
+                        # self.x_is_updated = True
+                        self.x_salesforce_exported = True
+                        self.x_last_modified_on = datetime.now()
+                        self.x_salesforce_id = parsed_result.get('id')
+                        _log_logging(self.env, "ID: %s Email: %s Response from SF: %s" % (
+                            str(self.id), str(self.email_from), str(parsed_result)),
+                                     "create_lead_in_sf", self)
+                        return parsed_result.get('id')
+                    else:
+                        return False
+                elif result.status_code == 401:
+                    parsed_json = result.json()
+                    sf_config.refresh_token_from_access_token()
+                    self.salesforce_response = 'ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...\nSF Raw Response (' \
+                                           '%s). ' % \
+                                           (parsed_json)
+                    _logger.info("ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...")
+                    _log_logging(self.env, "ID: %s Email: %s Response from SF: %s" % (
+                        str(self.id), str(self.email_from), str(parsed_json[0].get('message'))),
+                                 "create_lead_in_sf", self)
                     return False
-            elif result.status_code == 401:
-                sf_config.refresh_token_from_access_token()
-                self.salesforce_response = 'ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...'
-                _logger.info("ACCESS TOKEN EXPIRED, GETTING NEW REFRESH TOKEN...")
-                return False
-            else:
-                parsed_json = result.json()
-                _logger.error('response Of Partner creation in salesforce  (%s)', str(parsed_json[0].get('message')))
-                self.salesforce_response = str(parsed_json[0].get('message'))
-                return False
+                else:
+                    parsed_json = result.json()
+                    _logger.error('response Of Partner creation in salesforce  (%s)',
+                                  str(parsed_json[0].get('message')))
+                    self.salesforce_response = str(parsed_json[0].get('message'))
+                    _log_logging(self.env, "ID: %s Email: %s Response from SF: %s" % (
+                        str(self.id), str(self.email_from), str(parsed_json[0].get('message'))),
+                                 "create_lead_in_sf", self)
+                    return False
+
+        else:
+            raise UserError("Error Occured In Partner Search Request" + res.text)
 
     def update_lead_in_sf(self, sf_lead_dict):
         if not self.x_is_updated:
@@ -226,8 +262,15 @@ class CrmLead(models.Model):
                     ''' Try Updating it if already exported '''
                     res = requests.request('PATCH', sf_config.sf_url + endpoint + '/' + self.x_salesforce_id, headers=headers, data=payload)
                     if res.status_code == 204:
+                        parsed_result = res.json()
+                        self.salesforce_response = 'Successfully Updated \nSF Raw Response (' \
+                                                   '%s). ' % \
+                                                   (parsed_result)
                         self.x_last_modified_on = datetime.now()
                         self.x_is_updated = True
+                        _log_logging(self.env, "ID: %s Email: %s Response from SF: %s" % (
+                            str(self.id), str(self.email_from), str(parsed_result)),
+                                     "update_lead_in_sf", self)
                 else:
                     endpoint_get = "/services/data/v40.0/query/?q=select Id from Lead where Email = '{}'".format(
                         sf_lead_dict['Email'])
@@ -237,16 +280,33 @@ class CrmLead(models.Model):
                     _logger.info(res)
 
                     if res.status_code == 200:
-                        self.salesforce_response = 'A lead already exists in Salesforce with this email.'
+                        parsed_result = res.json()
+                        if parsed_result.get('records') and parsed_result.get('records')[0].get('Id'):
+                            self.salesforce_response = 'A lead already exists in Salesforce with this email \nSF Raw ' \
+                                                       'Response (' \
+                                                       '%s). ' % \
+                                                       (parsed_result)
+                            _log_logging(self.env, "ID: %s Email: %s Response from SF: %s" % (
+                                str(self.id), str(self.email_from), str(parsed_result)),
+                                         "update_lead_in_sf", self)
+                        if not parsed_result.get('records'):
+                            res = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=payload)
+                            if res.status_code in [200, 201]:
+                                self.salesforce_response = 'Successfully Created \nSF Raw Response (' \
+                                                           '%s). ' % \
+                                                           (parsed_result)
+                                parsed_resp = json.loads(str(res.text))
+                                self.x_salesforce_exported = True
+                                self.x_salesforce_id = parsed_resp.get('id')
+                                _log_logging(self.env, "ID: %s Email: %s Response from SF: %s" % (
+                                    str(self.id), str(self.email_from), str(parsed_result)),
+                                             "update_lead_in_sf", self)
+                                return parsed_resp.get('id')
+                            else:
+                                return False
                     else:
-                        res = requests.request('POST', sf_config.sf_url + endpoint, headers=headers, data=payload)
-                        if res.status_code in [200, 201]:
-                            parsed_resp = json.loads(str(res.text))
-                            self.x_salesforce_exported = True
-                            self.x_salesforce_id = parsed_resp.get('id')
-                            return parsed_resp.get('id')
-                        else:
-                            return False
+                        raise UserError("Error Occured In Partner Search Request" + res.text)
+
 
     def create_lead_sf(self):
         for lead in self.browse(self.id):

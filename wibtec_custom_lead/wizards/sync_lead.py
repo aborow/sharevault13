@@ -46,6 +46,18 @@ Lead_Type = [('new', 'New Lead'),
              ('marketing_ql', 'Marketing Qualified Lead')]
 
 
+def _log_logging(env, message, function_name, path):
+    env['ir.logging'].sudo().create({
+        'name': 'Salesforce Lead Sync',
+        'type': 'server',
+        'level': 'info',
+        'dbname': env.cr.dbname,
+        'message': message,
+        'func': function_name,
+        'path': path,
+        'line': '0',
+    })
+
 class SyncLeadWizard(models.TransientModel):
     _name = 'sync.lead.wizard'
     _description = "Sync Lead from SalesForce"
@@ -78,7 +90,6 @@ class SyncLeadWizard(models.TransientModel):
         headers['Content-Type'] = 'text/plain'
         lead_exists = lead_obj.search([('x_salesforce_id', '=', sf_id)])
         if not lead_exists:
-
             if lead_dict:
                 lead_dict['salesforce_response'] = ''
                 res = lead_obj.create(lead_dict)
@@ -86,7 +97,7 @@ class SyncLeadWizard(models.TransientModel):
                     ''' Write x_salesforce_id '''
                     res.write(
                         {'x_salesforce_id': sf_id, 'is_sf_lead': True, 'sf_last_sync_date': fields.Datetime.now()})
-                    return res.id
+                    return res
                 else:
                     return False
             else:
@@ -98,7 +109,7 @@ class SyncLeadWizard(models.TransientModel):
                 lead_dict['sf_last_sync_date'] = fields.Datetime.now()
                 lead_dict['salesforce_response'] = ''
                 lead_exists.write(lead_dict)
-                return lead_obj.id
+                return lead_exists
             else:
                 return False
 
@@ -165,7 +176,7 @@ class SyncLeadWizard(models.TransientModel):
                 if source_res:
                     lead_dict['source_id'] = source_res.id
         if lead_dict:
-            self.create_lead(lead_dict, lead_read.get('Id'))
+            return self.create_lead(lead_dict, lead_read.get('Id'))
 
     def import_leads(self):
         try:
@@ -210,13 +221,19 @@ class SyncLeadWizard(models.TransientModel):
                                             headers=headers)
                 if data != '':
                     recs = []
+                    parsed_result = data.json()
                     parsed_data = json.loads(str(data.text))
                     if parsed_data:
                         for p in parsed_data.get('records'):
                             recs.append([p.get('Id'), p.get('Owner').get('Name')])
                     for rec in recs:
                         lead_read = self.fetch_sf_lead_details(rec[0])
-                        self.prepare_dict(rec, lead_read)
+                        lead = self.prepare_dict(rec, lead_read)
+                        _log_logging(self.env, "ID: %s Email: %s Response from SF: %s" % (
+                        str(lead.id), str(lead.email_from), str(parsed_result)), "sync_lead_from_sfcd", sync_by)
 
         except Exception as e:
+            _log_logging(self.env,
+                         str('Oops Some error Occured'),
+                         "sync_lead_from_sfcd", sync_by)
             raise Warning("Oops Some error Occured" + str(e))

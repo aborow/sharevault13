@@ -125,3 +125,7 @@ SV-228: SF to odoo leads sync and SV-259.
 13.0.1.0.41 & 42
 ================
 SV-269: SalesForce Lead Sync Issues
+
+13.0.1.0.43
+===========
+SV-269: Resolved email issue and added ir.logging.
