@@ -34,6 +34,9 @@
                     <field name="hubspot_score" optional="hide"/>
                     <field name="odoo_score" optional="hide"/>
                 </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="x_salesforce_id" optional="show"/>
+                </xpath>
             </field>
         </record>
 

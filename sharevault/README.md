@@ -167,3 +167,7 @@ SV-246: Modified Label for Company View
 Version - 13.0.1.0.46
 =====================
 SV-256: change field positions
+
+13.0.1.0.47
+===========
+SV-271: Update SV tab

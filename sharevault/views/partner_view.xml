@@ -388,6 +388,7 @@
                         <field name="sharevault_c_ids" nolabel="1">
                             <tree string="Sharevaults" readonly="1">
                                 <field name="sharevault_name"/>
+                                <field name="sharevault_id"/>
                                 <field name="sharevault_owner"/>
                                 <field name="sv_type"/>
                             </tree>
